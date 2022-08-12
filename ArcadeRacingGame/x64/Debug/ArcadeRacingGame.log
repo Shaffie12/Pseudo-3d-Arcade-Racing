@@ -1,0 +1,42 @@
+﻿  Source.cpp
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Source.cpp(14,35): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Source.cpp(15,44): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Source.cpp(16,51): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Source.cpp(16,33): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Source.cpp(17,43): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Source.cpp(17,33): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Source.cpp(38,66): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Source.cpp(38,55): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  ArcadeRacingGame.vcxproj -> D:\Prod\git\ArcadeRacing\ArcadeRacingGame\x64\Debug\ArcadeRacingGame.exe
