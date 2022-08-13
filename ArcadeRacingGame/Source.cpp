@@ -28,14 +28,15 @@ void drawLines(sf::RenderWindow& window)
 	for (int i = 0; i < screen_h / 2; i++)
 	{
 		Line line;
-		float y = (screen_h - i) / screen_h / 2;
+		float xOffset = (i - screen_h / screen_h / 2)*0.95f; //perspective
+
 		line.vertices[0] = sf::Vertex(sf::Vector2f(0, screen_h - i), sf::Color::Green);
-		line.vertices[1] = sf::Vertex(sf::Vector2f(screen_w-road_w, (screen_h - i) / screen_h / 2), sf::Color::Green);
+		line.vertices[1] = sf::Vertex(sf::Vector2f(screen_w-(road_w-xOffset), screen_h-i), sf::Color::Green);
 
-		line.vertices[2] = sf::Vertex(sf::Vector2f(screen_w - road_w, screen_h-i), road);
-		line.vertices[3] = sf::Vertex(sf::Vector2f(road_w, screen_h-i), road);
+		line.vertices[2] = sf::Vertex(sf::Vector2f(screen_w - (road_w-xOffset), screen_h-i), road);
+		line.vertices[3] = sf::Vertex(sf::Vector2f(road_w-xOffset, screen_h-i), road);
 
-		line.vertices[4] = sf::Vertex(sf::Vector2f(road_w, screen_h - i), sf::Color::Green);
+		line.vertices[4] = sf::Vertex(sf::Vector2f(road_w-xOffset, screen_h-i), sf::Color::Green);
 		line.vertices[5] = sf::Vertex(sf::Vector2f(screen_w, screen_h - i), sf::Color::Green);
 
 
@@ -60,7 +61,7 @@ void drawLines(sf::RenderWindow& window)
 
 	for (int i = 0; i < lines.size(); i++)
 	{
-		window.draw(lines.at(i).vertices, 2, sf::Lines);
+		window.draw(lines.at(i).vertices, 6, sf::Lines);
 	}
 
 
