@@ -1,3 +1,5 @@
 ﻿  Source.cpp
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Source.cpp(37,22): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Source.cpp(38,22): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Source.cpp(39,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Source.cpp(40,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   ArcadeRacingGame.vcxproj -> D:\Prod\git\ArcadeRacing\ArcadeRacingGame\x64\Debug\ArcadeRacingGame.exe
