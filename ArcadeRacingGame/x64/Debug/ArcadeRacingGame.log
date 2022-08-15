@@ -1,5 +1,41 @@
-﻿  Source.cpp
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Source.cpp(38,22): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Source.cpp(39,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Source.cpp(40,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  ArcadeRacingGame.vcxproj -> D:\Prod\git\ArcadeRacing\ArcadeRacingGame\x64\Debug\ArcadeRacingGame.exe
+﻿  Main.cpp
+  RacingGame.cpp
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\GameGlobals.h(14,14): error C2039: 'screen_w': is not a member of '`global namespace''
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\GameGlobals.h(15,14): error C2039: 'screen_h': is not a member of '`global namespace''
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\RacingGame.cpp(25,110): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\RacingGame.cpp(25,88): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
+  Renderer.cpp
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\GameGlobals.h(14,14): error C2039: 'screen_w': is not a member of '`global namespace''
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\GameGlobals.h(15,14): error C2039: 'screen_h': is not a member of '`global namespace''
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(25,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(26,3): error C2597: illegal reference to non-static member 'Renderer::tile_w'
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.h(16): message : see declaration of 'Renderer::tile_w'
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(32,73): error C2597: illegal reference to non-static member 'Renderer::tile_w'
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(32,73): error C3867: 'Renderer::tile_w': non-standard syntax; use '&' to create a pointer to member
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(32,73): error C2568: '-': unable to resolve function overload
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(32,88): error C2440: '<function-style-cast>': cannot convert from 'float' to 'sf::Vector2f'
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(32,88): message : No constructor could take the source type, or constructor overload resolution was ambiguous
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(32,107): error C2440: '<function-style-cast>': cannot convert from 'const sf::Color' to 'sf::Vertex'
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(32,107): message : No constructor could take the source type, or constructor overload resolution was ambiguous
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(35,73): error C2597: illegal reference to non-static member 'Renderer::tile_w'
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(35,73): error C3867: 'Renderer::tile_w': non-standard syntax; use '&' to create a pointer to member
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(35,73): error C2568: '-': unable to resolve function overload
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(35,88): error C2440: '<function-style-cast>': cannot convert from 'float' to 'sf::Vector2f'
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(35,88): message : No constructor could take the source type, or constructor overload resolution was ambiguous
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(35,105): error C2440: '<function-style-cast>': cannot convert from 'const sf::Color' to 'sf::Vertex'
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(35,105): message : No constructor could take the source type, or constructor overload resolution was ambiguous
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(44,73): error C2597: illegal reference to non-static member 'Renderer::tile_w'
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(44,73): error C3867: 'Renderer::tile_w': non-standard syntax; use '&' to create a pointer to member
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(44,73): error C2568: '+': unable to resolve function overload
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(44,88): error C2440: '<function-style-cast>': cannot convert from 'float' to 'sf::Vector2f'
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(44,88): message : No constructor could take the source type, or constructor overload resolution was ambiguous
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(44,105): error C2440: '<function-style-cast>': cannot convert from 'const sf::Color' to 'sf::Vertex'
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(44,105): message : No constructor could take the source type, or constructor overload resolution was ambiguous
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(47,73): error C2597: illegal reference to non-static member 'Renderer::tile_w'
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(47,73): error C3867: 'Renderer::tile_w': non-standard syntax; use '&' to create a pointer to member
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(47,73): error C2568: '+': unable to resolve function overload
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(47,88): error C2440: '<function-style-cast>': cannot convert from 'float' to 'sf::Vector2f'
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(47,88): message : No constructor could take the source type, or constructor overload resolution was ambiguous
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(47,107): error C2440: '<function-style-cast>': cannot convert from 'const sf::Color' to 'sf::Vertex'
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(47,107): message : No constructor could take the source type, or constructor overload resolution was ambiguous
+  Generating Code...
