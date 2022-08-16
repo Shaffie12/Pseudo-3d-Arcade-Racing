@@ -6,8 +6,8 @@
 	class GameGlobals
 	{
 	public:
-		static const float screen_w, screen_h;
-		//static const sf::Clock* dt= new 
+		static const float SCREEN_W, SCREEN_H;
+		static const int DT_MULTIPLIER;
 
 
 	};

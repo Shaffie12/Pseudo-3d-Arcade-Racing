@@ -19,42 +19,44 @@ void Renderer::drawLines(sf::RenderWindow& win)
 	float mid = 0.5f;
 
 
-
-	for (int i = 0; i <  GameGlobals::screen_h/ 2; i++)
+	//construct the lines
+	for (int i = 0; i <  GameGlobals::SCREEN_H/ 2; i++)
 	{
 		Line line;
-		y = (GameGlobals::screen_h / 2) + i; //middle of screen downward
-		float perspective = 0.06 + ((y - (GameGlobals::screen_h / 2)) / (GameGlobals::screen_h - (GameGlobals::screen_h / 2))) * 0.5f; //scaling the 300-600 values to values between 0-1
+		y = (GameGlobals::SCREEN_H / 2) + i; //middle of screen downward
+
+		//scaling the 300-600 values to values between 0-1
+		float perspective = minRoad + ((y - (GameGlobals::SCREEN_H / 2)) / (GameGlobals::SCREEN_H - (GameGlobals::SCREEN_H / 2))) * percentOfPersp; 
 		tile_w = perspective * 0.5;
 
 		//draw the vertices for the lines
 
 		//grass left
 		line.vertices[0] = sf::Vertex(sf::Vector2f(0, y), sf::Color::Green);
-		line.vertices[1] = sf::Vertex(sf::Vector2f((mid - perspective - tile_w) * GameGlobals::screen_w, y), sf::Color::Green); //is it because im drawing from grass straight to road?
+		line.vertices[1] = sf::Vertex(sf::Vector2f((mid - perspective - tile_w) * GameGlobals::SCREEN_W, y), sf::Color::Green); //is it because im drawing from grass straight to road?
 
 		//road edge l
-		line.vertices[2] = sf::Vertex(sf::Vector2f((mid - perspective - tile_w) * GameGlobals::screen_w, y), sf::Color::Red);
-		line.vertices[3] = sf::Vertex(sf::Vector2f((mid - perspective) * GameGlobals::screen_w, y), sf::Color::Red);
+		line.vertices[2] = sf::Vertex(sf::Vector2f((mid - perspective - tile_w) * GameGlobals::SCREEN_W, y), sf::Color::Red);
+		line.vertices[3] = sf::Vertex(sf::Vector2f((mid - perspective) * GameGlobals::SCREEN_W, y), sf::Color::Red);
 
 		//road 
-		line.vertices[4] = sf::Vertex(sf::Vector2f((mid - perspective) * GameGlobals::screen_w, y), road);
-		line.vertices[5] = sf::Vertex(sf::Vector2f((mid + perspective) * GameGlobals::screen_w, y), road);
+		line.vertices[4] = sf::Vertex(sf::Vector2f((mid - perspective) * GameGlobals::SCREEN_W, y), road);
+		line.vertices[5] = sf::Vertex(sf::Vector2f((mid + perspective) * GameGlobals::SCREEN_W, y), road);
 
 		//edge 2
-		line.vertices[6] = sf::Vertex(sf::Vector2f((mid + perspective) * GameGlobals::screen_w, y), sf::Color::Red);
-		line.vertices[7] = sf::Vertex(sf::Vector2f((mid + perspective + tile_w) *GameGlobals::screen_w, y), sf::Color::Red);
+		line.vertices[6] = sf::Vertex(sf::Vector2f((mid + perspective) * GameGlobals::SCREEN_W, y), sf::Color::Red);
+		line.vertices[7] = sf::Vertex(sf::Vector2f((mid + perspective + tile_w) *GameGlobals::SCREEN_W, y), sf::Color::Red);
 
 		//grass right
-		line.vertices[8] = sf::Vertex(sf::Vector2f((mid + perspective + tile_w) * GameGlobals::screen_w, y), sf::Color::Green);
-		line.vertices[9] = sf::Vertex(sf::Vector2f(GameGlobals::screen_w, y), sf::Color::Green);
+		line.vertices[8] = sf::Vertex(sf::Vector2f((mid + perspective + tile_w) * GameGlobals::SCREEN_W, y), sf::Color::Green);
+		line.vertices[9] = sf::Vertex(sf::Vector2f(GameGlobals::SCREEN_W, y), sf::Color::Green);
 
 		//add the line to list
 		lines.push_back(line);
 
 	}
 
-	//draw the lines
+	//draw the lines on screen
 	for (int i = 0; i < lines.size(); i++)
 	{
 		win.draw(lines.at(i).vertices, 10, sf::Lines);
@@ -62,3 +64,6 @@ void Renderer::drawLines(sf::RenderWindow& win)
 
 
 };
+
+void::Renderer::addDist(float amount) { dist += amount; }
+float::Renderer::getDist() { return dist; }

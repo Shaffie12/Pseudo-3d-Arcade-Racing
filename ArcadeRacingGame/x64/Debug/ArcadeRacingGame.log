@@ -1,4 +1,6 @@
-﻿  Renderer.cpp
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(27,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(28,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+﻿  Main.cpp
+  RacingGame.cpp
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\RacingGame.cpp(7,110): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\RacingGame.cpp(7,88): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
+  Generating Code...
   ArcadeRacingGame.vcxproj -> D:\Prod\git\ArcadeRacing\ArcadeRacingGame\x64\Debug\ArcadeRacingGame.exe
