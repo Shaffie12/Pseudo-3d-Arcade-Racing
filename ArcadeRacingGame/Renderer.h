@@ -8,15 +8,16 @@ class Renderer
 {
 	public:
 		Renderer(); 
-		static void drawLines(sf::RenderWindow& win);
-		static void calculateCol(float xpos);
+
+		void drawLines(sf::RenderWindow& win);
+		void calculateCol(float xpos);
 
 		//maybe static but im not sure if these need to be manipulated for the bends in the track later
 		float road_w = 0.8f; 
-		float tile_w = road_w * 0.15f;
-
+		
 	private:
 		struct Line { sf::Vertex vertices[10]; };
+		float tile_w = road_w * 0.15f;
 
 
 };
