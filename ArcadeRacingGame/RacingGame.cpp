@@ -38,6 +38,7 @@ void RacingGame::gameLoop()
 		handleInput();
 		
 	_Renderer.drawLines(_MainWindow);
+	_Renderer.drawSprites(_MainWindow);
 	_MainWindow.display();
 }
 
@@ -46,8 +47,16 @@ void RacingGame::handleInput()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
 		_Renderer.addDist(60*elapsedTime);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+			_Renderer.updateTrackFocus(0.5 * elapsedTime, true);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+			_Renderer.updateTrackFocus(0.5 * elapsedTime, false);
+
+		//i might want to make a IRenderable interface
 		
 	}
+	
+	
 }
 	
 

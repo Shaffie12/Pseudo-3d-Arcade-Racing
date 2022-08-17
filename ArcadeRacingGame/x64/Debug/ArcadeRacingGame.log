@@ -1,5 +1,16 @@
-﻿  Renderer.cpp
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(30,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(32,59): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(33,58): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+﻿  Main.cpp
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.h(22,17): warning C4305: 'initializing': truncation from 'double' to 'float'
+  RacingGame.cpp
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.h(22,17): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\RacingGame.cpp(7,88): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\RacingGame.cpp(7,66): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\RacingGame.cpp(52,35): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\RacingGame.cpp(54,35): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Renderer.cpp
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.h(22,17): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(41,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(43,59): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(44,57): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Renderer.cpp(45,57): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
   ArcadeRacingGame.vcxproj -> D:\Prod\git\ArcadeRacing\ArcadeRacingGame\x64\Debug\ArcadeRacingGame.exe
