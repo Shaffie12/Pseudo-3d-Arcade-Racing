@@ -26,6 +26,14 @@ class Renderer
 		float tile_w = road_w * 0.15f;
 		float dist = 0;
 
+		//colours to use for the scene.
+		sf::Color grassLight = sf::Color::Green;
+		sf::Color grassDark = sf::Color(55, 154, 84);
+		sf::Color roadCol = sf::Color(178, 195, 183);
+		sf::Color tile_col_1 = sf::Color::Red;
+		sf::Color tile_col_2 = sf::Color::White;
+
+
 
 };
 

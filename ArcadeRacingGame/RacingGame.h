@@ -20,12 +20,12 @@ class RacingGame
 
 		void start();
 		void gameLoop();
-		void handleInput(sf::Event::KeyEvent e);
+		void handleInput();
 	private:
-		//why use heap alloc for these?
-		sf::RenderWindow* _MainWindow;
-		Renderer* _Renderer;
+		sf::RenderWindow _MainWindow;
+		Renderer _Renderer;
 		sf::Clock _Clock;
+		
 		
 
 

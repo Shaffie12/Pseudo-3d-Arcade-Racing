@@ -4,33 +4,28 @@
 
 float RacingGame::elapsedTime = 0;
 
-RacingGame::RacingGame() :_MainWindow( new sf::RenderWindow(sf::VideoMode(GameGlobals::SCREEN_W,GameGlobals::SCREEN_H),"Arcade Racing") ) , _Renderer(new Renderer())
-{ _MainWindow->setFramerateLimit(60); }
-RacingGame::~RacingGame() { delete _MainWindow; delete _Renderer; }
+RacingGame::RacingGame() :_MainWindow(sf::VideoMode(GameGlobals::SCREEN_W,GameGlobals::SCREEN_H),"Arcade Racing")  , _Renderer( Renderer())
+{ _MainWindow.setFramerateLimit(60); }
+RacingGame::~RacingGame() { }
 
 void RacingGame::start()
 {
 
 	sf::Event e;
-	while (_MainWindow->isOpen())
+	while (_MainWindow.isOpen())
 	{
-		while (_MainWindow->pollEvent(e))
+		while (_MainWindow.pollEvent(e))
 		{
 			if (e.type == sf::Event::Closed)
-				_MainWindow->close();
-			if (e.type == sf::Event::KeyPressed)
-			{
-				//i dont think this will work, because we need to sync with time dt; 
-				//maybe we can set some bool here and then check for that each update cycle
-				handleInput(e.key);
-				std::cout << "key was pressed";
-			}
+				_MainWindow.close();
+			if (e.type == sf::Event::LostFocus)
+				GameGlobals::isActiveWindow = false;
+			if (e.type == sf::Event::GainedFocus)
+				GameGlobals::isActiveWindow = true;
+			
 		}
-		
 
-		//run the game update loop fn here
 		gameLoop();
-
 
 	}
 }
@@ -38,28 +33,23 @@ void RacingGame::start()
 void RacingGame::gameLoop()
 {
 	elapsedTime = _Clock.restart().asSeconds();
-	_MainWindow->clear();
-	//need to make sure to check if the window is in focus before checking for input
-	
+	_MainWindow.clear();
+	if(GameGlobals::isActiveWindow)
+		handleInput();
 		
-	_Renderer->drawLines(*_MainWindow);
-	_MainWindow->display();
+	_Renderer.drawLines(_MainWindow);
+	_MainWindow.display();
 }
 
-void RacingGame::handleInput(sf::Event::KeyEvent key)
+void RacingGame::handleInput()
 {
-	switch (key.code)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		case(sf::Keyboard::W):
-			_Renderer->addDist(elapsedTime);
-			std::cout << _Renderer->getDist();
-		break;
-
-	default:
-		break;
-
+		_Renderer.addDist(60*elapsedTime);
+		
 	}
 }
+	
 
 
 
