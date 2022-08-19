@@ -3,6 +3,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include "Renderer.h"
+#include "Drawable.h"
 
 class RacingGame
 {
@@ -25,6 +26,7 @@ class RacingGame
 		sf::RenderWindow _MainWindow;
 		Renderer _Renderer;
 		sf::Clock _Clock;
+		std::vector<Drawable> sceneObjs; //heap?
 		
 		
 

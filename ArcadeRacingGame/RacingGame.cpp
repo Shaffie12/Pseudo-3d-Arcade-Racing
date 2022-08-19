@@ -37,8 +37,8 @@ void RacingGame::gameLoop()
 	if(GameGlobals::isActiveWindow)
 		handleInput();
 		
-	_Renderer.drawLines(_MainWindow);
-	_Renderer.drawSprites(_MainWindow);
+	for(Drawable d: sceneObjs) //look at iterators again!
+
 	_MainWindow.display();
 }
 
