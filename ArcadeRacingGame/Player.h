@@ -5,11 +5,8 @@
 class Player : public Racer
 {
 	public:
-		Player();
-		void addDist(float amount);
-		float getDist();
-
-	private:
-		float dist;
+		Player(sf::Vector2f startPosition);
+		int testInt = 0;
+		
 };
 #endif 

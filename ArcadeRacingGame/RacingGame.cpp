@@ -3,9 +3,13 @@
 #include<iostream>
 
 float RacingGame::elapsedTime = 0;
+Player RacingGame::player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::SCREEN_H) -30));
+Track RacingGame::track;
 
 RacingGame::RacingGame() :_MainWindow(sf::VideoMode(GameGlobals::SCREEN_W,GameGlobals::SCREEN_H),"Arcade Racing")  , _Renderer( Renderer())
-{ _MainWindow.setFramerateLimit(60); }
+{ _MainWindow.setFramerateLimit(60);}
+
+
 RacingGame::~RacingGame() { }
 
 void RacingGame::start()
@@ -36,8 +40,7 @@ void RacingGame::gameLoop()
 	_MainWindow.clear();
 	if(GameGlobals::isActiveWindow)
 		handleInput();
-		
-	for(Drawable d: sceneObjs) //look at iterators again!
+	drawAllElements();
 
 	_MainWindow.display();
 }
@@ -46,17 +49,27 @@ void RacingGame::handleInput()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		_Renderer.addDist(60*elapsedTime);
+		track.addDist(60*elapsedTime);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-			_Renderer.updateTrackFocus(0.5 * elapsedTime, true);
+			track.offsetCenter(0.5 * elapsedTime, true);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			_Renderer.updateTrackFocus(0.5 * elapsedTime, false);
-
-		//i might want to make a IRenderable interface
+			track.offsetCenter(0.5 * elapsedTime, false);
+		
 		
 	}
 	
 	
+}
+
+void RacingGame::drawAllElements()
+{
+	track.drawElement(_MainWindow);
+	player.drawElement(_MainWindow);
+
+	/*
+	for (auto d : enemyCars)
+		d.drawElement(_MainWindow);
+		*/
 }
 	
 

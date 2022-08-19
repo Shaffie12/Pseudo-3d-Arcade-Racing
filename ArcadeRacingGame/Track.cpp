@@ -61,3 +61,6 @@ void Track::offsetCenter(float amount, bool add)
 	else
 		mid -= amount;
 }
+
+void Track::addDist(float amount) { dist += amount; }
+float Track::getDist() { return dist; }

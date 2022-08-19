@@ -1,7 +1,4 @@
 #include "Renderer.h"
-#include "GameGlobals.h"
-#include <iostream>
-#include "Util.h"
 
 Renderer::Renderer() {}
 

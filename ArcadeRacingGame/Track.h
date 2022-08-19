@@ -11,6 +11,8 @@ class Track :public Drawable
 	public:
 	void drawElement(sf::RenderWindow& w);
 	void offsetCenter(float amount, bool add);
+	void addDist(float amount);
+	float getDist();
 	
 	
 	private:
@@ -21,6 +23,7 @@ class Track :public Drawable
 	float mid = 0.5f;
 	float minRoad = 0.01; //minimal amount of road at the highest point on road
 	float percentOfPersp = 0.5f; // change view toward ground or sky
+	float dist; //because the distance doesnt affect anything outside this class and the player is never actually moving, ill put this here
 
 	sf::Color grassLight = sf::Color::Green;
 	sf::Color grassDark = sf::Color(55, 154, 84);
