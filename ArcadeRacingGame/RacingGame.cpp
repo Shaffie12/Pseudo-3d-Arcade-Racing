@@ -40,6 +40,7 @@ void RacingGame::gameLoop()
 	_MainWindow.clear();
 	if(GameGlobals::isActiveWindow)
 		handleInput();
+	//update the track based on distance 
 	drawAllElements();
 
 	_MainWindow.display();
