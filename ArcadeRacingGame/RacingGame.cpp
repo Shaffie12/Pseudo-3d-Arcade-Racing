@@ -2,7 +2,7 @@
 #include "GameGlobals.h"
 #include<iostream>
 
-float RacingGame::elapsedTime = 0;
+
 Player RacingGame::player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::SCREEN_H) -30));
 Track RacingGame::track;
 
@@ -36,7 +36,7 @@ void RacingGame::start()
 
 void RacingGame::gameLoop()
 {
-	elapsedTime = _Clock.restart().asSeconds();
+	GameGlobals::elapsedTime = _Clock.restart().asSeconds();
 	_MainWindow.clear();
 	if(GameGlobals::isActiveWindow)
 		handleInput();
@@ -50,11 +50,11 @@ void RacingGame::handleInput()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		track.addDist(60*elapsedTime);
+		track.addDist(60*GameGlobals::elapsedTime);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-			track.offsetCenter(0.5 * elapsedTime, true);
+			track.offsetCenter(0.5 * GameGlobals::elapsedTime, true);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			track.offsetCenter(0.5 * elapsedTime, false);
+			track.offsetCenter(0.5 * GameGlobals::elapsedTime, false);
 		
 		
 	}

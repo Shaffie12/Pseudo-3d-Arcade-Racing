@@ -10,7 +10,7 @@
 class RacingGame
 {
 	public:
-		static float elapsedTime;
+		
 		static Track track;
 		static Player player;
 		std::vector<Drawable> enemyCars;

@@ -24,24 +24,37 @@ class Track :public Drawable
 		{ 
 			sf::Vertex vertices[10]; 
 			sf::Color colours[3];
-			Line(float persp, float distance)
+			float middlePt;
+			float y; //i dont think it needs this since its always passed it
+			float perspective;
+			float tile_w;
+			Line(int yval) : middlePt(0.5f), tile_w(road_w*0.15f), y(yval)
 			{
-				colours[0] = sinf(15 * pow(1 - persp, 10) + distance * 0.1) > 0.0f ? grassLight : grassDark; 
-				colours[1] =  sinf(50 * pow(1 - persp, 5) + distance * 0.7) > 0.0f ? tile_col_1 : tile_col_2; 
-				colours[2] = sinf(50 * pow(1 - persp, 5) + distance * 0.7) > 0.0f ? roadLight : roadDark;
+				float scaledY = ((y - (GameGlobals::SCREEN_H / 2)) / (GameGlobals::SCREEN_H - (GameGlobals::SCREEN_H / 2)));
+				perspective = Track::minRoad + scaledY * Track::percentOfPersp; //calculate perspective
+				//i think the colours need to be redrawn every frame too
+				
 			}
 		};
-		Line drawTrackLine(int y, float middlePt, float persp);
+
+		struct Segment
+		{
+			float t_curvature;
+			float distanceToReach;
+			float position;
+			Segment(float curvature, float distToReach) : position(GameGlobals::SCREEN_H / 2) { t_curvature = curvature; distanceToReach = distToReach; }
+		};
+
+		void drawTrackLines();
 		void moveSegment();
-
-		float road_w = 0.8f;
-		float tile_w = road_w * 0.15f;
-		float mid = 0.5f;
-		float minRoad = 0.01; //minimal amount of road at the highest point on road
-		float percentOfPersp = 0.5f; // change view toward ground or sky
+		
+		static float road_w;
+		static float minRoad; //minimal amount of road at the highest point on road
+		static float percentOfPersp;; // change view toward ground or sky
 		float dist = 0 ;//artificially represents how far player has moved
-
-		float segPosition = GameGlobals::SCREEN_H / 2;
+		std::vector<Line>* trackLines;
+		bool activeSegment = false;
+		float segPosition = GameGlobals::SCREEN_H / 2; //there may be limiatations to just using 1 segment as you have to wait for it to hit the bottom of the screen before you introduce a new curve
 		float baseSegOffset = 0.5f;
 		float curvature = 0;
 		std::vector<std::pair<float, float>> trackData;
