@@ -16,19 +16,19 @@ class Track :public Drawable
 		void addDist(float amount);
 		float getDist();
 		void getNextCurvature();
-	
-	
+
+
 	
 	private:
 		struct Line 
 		{ 
 			sf::Vertex vertices[10]; 
 			sf::Color colours[3];
-			float middlePt;
-			float y; //i dont think it needs this since its always passed it
+			int y; //i dont think it needs this since its always passed it
+			float pos_before_move;
 			float perspective;
 			float tile_w;
-			Line(int yval) : middlePt(0.5f), tile_w(road_w*0.15f), y(yval)
+			Line(int yval) : tile_w(road_w * 0.15f), y(yval), pos_before_move(0.5f)
 			{
 				float scaledY = ((y - (GameGlobals::SCREEN_H / 2)) / (GameGlobals::SCREEN_H - (GameGlobals::SCREEN_H / 2)));
 				perspective = Track::minRoad + scaledY * Track::percentOfPersp; //calculate perspective
@@ -48,15 +48,20 @@ class Track :public Drawable
 		void drawTrackLines();
 		void moveSegment();
 		
+		
 		static float road_w;
 		static float minRoad; //minimal amount of road at the highest point on road
 		static float percentOfPersp;; // change view toward ground or sky
+		float middlePt = 0.5f;
 		float dist = 0 ;//artificially represents how far player has moved
 		std::vector<Line>* trackLines;
+
 		bool activeSegment = false;
 		float segPosition = GameGlobals::SCREEN_H / 2; //there may be limiatations to just using 1 segment as you have to wait for it to hit the bottom of the screen before you introduce a new curve
 		float baseSegOffset = 0.5f;
-		float curvature = 0;
+
+		float curvature = 0; //amount to offset the track each frame
+		
 		std::vector<std::pair<float, float>> trackData;
 		int currentSect = 0;
 

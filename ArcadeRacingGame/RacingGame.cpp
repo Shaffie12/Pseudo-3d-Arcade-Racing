@@ -52,9 +52,9 @@ void RacingGame::handleInput()
 	{
 		track.addDist(60*GameGlobals::elapsedTime);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-			track.offsetCenter(0.5 * GameGlobals::elapsedTime, true);
+			track.offsetCenter(GameGlobals::elapsedTime, true);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			track.offsetCenter(0.5 * GameGlobals::elapsedTime, false);
+			track.offsetCenter(GameGlobals::elapsedTime, false);
 		
 		
 	}

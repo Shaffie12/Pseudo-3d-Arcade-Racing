@@ -1,22 +1,70 @@
 ﻿  Track.cpp
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.h(31,60): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(21,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(52,34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(54,61): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(55,60): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(56,60): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(61,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(23,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(77,34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(79,61): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(80,60): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(81,60): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(93,53): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(94,119): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(97,119): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(98,105): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(101,105): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(102,105): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(105,105): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(106,119): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(109,119): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(110,73): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\utility(242,16): warning C4244: 'initializing': conversion from '_Ty' to '_Ty1', possible loss of data
           with
           [
-              _Ty=double
+              _Ty=int
           ]
           and
           [
               _Ty1=float
           ]
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(25): message : see reference to function template instantiation 'std::pair<float,float>::pair<double,int,0>(std::pair<double,int> &&) noexcept' being compiled
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(25): message : see reference to function template instantiation 'std::pair<float,float>::pair<double,int,0>(std::pair<double,int> &&) noexcept' being compiled
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(27): message : see reference to function template instantiation 'std::pair<float,float>::pair<int,int,0>(std::pair<int,int> &&) noexcept' being compiled
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(27): message : see reference to function template instantiation 'std::pair<float,float>::pair<int,int,0>(std::pair<int,int> &&) noexcept' being compiled
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\utility(242,61): warning C4244: 'initializing': conversion from '_Ty' to '_Ty2', possible loss of data
           with
           [
@@ -29,12 +77,12 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.2
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\utility(242,16): warning C4244: 'initializing': conversion from '_Ty' to '_Ty1', possible loss of data
           with
           [
-              _Ty=int
+              _Ty=double
           ]
           and
           [
               _Ty1=float
           ]
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(26): message : see reference to function template instantiation 'std::pair<float,float>::pair<int,int,0>(std::pair<int,int> &&) noexcept' being compiled
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(26): message : see reference to function template instantiation 'std::pair<float,float>::pair<int,int,0>(std::pair<int,int> &&) noexcept' being compiled
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(28): message : see reference to function template instantiation 'std::pair<float,float>::pair<double,int,0>(std::pair<double,int> &&) noexcept' being compiled
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(28): message : see reference to function template instantiation 'std::pair<float,float>::pair<double,int,0>(std::pair<double,int> &&) noexcept' being compiled
   ArcadeRacingGame.vcxproj -> D:\Prod\git\ArcadeRacing\ArcadeRacingGame\x64\Debug\ArcadeRacingGame.exe
