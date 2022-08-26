@@ -28,7 +28,8 @@ class Track :public Drawable
 			float pos_before_move;
 			float perspective;
 			float tile_w;
-			Line(int yval) : tile_w(road_w * 0.15f), y(yval), pos_before_move(0.5f)
+			float offset;
+			Line(int yval) : tile_w(road_w * 0.15f), y(yval), pos_before_move(0.5f), offset(0)
 			{
 				float scaledY = ((y - (GameGlobals::SCREEN_H / 2)) / (GameGlobals::SCREEN_H - (GameGlobals::SCREEN_H / 2)));
 				perspective = Track::minRoad + scaledY * Track::percentOfPersp; //calculate perspective
@@ -61,6 +62,7 @@ class Track :public Drawable
 		float baseSegOffset = 0.5f;
 
 		float curvature = 0; //amount to offset the track each frame
+		float moveAmount = 0;
 		
 		std::vector<std::pair<float, float>> trackData;
 		int currentSect = 0;

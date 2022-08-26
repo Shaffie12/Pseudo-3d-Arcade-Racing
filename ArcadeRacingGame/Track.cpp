@@ -33,23 +33,29 @@ Track::Track()
 void Track::drawElement(sf::RenderWindow& w)
 {
 	//before we start drawing, check if any curve has been reached
+	//optimise later
 	if (dist > trackData.at(currentSect).second)
 		if (curvature == 0 &&  !activeSegment)
 		{
-			curvature = (trackData.at(currentSect).first - middlePt);
-			curvature = curvature / abs(curvature); //normalise for direction
+			moveAmount = abs((trackData.at(currentSect).first - middlePt)); //how much to move 
+			curvature = (trackData.at(currentSect).first - middlePt) / abs((trackData.at(currentSect).first - middlePt)); //normalise for direction
 			activeSegment = true;
 		}
 			
 		else
 		{
-			if (abs(middlePt - trackData.at(currentSect).first) > 0.01f) //instead of closeness to target point, check has the line moved enough.
+			if (moveAmount> 0)
+			{
+				
 				middlePt += curvature * (0.5f * GameGlobals::elapsedTime);
-			
+				moveAmount -= 0.5f * GameGlobals::elapsedTime;
+			}
+				
 				
 			else
 			{
 				curvature = 0;
+				moveAmount = 0;
 				currentSect = (++currentSect) % trackData.size();
 				activeSegment = false;
 			}
@@ -80,6 +86,7 @@ void Track::drawTrackLines()
 		line.colours[1] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.7) > 0.0f ? tile_col_1 : tile_col_2;
 		line.colours[2] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.7) > 0.0f ? roadLight : roadDark;
 	
+		 
 		//float percentOfSeg = 1 - ((line.y - (GameGlobals::SCREEN_H / 2)) / (segPosition - (GameGlobals::SCREEN_H / 2)));
 												//was 0.5f before
 		//line.middlePt = line.y < segPosition ? line.middlePt + (curvature * percentOfSeg) * pow((1 - line.perspective), 3) : line.middlePt;
@@ -88,7 +95,7 @@ void Track::drawTrackLines()
 		
 		//draw the vertices for the lines
 		
-
+		middlePt = 0.5f + moveAmount * powf( (1 - line.perspective), 3);
 		//grass left
 		line.vertices[0] = sf::Vertex(sf::Vector2f(0, line.y), line.colours[0]);
 		line.vertices[1] = sf::Vertex(sf::Vector2f((middlePt - line.perspective - line.tile_w) * GameGlobals::SCREEN_W, line.y), line.colours[0]);
