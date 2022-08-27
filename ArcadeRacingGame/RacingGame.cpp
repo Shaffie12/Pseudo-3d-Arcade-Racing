@@ -50,14 +50,17 @@ void RacingGame::handleInput()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		track.addDist(60*GameGlobals::elapsedTime);
+		track.addSpeed(GameGlobals::elapsedTime, true);
+		/*
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 			track.offsetCenter(GameGlobals::elapsedTime, true);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 			track.offsetCenter(GameGlobals::elapsedTime, false);
-		
-		
+		*/
 	}
+	else
+		track.addSpeed(GameGlobals::elapsedTime, false);
+	
 	
 	
 }
