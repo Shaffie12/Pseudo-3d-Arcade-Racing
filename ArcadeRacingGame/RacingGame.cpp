@@ -36,7 +36,7 @@ void RacingGame::start()
 
 void RacingGame::gameLoop()
 {
-	GameGlobals::elapsedTime = _Clock.restart().asSeconds();
+	GameGlobals::elapsedTime = Racing::Util::roundToDP(_Clock.restart().asSeconds(),2);
 	_MainWindow.clear();
 	if(GameGlobals::isActiveWindow)
 		handleInput();
@@ -50,7 +50,7 @@ void RacingGame::handleInput()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		track.addSpeed(GameGlobals::elapsedTime, true);
+		track.addSpeed(0.02, true);
 		/*
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 			track.offsetCenter(GameGlobals::elapsedTime, true);
@@ -59,7 +59,7 @@ void RacingGame::handleInput()
 		*/
 	}
 	else
-		track.addSpeed(GameGlobals::elapsedTime, false);
+		track.addSpeed(0.02, false);
 	
 	
 	

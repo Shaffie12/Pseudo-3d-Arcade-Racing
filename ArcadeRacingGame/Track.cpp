@@ -25,34 +25,36 @@ Track::Track()
 	}
 		
 	trackData.push_back(std::make_pair(1, 30)); 
-	trackData.push_back(std::make_pair(0, 200));
-	trackData.push_back(std::make_pair(0.5, 700));
+	trackData.push_back(std::make_pair(0, 700));
+	trackData.push_back(std::make_pair(0.5, 1000));
 	
 }
 
 void Track::drawElement(sf::RenderWindow& w)
 {
 	
-	speed = Racing::Util::clamp(speed, 0, 1); //normalise speed
+	speed = Racing::Util::clamp(speed, 0, 1);
 	dist += speed;
+	
 
 	if (dist > trackData.at(currentSect).second)
 	{
-		if (abs(trackData.at(currentSect).first - curvature) < 0.01)
+		int scaled_diff = (trackData.at(currentSect).first - curvature) * 100; //this can be global
+
+		if (abs(scaled_diff) <= 1)
 			currentSect = (++currentSect) % trackData.size();
 		else
 		{
-			
-			moveAmount = (trackData.at(currentSect).first - curvature) * GameGlobals::elapsedTime * speed;
-			moveAmount = Racing::Util::roundToDP(moveAmount, 4);
+			moveAmount = (scaled_diff/abs(scaled_diff)) * 0.01 * speed;
+				//((static_cast<float> (scaled_diff) / 100.0f) * 0.02) *speed;
 			curvature += moveAmount;
-		}
-		
-		
 
-		
+		}
+
 	}
-	std::cout << trackLines->at(0).middlePt << '\n';
+	else
+		moveAmount = 0;
+	
 
 	drawTrackLines();
 		
@@ -69,9 +71,10 @@ void Track::drawTrackLines()
 
 		line.tile_w = line.perspective * 0.2; //adjust tile width
 
-		line.colours[0] = sinf(15 * pow(1 - line.perspective, 10) + dist * 0.1) > 0.0f ? grassLight : grassDark;
-		line.colours[1] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.7) > 0.0f ? tile_col_1 : tile_col_2;
-		line.colours[2] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.7) > 0.0f ? roadLight : roadDark;
+		//tweak multiplier on dist to change "speed look"
+		line.colours[0] = sinf(15 * pow(1 - line.perspective, 10) + dist * 0.3) > 0.0f ? grassLight : grassDark;
+		line.colours[1] = sinf(50 * pow(1 - line.perspective, 5) + dist * 1.5) > 0.0f ? tile_col_1 : tile_col_2;
+		line.colours[2] = sinf(50 * pow(1 - line.perspective, 5) + dist * 1.5) > 0.0f ? roadLight : roadDark;
 
 		//adjust lines
 		//buggy - line is not getting moveAmount as zero
@@ -112,7 +115,11 @@ void Track::offsetCenter(float amount, bool add)
 		middlePt -= amount;
 }
 
-void Track::addSpeed(float amount, bool add) { if (add)speed += amount; else speed -= amount; }
+void Track::addSpeed(float amount, bool add)
+{ 
+	
+	if (add)speed += amount; else speed -= amount; 
+}
 float Track::getDist() { return dist; }
 
 void Track::getNextCurvature()
