@@ -27,6 +27,7 @@ Track::Track(): baseSeg(Segment(0.5,0))
 	trackData.push_back(Segment(0.88, 30));
 	trackData.push_back(Segment(0.43, 60)); 
 	//curve shouldnt be going off screen
+	//comment
 
 	
 }
