@@ -1,94 +1,64 @@
 ﻿  Track.cpp
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.h(38,26): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(23,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(42,19): warning C4244: 'initializing': conversion from '_Ty1' to 'int', possible loss of data
-          with
-          [
-              _Ty1=float
-          ]
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(48,55): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(72,34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(74,61): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(75,60): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(76,60): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(84,53): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(27,38): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(28,38): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(47,85): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(54,41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(81,61): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(82,60): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(83,60): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(90,53): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(85,124): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(91,124): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(88,124): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(94,124): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(89,110): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(95,110): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(92,110): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(98,110): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(93,110): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(99,110): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(96,110): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(102,110): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(97,124): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(103,124): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(100,124): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(106,124): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(101,73): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(107,73): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\utility(242,16): warning C4244: 'initializing': conversion from '_Ty' to '_Ty1', possible loss of data
-          with
-          [
-              _Ty=int
-          ]
-          and
-          [
-              _Ty1=float
-          ]
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(27): message : see reference to function template instantiation 'std::pair<float,float>::pair<int,int,0>(std::pair<int,int> &&) noexcept' being compiled
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(27): message : see reference to function template instantiation 'std::pair<float,float>::pair<int,int,0>(std::pair<int,int> &&) noexcept' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\utility(242,61): warning C4244: 'initializing': conversion from '_Ty' to '_Ty2', possible loss of data
-          with
-          [
-              _Ty=int
-          ]
-          and
-          [
-              _Ty2=float
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\utility(242,16): warning C4244: 'initializing': conversion from '_Ty' to '_Ty1', possible loss of data
-          with
-          [
-              _Ty=double
-          ]
-          and
-          [
-              _Ty1=float
-          ]
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(29): message : see reference to function template instantiation 'std::pair<float,float>::pair<double,int,0>(std::pair<double,int> &&) noexcept' being compiled
-D:\Prod\git\ArcadeRacing\ArcadeRacingGame\Track.cpp(29): message : see reference to function template instantiation 'std::pair<float,float>::pair<double,int,0>(std::pair<double,int> &&) noexcept' being compiled
+Util.obj : warning LNK4204: 'D:\Prod\git\ArcadeRacing\ArcadeRacingGame\x64\Debug\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
+Renderer.obj : warning LNK4204: 'D:\Prod\git\ArcadeRacing\ArcadeRacingGame\x64\Debug\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
+GameGlobals.obj : warning LNK4204: 'D:\Prod\git\ArcadeRacing\ArcadeRacingGame\x64\Debug\vc142.pdb' is missing debugging information for referencing module; linking object as if no debug info
   ArcadeRacingGame.vcxproj -> D:\Prod\git\ArcadeRacing\ArcadeRacingGame\x64\Debug\ArcadeRacingGame.exe

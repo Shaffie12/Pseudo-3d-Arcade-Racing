@@ -40,7 +40,6 @@ void RacingGame::gameLoop()
 	_MainWindow.clear();
 	if(GameGlobals::isActiveWindow)
 		handleInput();
-	//update the track based on distance 
 	drawAllElements();
 
 	_MainWindow.display();
@@ -51,12 +50,12 @@ void RacingGame::handleInput()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
 		track.addSpeed(0.02, true);
-		/*
+		track.adjustRoadSpeed(player.getCurvature());
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-			track.offsetCenter(GameGlobals::elapsedTime, true);
+			player.updateCurvature(0.008, false);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			track.offsetCenter(GameGlobals::elapsedTime, false);
-		*/
+			player.updateCurvature(0.008, true);
+	
 	}
 	else
 		track.addSpeed(0.02, false);

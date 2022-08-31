@@ -15,7 +15,8 @@ class Track :public Drawable
 		void offsetCenter(float amount, bool add);
 		void addSpeed(float amount, bool add);
 		float getDist();
-		void getNextCurvature();
+		void adjustRoadSpeed(float playerPosition);
+		static float trackCurvature;
 
 
 	
@@ -25,16 +26,16 @@ class Track :public Drawable
 			sf::Vertex vertices[10]; 
 			sf::Color colours[3];
 			int y; //i dont think it needs this since its always passed it
-			float pos_before_move;
+			float scaledY;
 			float perspective;
 			float tile_w;
-			float offset;
 			float middlePt;
-			Line(int yval) : tile_w(road_w * 0.15f), y(yval), pos_before_move(0.5f), offset(0), middlePt(0.5)
+			Line(int yval) : y(yval), middlePt(0.5)
 			{
-				float scaledY = ((y - (GameGlobals::SCREEN_H / 2)) / (GameGlobals::SCREEN_H - (GameGlobals::SCREEN_H / 2)));
-				perspective = Track::minRoad + scaledY * Track::percentOfPersp; //calculate perspective
+				scaledY = ((y - (GameGlobals::SCREEN_H / 2)) / (GameGlobals::SCREEN_H - (GameGlobals::SCREEN_H / 2))) ;
+				perspective = minRoad +scaledY *road_w;
 				//i think the colours need to be redrawn every frame too
+				tile_w = perspective * 0.15;
 				
 			}
 		};
@@ -44,7 +45,8 @@ class Track :public Drawable
 			float t_curvature;
 			float distanceToReach;
 			float position;
-			Segment(float curvature, float distToReach) : position(GameGlobals::SCREEN_H / 2) { t_curvature = curvature; distanceToReach = distToReach; }
+			Segment(float curvature, float distance) : position(GameGlobals::SCREEN_H / 2) { t_curvature = curvature; distanceToReach = distance; }
+			Segment(const Segment& s) { this->distanceToReach = s.distanceToReach; this->position = GameGlobals::SCREEN_H / 2; this->t_curvature = s.t_curvature; }
 		};
 
 		void drawTrackLines();
@@ -53,20 +55,23 @@ class Track :public Drawable
 		
 		static float road_w;
 		static float minRoad; //minimal amount of road at the highest point on road
-		static float percentOfPersp; // change view toward ground or sky
 		float middlePt = 0.5;
 		float speed = 0; //artificially represent speed of player
 		float dist = 0; //artificially represents how far player has moved
 		std::vector<Line>* trackLines;
 
-		bool activeSegment = false;
-		float segPosition = GameGlobals::SCREEN_H / 2; //there may be limiatations to just using 1 segment as you have to wait for it to hit the bottom of the screen before you introduce a new curve
-		float baseSegOffset = 0.5f;
-
-		float curvature = 0.5; //amount to offset the track each frame
+		int curveDirection = 0;
+		int scaled_diff = 0;
+		float baseDiff = 0;
+		float curvature = 0; //amount to offset the track each frame
 		float moveAmount = 0; //how much to move each frame and which direction
-		std::vector<std::pair<float, float>> trackData;
+		float offset = 0;
+		std::vector<Segment> trackData;
 		int currentSect = 0;
+		
+
+		Segment baseSeg;
+		
 
 		static sf::Color grassLight;
 		static sf::Color grassDark;
