@@ -61,7 +61,7 @@ class Track :public Drawable
 		std::vector<Line>* trackLines;
 
 		int curveDirection = 0;
-		int scaled_diff = 0;
+		float offsetDiff = 0;
 		float baseDiff = 0;
 		float curvature = 0; //amount to offset the track each frame
 		float moveAmount = 0; //how much to move each frame and which direction

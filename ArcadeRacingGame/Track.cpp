@@ -24,8 +24,8 @@ Track::Track(): baseSeg(Segment(0.5,0))
 		trackLines->push_back(*line);
 	}
 
-	trackData.push_back(Segment(0.88, 30));
-	trackData.push_back(Segment(0.43, 60)); 
+	trackData.push_back(Segment(0.1, 30));
+	trackData.push_back(Segment(0.43, 600000)); 
 	//curve shouldnt be going off screen
 	//comment
 
@@ -41,21 +41,24 @@ void Track::drawElement(sf::RenderWindow& w)
 	//baseDiff = (baseSeg.t_curvature  - trackLines->at((GameGlobals::SCREEN_H / 2) - 1).middlePt) * 100;
 	//offset = curveDirection * baseDiff * 0.0001 * speed;
 	
-	
 
 	if (dist > trackData.at(currentSect).distanceToReach)
 	{
-		scaled_diff =(trackData.at(currentSect).t_curvature - trackLines->at(0).middlePt) * 100;
-		if (abs(scaled_diff > 0))
-			curveDirection = scaled_diff > 0 ? 1 : -1;
-		std::cout << scaled_diff << '\n';
-
-		if (abs(scaled_diff) >1) //its overcapping and doesnt stop
+		offsetDiff = Racing::Util::roundToDP((trackData.at(currentSect).t_curvature - trackLines->at(0).middlePt),3);
+		if (abs(offsetDiff)>0)
+			curveDirection = offsetDiff > 0 ? 1 : -1;
+		
+		if (abs(offsetDiff) >0.01) 
 		{
-			moveAmount = curveDirection * 0.0008 * speed;
-			curvature += moveAmount;
-			trackCurvature = curvature;
+			moveAmount = curveDirection * 0.001 * speed;
+			curvature += moveAmount * speed;
+			//trackCurvature = curvature * speed;
 		}
+		else
+			moveAmount = 0;
+
+		
+		
 
 		moveSegment();
 
@@ -131,6 +134,7 @@ float Track::getDist() { return dist; }
 void Track::moveSegment()
 {
 	trackData.at(currentSect).position += 1 * speed;
+	/*
 	if (trackData.at(currentSect).position >= GameGlobals::SCREEN_H)
 	{
 		
@@ -145,6 +149,7 @@ void Track::moveSegment()
 		currentSect = (++currentSect) % trackData.size(); //we can replace this system with 2 references and pointers
 
 	}
+	*/
 		
 	//move the segment by n lines a frame
 	//once the segment hits the bottom of the screen, the entire road should be shifted to the same direction as the curve.
