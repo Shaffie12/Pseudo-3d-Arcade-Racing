@@ -38,8 +38,9 @@ void Track::drawElement(sf::RenderWindow& w)
 	speed = Racing::Util::clamp(speed, 0, 1);
 	dist += speed;
 	
-	//baseDiff = (baseSeg.t_curvature  - trackLines->at((GameGlobals::SCREEN_H / 2) - 1).middlePt) * 100;
-	//offset = curveDirection * baseDiff * 0.0001 * speed;
+	baseDiff = Racing::Util::roundToDP((baseSeg.t_curvature - trackLines->at((GameGlobals::SCREEN_H / 2) - 1).middlePt),3);
+	std::cout << baseDiff << '\n';
+	offset = baseDiff * 0.01 * speed;
 	
 
 	if (dist > trackData.at(currentSect).distanceToReach)
@@ -52,13 +53,11 @@ void Track::drawElement(sf::RenderWindow& w)
 		{
 			moveAmount = curveDirection * 0.001 * speed;
 			curvature += moveAmount * speed;
-			//trackCurvature = curvature * speed;
+			trackCurvature = curvature * speed;
 		}
 		else
 			moveAmount = 0;
-
-		
-		
+	
 
 		moveSegment();
 
@@ -86,7 +85,7 @@ void Track::drawTrackLines()
 		line.colours[1] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? tile_col_1 : tile_col_2;
 		line.colours[2] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? roadLight : roadDark;
 
-		line.middlePt += offset + moveAmount * powf(1 - line.perspective, 10); //
+		line.middlePt += offset + moveAmount * powf(1 - line.perspective, 10); 
 		
 		
 		
@@ -134,22 +133,17 @@ float Track::getDist() { return dist; }
 void Track::moveSegment()
 {
 	trackData.at(currentSect).position += 1 * speed;
-	/*
+	
 	if (trackData.at(currentSect).position >= GameGlobals::SCREEN_H)
 	{
 		
 		baseSeg = trackData.at(currentSect);
 	
-		
-		//float diff = (baseSeg.t_curvature - trackLines->at((GameGlobals::SCREEN_H/2)-1).middlePt) * 100;
-		 
-			
-		//make road thinner as it goes off to the side
 		trackData.at(currentSect).position = GameGlobals::SCREEN_H / 2;
 		currentSect = (++currentSect) % trackData.size(); //we can replace this system with 2 references and pointers
 
 	}
-	*/
+	
 		
 	//move the segment by n lines a frame
 	//once the segment hits the bottom of the screen, the entire road should be shifted to the same direction as the curve.
