@@ -25,7 +25,7 @@ Track::Track(): baseSeg(Segment(0.5,0))
 	}
 
 	trackData.push_back(Segment(0.1, 30));
-	trackData.push_back(Segment(0.43, 600000)); 
+	trackData.push_back(Segment(1, 60)); 
 	//curve shouldnt be going off screen
 	//comment
 
@@ -38,29 +38,29 @@ void Track::drawElement(sf::RenderWindow& w)
 	speed = Racing::Util::clamp(speed, 0, 1);
 	dist += speed;
 	
-	baseDiff = Racing::Util::roundToDP((baseSeg.t_curvature - trackLines->at((GameGlobals::SCREEN_H / 2) - 1).middlePt),3);
-	std::cout << baseDiff << '\n';
-	offset = baseDiff * 0.01 * speed;
+	//baseDiff = Racing::Util::roundToDP((baseSeg.t_curvature - trackLines->at((GameGlobals::SCREEN_H / 2) - 1).middlePt),3);
+	//offset = baseDiff * 0.01 * speed;
 	
 
 	if (dist > trackData.at(currentSect).distanceToReach)
 	{
+		
 		offsetDiff = Racing::Util::roundToDP((trackData.at(currentSect).t_curvature - trackLines->at(0).middlePt),3);
+		
 		if (abs(offsetDiff)>0)
 			curveDirection = offsetDiff > 0 ? 1 : -1;
 		
 		if (abs(offsetDiff) >0.01) 
 		{
-			moveAmount = curveDirection * 0.001 * speed;
-			curvature += moveAmount * speed;
-			trackCurvature = curvature * speed;
+			moveAmount = curveDirection * 0.004 * speed;
+			curvature += moveAmount;
+			trackCurvature = curvature;
 		}
 		else
 			moveAmount = 0;
-	
 
 		moveSegment();
-
+	
 
 	}
 	else
@@ -85,10 +85,9 @@ void Track::drawTrackLines()
 		line.colours[1] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? tile_col_1 : tile_col_2;
 		line.colours[2] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? roadLight : roadDark;
 
-		line.middlePt += offset + moveAmount * powf(1 - line.perspective, 10); 
 		
-		
-		
+		line.middlePt += moveAmount * powf(1 - line.perspective, 10); 
+			
 		//grass left
 		line.vertices[0] = sf::Vertex(sf::Vector2f(0, line.y), line.colours[0]);
 		line.vertices[1] = sf::Vertex(sf::Vector2f((line.middlePt - line.perspective - line.tile_w) * GameGlobals::SCREEN_W, line.y), line.colours[0]);
@@ -134,7 +133,7 @@ void Track::moveSegment()
 {
 	trackData.at(currentSect).position += 1 * speed;
 	
-	if (trackData.at(currentSect).position >= GameGlobals::SCREEN_H)
+	if (trackData.at(currentSect).position >= GameGlobals::SCREEN_H && abs(offsetDiff)<0.01 )
 	{
 		
 		baseSeg = trackData.at(currentSect);

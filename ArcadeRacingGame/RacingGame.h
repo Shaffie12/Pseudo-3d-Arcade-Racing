@@ -6,6 +6,7 @@
 #include "Drawable.h"
 #include "Player.h"
 #include "Track.h"
+#include "Props.h"
 
 class RacingGame
 {
@@ -13,6 +14,7 @@ class RacingGame
 		
 		static Track track;
 		static Player player;
+		static Props props;
 		std::vector<Drawable> enemyCars;
 		
 		RacingGame();

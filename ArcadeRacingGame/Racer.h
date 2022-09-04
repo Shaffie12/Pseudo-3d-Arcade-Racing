@@ -4,7 +4,6 @@
 #include "GameGlobals.h"
 #include "Track.h"
 
-enum direction { f, l, r }; //use class
 
 class Racer :public Drawable
 {
