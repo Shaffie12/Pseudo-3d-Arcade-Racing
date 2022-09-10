@@ -35,5 +35,5 @@ Props::Props()
 
 void Props::drawElement(sf::RenderWindow& w)
 {
-	w.draw(bgs.at(2));
+	w.draw(bgs.at(8));
 }

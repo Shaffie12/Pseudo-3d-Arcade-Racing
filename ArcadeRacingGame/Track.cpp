@@ -2,7 +2,7 @@
 #include<iostream>
 #include <cmath>
 
-float Track::road_w = 0.65f;
+float Track::road_w = 0.6f;
 float Track::minRoad = 0.01f;
 float Track::trackCurvature = 0;
 //i think the colours can be moved to a configuration place later
@@ -14,7 +14,7 @@ sf::Color Track::tile_col_1 = sf::Color::Red;
 sf::Color Track::tile_col_2 = sf::Color::White;
 
 
-Track::Track(): baseSeg(Segment(0.5,0))
+Track::Track(): baseSeg(Segment(0,0))
 {
 	
 	trackLines = new std::vector<Line>;
@@ -24,69 +24,71 @@ Track::Track(): baseSeg(Segment(0.5,0))
 		trackLines->push_back(*line);
 	}
 
-	trackData.push_back(Segment(0.1, 30));
-	trackData.push_back(Segment(1, 60)); 
-	//curve shouldnt be going off screen
-	//comment
-
+	trackData.push_back(Segment(0.0000133, 30));
+	trackData.push_back(Segment(-0.0000133, 100));
 	
 }
 
 void Track::drawElement(sf::RenderWindow& w)
 {
-	
+
 	speed = Racing::Util::clamp(speed, 0, 1);
 	dist += speed;
-	
-	//baseDiff = Racing::Util::roundToDP((baseSeg.t_curvature - trackLines->at((GameGlobals::SCREEN_H / 2) - 1).middlePt),3);
-	//offset = baseDiff * 0.01 * speed;
-	
 
-	if (dist > trackData.at(currentSect).distanceToReach)
-	{
-		
-		offsetDiff = Racing::Util::roundToDP((trackData.at(currentSect).t_curvature - trackLines->at(0).middlePt),3);
-		
-		if (abs(offsetDiff)>0)
-			curveDirection = offsetDiff > 0 ? 1 : -1;
-		
-		if (abs(offsetDiff) >0.01) 
-		{
-			moveAmount = curveDirection * 0.004 * speed;
-			curvature += moveAmount;
-			trackCurvature = curvature;
-		}
-		else
-			moveAmount = 0;
 
-		moveSegment();
-	
-
-	}
-	else
-		moveAmount = 0;
-	
-
+	moveSegment();
 	drawTrackLines();
-		
+
+	
 	//draw the lines on screen
-	for (Line& l: *trackLines)
+	
+	
+
+	for (Line& l : *trackLines)
+	{
 		w.draw(l.vertices, 10, sf::Lines);
+	}
+		
+
+	sf::Vertex line[] =
+	{
+		sf::Vertex(sf::Vector2f(0,trackData.at(currentSect).position),sf::Color::White),
+		sf::Vertex(sf::Vector2f(GameGlobals::SCREEN_W, trackData.at(currentSect).position),sf::Color::White)
+	};
+
+	w.draw(line, 2, sf::Lines);
 
 }
 
 void Track::drawTrackLines()
 {
-	for (Line& line: *trackLines)
+	double dx = 0;
+	double ddx = 0;
+	double current_x = 0.5;
+	
+	rit = trackLines->rbegin();
+	while(rit!=trackLines->rend())
 	{
-		line.perspective = minRoad + line.scaledY * road_w; // change perspective based on the players position 
-		//tweak multiplier on dist to change "speed look"
-		line.colours[0] = sinf(15 * pow(1 - line.perspective, 10) + dist * 0.1) > 0.0f ? grassLight : grassDark;
+		
+		Line& line = *rit;
+		
+	
+		//line.perspective = minRoad + line.scaledY * road_w;
+		line.colours[0] = sinf(30 * pow(1 - line.perspective, 10) + dist * 0.1) > 0.0f ? grassLight : grassDark;
 		line.colours[1] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? tile_col_1 : tile_col_2;
 		line.colours[2] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? roadLight : roadDark;
 
 		
-		line.middlePt += moveAmount * powf(1 - line.perspective, 10); 
+		if (line.y < trackData.at(currentSect).position)
+			dx = trackData.at(currentSect).t_curvature;
+		else
+			dx=baseSeg.t_curvature;
+		
+
+		ddx += 1.5 * (1-line.scaledY/2) * dx; //still a  bug where we can move the road but not the curve
+		current_x += ddx;
+		line.middlePt = current_x;
+	
 			
 		//grass left
 		line.vertices[0] = sf::Vertex(sf::Vector2f(0, line.y), line.colours[0]);
@@ -107,7 +109,10 @@ void Track::drawTrackLines()
 		//grass right
 		line.vertices[8] = sf::Vertex(sf::Vector2f((line.middlePt + line.perspective + line.tile_w) * GameGlobals::SCREEN_W, line.y), line.colours[0]);
 		line.vertices[9] = sf::Vertex(sf::Vector2f(GameGlobals::SCREEN_W, line.y), line.colours[0]);
+
+		++rit;
 	}
+	
 
 
 
@@ -131,24 +136,21 @@ float Track::getDist() { return dist; }
 
 void Track::moveSegment()
 {
-	trackData.at(currentSect).position += 1 * speed;
 	
-	if (trackData.at(currentSect).position >= GameGlobals::SCREEN_H && abs(offsetDiff)<0.01 )
+	trackData.at(currentSect).position += 2*speed;
+
+	if (trackData.at(currentSect).position >= GameGlobals::SCREEN_H)
 	{
 		
-		baseSeg = trackData.at(currentSect);
-	
 		trackData.at(currentSect).position = GameGlobals::SCREEN_H / 2;
-		currentSect = (++currentSect) % trackData.size(); //we can replace this system with 2 references and pointers
-
-	}
-	
+		baseSeg = trackData.at(currentSect);
+		currentSect = ++currentSect % trackData.size(); //we should only move to the next segment if the distance has been reached?
 		
-	//move the segment by n lines a frame
-	//once the segment hits the bottom of the screen, the entire road should be shifted to the same direction as the curve.
-	//its also possible to draw the road thinner the further away from the centre it is (within a reasonable amount)
+	}
+		
+
 	
-	//i changed the data to a list of segments for now.
+	
 		
 }
 

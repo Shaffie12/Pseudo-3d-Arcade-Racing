@@ -32,7 +32,7 @@ class Track :public Drawable
 			float middlePt;
 			Line(int yval) : y(yval), middlePt(0.5)
 			{
-				scaledY = ((y - (GameGlobals::SCREEN_H / 2)) / (GameGlobals::SCREEN_H - (GameGlobals::SCREEN_H / 2))) ;
+				scaledY = ((y - (GameGlobals::SCREEN_H / 2)) / (GameGlobals::SCREEN_H - (GameGlobals::SCREEN_H / 2))) ; //scale 300-600 as 0-1
 				perspective = minRoad +scaledY *road_w;
 				//i think the colours need to be redrawn every frame too
 				tile_w = perspective * 0.15;
@@ -44,9 +44,9 @@ class Track :public Drawable
 		{
 			float t_curvature;
 			float distanceToReach;
-			float position;
+			int position;
 			Segment(float curvature, float distance) : position(GameGlobals::SCREEN_H / 2) { t_curvature = curvature; distanceToReach = distance; }
-			Segment(const Segment& s) { this->distanceToReach = s.distanceToReach; this->position = GameGlobals::SCREEN_H / 2; this->t_curvature = s.t_curvature; }
+			Segment(const Segment& s) { this->distanceToReach = s.distanceToReach; this->position = GameGlobals::SCREEN_H / 2; this->t_curvature = s.t_curvature;  }
 		};
 
 		void drawTrackLines();
@@ -59,15 +59,12 @@ class Track :public Drawable
 		float speed = 0; //artificially represent speed of player
 		float dist = 0; //artificially represents how far player has moved
 		std::vector<Line>* trackLines;
-
-		int curveDirection = 0;
-		float offsetDiff = 0;
-		float baseDiff = 0;
-		float curvature = 0; //amount to offset the track each frame
-		float moveAmount = 0; //how much to move each frame and which direction
 		float offset = 0;
 		std::vector<Segment> trackData;
+		std::vector<Line>::reverse_iterator rit;
 		int currentSect = 0;
+
+		
 		
 
 		Segment baseSeg;
