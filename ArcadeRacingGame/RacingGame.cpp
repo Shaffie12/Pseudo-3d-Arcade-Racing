@@ -6,6 +6,7 @@
 Player RacingGame::player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::SCREEN_H) -30));
 Track RacingGame::track;
 Props RacingGame::props;
+UI RacingGame::ui;
 
 RacingGame::RacingGame() :_MainWindow(sf::VideoMode(GameGlobals::SCREEN_W,GameGlobals::SCREEN_H),"Arcade Racing")  , _Renderer( Renderer())
 { _MainWindow.setFramerateLimit(60);}
@@ -70,6 +71,9 @@ void RacingGame::drawAllElements()
 	track.drawElement(_MainWindow);
 	player.drawElement(_MainWindow);
 	props.drawElement(_MainWindow);
+	ui.drawElement(_MainWindow);
+
+
 
 	/*
 	for (auto d : enemyCars)

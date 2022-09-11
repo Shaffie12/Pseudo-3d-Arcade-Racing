@@ -5,6 +5,8 @@
 float Track::road_w = 0.6f;
 float Track::minRoad = 0.01f;
 float Track::trackCurvature = 0;
+float Track::speed = 0;
+float Track::dist = 0;
 //i think the colours can be moved to a configuration place later
 sf::Color Track::grassLight = sf::Color::Green;
 sf::Color Track::grassDark = sf::Color(55, 154, 84);
@@ -24,8 +26,10 @@ Track::Track(): baseSeg(Segment(0,0))
 		trackLines->push_back(*line);
 	}
 
+	trackData.push_back(Segment(0, 0));
 	trackData.push_back(Segment(0.0000133, 30));
 	trackData.push_back(Segment(-0.0000133, 100));
+	trackData.push_back(Segment(-0.0000001, 150));
 	
 }
 
@@ -132,7 +136,6 @@ void Track::addSpeed(float amount, bool add)
 	
 	if (add)speed += amount; else speed -= amount; 
 }
-float Track::getDist() { return dist; }
 
 void Track::moveSegment()
 {

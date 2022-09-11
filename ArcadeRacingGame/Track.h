@@ -14,9 +14,10 @@ class Track :public Drawable
 		void drawElement(sf::RenderWindow& w);
 		void offsetCenter(float amount, bool add);
 		void addSpeed(float amount, bool add);
-		float getDist();
 		void adjustRoadSpeed(float playerPosition);
 		static float trackCurvature;
+		static float speed; //artificially represent speed of player
+		static float dist; //artificially represents how far player has moved
 
 
 	
@@ -56,8 +57,7 @@ class Track :public Drawable
 		static float road_w;
 		static float minRoad; //minimal amount of road at the highest point on road
 		float middlePt = 0.5;
-		float speed = 0; //artificially represent speed of player
-		float dist = 0; //artificially represents how far player has moved
+		
 		std::vector<Line>* trackLines;
 		float offset = 0;
 		std::vector<Segment> trackData;
