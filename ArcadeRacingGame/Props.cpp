@@ -20,7 +20,7 @@ Props::Props()
 		int y = 4 + (row * iy)+(row*4);
 		
 		bgs.push_back(sf::Sprite(bgTex, sf::IntRect(x, y, ix - 4, iy - 64)));
-		bgs.at(i).setScale(4, 1.17);
+		bgs.at(i).setScale(4 , 1.17);
 		
 	
 		j = ++j % 3;
@@ -35,5 +35,5 @@ Props::Props()
 
 void Props::drawElement(sf::RenderWindow& w)
 {
-	w.draw(bgs.at(8));
+	w.draw(bgs.at(1));
 }

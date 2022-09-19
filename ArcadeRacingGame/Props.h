@@ -1,6 +1,7 @@
 #ifndef PROPS_H_
 #define _PROPS_H_
 #include "Drawable.h"
+#include "GameGlobals.h"
 
 class Props :public Drawable
 {

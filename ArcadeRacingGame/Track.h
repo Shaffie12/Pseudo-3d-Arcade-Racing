@@ -5,6 +5,7 @@
 #include "Util.h"
 #include <SFML/Graphics.hpp>
 #include<vector>
+#include<iostream>
 
 class Track :public Drawable
 {
@@ -14,16 +15,19 @@ class Track :public Drawable
 		void drawElement(sf::RenderWindow& w);
 		void offsetCenter(float amount, bool add);
 		void addSpeed(float amount, bool add);
-		void adjustRoadSpeed(float playerPosition);
+	
+
 		static float trackCurvature;
 		static float speed; //artificially represent speed of player
 		static float dist; //artificially represents how far player has moved
+		
 
 
 	
 	private:
 		struct Line 
 		{ 
+		
 			sf::Vertex vertices[10]; 
 			sf::Color colours[3];
 			int y; //i dont think it needs this since its always passed it
@@ -31,12 +35,15 @@ class Track :public Drawable
 			float perspective;
 			float tile_w;
 			float middlePt;
+			float screenY;
 			Line(int yval) : y(yval), middlePt(0.5)
 			{
-				scaledY = ((y - (GameGlobals::SCREEN_H / 2)) / (GameGlobals::SCREEN_H - (GameGlobals::SCREEN_H / 2))) ; //scale 300-600 as 0-1
+				
+				scaledY = Racing::Util::convertRange(y, 1, 300, 0, 1);
+				screenY = y + GameGlobals::SCREEN_H / 2;
 				perspective = minRoad +scaledY *road_w;
-				//i think the colours need to be redrawn every frame too
 				tile_w = perspective * 0.15;
+				
 				
 			}
 		};
@@ -45,7 +52,7 @@ class Track :public Drawable
 		{
 			float t_curvature;
 			float distanceToReach;
-			int position;
+			float position;
 			Segment(float curvature, float distance) : position(GameGlobals::SCREEN_H / 2) { t_curvature = curvature; distanceToReach = distance; }
 			Segment(const Segment& s) { this->distanceToReach = s.distanceToReach; this->position = GameGlobals::SCREEN_H / 2; this->t_curvature = s.t_curvature;  }
 		};
@@ -53,7 +60,7 @@ class Track :public Drawable
 		void drawTrackLines();
 		void moveSegment();
 		
-		
+		float diff = 0;
 		static float road_w;
 		static float minRoad; //minimal amount of road at the highest point on road
 		float middlePt = 0.5;
@@ -63,10 +70,6 @@ class Track :public Drawable
 		std::vector<Segment> trackData;
 		std::vector<Line>::reverse_iterator rit;
 		int currentSect = 0;
-
-		
-		
-
 		Segment baseSeg;
 		
 

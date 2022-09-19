@@ -52,11 +52,11 @@ void RacingGame::handleInput()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
 		track.addSpeed(0.02, true);
-		track.adjustRoadSpeed(player.getCurvature());
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-			player.updateCurvature(0.008, false);
+			track.offsetCenter(0.0055, true);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			player.updateCurvature(0.008, true);
+			track.offsetCenter(0.0055, false);
+			
 	
 	}
 	else

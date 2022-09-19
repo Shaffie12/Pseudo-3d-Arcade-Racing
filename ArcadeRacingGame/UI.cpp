@@ -25,7 +25,7 @@ UI::UI()
 
 void UI::drawElement(sf::RenderWindow& w)
 {
-	std::stringstream ss;
+	std::stringstream ss; //is there a way to only declare this once?
 	ss << Racing::Util::roundToDP(Track::speed, 3) * 100 << ';' << Track::dist;		 //these cars can go up to 360km/ph
 	std::string spd;
 	std::string dst;

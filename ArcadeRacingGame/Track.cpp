@@ -20,16 +20,18 @@ Track::Track(): baseSeg(Segment(0,0))
 {
 	
 	trackLines = new std::vector<Line>;
-	for (int i = 0; i < GameGlobals::SCREEN_H/2 ; i++)
+	for (int i = 1; i <=GameGlobals::SCREEN_H/2 ; i++)
 	{
-		Line* line = new Line((GameGlobals::SCREEN_H/2)+i);
+		Line* line = new Line(i);
 		trackLines->push_back(*line);
+		
 	}
 
-	trackData.push_back(Segment(0, 0));
-	trackData.push_back(Segment(0.0000133, 30));
-	trackData.push_back(Segment(-0.0000133, 100));
-	trackData.push_back(Segment(-0.0000001, 150));
+	trackData.push_back(Segment(-0.0009,70)); //very hard right -1 - 2 range
+	trackData.push_back(Segment(0, 200)); //straight
+	trackData.push_back(Segment(0.0005, 270));
+	trackData.push_back(Segment(0, 400));
+	
 	
 }
 
@@ -37,10 +39,12 @@ void Track::drawElement(sf::RenderWindow& w)
 {
 
 	speed = Racing::Util::clamp(speed, 0, 1);
-	dist += speed;
+	dist += speed*1.5;
 
 
 	moveSegment();
+	
+	
 	drawTrackLines();
 
 	
@@ -69,66 +73,68 @@ void Track::drawTrackLines()
 	double dx = 0;
 	double ddx = 0;
 	double current_x = 0.5;
+	float distFromCam;
 	
+
+	float segpos = Racing::Util::convertRange(trackData.at(currentSect).position, 300, 600, 1, 300);
+	float td = trackData.at(currentSect).t_curvature;
+	float bd = baseSeg.t_curvature; //another way to alias this?
+
 	rit = trackLines->rbegin();
 	while(rit!=trackLines->rend())
 	{
 		
 		Line& line = *rit;
-		
-	
-		//line.perspective = minRoad + line.scaledY * road_w;
+
 		line.colours[0] = sinf(30 * pow(1 - line.perspective, 10) + dist * 0.1) > 0.0f ? grassLight : grassDark;
 		line.colours[1] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? tile_col_1 : tile_col_2;
 		line.colours[2] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? roadLight : roadDark;
 
-		
-		if (line.y < trackData.at(currentSect).position)
-			dx = trackData.at(currentSect).t_curvature;
+		if (line.y < segpos)
+			dx = td * ( (1 - line.scaledY) * (1 - line.scaledY) / 6) * ((trackLines->at(299).scaledY - line.scaledY) *1.5) ;
 		else
-			dx=baseSeg.t_curvature;
-		
+			dx = bd * ((1 - line.scaledY) * (1 - line.scaledY) / 6) * ((trackLines->at(299).scaledY - line.scaledY) * 1.5);
 
-		ddx += 1.5 * (1-line.scaledY/2) * dx; //still a  bug where we can move the road but not the curve
+		ddx += dx;
 		current_x += ddx;
 		line.middlePt = current_x;
-	
-			
+
+
+		
 		//grass left
-		line.vertices[0] = sf::Vertex(sf::Vector2f(0, line.y), line.colours[0]);
-		line.vertices[1] = sf::Vertex(sf::Vector2f((line.middlePt - line.perspective - line.tile_w) * GameGlobals::SCREEN_W, line.y), line.colours[0]);
+		line.vertices[0] = sf::Vertex(sf::Vector2f(0, line.screenY), line.colours[0]);
+		line.vertices[1] = sf::Vertex(sf::Vector2f((line.middlePt - line.perspective - line.tile_w) * GameGlobals::SCREEN_W, line.screenY), line.colours[0]);
 
 		//road edge l
-		line.vertices[2] = sf::Vertex(sf::Vector2f((line.middlePt - line.perspective - line.tile_w) * GameGlobals::SCREEN_W, line.y), line.colours[1]);
-		line.vertices[3] = sf::Vertex(sf::Vector2f((line.middlePt - line.perspective) * GameGlobals::SCREEN_W, line.y), line.colours[1]);
+		line.vertices[2] = sf::Vertex(sf::Vector2f((line.middlePt - line.perspective - line.tile_w) * GameGlobals::SCREEN_W, line.screenY), line.colours[1]);
+		line.vertices[3] = sf::Vertex(sf::Vector2f((line.middlePt - line.perspective) * GameGlobals::SCREEN_W, line.screenY), line.colours[1]);
 
 		//road 
-		line.vertices[4] = sf::Vertex(sf::Vector2f((line.middlePt - line.perspective) * GameGlobals::SCREEN_W, line.y), line.colours[2]);
-		line.vertices[5] = sf::Vertex(sf::Vector2f((line.middlePt + line.perspective) * GameGlobals::SCREEN_W, line.y), roadLight);
+		line.vertices[4] = sf::Vertex(sf::Vector2f((line.middlePt - line.perspective) * GameGlobals::SCREEN_W, line.screenY), line.colours[2]);
+		line.vertices[5] = sf::Vertex(sf::Vector2f((line.middlePt + line.perspective) * GameGlobals::SCREEN_W, line.screenY), roadLight);
 
 		//edge 2
-		line.vertices[6] = sf::Vertex(sf::Vector2f((line.middlePt + line.perspective) * GameGlobals::SCREEN_W, line.y), line.colours[1]);
-		line.vertices[7] = sf::Vertex(sf::Vector2f((line.middlePt + line.perspective + line.tile_w) * GameGlobals::SCREEN_W, line.y), line.colours[1]);
+		line.vertices[6] = sf::Vertex(sf::Vector2f((line.middlePt + line.perspective) * GameGlobals::SCREEN_W, line.screenY), line.colours[1]);
+		line.vertices[7] = sf::Vertex(sf::Vector2f((line.middlePt + line.perspective + line.tile_w) * GameGlobals::SCREEN_W, line.screenY), line.colours[1]);
 
 		//grass right
-		line.vertices[8] = sf::Vertex(sf::Vector2f((line.middlePt + line.perspective + line.tile_w) * GameGlobals::SCREEN_W, line.y), line.colours[0]);
-		line.vertices[9] = sf::Vertex(sf::Vector2f(GameGlobals::SCREEN_W, line.y), line.colours[0]);
+		line.vertices[8] = sf::Vertex(sf::Vector2f((line.middlePt + line.perspective + line.tile_w) * GameGlobals::SCREEN_W, line.screenY), line.colours[0]);
+		line.vertices[9] = sf::Vertex(sf::Vector2f(GameGlobals::SCREEN_W, line.screenY), line.colours[0]);
 
 		++rit;
 	}
 	
 
-
-
 }
+
 
 
 void Track::offsetCenter(float amount, bool add)
 {
 	if (add)
-		middlePt += amount;
+		offset += amount;
 	else
-		middlePt -= amount;
+		offset -= amount;
 }
 
 void Track::addSpeed(float amount, bool add)
@@ -139,8 +145,8 @@ void Track::addSpeed(float amount, bool add)
 
 void Track::moveSegment()
 {
-	
-	trackData.at(currentSect).position += 2*speed;
+
+	trackData.at(currentSect).position += speed;
 
 	if (trackData.at(currentSect).position >= GameGlobals::SCREEN_H)
 	{
@@ -149,21 +155,8 @@ void Track::moveSegment()
 		baseSeg = trackData.at(currentSect);
 		currentSect = ++currentSect % trackData.size(); //we should only move to the next segment if the distance has been reached?
 		
-	}
-		
-
-	
-	
-		
-}
-
-void Track::adjustRoadSpeed(float playerPosition)
-{
-	if (fabs(playerPosition - trackCurvature) > 0.48)
-	{
-		//speed =0.02;
 		
 	}
-	
+
 		
 }

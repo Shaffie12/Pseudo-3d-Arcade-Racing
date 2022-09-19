@@ -11,6 +11,8 @@ namespace Racing
 		static float roundToDP(float val, float p);
 		static float Lerp(float a, float b, float t);
 		static float clamp(float n, float lower, float upper);
+		static float convertRange(float valToConvert, float oldMin, float oldMax, float newMin, float newMax);
+		
 		
 	};
 }

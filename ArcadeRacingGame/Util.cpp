@@ -13,3 +13,9 @@ float Racing::Util::roundToDP(float val, float prec)
 	float power = pow(10, prec);
 	return round(val * power) / power;
 }
+
+float Racing::Util::convertRange(float valToConvert, float oldMin, float oldMax, float newMin, float newMax)
+{
+	return(((valToConvert - oldMin) * (newMax - newMin)) / (oldMax - oldMin)) + newMin;
+}
+
