@@ -20,22 +20,39 @@ Track::Track(): baseSeg(Segment(0,0))
 {
 	
 	trackLines = new std::vector<Line>;
-	for (int i = 1; i <=GameGlobals::SCREEN_H/2 ; i++)
+	int pushed = 0;
+	for (int i = 1; i <=GameGlobals::GAME_H/2 ; i++)
 	{
+		/*
+		pushed = (++pushed) % 2;
 		Line* line = new Line(i);
-		trackLines->push_back(*line);
 		
-	}
+		if (pushed == 0 && i > 1)
+			line->scaledY = Racing::Util::convertRange(i-1, 1, 300, 0, 1);
+		else
+			line->scaledY = Racing::Util::convertRange(i, 1, 300, 0, 1);
 
-	trackData.push_back(Segment(-0.0009,70)); //very hard right -1 - 2 range
+		line->perspective = minRoad + line->scaledY * road_w;
+		line->screenY = line->y + GameGlobals::GAME_H / 2;
+		line->tile_w = line->perspective * 0.15;
+		*/
+		Line* line = new Line(i);
+
+		trackLines->push_back(*line);
+
+		//i think he actually just draws the game small and scales it up.  its game height is 200 and the road is 100
+	}
+	
+
+	trackData.push_back(Segment(-0.0019,70)); //very hard right -1 - 2 range
 	trackData.push_back(Segment(0, 200)); //straight
-	trackData.push_back(Segment(0.0005, 270));
+	trackData.push_back(Segment(0.0015, 270));
 	trackData.push_back(Segment(0, 400));
 	
 	
 }
 
-void Track::drawElement(sf::RenderWindow& w)
+void Track::drawElement(sf::RenderTarget& w)
 {
 
 	speed = Racing::Util::clamp(speed, 0, 1);
@@ -61,7 +78,7 @@ void Track::drawElement(sf::RenderWindow& w)
 	sf::Vertex line[] =
 	{
 		sf::Vertex(sf::Vector2f(0,trackData.at(currentSect).position),sf::Color::White),
-		sf::Vertex(sf::Vector2f(GameGlobals::SCREEN_W, trackData.at(currentSect).position),sf::Color::White)
+		sf::Vertex(sf::Vector2f(GameGlobals::GAME_W, trackData.at(currentSect).position),sf::Color::White)
 	};
 
 	w.draw(line, 2, sf::Lines);
@@ -73,10 +90,9 @@ void Track::drawTrackLines()
 	double dx = 0;
 	double ddx = 0;
 	double current_x = 0.5;
-	float distFromCam;
-	
 
-	float segpos = Racing::Util::convertRange(trackData.at(currentSect).position, 300, 600, 1, 300);
+	
+	float segpos = Racing::Util::convertRange(trackData.at(currentSect).position, GameGlobals::GAME_H/2, GameGlobals::GAME_H, 1, GameGlobals::GAME_H/2);
 	float td = trackData.at(currentSect).t_curvature;
 	float bd = baseSeg.t_curvature; //another way to alias this?
 
@@ -91,35 +107,35 @@ void Track::drawTrackLines()
 		line.colours[2] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? roadLight : roadDark;
 
 		if (line.y < segpos)
-			dx = td * ( (1 - line.scaledY) * (1 - line.scaledY) / 6) * ((trackLines->at(299).scaledY - line.scaledY) *1.5) ;
+			dx = td * ( (1 - line.scaledY) * (1 - line.scaledY) / 6) * ((trackLines->at(trackLines->size()-1).scaledY - line.scaledY) *1.5) ;
 		else
-			dx = bd * ((1 - line.scaledY) * (1 - line.scaledY) / 6) * ((trackLines->at(299).scaledY - line.scaledY) * 1.5);
+			dx = bd * ((1 - line.scaledY) * (1 - line.scaledY) / 6) * ((trackLines->at(trackLines->size()-1).scaledY - line.scaledY) * 1.5);
 
 		ddx += dx;
 		current_x += ddx;
 		line.middlePt = current_x;
 
-
+		//because you now have 300 entries but half the amount of y space covered since first 2 entries occupy the same y position on screen
 		
 		//grass left
 		line.vertices[0] = sf::Vertex(sf::Vector2f(0, line.screenY), line.colours[0]);
-		line.vertices[1] = sf::Vertex(sf::Vector2f((line.middlePt - line.perspective - line.tile_w) * GameGlobals::SCREEN_W, line.screenY), line.colours[0]);
+		line.vertices[1] = sf::Vertex(sf::Vector2f((line.middlePt - line.perspective - line.tile_w) * GameGlobals::GAME_W, line.screenY), line.colours[0]);
 
 		//road edge l
-		line.vertices[2] = sf::Vertex(sf::Vector2f((line.middlePt - line.perspective - line.tile_w) * GameGlobals::SCREEN_W, line.screenY), line.colours[1]);
-		line.vertices[3] = sf::Vertex(sf::Vector2f((line.middlePt - line.perspective) * GameGlobals::SCREEN_W, line.screenY), line.colours[1]);
+		line.vertices[2] = sf::Vertex(sf::Vector2f((line.middlePt - line.perspective - line.tile_w) * GameGlobals::GAME_W, line.screenY), line.colours[1]);
+		line.vertices[3] = sf::Vertex(sf::Vector2f((line.middlePt - line.perspective) * GameGlobals::GAME_W, line.screenY), line.colours[1]);
 
 		//road 
-		line.vertices[4] = sf::Vertex(sf::Vector2f((line.middlePt - line.perspective) * GameGlobals::SCREEN_W, line.screenY), line.colours[2]);
-		line.vertices[5] = sf::Vertex(sf::Vector2f((line.middlePt + line.perspective) * GameGlobals::SCREEN_W, line.screenY), roadLight);
+		line.vertices[4] = sf::Vertex(sf::Vector2f((line.middlePt - line.perspective) * GameGlobals::GAME_W, line.screenY), line.colours[2]);
+		line.vertices[5] = sf::Vertex(sf::Vector2f((line.middlePt + line.perspective) * GameGlobals::GAME_W, line.screenY), roadLight);
 
 		//edge 2
-		line.vertices[6] = sf::Vertex(sf::Vector2f((line.middlePt + line.perspective) * GameGlobals::SCREEN_W, line.screenY), line.colours[1]);
-		line.vertices[7] = sf::Vertex(sf::Vector2f((line.middlePt + line.perspective + line.tile_w) * GameGlobals::SCREEN_W, line.screenY), line.colours[1]);
+		line.vertices[6] = sf::Vertex(sf::Vector2f((line.middlePt + line.perspective) * GameGlobals::GAME_W, line.screenY), line.colours[1]);
+		line.vertices[7] = sf::Vertex(sf::Vector2f((line.middlePt + line.perspective + line.tile_w) * GameGlobals::GAME_W, line.screenY), line.colours[1]);
 
 		//grass right
-		line.vertices[8] = sf::Vertex(sf::Vector2f((line.middlePt + line.perspective + line.tile_w) * GameGlobals::SCREEN_W, line.screenY), line.colours[0]);
-		line.vertices[9] = sf::Vertex(sf::Vector2f(GameGlobals::SCREEN_W, line.screenY), line.colours[0]);
+		line.vertices[8] = sf::Vertex(sf::Vector2f((line.middlePt + line.perspective + line.tile_w) * GameGlobals::GAME_W, line.screenY), line.colours[0]);
+		line.vertices[9] = sf::Vertex(sf::Vector2f(GameGlobals::GAME_W, line.screenY), line.colours[0]);
 
 		++rit;
 	}
@@ -148,10 +164,10 @@ void Track::moveSegment()
 
 	trackData.at(currentSect).position += speed;
 
-	if (trackData.at(currentSect).position >= GameGlobals::SCREEN_H)
+	if (trackData.at(currentSect).position >= GameGlobals::GAME_H)
 	{
 		
-		trackData.at(currentSect).position = GameGlobals::SCREEN_H / 2;
+		trackData.at(currentSect).position = GameGlobals::GAME_H / 2;
 		baseSeg = trackData.at(currentSect);
 		currentSect = ++currentSect % trackData.size(); //we should only move to the next segment if the distance has been reached?
 		

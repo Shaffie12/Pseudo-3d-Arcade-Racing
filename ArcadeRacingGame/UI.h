@@ -11,7 +11,7 @@ class UI : public Drawable
 {
 	public:
 		UI();
-		void drawElement(sf::RenderWindow& w);
+		void drawElement(sf::RenderTarget& w);
 
 
 	private:

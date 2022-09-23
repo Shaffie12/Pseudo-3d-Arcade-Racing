@@ -12,7 +12,7 @@ class Track :public Drawable
 	
 	public:
 		Track();
-		void drawElement(sf::RenderWindow& w);
+		void drawElement(sf::RenderTarget& w);
 		void offsetCenter(float amount, bool add);
 		void addSpeed(float amount, bool add);
 	
@@ -38,11 +38,13 @@ class Track :public Drawable
 			float screenY;
 			Line(int yval) : y(yval), middlePt(0.5)
 			{
-				
-				scaledY = Racing::Util::convertRange(y, 1, 300, 0, 1);
-				screenY = y + GameGlobals::SCREEN_H / 2;
-				perspective = minRoad +scaledY *road_w;
+			
+				scaledY = Racing::Util::convertRange(y, 1, GameGlobals::GAME_H/2, 0, 1);
+				perspective = minRoad + scaledY * road_w;
+				screenY = y + GameGlobals::GAME_H / 2;
 				tile_w = perspective * 0.15;
+				
+				
 				
 				
 			}
@@ -53,8 +55,8 @@ class Track :public Drawable
 			float t_curvature;
 			float distanceToReach;
 			float position;
-			Segment(float curvature, float distance) : position(GameGlobals::SCREEN_H / 2) { t_curvature = curvature; distanceToReach = distance; }
-			Segment(const Segment& s) { this->distanceToReach = s.distanceToReach; this->position = GameGlobals::SCREEN_H / 2; this->t_curvature = s.t_curvature;  }
+			Segment(float curvature, float distance) : position(GameGlobals::GAME_H / 2) { t_curvature = curvature; distanceToReach = distance; }
+			Segment(const Segment& s) { this->distanceToReach = s.distanceToReach; this->position = GameGlobals::GAME_H / 2; this->t_curvature = s.t_curvature;  }
 		};
 
 		void drawTrackLines();

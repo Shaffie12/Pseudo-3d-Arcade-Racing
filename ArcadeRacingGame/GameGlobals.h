@@ -8,8 +8,7 @@
 	class GameGlobals
 	{
 	public:
-		static const float SCREEN_W, SCREEN_H;
-		static const int DT_MULTIPLIER;
+		static const float SCREEN_W, SCREEN_H, GAME_W, GAME_H, GAME_ASPECT;
 		static bool isActiveWindow; //maybe getter and setter for this
 		static float elapsedTime;
 		

@@ -7,7 +7,7 @@ class Props :public Drawable
 {
 	public:
 		Props();
-		void drawElement(sf::RenderWindow& w);
+		void drawElement(sf::RenderTarget& w);
 	private:
 		std::vector<sf::Sprite> bgs;
 		sf::Texture bgTex;

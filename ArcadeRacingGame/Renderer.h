@@ -3,6 +3,7 @@
 
 #include "SFML/Graphics.hpp"
 #include "Drawable.h"
+#include "GameGlobals.h"
 
 
 
@@ -10,7 +11,11 @@ class Renderer
 {
 	public:
 		Renderer(); 
-		void draw(sf::RenderWindow& w, Drawable& d);
+		Renderer(const Renderer& other);
+		~Renderer();
+		sf::RenderTexture* rtx;
+		sf::Sprite* sprite;
+		void init();
 		
 	private:
 

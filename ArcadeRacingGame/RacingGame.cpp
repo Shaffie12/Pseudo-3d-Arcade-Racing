@@ -3,27 +3,29 @@
 #include<iostream>
 
 
-Player RacingGame::player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::SCREEN_H) -30));
+Player RacingGame::player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H) -30));
 Track RacingGame::track;
 Props RacingGame::props;
 UI RacingGame::ui;
 
-RacingGame::RacingGame() :_MainWindow(sf::VideoMode(GameGlobals::SCREEN_W,GameGlobals::SCREEN_H),"Arcade Racing")  , _Renderer( Renderer())
-{ _MainWindow.setFramerateLimit(60);}
+RacingGame::RacingGame() :_MainWindow(new sf::RenderWindow(sf::VideoMode(GameGlobals::SCREEN_W,GameGlobals::SCREEN_H),"Arcade Racing")  ), _Renderer( new Renderer())
+{	_MainWindow->setFramerateLimit(60);
+	_Renderer->init();
+}
 
 
-RacingGame::~RacingGame() { }
+RacingGame::~RacingGame() { delete _MainWindow; }
 
 void RacingGame::start()
 {
 
 	sf::Event e;
-	while (_MainWindow.isOpen())
+	while (_MainWindow->isOpen())
 	{
-		while (_MainWindow.pollEvent(e))
+		while (_MainWindow->pollEvent(e))
 		{
 			if (e.type == sf::Event::Closed)
-				_MainWindow.close();
+				_MainWindow->close();
 			if (e.type == sf::Event::LostFocus)
 				GameGlobals::isActiveWindow = false;
 			if (e.type == sf::Event::GainedFocus)
@@ -39,12 +41,13 @@ void RacingGame::start()
 void RacingGame::gameLoop()
 {
 	GameGlobals::elapsedTime = Racing::Util::roundToDP(_Clock.restart().asSeconds(),2);
-	_MainWindow.clear();
+	_MainWindow->clear();
 	if(GameGlobals::isActiveWindow)
 		handleInput();
-	drawAllElements();
+	
+	drawAllElements(_MainWindow);
 
-	_MainWindow.display();
+	_MainWindow->display();
 }
 
 void RacingGame::handleInput()
@@ -57,7 +60,7 @@ void RacingGame::handleInput()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 			track.offsetCenter(0.0055, false);
 			
-	
+		
 	}
 	else
 		track.addSpeed(0.02, false);
@@ -66,12 +69,22 @@ void RacingGame::handleInput()
 	
 }
 
-void RacingGame::drawAllElements()
+void RacingGame::drawAllElements(sf::RenderTarget* rt)
 {
-	track.drawElement(_MainWindow);
-	player.drawElement(_MainWindow);
-	props.drawElement(_MainWindow);
-	ui.drawElement(_MainWindow);
+	_Renderer->rtx->clear();
+	
+	track.drawElement(*_Renderer->rtx); 
+	player.drawElement(*_Renderer->rtx); 
+	props.drawElement(*_Renderer->rtx); 
+	ui.drawElement(*_Renderer->rtx);
+	
+	_Renderer->rtx->display();
+	_Renderer->sprite->setTexture(_Renderer->rtx->getTexture());
+	_Renderer->sprite->setScale(sf::Vector2f(2, 2)); //scale using dimensions instead
+	rt->draw(*_Renderer->sprite);
+	
+	
+	
 
 
 

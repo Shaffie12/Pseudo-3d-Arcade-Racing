@@ -6,7 +6,7 @@
 class Drawable
 {
 	public:
-		virtual void drawElement(sf::RenderWindow& w) = 0;
+		virtual void drawElement(sf::RenderTarget& w) = 0;
 
 };
 

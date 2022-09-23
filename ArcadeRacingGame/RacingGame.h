@@ -31,10 +31,10 @@ class RacingGame
 		void start();
 		void gameLoop();
 		void handleInput();
-		void drawAllElements();
+		void drawAllElements(sf::RenderTarget* rt);
 	private:
-		sf::RenderWindow _MainWindow;
-		Renderer _Renderer;
+		sf::RenderWindow* _MainWindow;
+		Renderer*_Renderer;
 		sf::Clock _Clock;
 		
 		

@@ -9,7 +9,7 @@ class Racer :public Drawable
 {
 	public:
 		Racer(sf::Vector2f startPosition);
-		void drawElement(sf::RenderWindow& w);
+		void drawElement(sf::RenderTarget& w);
 		void updateCurvature(float amount, bool add);
 		float getCurvature();
 		

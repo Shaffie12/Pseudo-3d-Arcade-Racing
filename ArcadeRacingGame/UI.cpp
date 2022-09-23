@@ -13,17 +13,18 @@ UI::UI()
 	playerSpeed.setFont(textFont);
 	playerSpeed.setFillColor(sf::Color::White);
 	playerSpeed.setPosition(50, 50);
+	playerSpeed.setScale(sf::Vector2f(0.5, 0.5));
 
 	distanceTravelled.setFont(textFont);
 	distanceTravelled.setFillColor(sf::Color::White);
-	distanceTravelled.setPosition(50, 80);
-	
+	distanceTravelled.setPosition(50, 65);
+	distanceTravelled.setScale(sf::Vector2f(0.5, 0.5));
 	
 	
 
 }
 
-void UI::drawElement(sf::RenderWindow& w)
+void UI::drawElement(sf::RenderTarget& w)
 {
 	std::stringstream ss; //is there a way to only declare this once?
 	ss << Racing::Util::roundToDP(Track::speed, 3) * 100 << ';' << Track::dist;		 //these cars can go up to 360km/ph
