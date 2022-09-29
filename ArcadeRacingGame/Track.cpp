@@ -1,8 +1,9 @@
 #include "Track.h"
+#include "Props.h"
 #include<iostream>
 #include <cmath>
 
-float Track::road_w = 0.6f;
+float Track::road_w = 0.9f;
 float Track::minRoad = 0.01f;
 float Track::trackCurvature = 0;
 float Track::speed = 0;
@@ -16,38 +17,24 @@ sf::Color Track::tile_col_1 = sf::Color::Red;
 sf::Color Track::tile_col_2 = sf::Color::White;
 
 
-Track::Track(): baseSeg(Segment(0,0))
+Track::Track() : baseSeg(0, 0)
 {
 	
 	trackLines = new std::vector<Line>;
-	int pushed = 0;
 	for (int i = 1; i <=GameGlobals::GAME_H/2 ; i++)
 	{
-		/*
-		pushed = (++pushed) % 2;
-		Line* line = new Line(i);
-		
-		if (pushed == 0 && i > 1)
-			line->scaledY = Racing::Util::convertRange(i-1, 1, 300, 0, 1);
-		else
-			line->scaledY = Racing::Util::convertRange(i, 1, 300, 0, 1);
-
-		line->perspective = minRoad + line->scaledY * road_w;
-		line->screenY = line->y + GameGlobals::GAME_H / 2;
-		line->tile_w = line->perspective * 0.15;
-		*/
+	
 		Line* line = new Line(i);
 
 		trackLines->push_back(*line);
 
-		//i think he actually just draws the game small and scales it up.  its game height is 200 and the road is 100
 	}
 	
 
-	trackData.push_back(Segment(-0.0019,70)); //very hard right -1 - 2 range
-	trackData.push_back(Segment(0, 200)); //straight
-	trackData.push_back(Segment(0.0015, 270));
-	trackData.push_back(Segment(0, 400));
+	trackData.push_back(Segment(-0.002,70)); //very hard right -1 - 2 range
+	trackData.push_back(Segment(0, 1000)); //straight
+	trackData.push_back(Segment(0.0015, 1500));
+	trackData.push_back(Segment(0, 2000));
 	
 	
 }
@@ -57,24 +44,17 @@ void Track::drawElement(sf::RenderTarget& w)
 
 	speed = Racing::Util::clamp(speed, 0, 1);
 	dist += speed*1.5;
-
-
+	
 	moveSegment();
-	
-	
-	drawTrackLines();
 
-	
-	//draw the lines on screen
-	
-	
+	update();
 
 	for (Line& l : *trackLines)
 	{
 		w.draw(l.vertices, 10, sf::Lines);
 	}
 		
-
+	//debug
 	sf::Vertex line[] =
 	{
 		sf::Vertex(sf::Vector2f(0,trackData.at(currentSect).position),sf::Color::White),
@@ -85,38 +65,40 @@ void Track::drawElement(sf::RenderTarget& w)
 
 }
 
-void Track::drawTrackLines()
+void Track::update()
 {
 	double dx = 0;
 	double ddx = 0;
 	double current_x = 0.5;
-
+	
 	
 	float segpos = Racing::Util::convertRange(trackData.at(currentSect).position, GameGlobals::GAME_H/2, GameGlobals::GAME_H, 1, GameGlobals::GAME_H/2);
 	float td = trackData.at(currentSect).t_curvature;
 	float bd = baseSeg.t_curvature; //another way to alias this?
+	
 
 	rit = trackLines->rbegin();
 	while(rit!=trackLines->rend())
 	{
 		
 		Line& line = *rit;
+		
 
 		line.colours[0] = sinf(30 * pow(1 - line.perspective, 10) + dist * 0.1) > 0.0f ? grassLight : grassDark;
 		line.colours[1] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? tile_col_1 : tile_col_2;
 		line.colours[2] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? roadLight : roadDark;
 
 		if (line.y < segpos)
-			dx = td * ( (1 - line.scaledY) * (1 - line.scaledY) / 6) * ((trackLines->at(trackLines->size()-1).scaledY - line.scaledY) *1.5) ;
+			dx = td * ( (1 - line.scaledY) * (1 - line.scaledY) / 6) * ((trackLines->at(trackLines->size()-1).scaledY - line.scaledY) *2.5);
 		else
-			dx = bd * ((1 - line.scaledY) * (1 - line.scaledY) / 6) * ((trackLines->at(trackLines->size()-1).scaledY - line.scaledY) * 1.5);
+			dx = bd * ((1 - line.scaledY) * (1 - line.scaledY) / 6) * ((trackLines->at(trackLines->size()-1).scaledY - line.scaledY) * 2.5);
+
 
 		ddx += dx;
 		current_x += ddx;
-		line.middlePt = current_x;
+		line.middlePt = current_x + globalOffset;
 
-		//because you now have 300 entries but half the amount of y space covered since first 2 entries occupy the same y position on screen
-		
+
 		//grass left
 		line.vertices[0] = sf::Vertex(sf::Vector2f(0, line.screenY), line.colours[0]);
 		line.vertices[1] = sf::Vertex(sf::Vector2f((line.middlePt - line.perspective - line.tile_w) * GameGlobals::GAME_W, line.screenY), line.colours[0]);
@@ -143,14 +125,12 @@ void Track::drawTrackLines()
 
 }
 
-
-
-void Track::offsetCenter(float amount, bool add)
+void Track::addPlayerOffset(float amount, bool add)
 {
 	if (add)
-		offset += amount;
+		globalOffset += amount;
 	else
-		offset -= amount;
+		globalOffset -= amount;
 }
 
 void Track::addSpeed(float amount, bool add)
@@ -159,20 +139,43 @@ void Track::addSpeed(float amount, bool add)
 	if (add)speed += amount; else speed -= amount; 
 }
 
+void Track::addSegmentOffset()
+{
+	if (trackData.at(currentSect).position >= GameGlobals::GAME_H - 80)
+	{
+		globalOffset += (trackData.at(currentSect).roadOffset * 3 * speed);
+		globalOffset = Racing::Util::clamp(globalOffset, -1.1f, 1.1f);
+		
+	}
+
+}
+
+void Track::nextSegment()
+{
+	if (trackData.at(currentSect).position >= GameGlobals::GAME_H)
+	{
+		baseSeg = trackData.at(currentSect);
+
+		int next = (currentSect + 1) % trackData.size();
+		if (dist >= trackData.at(next).distanceToReach)
+		{
+
+			trackData.at(currentSect).position = GameGlobals::GAME_H / 2;
+			currentSect = ++currentSect % trackData.size();
+		}
+
+
+	}
+}
+
 void Track::moveSegment()
 {
 
-	trackData.at(currentSect).position += speed;
+	trackData.at(currentSect).position +=(0.7*speed);
 
-	if (trackData.at(currentSect).position >= GameGlobals::GAME_H)
-	{
-		
-		trackData.at(currentSect).position = GameGlobals::GAME_H / 2;
-		baseSeg = trackData.at(currentSect);
-		currentSect = ++currentSect % trackData.size(); //we should only move to the next segment if the distance has been reached?
-		
-		
-	}
+	addSegmentOffset();
+	nextSegment();
+	
 
 		
 }

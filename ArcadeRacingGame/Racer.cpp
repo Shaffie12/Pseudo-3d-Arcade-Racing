@@ -11,7 +11,7 @@ Racer::Racer(sf::Vector2f startPosition):playerCurvature(0)
 	{
 		playerSprites.push_back(sf::Sprite(playerTex, sf::IntRect(pixStart, 0, 32, 16)));
 		pixStart += 32;
-		playerSprites.at(i).scale(sf::Vector2f(1.5,1.5));
+		playerSprites.at(i).scale(sf::Vector2f(2,2));
 		playerSprites.at(i).setPosition(
 			sf::Vector2f((startPosition.x) - playerSprites.at(i).getGlobalBounds().width / 2, (startPosition.y) - playerSprites.at(i).getGlobalBounds().height - 10));
 	}
@@ -29,14 +29,10 @@ void Racer::drawElement(sf::RenderTarget& w)
 	w.draw(playerSprites.at(2));//can go out of range
 }
 
-void Racer::updateCurvature(float amount, bool add)
+void Racer::update(float amount, bool add)
 {
 	
-	if (add)
-		playerCurvature += amount;
-	else
-		playerCurvature -= amount;
-
+	
 
 }
 

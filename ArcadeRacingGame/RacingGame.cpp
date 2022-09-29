@@ -3,16 +3,13 @@
 #include<iostream>
 
 
-Player RacingGame::player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H) -30));
-Track RacingGame::track;
-Props RacingGame::props;
-UI RacingGame::ui;
 
-RacingGame::RacingGame() :_MainWindow(new sf::RenderWindow(sf::VideoMode(GameGlobals::SCREEN_W,GameGlobals::SCREEN_H),"Arcade Racing")  ), _Renderer( new Renderer())
+RacingGame::RacingGame() :_MainWindow(new sf::RenderWindow(sf::VideoMode(GameGlobals::SCREEN_W, GameGlobals::SCREEN_H), "Arcade Racing")), _Renderer(new Renderer()),
+player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)), track(), props(), ui()
 {	_MainWindow->setFramerateLimit(60);
 	_Renderer->init();
+	
 }
-
 
 RacingGame::~RacingGame() { delete _MainWindow; }
 
@@ -56,9 +53,9 @@ void RacingGame::handleInput()
 	{
 		track.addSpeed(0.02, true);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-			track.offsetCenter(0.0055, true);
+			track.addPlayerOffset(0.012, true);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			track.offsetCenter(0.0055, false);
+			track.addPlayerOffset(0.012, false);
 			
 		
 	}
@@ -88,10 +85,6 @@ void RacingGame::drawAllElements(sf::RenderTarget* rt)
 
 
 
-	/*
-	for (auto d : enemyCars)
-		d.drawElement(_MainWindow);
-		*/
 }
 	
 

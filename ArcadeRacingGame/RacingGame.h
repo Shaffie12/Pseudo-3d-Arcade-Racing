@@ -13,10 +13,10 @@ class RacingGame
 {
 	public:
 		
-		static Track track;
-		static Player player;
-		static Props props;
-		static UI ui;
+		Track track;
+		Player player;
+		Props props;
+		UI ui;
 		std::vector<Drawable> enemyCars;
 		
 		RacingGame();

@@ -19,22 +19,28 @@ Props::Props()
 			row++;	
 		int y = 4 + (row * iy)+(row*4);
 		
-		bgs.push_back(sf::Sprite(bgTex, sf::IntRect(x, y, ix - 4, iy - 64)));
-		bgs.at(i).setScale(2 , 0.588); //just calculate using the img dimensions
-		
-		
-	
+		allBgs.push_back(sf::Sprite(bgTex, sf::IntRect(x, y, ix - 4, iy - 64)));
+		allBgs.at(i).setScale(2 , 0.588); //just calculate using the img dimensions
+		bg.push_back(allBgs.at(i));
+		bg.push_back(allBgs.at(i));
+		bg.push_back(allBgs.at(i));
+
 		j = ++j % 3;
 		i++;
 	}
 
-	
-
-	
 
 }
 
 void Props::drawElement(sf::RenderTarget& w)
 {
-	w.draw(bgs.at(1));
+	w.draw(bg.at(0));
+	bg.at(1).setPosition(bg.at(0).getPosition() + sf::Vector2f(bg.at(0).getGlobalBounds().width, 0));
+	w.draw(bg.at(1)); //we actually want a copy here even if we do use pointers as well
+	
+}
+
+ void Props::scroll(float amount) { 
+	bg.at(0).setPosition(bg.at(0).getPosition() + sf::Vector2f(amount,0));
+
 }

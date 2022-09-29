@@ -8,9 +8,14 @@ class Props :public Drawable
 	public:
 		Props();
 		void drawElement(sf::RenderTarget& w);
+		void scroll(float amount);
+	
 	private:
-		std::vector<sf::Sprite> bgs;
+		std::vector<sf::Sprite> allBgs;
 		sf::Texture bgTex;
+		std::vector<sf::Sprite> bg;
+
+
 
 
 };

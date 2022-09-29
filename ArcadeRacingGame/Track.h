@@ -13,10 +13,9 @@ class Track :public Drawable
 	public:
 		Track();
 		void drawElement(sf::RenderTarget& w);
-		void offsetCenter(float amount, bool add);
+		void addPlayerOffset(float amount, bool add);
 		void addSpeed(float amount, bool add);
 	
-
 		static float trackCurvature;
 		static float speed; //artificially represent speed of player
 		static float dist; //artificially represents how far player has moved
@@ -55,20 +54,25 @@ class Track :public Drawable
 			float t_curvature;
 			float distanceToReach;
 			float position;
-			Segment(float curvature, float distance) : position(GameGlobals::GAME_H / 2) { t_curvature = curvature; distanceToReach = distance; }
-			Segment(const Segment& s) { this->distanceToReach = s.distanceToReach; this->position = GameGlobals::GAME_H / 2; this->t_curvature = s.t_curvature;  }
+			float roadOffset;
+			Segment(float curvature, float distance) : position(GameGlobals::GAME_H / 2) { t_curvature = curvature; distanceToReach = distance; roadOffset = curvature; }
+			Segment(const Segment& s) { this->distanceToReach = s.distanceToReach; this->position = GameGlobals::GAME_H / 2; this->t_curvature = s.t_curvature; this->roadOffset = s.roadOffset; }
 		};
 
-		void drawTrackLines();
+		void update();
 		void moveSegment();
+		void addSegmentOffset();
+		void nextSegment();
+		
 		
 		float diff = 0;
 		static float road_w;
 		static float minRoad; //minimal amount of road at the highest point on road
 		float middlePt = 0.5;
+		bool move = false;
 		
 		std::vector<Line>* trackLines;
-		float offset = 0;
+		float globalOffset = 0;
 		std::vector<Segment> trackData;
 		std::vector<Line>::reverse_iterator rit;
 		int currentSect = 0;
