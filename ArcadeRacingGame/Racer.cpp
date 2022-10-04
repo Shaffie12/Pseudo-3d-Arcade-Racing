@@ -1,7 +1,7 @@
 #include "Racer.h"
 #include <iostream>
 
-Racer::Racer(sf::Vector2f startPosition):playerCurvature(0)
+Racer::Racer(sf::Vector2f startPosition)
 {
 	
 
@@ -21,10 +21,10 @@ Racer::Racer(sf::Vector2f startPosition):playerCurvature(0)
 void Racer::drawElement(sf::RenderTarget& w)
 {
 
-	float carPos = playerCurvature - Track::trackCurvature;
+	
 	
 	playerSprites.at(2).setPosition(
-		sf::Vector2f(((GameGlobals::GAME_W/2)+ (carPos *GameGlobals::GAME_W) ) - playerSprites.at(2).getGlobalBounds().width / 2,
+		sf::Vector2f((GameGlobals::GAME_W/2) - playerSprites.at(2).getGlobalBounds().width / 2,
 			(GameGlobals::GAME_H) - playerSprites.at(2).getGlobalBounds().height - 10));
 	w.draw(playerSprites.at(2));//can go out of range
 }
@@ -36,4 +36,3 @@ void Racer::update(float amount, bool add)
 
 }
 
-float Racer::getCurvature() { return playerCurvature; }

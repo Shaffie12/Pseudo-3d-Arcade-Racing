@@ -69,7 +69,7 @@ void RacingGame::handleInput()
 void RacingGame::drawAllElements(sf::RenderTarget* rt)
 {
 	_Renderer->rtx->clear();
-	
+	//there is some screen tear
 	track.drawElement(*_Renderer->rtx); 
 	player.drawElement(*_Renderer->rtx); 
 	props.drawElement(*_Renderer->rtx); 

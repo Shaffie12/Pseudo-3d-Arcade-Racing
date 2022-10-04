@@ -19,6 +19,7 @@ class Track :public Drawable
 		static float trackCurvature;
 		static float speed; //artificially represent speed of player
 		static float dist; //artificially represents how far player has moved
+		static float globalOffset;
 		
 
 
@@ -72,7 +73,7 @@ class Track :public Drawable
 		bool move = false;
 		
 		std::vector<Line>* trackLines;
-		float globalOffset = 0;
+		
 		std::vector<Segment> trackData;
 		std::vector<Line>::reverse_iterator rit;
 		int currentSect = 0;

@@ -11,11 +11,11 @@ class Racer :public Drawable
 		Racer(sf::Vector2f startPosition);
 		void drawElement(sf::RenderTarget& w);
 		void update(float amount, bool add);
-		float getCurvature();
+		
 		
 
 	private:
-		float playerCurvature = 0;
+		
 		sf::Texture playerTex;
 		std::vector<sf::Sprite> playerSprites;
 

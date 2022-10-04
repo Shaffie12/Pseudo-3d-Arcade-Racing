@@ -8,6 +8,7 @@ float Track::minRoad = 0.01f;
 float Track::trackCurvature = 0;
 float Track::speed = 0;
 float Track::dist = 0;
+float Track::globalOffset = 0;
 //i think the colours can be moved to a configuration place later
 sf::Color Track::grassLight = sf::Color::Green;
 sf::Color Track::grassDark = sf::Color(55, 154, 84);
@@ -31,7 +32,7 @@ Track::Track() : baseSeg(0, 0)
 	}
 	
 
-	trackData.push_back(Segment(-0.002,70)); //very hard right -1 - 2 range
+	trackData.push_back(Segment(0.002,70)); //very hard right -1 - 2 range
 	trackData.push_back(Segment(0, 1000)); //straight
 	trackData.push_back(Segment(0.0015, 1500));
 	trackData.push_back(Segment(0, 2000));

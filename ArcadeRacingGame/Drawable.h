@@ -7,7 +7,7 @@ class Drawable
 {
 	protected:
 		virtual void drawElement(sf::RenderTarget& w) = 0;
-		//virtual void update() = 0;
+		
 		
 
 };

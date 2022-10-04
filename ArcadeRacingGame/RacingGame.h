@@ -13,7 +13,7 @@ class RacingGame
 {
 	public:
 		
-		Track track;
+		Track track; //i think these should be static because there should only be 1 of these ever in a game
 		Player player;
 		Props props;
 		UI ui;

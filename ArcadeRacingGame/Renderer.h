@@ -17,6 +17,7 @@ class Renderer
 		sf::Sprite* sprite;
 		void init();
 		
+		
 	private:
 
 
