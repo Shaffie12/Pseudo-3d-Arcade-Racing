@@ -9,6 +9,8 @@ float Track::trackCurvature = 0;
 float Track::speed = 0;
 float Track::dist = 0;
 float Track::globalOffset = 0;
+Track::Segment Track::baseSeg(0, 0);
+float Track::segmentAmt = 0;
 //i think the colours can be moved to a configuration place later
 sf::Color Track::grassLight = sf::Color::Green;
 sf::Color Track::grassDark = sf::Color(55, 154, 84);
@@ -18,7 +20,7 @@ sf::Color Track::tile_col_1 = sf::Color::Red;
 sf::Color Track::tile_col_2 = sf::Color::White;
 
 
-Track::Track() : baseSeg(0, 0)
+Track::Track() 
 {
 	
 	trackLines = new std::vector<Line>;
@@ -32,8 +34,8 @@ Track::Track() : baseSeg(0, 0)
 	}
 	
 
-	trackData.push_back(Segment(0.002,70)); //very hard right -1 - 2 range
-	trackData.push_back(Segment(0, 1000)); //straight
+	trackData.push_back(Segment(-0.002,70)); 
+	trackData.push_back(Segment(0.002, 1000)); 
 	trackData.push_back(Segment(0.0015, 1500));
 	trackData.push_back(Segment(0, 2000));
 	
@@ -90,9 +92,9 @@ void Track::update()
 		line.colours[2] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? roadLight : roadDark;
 
 		if (line.y < segpos)
-			dx = td * ( (1 - line.scaledY) * (1 - line.scaledY) / 6) * ((trackLines->at(trackLines->size()-1).scaledY - line.scaledY) *2.5);
+			dx = td * ((1 - line.scaledY) *(1 - line.scaledY) / 6) * (((trackLines->at(trackLines->size()-1).scaledY) - line.scaledY) *2.5);
 		else
-			dx = bd * ((1 - line.scaledY) * (1 - line.scaledY) / 6) * ((trackLines->at(trackLines->size()-1).scaledY - line.scaledY) * 2.5);
+			dx = bd * ((1 - line.scaledY) * (1 - line.scaledY) /6) * (((trackLines->at(trackLines->size() - 1).scaledY ) - line.scaledY) * 2.5);
 
 
 		ddx += dx;
@@ -142,10 +144,11 @@ void Track::addSpeed(float amount, bool add)
 
 void Track::addSegmentOffset()
 {
-	if (trackData.at(currentSect).position >= GameGlobals::GAME_H - 80)
+	if (trackData.at(currentSect).position >= GameGlobals::GAME_H-80 )
 	{
 		globalOffset += (trackData.at(currentSect).roadOffset * 3 * speed);
 		globalOffset = Racing::Util::clamp(globalOffset, -1.1f, 1.1f);
+		segmentAmt = trackData.at(currentSect).t_curvature;
 		
 	}
 
@@ -171,8 +174,10 @@ void Track::nextSegment()
 
 void Track::moveSegment()
 {
-
-	trackData.at(currentSect).position +=(0.7*speed);
+	
+	trackData.at(currentSect).position += (0.7 * speed);
+	
+	
 
 	addSegmentOffset();
 	nextSegment();

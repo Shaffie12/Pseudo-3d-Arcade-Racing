@@ -9,21 +9,6 @@
 
 class Track :public Drawable
 {
-	
-	public:
-		Track();
-		void drawElement(sf::RenderTarget& w);
-		void addPlayerOffset(float amount, bool add);
-		void addSpeed(float amount, bool add);
-	
-		static float trackCurvature;
-		static float speed; //artificially represent speed of player
-		static float dist; //artificially represents how far player has moved
-		static float globalOffset;
-		
-
-
-	
 	private:
 		struct Line 
 		{ 
@@ -77,7 +62,7 @@ class Track :public Drawable
 		std::vector<Segment> trackData;
 		std::vector<Line>::reverse_iterator rit;
 		int currentSect = 0;
-		Segment baseSeg;
+		
 		
 
 		static sf::Color grassLight;
@@ -87,8 +72,24 @@ class Track :public Drawable
 		static sf::Color tile_col_1;
 		static sf::Color tile_col_2;
 
+public:
+	Track();
+	void drawElement(sf::RenderTarget& w);
+	void addPlayerOffset(float amount, bool add);
+	void addSpeed(float amount, bool add);
+	static float segmentAmt;
+	static Segment baseSeg;
+
+	static float trackCurvature;
+	static float speed; //artificially represent speed of player
+	static float dist; //artificially represents how far player has moved
+	static float globalOffset;
+
+		
 	
 };
+
+
 
 
 #endif

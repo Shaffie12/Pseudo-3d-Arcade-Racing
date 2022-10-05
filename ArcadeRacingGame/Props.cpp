@@ -45,7 +45,7 @@ void Props::setBackground(int bgNum) //just make it so the input for this in the
 
 void Props::drawElement(sf::RenderTarget& w)
 {
-	scroll((-1*Track::globalOffset )*Track::speed);
+	scroll((-1*Track::segmentAmt )*Track::speed);
 	for (ScrollingBackground::ImagePart& part : gameBG->imgs)
 		if (part.onScreen())
 			w.draw(part.sprite);
@@ -54,24 +54,19 @@ void Props::drawElement(sf::RenderTarget& w)
 
  void Props::scroll(float amount) 
  { 
-	
-	 //gameBG->imgs.at(1).sprite.setPosition(sf::Vector2f(gameBG->imgs.at(1).sprite.getPosition().x + amount, 0));
-
-	
+	 
 	 for (ScrollingBackground::ImagePart& part : gameBG->imgs)
 	 {
-		 part.sprite.setPosition(sf::Vector2f(part.sprite.getPosition().x + amount, 0));
-	 }
+		 part.sprite.setPosition(sf::Vector2f(std::floor(part.sprite.getPosition().x + (amount*1000)), 0));
 
-	 for (ScrollingBackground::ImagePart& part : gameBG->imgs)
-	 {
 		 if (part.sprite.getPosition().x < -2 * part.sprite.getGlobalBounds().width)
-			 part.sprite.setPosition(sf::Vector2f(part.sprite.getGlobalBounds().width - 1, 0));
+			 part.sprite.setPosition(sf::Vector2f(std::floor(part.sprite.getGlobalBounds().width-2), 0));
 		 if (part.sprite.getPosition().x > 2 * part.sprite.getGlobalBounds().width)
-			 part.sprite.setPosition(sf::Vector2f(-part.sprite.getGlobalBounds().width + 1, 0));
+			 part.sprite.setPosition(sf::Vector2f(-part.sprite.getGlobalBounds().width + 2, 0));
 	 }
 
-	 //kinda looks like theres a gap or some trailing
+	 
+
 
 	
 
