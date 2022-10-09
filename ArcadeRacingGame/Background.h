@@ -6,10 +6,10 @@
 #include <memory>
 #include<list>
 
-class Props :public Drawable
+class Background :public Drawable
 {
 public:
-	Props();
+	Background();
 	void drawElement(sf::RenderTarget& w);
 	void scroll(float amount);
 	void setBackground(int bgNum);

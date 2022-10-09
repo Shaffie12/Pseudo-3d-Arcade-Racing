@@ -1,5 +1,5 @@
 #include "Track.h"
-#include "Props.h"
+#include "Background.h"
 #include<iostream>
 #include <cmath>
 

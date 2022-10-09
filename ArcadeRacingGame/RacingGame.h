@@ -6,7 +6,8 @@
 #include "Drawable.h"
 #include "Player.h"
 #include "Track.h"
-#include "Props.h"
+#include "Background.h"
+#include "Tree.h"
 #include "UI.h"
 
 class RacingGame
@@ -15,8 +16,9 @@ class RacingGame
 		
 		Track track; //i think these should be static because there should only be 1 of these ever in a game
 		Player player;
-		Props props;
+		Background bg;
 		UI ui;
+		std::vector<RoadObject> roadsides;
 		std::vector<Drawable> enemyCars;
 		
 		RacingGame();

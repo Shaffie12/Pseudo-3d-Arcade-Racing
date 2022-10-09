@@ -5,8 +5,10 @@
 
 
 RacingGame::RacingGame() :_MainWindow(new sf::RenderWindow(sf::VideoMode(GameGlobals::SCREEN_W, GameGlobals::SCREEN_H), "Arcade Racing")), _Renderer(new Renderer()),
-player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)), track(), props(), ui()
-{	_MainWindow->setFramerateLimit(60);
+player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)), track(), bg(), ui(), tree()
+{	
+	
+	_MainWindow->setFramerateLimit(60);
 	_Renderer->init();
 	
 }
@@ -69,11 +71,16 @@ void RacingGame::handleInput()
 void RacingGame::drawAllElements(sf::RenderTarget* rt)
 {
 	_Renderer->rtx->clear();
-	//there is some screen tear
+	
 	track.drawElement(*_Renderer->rtx); 
 	player.drawElement(*_Renderer->rtx); 
-	props.drawElement(*_Renderer->rtx); 
+	bg.drawElement(*_Renderer->rtx); 
+	for (RoadObject ro : roadsides)
+	{
+		ro.drawElement(*_Renderer->rtx);
+	}
 	ui.drawElement(*_Renderer->rtx);
+
 	
 	_Renderer->rtx->display();
 	_Renderer->sprite->setTexture(_Renderer->rtx->getTexture());

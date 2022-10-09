@@ -3,6 +3,7 @@
 #include "Drawable.h"
 #include "GameGlobals.h"
 #include "Util.h"
+
 #include <SFML/Graphics.hpp>
 #include<vector>
 #include<iostream>
@@ -44,6 +45,8 @@ class Track :public Drawable
 			Segment(float curvature, float distance) : position(GameGlobals::GAME_H / 2) { t_curvature = curvature; distanceToReach = distance; roadOffset = curvature; }
 			Segment(const Segment& s) { this->distanceToReach = s.distanceToReach; this->position = GameGlobals::GAME_H / 2; this->t_curvature = s.t_curvature; this->roadOffset = s.roadOffset; }
 		};
+		//list of items here?  though ideally we would want multiple tracks, in which case we need to abstract the entire track class.
+		//foppy has the track simply be a list of segments. where segments have a ddx, length and a list of items(items have count, type, start depth, dz?
 
 		void update();
 		void moveSegment();
