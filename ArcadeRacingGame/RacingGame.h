@@ -5,6 +5,7 @@
 #include "Renderer.h"
 #include "Drawable.h"
 #include "Player.h"
+#include "TrackData.h"
 #include "Track.h"
 #include "Background.h"
 #include "Tree.h"
@@ -13,12 +14,14 @@
 class RacingGame
 {
 	public:
+		//i think these should be static because there should only be 1 of these ever in a game
 		
-		Track track; //i think these should be static because there should only be 1 of these ever in a game
+		Track track; 
 		Player player;
 		Background bg;
 		UI ui;
-		std::vector<RoadObject> roadsides;
+		std::vector<Tree> roadsides;
+		
 		std::vector<Drawable> enemyCars;
 		
 		RacingGame();

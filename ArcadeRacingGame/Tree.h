@@ -7,6 +7,9 @@ class Tree : public RoadObject
 {
 	public:
 		Tree();
+		Tree(Tree&& other) noexcept;
+		
+		
 
 		
 };

@@ -9,7 +9,7 @@ class Racer :public Drawable
 {
 	public:
 		Racer(sf::Vector2f startPosition);
-		void drawElement(sf::RenderTarget& w);
+		virtual void drawElement(sf::RenderTarget& w) override;
 		void update(float amount, bool add);
 		
 		

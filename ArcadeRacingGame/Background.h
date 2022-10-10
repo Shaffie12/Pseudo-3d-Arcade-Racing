@@ -10,7 +10,7 @@ class Background :public Drawable
 {
 public:
 	Background();
-	void drawElement(sf::RenderTarget& w);
+	virtual void drawElement(sf::RenderTarget& w) override;
 	void scroll(float amount);
 	void setBackground(int bgNum);
 

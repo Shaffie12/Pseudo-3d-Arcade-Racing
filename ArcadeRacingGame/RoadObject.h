@@ -5,14 +5,17 @@
 class RoadObject : public Drawable
 {
 public:
-	
-	void drawElement(sf::RenderTarget& w);
+	RoadObject();
+	RoadObject(RoadObject&& other);
+	RoadObject(const RoadObject& other);
+	~RoadObject();
+
+	virtual void drawElement(sf::RenderTarget& w) override;
 protected:
 	float screen_y;
 	sf::Texture texture;
 	sf::Sprite sprite;
-	//std::vector<sf::Texture> textures;
-	//std::vector<sf::Sprite> sprites;
+	
 
 
 

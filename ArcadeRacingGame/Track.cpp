@@ -11,7 +11,7 @@ float Track::dist = 0;
 float Track::globalOffset = 0;
 Track::Segment Track::baseSeg(0, 0);
 float Track::segmentAmt = 0;
-//i think the colours can be moved to a configuration place later
+//i think the colours can be moved to a configuration place later (trackdata
 sf::Color Track::grassLight = sf::Color::Green;
 sf::Color Track::grassDark = sf::Color(55, 154, 84);
 sf::Color Track::roadLight = sf::Color(178, 195, 183);

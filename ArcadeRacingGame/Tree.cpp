@@ -1,16 +1,13 @@
 #include "Tree.h"
 #include<iostream>
 
-Tree::Tree() 
+Tree::Tree(): RoadObject()
 {
 	screen_y = GameGlobals::GAME_H / 2 + 100;
 
 	if (!texture.loadFromFile("assets/roadside/tree/treeRound1.png"))
 		std::cout << "error loading assets" << '\n';
-
-	
-	
-	
+	sprite.setTexture(texture);
 	//sprites.at(0).setPosition(sf::Vector2f(GameGlobals::GAME_W / 2, GameGlobals::GAME_H / 2 + 20));
 	/*
 	for (int i = 0; i < 4; i++)
@@ -29,4 +26,15 @@ Tree::Tree()
 	}
 	*/
 }
+
+Tree::Tree(Tree&& other) noexcept
+{
+	texture = other.texture;
+	sprite = other.sprite;
+	sprite.setTexture(texture);
+}
+
+
+
+
 

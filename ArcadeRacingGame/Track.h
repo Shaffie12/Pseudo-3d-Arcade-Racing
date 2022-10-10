@@ -77,7 +77,7 @@ class Track :public Drawable
 
 public:
 	Track();
-	void drawElement(sf::RenderTarget& w);
+	virtual void drawElement(sf::RenderTarget& w) override;
 	void addPlayerOffset(float amount, bool add);
 	void addSpeed(float amount, bool add);
 	static float segmentAmt;
