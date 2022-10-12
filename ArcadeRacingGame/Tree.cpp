@@ -3,36 +3,53 @@
 
 Tree::Tree(): RoadObject()
 {
-	screen_y = GameGlobals::GAME_H / 2 + 100;
-
-	if (!texture.loadFromFile("assets/roadside/tree/treeRound1.png"))
+	if (!texture.loadFromFile("assets/roadside/signsheet.png"))
 		std::cout << "error loading assets" << '\n';
-	sprite.setTexture(texture);
-	//sprites.at(0).setPosition(sf::Vector2f(GameGlobals::GAME_W / 2, GameGlobals::GAME_H / 2 + 20));
-	/*
-	for (int i = 0; i < 4; i++)
+
+
+	int ix = 0;
+	int iy = 0;
+	int size = 32;
+	for (int i = 0; i < sizeof(sprites) / sizeof(sprites[0]); i++)
 	{
-		textures.push_back(sf::Texture());
+		sprites[i] = sf::Sprite(texture, sf::IntRect(ix, iy, size, size));
+		sprites[i].setPosition(sf::Vector2f((0.5 + perspective+Track::tile_w) * GameGlobals::GAME_W, screen_y - activeSpr->getGlobalBounds().height / 2));
+		ix += size;
+		iy += 8;
+		size -= 8;
+	}
+	
+	//default
+	activeSpr = &sprites[3];
+	
+
+
+	/*
+
+	for (int i = 3; i > -1; i-- )
+	{
+		std::cout << i << '\n';
 		int imgNum = i + 1;
 		std::string num = std::to_string(imgNum);
-		if (!(textures.at(i).loadFromFile("assets/roadside/tree/treeRound" + num + ".png")))
-		{
+		if (!(textures[3-i].loadFromFile("assets/roadside/tree/treeRound" + num + ".png")))
 			std::cout<<"could not load asset sprite"<<'\n';
-		}
-		sf::Sprite s(textures.at(i), sf::IntRect(0, 0, textures.at(i).getSize().x, textures.at(i).getSize().y));
-		s.setPosition(sf::Vector2f(0.5 * GameGlobals::GAME_W + 20, screen_y)); //its position x depends on the width of the line at that point/perspective
 		
-		sprites.push_back(s);
+		sf::Sprite s(textures[3-i], sf::IntRect(0, 0, textures[3-i].getSize().x, textures[3-i].getSize().y));
+		
+		s.setPosition(sf::Vector2f((0.6 + perspective) *GameGlobals::GAME_W, screen_y-s.getGlobalBounds().height/2 )); 
+		
+		
+		sprites[3-i] = s; 
+
+		
 	}
+
 	*/
+
+	
+	
 }
 
-Tree::Tree(Tree&& other) noexcept
-{
-	texture = other.texture;
-	sprite = other.sprite;
-	sprite.setTexture(texture);
-}
 
 
 

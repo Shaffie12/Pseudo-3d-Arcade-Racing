@@ -2,34 +2,59 @@
 #include<iostream>
 
 
-RoadObject::RoadObject() {};
-RoadObject::RoadObject(const RoadObject& other) 
+RoadObject::RoadObject() : activeSpr(&sprites[3])
+{ 
+	screen_y = GameGlobals::GAME_H / 2;
+	spawnDist = 0;
+	float scaledY = Racing::Util::convertRange(screen_y, 1, GameGlobals::GAME_H/2, 1, 0);
+	perspective = Track::minRoad + 0.035+scaledY * Track::road_w;
+
+	
+};
+
+
+RoadObject::RoadObject(RoadObject&& other) noexcept : activeSpr (&sprites[3])
 {
 	screen_y = other.screen_y;
+	perspective = other.perspective;
+	spawnDist=other.spawnDist;
 	texture = other.texture;
-	sprite = other.sprite;
-	std::cout << "copied!" << '\n';
-}
 
-RoadObject::RoadObject(RoadObject&& other)
-{
-	texture = other.texture;
-	sprite = other.sprite;
-
-	std::cout << "moved!" << '\n';
-
-}
-
-RoadObject::~RoadObject() 
-{
-	std::cout << "destroyed!" << '\n'; 
+	memcpy(sprites, other.sprites, sizeof(sprites));
+	for (int i = 0; i < sizeof(sprites) / sizeof(sprites[0]); i++)
+		sprites[i].setTexture(texture);
+	other.activeSpr = nullptr;
+	activeSpr = &sprites[3];
+	
+	
+	
+	
+	
 }
 
 void RoadObject::drawElement(sf::RenderTarget& w)
 {
-	
-	w.draw(sprite);
+	move();
+	w.draw(*activeSpr);
 
+}
+
+void RoadObject::move()
+{
+	screen_y += 0.7 * Track::speed;
+	float scaledY = Racing::Util::convertRange(screen_y, GameGlobals::GAME_H/2, GameGlobals::GAME_H , 0, 1);
+	perspective = Track::minRoad + scaledY * Track::road_w;
+	//perspective += perspective * (Track::tile_w );
+	//perspective -= perspective ;
+
+	if (screen_y > 152)
+		activeSpr = &sprites[2];
+	if (screen_y > 155)
+		activeSpr = &sprites[1];
+	if (screen_y > 160)
+		activeSpr = &sprites[0];
+
+	activeSpr->setPosition(sf::Vector2f((0.5 + perspective) *GameGlobals::GAME_W+activeSpr->getGlobalBounds().width, screen_y - activeSpr->getGlobalBounds().height/2)); 
 	
 }
 

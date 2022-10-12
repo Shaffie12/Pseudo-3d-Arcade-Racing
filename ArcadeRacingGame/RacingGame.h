@@ -20,8 +20,8 @@ class RacingGame
 		Player player;
 		Background bg;
 		UI ui;
-		std::vector<Tree> roadsides;
-		
+		std::vector<RoadObject> roadsides;
+
 		std::vector<Drawable> enemyCars;
 		
 		RacingGame();

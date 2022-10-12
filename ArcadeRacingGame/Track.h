@@ -16,23 +16,20 @@ class Track :public Drawable
 		
 			sf::Vertex vertices[10]; 
 			sf::Color colours[3];
-			int y; //i dont think it needs this since its always passed it
+			
 			float scaledY;
 			float perspective;
 			float tile_w;
 			float middlePt;
 			float screenY;
-			Line(int yval) : y(yval), middlePt(0.5)
+			Line(int y) : middlePt(0.5)
 			{
 			
 				scaledY = Racing::Util::convertRange(y, 1, GameGlobals::GAME_H/2, 0, 1);
 				perspective = minRoad + scaledY * road_w;
 				screenY = y + GameGlobals::GAME_H / 2;
-				tile_w = perspective * 0.15;
-				
-				
-				
-				
+				tile_w = perspective * Track::tile_w;
+
 			}
 		};
 
@@ -52,22 +49,11 @@ class Track :public Drawable
 		void moveSegment();
 		void addSegmentOffset();
 		void nextSegment();
-		
-		
-		float diff = 0;
-		static float road_w;
-		static float minRoad; //minimal amount of road at the highest point on road
-		float middlePt = 0.5;
-		bool move = false;
-		
 		std::vector<Line>* trackLines;
-		
-		std::vector<Segment> trackData;
+		std::vector<Segment> trackData; //this can be another class?
 		std::vector<Line>::reverse_iterator rit;
 		int currentSect = 0;
 		
-		
-
 		static sf::Color grassLight;
 		static sf::Color grassDark;
 		static sf::Color roadLight;
@@ -76,10 +62,13 @@ class Track :public Drawable
 		static sf::Color tile_col_2;
 
 public:
-	Track();
+	Track(); //can take an arg from the other state to get initialisation data
 	virtual void drawElement(sf::RenderTarget& w) override;
 	void addPlayerOffset(float amount, bool add);
 	void addSpeed(float amount, bool add);
+	static float road_w;
+	static float tile_w;
+	static float minRoad; //minimal amount of road at the highest point on road
 	static float segmentAmt;
 	static Segment baseSeg;
 

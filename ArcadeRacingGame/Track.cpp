@@ -4,7 +4,8 @@
 #include <cmath>
 
 float Track::road_w = 0.9f;
-float Track::minRoad = 0.01f;
+float Track::tile_w = 0.15;
+float Track::minRoad = 0.01;
 float Track::trackCurvature = 0;
 float Track::speed = 0;
 float Track::dist = 0;
@@ -27,9 +28,10 @@ Track::Track()
 	for (int i = 1; i <=GameGlobals::GAME_H/2 ; i++)
 	{
 	
-		Line* line = new Line(i);
+		Line* line = new Line(i); //we could make static array for this also i think
 
 		trackLines->push_back(*line);
+	
 
 	}
 	
@@ -75,7 +77,7 @@ void Track::update()
 	double current_x = 0.5;
 	
 	
-	float segpos = Racing::Util::convertRange(trackData.at(currentSect).position, GameGlobals::GAME_H/2, GameGlobals::GAME_H, 1, GameGlobals::GAME_H/2);
+	//float segpos = Racing::Util::convertRange(trackData.at(currentSect).position, GameGlobals::GAME_H/2, GameGlobals::GAME_H, 1, GameGlobals::GAME_H/2);
 	float td = trackData.at(currentSect).t_curvature;
 	float bd = baseSeg.t_curvature; //another way to alias this?
 	
@@ -91,7 +93,7 @@ void Track::update()
 		line.colours[1] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? tile_col_1 : tile_col_2;
 		line.colours[2] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? roadLight : roadDark;
 
-		if (line.y < segpos)
+		if (line.screenY < trackData.at(currentSect).position)
 			dx = td * ((1 - line.scaledY) *(1 - line.scaledY) / 6) * (((trackLines->at(trackLines->size()-1).scaledY) - line.scaledY) *2.5);
 		else
 			dx = bd * ((1 - line.scaledY) * (1 - line.scaledY) /6) * (((trackLines->at(trackLines->size() - 1).scaledY ) - line.scaledY) * 2.5);
@@ -176,8 +178,6 @@ void Track::moveSegment()
 {
 	
 	trackData.at(currentSect).position += (0.7 * speed);
-	
-	
 
 	addSegmentOffset();
 	nextSegment();
