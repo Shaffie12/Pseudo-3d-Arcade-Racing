@@ -151,23 +151,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="GameGlobals.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Racer.cpp" />
     <ClCompile Include="RacingGame.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="RoadObject.cpp" />
     <ClCompile Include="Track.cpp" />
+    <ClCompile Include="Tree.cpp" />
+    <ClCompile Include="UI.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Background.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="GameGlobals.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Racer.h" />
     <ClInclude Include="RacingGame.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="RoadObject.h" />
     <ClInclude Include="Track.h" />
+    <ClInclude Include="TrackData.h" />
+    <ClInclude Include="Tree.h" />
+    <ClInclude Include="UI.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

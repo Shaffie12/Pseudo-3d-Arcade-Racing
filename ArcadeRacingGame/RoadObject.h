@@ -12,12 +12,14 @@ public:
 	RoadObject(RoadObject&& other) noexcept;
 	virtual void drawElement(sf::RenderTarget& w) override;
 protected:
+	void swapSprite();
 	float spawnDist;
 	float perspective;
 	float screen_y;
 	sf::Texture texture;
 	sf::Sprite sprites[4];
 	sf::Sprite* activeSpr;
+	
 
 
 	void move();
