@@ -8,7 +8,7 @@
 class RoadObject : public Drawable
 {
 public:
-	RoadObject();
+	RoadObject(bool left);
 	RoadObject(RoadObject&& other) noexcept;
 	virtual void drawElement(sf::RenderTarget& w) override;
 protected:
@@ -16,6 +16,7 @@ protected:
 	float spawnDist;
 	float perspective;
 	float screen_y;
+	bool left;
 	sf::Texture texture;
 	sf::Sprite sprites[4];
 	sf::Sprite* activeSpr;

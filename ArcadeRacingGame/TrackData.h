@@ -1,18 +1,16 @@
 #ifndef _TRACKDATA_H_
 #define _TRACKDATA_H_
-#include <vector>
-#include "Tree.h"
-
+#include "Segment.h"
 class TrackData
 {
-	public:
-		TrackData(int trackNumber);
-		std::vector<std::pair<float, float>> road_curve;
-		std::vector<RoadObject> road_objects; 
-		sf::Color roadCol;
+	//foppy ref.  list of segments .
+public:
+	TrackData();
+protected:
+	std::vector<Segment> segments;
+	//colours, theme tune etc..
 
-
-	private:
 };
-#endif
 
+
+#endif 

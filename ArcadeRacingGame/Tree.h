@@ -6,7 +6,7 @@
 class Tree : public RoadObject
 {
 	public:
-		Tree();
+		Tree(bool left);
 	
 };
 #endif

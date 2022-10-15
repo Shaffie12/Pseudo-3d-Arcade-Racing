@@ -1,7 +1,7 @@
 #include "Tree.h"
 #include<iostream>
 
-Tree::Tree(): RoadObject()
+Tree::Tree(bool left): RoadObject(left)
 {
 	if (!texture.loadFromFile("assets/roadside/signsheet.png"))
 		std::cout << "error loading assets" << '\n';
