@@ -8,15 +8,16 @@
 class RoadObject : public Drawable
 {
 public:
-	RoadObject(bool left);
+	RoadObject();
+	RoadObject(const RoadObject& other);
 	RoadObject(RoadObject&& other) noexcept;
+	RoadObject& operator=(const RoadObject& other);
 	virtual void drawElement(sf::RenderTarget& w) override;
 protected:
 	void swapSprite();
 	float spawnDist;
 	float perspective;
 	float screen_y;
-	bool left;
 	sf::Texture texture;
 	sf::Sprite sprites[4];
 	sf::Sprite* activeSpr;
