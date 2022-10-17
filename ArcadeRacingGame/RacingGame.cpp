@@ -2,12 +2,9 @@
 #include "GameGlobals.h"
 #include<iostream>
 
-//this would be a state, chosen track data passed in and into the track
-
-RacingGame::RacingGame(TrackData td) :_MainWindow(new sf::RenderWindow(sf::VideoMode(GameGlobals::SCREEN_W, GameGlobals::SCREEN_H), "Arcade Racing")), _Renderer(new Renderer()),
-player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)), track(Track1(td.)), bg(), ui()
+RacingGame::RacingGame() :_MainWindow(new sf::RenderWindow(sf::VideoMode(GameGlobals::SCREEN_W, GameGlobals::SCREEN_H), "Arcade Racing")), _Renderer(new Renderer()),
+player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)), track(), bg(), ui()
 {	
-	roadsides.push_back(Tree());
 	_MainWindow->setFramerateLimit(60);
 	_Renderer->init();
 	

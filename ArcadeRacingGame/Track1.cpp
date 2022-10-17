@@ -2,6 +2,7 @@
 
 Track1::Track1() :TrackData() 
 {
+	//use a map instead
 	colors = {
 		std::make_pair(sf::Color::Green,"grassLight"),
 		std::make_pair(sf::Color(55, 154, 84), "grassDark"),
@@ -10,9 +11,10 @@ Track1::Track1() :TrackData()
 		std::make_pair(sf::Color::Red,"rumble1"),
 		std::make_pair(sf::Color::White, "rumble2")
 	};
-	segments = 
+	segments =
 	{
-	}
+		
+	};
 
 };
 

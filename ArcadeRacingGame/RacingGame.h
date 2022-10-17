@@ -9,11 +9,13 @@
 #include "Background.h"
 #include "UI.h"
 
+//this is the game state
+//when start is pressed, create one of these with the track data selected, in main or previous state
 
 class RacingGame
 {
 	public:
-		RacingGame(TrackData td);
+		RacingGame();
 		~RacingGame();
 		//static?
 		Track track; 

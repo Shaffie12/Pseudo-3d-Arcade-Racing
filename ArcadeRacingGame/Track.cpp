@@ -23,9 +23,7 @@ sf::Color Track::tile_col_2 = sf::Color::White;
 */
 
 Track::Track(sf::Color colors[6], std::vector<Segment> segments) 
-{
-	this->segments = segments;
-	
+{	
 	for (int i = 1; i <=GameGlobals::GAME_H/2 ; i++)
 		lines.push_back(Line(i));
 	baseSeg = &segments.at(0);
@@ -43,7 +41,7 @@ Track::Track(sf::Color colors[6], std::vector<Segment> segments)
 void Track::drawElement(sf::RenderTarget& w)
 {
 
-	speed = Racing::Util::clamp(speed, 0, 1);
+	speed = Racing::Util::clamp(speed, 0, 1); //could move these
 	dist += speed*1.5;
 	
 	moveSegment();
