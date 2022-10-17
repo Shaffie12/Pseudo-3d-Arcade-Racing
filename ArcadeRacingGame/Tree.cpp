@@ -1,7 +1,7 @@
 #include "Tree.h"
 #include<iostream>
 
-Tree::Tree(bool left): RoadObject(left)
+Tree::Tree(float spawnDist): RoadObject(spawnDist)
 {
 	if (!texture.loadFromFile("assets/roadside/signsheet.png"))
 		std::cout << "error loading assets" << '\n';

@@ -2,12 +2,17 @@
 
 Track1::Track1() :TrackData() 
 {
-	segments =
-	{
-		Segment(0.0019,
-		//need to somehow get the list of objects, number of them, start distance in here
+	colors = {
+		std::make_pair(sf::Color::Green,"grassLight"),
+		std::make_pair(sf::Color(55, 154, 84), "grassDark"),
+		std::make_pair(sf::Color(178, 195, 183), "roadLight"),
+		std::make_pair(sf::Color(188, 205, 190),"roadDark"),
+		std::make_pair(sf::Color::Red,"rumble1"),
+		std::make_pair(sf::Color::White, "rumble2")
 	};
-
+	segments = 
+	{
+	}
 
 };
 

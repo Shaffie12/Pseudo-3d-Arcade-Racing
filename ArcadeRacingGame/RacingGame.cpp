@@ -2,13 +2,12 @@
 #include "GameGlobals.h"
 #include<iostream>
 
+//this would be a state, chosen track data passed in and into the track
 
-//need to get some variables from the other states (main menu)
-//window probably needs to be made before this to show the menu.
-RacingGame::RacingGame() :_MainWindow(new sf::RenderWindow(sf::VideoMode(GameGlobals::SCREEN_W, GameGlobals::SCREEN_H), "Arcade Racing")), _Renderer(new Renderer()),
-player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)), track(), bg(), ui()
+RacingGame::RacingGame(TrackData td) :_MainWindow(new sf::RenderWindow(sf::VideoMode(GameGlobals::SCREEN_W, GameGlobals::SCREEN_H), "Arcade Racing")), _Renderer(new Renderer()),
+player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)), track(Track1(td.)), bg(), ui()
 {	
-	roadsides.push_back(Tree(false));
+	//roadsides.push_back(Tree(false));
 	_MainWindow->setFramerateLimit(60);
 	_Renderer->init();
 	
@@ -76,10 +75,7 @@ void RacingGame::drawAllElements(sf::RenderTarget* rt)
 	track.drawElement(*_Renderer->rtx); 
 	player.drawElement(*_Renderer->rtx); 
 	bg.drawElement(*_Renderer->rtx); 
-	for (RoadObject& ro : roadsides)
-	{
-		ro.drawElement(*_Renderer->rtx);
-	}
+	//draw the road obj
 	ui.drawElement(*_Renderer->rtx);
 
 	

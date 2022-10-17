@@ -5,33 +5,23 @@
 #include "Renderer.h"
 #include "Drawable.h"
 #include "Player.h"
-#include "TrackData.h"
+#include "Track1.h"
 #include "Track.h"
 #include "Background.h"
-#include "Tree.h"
 #include "UI.h"
+
 
 class RacingGame
 {
 	public:
-		//i think these should be static because there should only be 1 of these ever in a game
-		
+		RacingGame(TrackData td);
+		~RacingGame();
+		//static?
 		Track track; 
 		Player player;
 		Background bg;
 		UI ui;
-		std::vector<RoadObject> roadsides;
-
-		std::vector<Drawable> enemyCars;
 		
-		RacingGame();
-		~RacingGame();
-
-		/*
-		*should also have a copy constructorand copy assignment by convention, but since this should never be copied or assigned
-		*there should only ever be 1 instance of this, the player and the track
-		*
-		*/
 
 		void start();
 		void gameLoop();

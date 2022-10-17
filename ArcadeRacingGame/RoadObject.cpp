@@ -2,17 +2,16 @@
 #include<iostream>
 
 
-RoadObject::RoadObject(bool left) : activeSpr(&sprites[3])
+RoadObject::RoadObject(float spawnDist) : activeSpr(&sprites[3])
 { 
 	screen_y = GameGlobals::GAME_H / 2;
-	spawnDist = 0;
-	this->left = left;	
+	this->spawnDist = spawnDist;
 	float scaledY = Racing::Util::convertRange(screen_y, 1, GameGlobals::GAME_H/2, 1, 0);
 	perspective = Track::minRoad + 0.035+scaledY * Track::road_w;
+	draw = false;
 
 	
 };
-
 
 RoadObject::RoadObject(RoadObject&& other) noexcept : activeSpr (&sprites[3])
 {
@@ -20,7 +19,7 @@ RoadObject::RoadObject(RoadObject&& other) noexcept : activeSpr (&sprites[3])
 	perspective = other.perspective;
 	spawnDist=other.spawnDist;
 	texture = other.texture;
-	left = other.left;
+	draw = other.draw;
 
 	memcpy(sprites, other.sprites, sizeof(sprites));
 	for (int i = 0; i < sizeof(sprites) / sizeof(sprites[0]); i++)
@@ -35,7 +34,7 @@ void RoadObject::drawElement(sf::RenderTarget& w)
 {
 	swapSprite();
 	move();
-	if(screen_y<GameGlobals::GAME_H)
+	if(draw)
 		w.draw(*activeSpr);
 
 }

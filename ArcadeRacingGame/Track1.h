@@ -4,6 +4,7 @@
 
 class Track1: public TrackData
 {
+public:
 	Track1();
 	
 };
