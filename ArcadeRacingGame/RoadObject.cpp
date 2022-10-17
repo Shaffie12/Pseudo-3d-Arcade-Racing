@@ -30,6 +30,21 @@ RoadObject::RoadObject(RoadObject&& other) noexcept : activeSpr (&sprites[3])
 	
 }
 
+RoadObject& RoadObject::operator=(const RoadObject& other)
+{
+	RoadObject ro;
+	ro.screen_y = other.screen_y;
+	ro.perspective = other.perspective;
+	ro.spawnDist = other.spawnDist;
+	ro.texture = other.texture;
+
+	memcpy(ro.sprites, other.sprites, sizeof(ro.sprites));
+	for (int i = 0; i < sizeof(sprites) / sizeof(sprites[0]); i++)
+		ro.sprites[i].setTexture(ro.texture);
+	ro.activeSpr = &ro.sprites[3];
+	return ro;
+}
+
 void RoadObject::drawElement(sf::RenderTarget& w)
 {
 	swapSprite();

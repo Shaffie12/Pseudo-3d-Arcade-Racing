@@ -1,4 +1,4 @@
-#ifndef UTIL_H_
+#ifndef _UTIL_H_
 #define _UTIL_H_
 #include <algorithm>
 #include <cmath>

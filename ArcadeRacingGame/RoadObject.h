@@ -12,8 +12,10 @@ class Track;
 class RoadObject : public Drawable
 {
 public:
-	RoadObject(float spawnDist);
+	RoadObject();
+	RoadObject(const RoadObject& other);
 	RoadObject(RoadObject&& other) noexcept;
+	RoadObject& operator=(const RoadObject& other);
 	virtual void drawElement(sf::RenderTarget& w) override;
 	bool draw;
 protected:
