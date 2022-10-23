@@ -2,7 +2,7 @@
 
 Track1::Track1() :TrackData() 
 {
-	//use a map instead
+	
 	colors = {
 		std::make_pair("grassLight",sf::Color::Green),
 		std::make_pair("grassDark",sf::Color(55, 154, 84)),
@@ -13,13 +13,17 @@ Track1::Track1() :TrackData()
 	};
 	segments =
 	{
-		Segment
-		(
-			-0.002f,70,{}
-
-		)
+		Segment(0,0),
+		Segment(-0.002f,70),
+		Segment(0.0015,1500),
+		Segment(0, 2000)
+		//define track here
+		
 		
 	};
+	objects = {};
 
 };
+
+
 

@@ -8,9 +8,7 @@ float Track::minRoad = 0.01;
 float Track::speed = 0;
 float Track::dist = 0;
 float Track::globalOffset = 0;
-//Track::Segment Track::baseSeg(0, 0);
 float Track::segmentAmt = 0;
-
 std::vector<Track::Line> Track::lines = std::vector<Track::Line>(); 
 
 Track::Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segments) 
@@ -19,15 +17,8 @@ Track::Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segmen
 		lines.push_back(Line(i));
 	this->segments = segments;
 	roadColors = colors;
-	baseSeg = &segments.at(0);
+	baseSeg = new  Segment(0, 0);
 
-	/*
-	trackData.push_back(Segment(-0.002,70)); 
-	trackData.push_back(Segment(0.002, 1000)); 
-	trackData.push_back(Segment(0.0015, 1500));
-	trackData.push_back(Segment(0, 2000));
-	*/
-	
 	
 }
 
@@ -35,7 +26,7 @@ void Track::drawElement(sf::RenderTarget& w)
 {
 
 	speed = Racing::Util::clamp(speed, 0, 1); //could move these
-	dist += speed*1.5;
+	dist += speed * 1.5;
 	
 	moveSegment();
 
@@ -63,11 +54,8 @@ void Track::update()
 	double ddx = 0;
 	double current_x = 0.5;
 	
-	
-	
 	float td = segments.at(currentSeg).curvature;
 	float bd = baseSeg->curvature; 
-	
 
 	rit = lines.rbegin();
 	while(rit!=lines.rend())

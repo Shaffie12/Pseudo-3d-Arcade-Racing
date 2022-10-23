@@ -3,6 +3,7 @@
 #include "Drawable.h"
 #include "GameGlobals.h"
 #include "Segment.h"
+#include "Util.h"
 #include <SFML/Graphics.hpp>
 #include<vector>
 #include<iostream>
@@ -44,6 +45,7 @@ private:
 	std::vector<Line>::reverse_iterator rit;
 	std::map<std::string, sf::Color> roadColors;
 	std::vector<Segment> segments;
+	Segment* baseSeg;
 	int currentSeg = 0;
 
 public:
@@ -55,7 +57,6 @@ public:
 	static float tile_w;
 	static float minRoad; //minimal amount of road at the highest point on road
 	static float segmentAmt;
-	static Segment* baseSeg;
 	static std::vector<Line> lines;
 	static float speed; //artificially represent speed of player
 	static float dist; //artificially represents how far player has moved

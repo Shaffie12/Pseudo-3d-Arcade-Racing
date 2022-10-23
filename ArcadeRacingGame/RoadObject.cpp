@@ -13,7 +13,21 @@ RoadObject::RoadObject(float depth) : activeSpr(&sprites[3])
 	
 };
 
-RoadObject::RoadObject(RoadObject&& other) noexcept : activeSpr (&sprites[3])
+RoadObject::RoadObject(const RoadObject& other) //copy
+{
+	screen_y = other.screen_y;
+	perspective = other.perspective;
+	depth = other.depth;
+	draw = other.draw; //cant we just use the depth to check
+
+	memcpy(sprites, other.sprites, sizeof(sprites));
+	for (int i = 0; i < sizeof(sprites) / sizeof(sprites[0]); i++)
+		sprites[i].setTexture(texture);
+	activeSpr = &sprites[3];
+
+}
+
+RoadObject::RoadObject(RoadObject&& other) noexcept : activeSpr (&sprites[3]) //move 
 {
 	screen_y = other.screen_y;
 	perspective = other.perspective;
