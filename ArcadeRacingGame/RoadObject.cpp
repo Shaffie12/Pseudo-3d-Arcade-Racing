@@ -2,10 +2,10 @@
 #include<iostream>
 
 
-RoadObject::RoadObject(float spawnDist) : activeSpr(&sprites[3])
+RoadObject::RoadObject(float depth) : activeSpr(&sprites[3])
 { 
 	screen_y = GameGlobals::GAME_H / 2;
-	this->spawnDist = spawnDist;
+	this->depth = depth;
 	float scaledY = Racing::Util::convertRange(screen_y, 1, GameGlobals::GAME_H/2, 1, 0);
 	perspective = Track::minRoad + 0.035+scaledY * Track::road_w;
 	draw = false;
@@ -17,7 +17,7 @@ RoadObject::RoadObject(RoadObject&& other) noexcept : activeSpr (&sprites[3])
 {
 	screen_y = other.screen_y;
 	perspective = other.perspective;
-	spawnDist=other.spawnDist;
+	depth=other.depth;
 	texture = other.texture;
 	draw = other.draw;
 
@@ -32,10 +32,9 @@ RoadObject::RoadObject(RoadObject&& other) noexcept : activeSpr (&sprites[3])
 
 RoadObject& RoadObject::operator=(const RoadObject& other)
 {
-	RoadObject ro;
+	RoadObject ro(other.depth);
 	ro.screen_y = other.screen_y;
 	ro.perspective = other.perspective;
-	ro.spawnDist = other.spawnDist;
 	ro.texture = other.texture;
 
 	memcpy(ro.sprites, other.sprites, sizeof(ro.sprites));
@@ -61,15 +60,13 @@ void RoadObject::move()
 	screen_y += 1 * Track::speed;
 	idx = (screen_y - 150) < Track::lines.size() - 1 ? (screen_y -150) : idx;
 
-
-	
 	activeSpr->setPosition(sf::Vector2f(((Track::lines.at(idx).middlePt + Track::lines.at(idx).perspective )*GameGlobals::GAME_W)+activeSpr->getGlobalBounds().width, 
 		screen_y - activeSpr->getGlobalBounds().height));
 	
 	
 }
 
-void::RoadObject::swapSprite()
+void::RoadObject::swapSprite() //change this to use defined boundaries
 {
 	if (screen_y > 152)
 		activeSpr = &sprites[2];

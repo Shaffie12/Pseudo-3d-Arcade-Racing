@@ -6,16 +6,17 @@
 #include "Drawable.h"
 #include "Player.h"
 #include "Track.h"
+#include "TrackData.h"
 #include "Background.h"
 #include "UI.h"
 
 //this is the game state
 //when start is pressed, create one of these with the track data selected, in main or previous state
-
+//states class will hold globals such as chosen track
 class RacingGame
 {
 	public:
-		RacingGame();
+		RacingGame(TrackData data);
 		~RacingGame();
 		//static?
 		Track track; 

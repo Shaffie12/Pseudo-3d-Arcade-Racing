@@ -6,13 +6,13 @@
 
 
 
-class TrackData
+class TrackData //this should never be instantiated
 {
 	
 public:
 	TrackData();
 	std::vector<Segment> segments;
-	std::vector<std::pair<sf::Color, std::string>> colors;
+	std::map<std::string,sf::Color> colors; 
 	//colours, theme tune etc..
 
 };

@@ -13,19 +13,12 @@ float Track::segmentAmt = 0;
 
 std::vector<Track::Line> Track::lines = std::vector<Track::Line>(); 
 
-/*
-sf::Color Track::grassLight = sf::Color::Green;
-sf::Color Track::grassDark = sf::Color(55, 154, 84);
-sf::Color Track::roadLight = sf::Color(178, 195, 183);
-sf::Color Track::roadDark = sf::Color(188, 205, 190);
-sf::Color Track::tile_col_1 = sf::Color::Red;
-sf::Color Track::tile_col_2 = sf::Color::White;
-*/
-
-Track::Track(sf::Color colors[6], std::vector<Segment> segments) 
+Track::Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segments) 
 {	
 	for (int i = 1; i <=GameGlobals::GAME_H/2 ; i++)
 		lines.push_back(Line(i));
+	this->segments = segments;
+	roadColors = colors;
 	baseSeg = &segments.at(0);
 
 	/*
@@ -56,8 +49,8 @@ void Track::drawElement(sf::RenderTarget& w)
 	//debug
 	sf::Vertex line[] =
 	{
-		sf::Vertex(sf::Vector2f(0,trackData.segments.at(currentSect).screen_y),sf::Color::White),
-		sf::Vertex(sf::Vector2f(GameGlobals::GAME_W, trackData.segments.at(currentSect).screen_y),sf::Color::White)
+		sf::Vertex(sf::Vector2f(0,segments.at(currentSeg).screen_y),sf::Color::White),
+		sf::Vertex(sf::Vector2f(GameGlobals::GAME_W, segments.at(currentSeg).screen_y),sf::Color::White)
 	};
 
 	w.draw(line, 2, sf::Lines);
@@ -72,7 +65,7 @@ void Track::update()
 	
 	
 	
-	float td = segments.at(currentSect).curvature;
+	float td = segments.at(currentSeg).curvature;
 	float bd = baseSeg->curvature; 
 	
 
@@ -83,11 +76,11 @@ void Track::update()
 		Line& line = *rit;
 		
 
-		line.colours[0] = sinf(30 * pow(1 - line.perspective, 10) + dist * 0.1) > 0.0f ? grassLight : grassDark;
-		line.colours[1] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? tile_col_1 : tile_col_2;
-		line.colours[2] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? roadLight : roadDark;
+		line.colours[0] = sinf(30 * pow(1 - line.perspective, 10) + dist * 0.1) > 0.0f ? roadColors.find("grassLight")->second : roadColors.find("grassDark")->second;
+		line.colours[1] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? roadColors.find("rumble1")->second : roadColors.find("rumble2")->second;
+		line.colours[2] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? roadColors.find("roadLight")->second: roadColors.find("roadDark")->second;
 
-		if (line.screenY < segments.at(currentSect).screen_y)
+		if (line.screenY < segments.at(currentSeg).screen_y)
 			dx = td * ((1 - line.scaledY) *(1 - line.scaledY) / 6) * (((lines.at(lines.size()-1).scaledY) - line.scaledY) *2.5);
 		else
 			dx = bd * ((1 - line.scaledY) * (1 - line.scaledY) /6) * (((lines.at(lines.size() - 1).scaledY ) - line.scaledY) * 2.5);
@@ -108,7 +101,7 @@ void Track::update()
 
 		//road 
 		line.vertices[4] = sf::Vertex(sf::Vector2f((line.middlePt - line.perspective) * GameGlobals::GAME_W, line.screenY), line.colours[2]);
-		line.vertices[5] = sf::Vertex(sf::Vector2f((line.middlePt + line.perspective) * GameGlobals::GAME_W, line.screenY), roadLight);
+		line.vertices[5] = sf::Vertex(sf::Vector2f((line.middlePt + line.perspective) * GameGlobals::GAME_W, line.screenY), line.colours[2]);//was roadLight
 
 		//edge 2
 		line.vertices[6] = sf::Vertex(sf::Vector2f((line.middlePt + line.perspective) * GameGlobals::GAME_W, line.screenY), line.colours[1]);
@@ -140,11 +133,11 @@ void Track::addSpeed(float amount, bool add)
 
 void Track::addSegmentOffset()
 {
-	if (segments.at(currentSect).screen_y >= GameGlobals::GAME_H-80 )
+	if (segments.at(currentSeg).screen_y >= GameGlobals::GAME_H-80 )
 	{
-		globalOffset += (segments.at(currentSect).curvature * 3 * speed); //originally roadoffset
+		globalOffset += (segments.at(currentSeg).curvature * 3 * speed); //originally roadoffset
 		globalOffset = Racing::Util::clamp(globalOffset, -1.1f, 1.1f);
-		segmentAmt = segments.at(currentSect).curvature;
+		segmentAmt = segments.at(currentSeg).curvature;
 		
 	}
 
@@ -152,16 +145,16 @@ void Track::addSegmentOffset()
 
 void Track::nextSegment()
 {
-	if (segments.at(currentSect).screen_y >= GameGlobals::GAME_H)
+	if (segments.at(currentSeg).screen_y >= GameGlobals::GAME_H)
 	{
-		baseSeg = &segments.at(currentSect);
+		baseSeg = &segments.at(currentSeg);
 
-		int next = (currentSect + 1) % segments.size();
+		int next = (currentSeg + 1) % segments.size();
 		if (dist >= segments.at(next).distance)
 		{
 
-			segments.at(currentSect).screen_y = GameGlobals::GAME_H / 2;
-			currentSect = ++currentSect % segments.size();
+			segments.at(currentSeg).screen_y = GameGlobals::GAME_H / 2;
+			currentSeg = ++currentSeg % segments.size();
 		}
 
 
@@ -171,7 +164,7 @@ void Track::nextSegment()
 void Track::moveSegment()
 {
 	
-	segments.at(currentSect).screen_y += (0.7 * speed);
+	segments.at(currentSeg).screen_y += (0.7 * speed);
 
 	addSegmentOffset();
 	nextSegment();

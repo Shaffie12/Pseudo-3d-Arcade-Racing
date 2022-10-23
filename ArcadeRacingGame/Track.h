@@ -42,18 +42,12 @@ private:
 	void nextSegment();
 
 	std::vector<Line>::reverse_iterator rit;
+	std::map<std::string, sf::Color> roadColors;
 	std::vector<Segment> segments;
-	int currentSect = 0;
-
-	static sf::Color grassLight;
-	static sf::Color grassDark;
-	static sf::Color roadLight;
-	static sf::Color roadDark;
-	static sf::Color tile_col_1;
-	static sf::Color tile_col_2;
+	int currentSeg = 0;
 
 public:
-	Track(sf::Color colors[6], std::vector<Segment> segments); 
+	Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segments); 
 	virtual void drawElement(sf::RenderTarget& w) override;
 	void addPlayerOffset(float amount, bool add);
 	void addSpeed(float amount, bool add);

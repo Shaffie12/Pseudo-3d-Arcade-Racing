@@ -12,7 +12,7 @@ class Track;
 class RoadObject : public Drawable
 {
 public:
-	RoadObject();
+	RoadObject(float depth);
 	RoadObject(const RoadObject& other);
 	RoadObject(RoadObject&& other) noexcept;
 	RoadObject& operator=(const RoadObject& other);
@@ -20,7 +20,7 @@ public:
 	bool draw;
 protected:
 	void swapSprite();
-	float spawnDist;
+	float depth; //at what point should we start drawing this object
 	float perspective;
 	float screen_y;
 	sf::Texture texture;

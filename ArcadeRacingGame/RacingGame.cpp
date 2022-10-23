@@ -2,8 +2,8 @@
 #include "GameGlobals.h"
 #include<iostream>
 
-RacingGame::RacingGame() :_MainWindow(new sf::RenderWindow(sf::VideoMode(GameGlobals::SCREEN_W, GameGlobals::SCREEN_H), "Arcade Racing")), _Renderer(new Renderer()),
-player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)), track(), bg(), ui()
+RacingGame::RacingGame(TrackData data) :_MainWindow(new sf::RenderWindow(sf::VideoMode(GameGlobals::SCREEN_W, GameGlobals::SCREEN_H), "Arcade Racing")), _Renderer(new Renderer()),
+player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)), track(data.colors,data.segments), bg(), ui()
 {	
 	_MainWindow->setFramerateLimit(60);
 	_Renderer->init();
