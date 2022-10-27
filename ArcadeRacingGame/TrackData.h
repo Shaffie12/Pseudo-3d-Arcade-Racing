@@ -1,13 +1,19 @@
 #ifndef _TRACKDATA_H_
 #define _TRACKDATA_H_
 #include "Segment.h"
-class TrackData
+#include "Sign.h"
+
+
+
+
+class TrackData //this should never be instantiated
 {
-	//foppy ref.  list of segments .
+	
 public:
 	TrackData();
-protected:
 	std::vector<Segment> segments;
+	std::vector<RoadObject> objects;
+	std::map<std::string,sf::Color> colors; 
 	//colours, theme tune etc..
 
 };

@@ -33,7 +33,7 @@ Background::Background()
 		i++;
 	}
 	//default
-	selected_bg = &bg_list.at(10);
+	selected_bg = &bg_list.at(0);
 	gameBG = new ScrollingBackground(*selected_bg); 
 	
 
