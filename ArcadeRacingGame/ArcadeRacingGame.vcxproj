@@ -163,7 +163,7 @@
     <ClCompile Include="Track.cpp" />
     <ClCompile Include="Track1.cpp" />
     <ClCompile Include="TrackData.cpp" />
-    <ClCompile Include="Tree.cpp" />
+    <ClCompile Include="Sign.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>
@@ -180,7 +180,7 @@
     <ClInclude Include="Track.h" />
     <ClInclude Include="Track1.h" />
     <ClInclude Include="TrackData.h" />
-    <ClInclude Include="Tree.h" />
+    <ClInclude Include="Sign.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>

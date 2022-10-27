@@ -23,6 +23,8 @@ class RacingGame
 		Player player;
 		Background bg;
 		UI ui;
+		std::vector<RoadObject> road_objects;
+		
 		
 
 		void start();

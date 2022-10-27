@@ -21,7 +21,12 @@ Track1::Track1() :TrackData()
 		
 		
 	};
-	objects = {};
+	objects =
+	{
+		Sign(0,true),
+		Sign(0,false),
+	};
+	
 
 };
 
