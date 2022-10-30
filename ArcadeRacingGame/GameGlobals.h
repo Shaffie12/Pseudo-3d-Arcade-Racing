@@ -12,6 +12,7 @@
 		static bool isActiveWindow; //maybe getter and setter for this
 		static float elapsedTime;
 		
+		
 
 
 	};

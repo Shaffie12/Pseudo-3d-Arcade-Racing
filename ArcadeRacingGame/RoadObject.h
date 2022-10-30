@@ -12,12 +12,14 @@ class Track;
 class RoadObject : public Drawable
 {
 public:
-	RoadObject(float depth, bool left);
+	RoadObject(int segmentID, float depth, bool left);
 	RoadObject(const RoadObject& other);
 	RoadObject(RoadObject&& other) noexcept;
 	RoadObject& operator=(const RoadObject& other);
 	virtual void drawElement(sf::RenderTarget& w) override;
 	float depth; //at what point should we start drawing this object
+	int segId;
+	bool draw = false;
 protected:
 	bool left;
 	float perspective;
@@ -32,6 +34,7 @@ protected:
 	void swapSprite();
 	void upscale();
 	void move();
+	
 	
 };
 #endif

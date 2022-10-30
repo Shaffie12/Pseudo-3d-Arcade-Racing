@@ -1,7 +1,7 @@
 #include "Sign.h"
 #include<iostream>
 
-Sign::Sign(float depth, bool left): RoadObject(depth, left)
+Sign::Sign(int segmentId, float depth, bool left): RoadObject(segmentId,depth, left)
 {
 	if (!texture.loadFromFile("assets/roadside/signsheet.png"))
 		std::cout << "error loading assets" << '\n';
@@ -17,11 +17,13 @@ Sign::Sign(float depth, bool left): RoadObject(depth, left)
 		ix += size;
 		iy += 8;
 		size -= 8;
+		sprites[i].setOrigin(sf::Vector2f(sprites[i].getGlobalBounds().width / 2, 0));
 	}
 	
 	//reassign default
 	activeSpr = &sprites[3];
 	original_dimensions = sf::Vector2f(sprites[3].getLocalBounds().width, sprites[3].getLocalBounds().height);
+	
 	
 	
 }

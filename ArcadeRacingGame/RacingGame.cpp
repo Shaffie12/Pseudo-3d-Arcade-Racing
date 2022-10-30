@@ -53,9 +53,9 @@ void RacingGame::handleInput()
 	{
 		track.addSpeed(0.02, true);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-			track.addPlayerOffset(0.012, true);
+			track.addPlayerOffset(0.02, true);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			track.addPlayerOffset(0.012, false);
+			track.addPlayerOffset(0.02, false);
 			
 		
 	}
@@ -74,8 +74,12 @@ void RacingGame::drawAllElements(sf::RenderTarget* rt)
 	player.drawElement(*_Renderer->rtx); 
 	bg.drawElement(*_Renderer->rtx);
 	for (RoadObject& r : road_objects)
-		if(r.depth<=Track::dist)
-		r.drawElement(*_Renderer->rtx);
+	{
+		if (r.segId == Track::activeSeg->id && r.depth <= Track::activeSeg->screen_y - 150)
+			r.draw = true;
+		if(r.draw)
+			r.drawElement(*_Renderer->rtx);
+	}
 			
 	ui.drawElement(*_Renderer->rtx);
 

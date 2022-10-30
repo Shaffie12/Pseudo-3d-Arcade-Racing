@@ -45,8 +45,9 @@ private:
 	std::vector<Line>::reverse_iterator rit;
 	std::map<std::string, sf::Color> roadColors;
 	std::vector<Segment> segments;
-	Segment* baseSeg;
+	Segment baseSeg;
 	int currentSeg = 0;
+	
 
 public:
 	Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segments); 
@@ -58,6 +59,7 @@ public:
 	static float minRoad; //minimal amount of road at the highest point on road
 	static float segmentAmt;
 	static std::vector<Line> lines;
+	static Segment* activeSeg;
 	static float speed; //artificially represent speed of player
 	static float dist; //artificially represents how far player has moved
 	static float globalOffset;

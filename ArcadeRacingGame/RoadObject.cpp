@@ -4,7 +4,7 @@
 int RoadObject::slow_limiter = 10;
 int RoadObject::sprite_limits[3] = { 152,155,160 };
 
-RoadObject::RoadObject(float depth, bool left) : activeSpr(&sprites[3])
+RoadObject::RoadObject(int segmentId, float depth, bool left) : activeSpr(&sprites[3]), segId(segmentId)
 { 
 	std::cout << "standard constructor was called" << '\n';
 	this->left = left;
@@ -19,6 +19,8 @@ RoadObject::RoadObject(float depth, bool left) : activeSpr(&sprites[3])
 RoadObject::RoadObject(const RoadObject& other) //copy
 {
 	std::cout << "copy constructor was called" << '\n';
+	segId = other.segId;
+	draw = other.draw;
 	left = other.left;
 	screen_y = other.screen_y;
 	perspective = other.perspective;
@@ -39,6 +41,8 @@ RoadObject::RoadObject(RoadObject&& other) noexcept  //move
 {
 	
 	std::cout << "move constructor was called" << '\n';
+	segId = other.segId;
+	draw = other.draw;
 	left = other.left;
 	screen_y = other.screen_y;
 	perspective = other.perspective;
@@ -58,8 +62,9 @@ RoadObject::RoadObject(RoadObject&& other) noexcept  //move
 
 RoadObject& RoadObject::operator=(const RoadObject& other) 
 {
-	RoadObject ro(other.depth, other.left);
+	RoadObject ro(other.segId, other.depth, other.left);
 	ro.screen_y = other.screen_y;
+	ro.draw = other.draw;
 	ro.perspective = other.perspective;
 	ro.left = other.left;
 	ro.texture = other.texture;
@@ -79,6 +84,8 @@ void RoadObject::drawElement(sf::RenderTarget& w)
 	upscale();
 	move();
 	w.draw(*activeSpr);
+	
+	
 
 }
 
@@ -96,29 +103,37 @@ void RoadObject::move()
 		activeSpr->setPosition(sf::Vector2f(((Track::lines.at(idx).middlePt + Track::lines.at(idx).perspective) * GameGlobals::GAME_W) + activeSpr->getGlobalBounds().width,
 			screen_y - activeSpr->getGlobalBounds().height));
 
-	
-
-	
-	
+	std::cout << idx << '\n';
+	if (idx > 130)
+	{
+		draw = false;
+		screen_y = GameGlobals::GAME_H / 2;
+		
+	}
+		
 }
 
 void::RoadObject::swapSprite() 
 {
-	
+	if (screen_y < sprite_limits[0])
+		activeSpr = &sprites[3];
 	if (screen_y > sprite_limits[0])
 		activeSpr = &sprites[2];
 	if (screen_y > sprite_limits[1])
 		activeSpr = &sprites[1];
 	if (screen_y > sprite_limits[2])
 		activeSpr = &sprites[0];
-
+	
+	
 	upscale();
 	
 }
 
 void::RoadObject::upscale()
 {
-	float scale = Racing::Util::convertRange(screen_y, 150, 160, 1, 1.5f);
+	float scale = Racing::Util::convertRange(screen_y, 150, 160, 0.5, 1);
 	activeSpr->setScale(scale, scale);
+	
 
 }
+
