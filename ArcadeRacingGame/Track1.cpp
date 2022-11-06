@@ -23,10 +23,16 @@ Track1::Track1() :TrackData()
 	};
 	objects = //i wanted to have a struture that couples the segments and the road objects but caused circular ref issues.
 	{
-		Sign(0,100,true),
-		Sign(0,100,false),
-		Sign(0,80,true),
-		Sign(0,80,false),
+		
+		Sign(0,130,true),
+		Rock(0,100,true),
+		Tree(0,30,false),
+		Tree(0,30,false),
+		Tree(0,0,true),
+		Tree(0,0,true),
+		
+
+		
 	};
 	
 

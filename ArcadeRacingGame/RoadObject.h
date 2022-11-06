@@ -17,23 +17,25 @@ public:
 	RoadObject(RoadObject&& other) noexcept;
 	RoadObject& operator=(const RoadObject& other);
 	virtual void drawElement(sf::RenderTarget& w) override;
-	float depth; //at what point should we start drawing this object
+	float depth; //at what point relative to the segment progress down the screen, should we start drawing this object
 	int segId;
-	bool draw = false;
+	bool draw = false; //was doing this check in the racing game before
 protected:
 	bool left;
 	float perspective;
 	float screen_y;
-	sf::Vector2f original_dimensions;
+	sf::Transform base_transform;
 	static int slow_limiter;
 	static int sprite_limits[3];
 	sf::Texture texture;
 	sf::Sprite sprites[4];
 	sf::Sprite* activeSpr;
 	
+	void loadSprites();
 	void swapSprite();
 	void upscale();
 	void move();
+	void checkDraw();
 	
 	
 };

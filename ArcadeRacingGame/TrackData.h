@@ -2,9 +2,8 @@
 #define _TRACKDATA_H_
 #include "Segment.h"
 #include "Sign.h"
-
-
-
+#include "Rock.h"
+#include "Tree.h"
 
 class TrackData //this should never be instantiated
 {

@@ -74,13 +74,7 @@ void RacingGame::drawAllElements(sf::RenderTarget* rt)
 	player.drawElement(*_Renderer->rtx); 
 	bg.drawElement(*_Renderer->rtx);
 	for (RoadObject& r : road_objects)
-	{
-		if (r.segId == Track::activeSeg->id && r.depth <= Track::activeSeg->screen_y - 150)
-			r.draw = true;
-		if(r.draw)
-			r.drawElement(*_Renderer->rtx);
-	}
-			
+		r.drawElement(*_Renderer->rtx);		
 	ui.drawElement(*_Renderer->rtx);
 
 	

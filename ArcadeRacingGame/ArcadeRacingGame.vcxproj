@@ -159,11 +159,13 @@
     <ClCompile Include="RacingGame.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RoadObject.cpp" />
+    <ClCompile Include="Rock.cpp" />
     <ClCompile Include="Segment.cpp" />
     <ClCompile Include="Track.cpp" />
     <ClCompile Include="Track1.cpp" />
     <ClCompile Include="TrackData.cpp" />
     <ClCompile Include="Sign.cpp" />
+    <ClCompile Include="Tree.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>
@@ -176,11 +178,13 @@
     <ClInclude Include="RacingGame.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RoadObject.h" />
+    <ClInclude Include="Rock.h" />
     <ClInclude Include="Segment.h" />
     <ClInclude Include="Track.h" />
     <ClInclude Include="Track1.h" />
     <ClInclude Include="TrackData.h" />
     <ClInclude Include="Sign.h" />
+    <ClInclude Include="Tree.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>

@@ -33,7 +33,7 @@ RoadObject::RoadObject(const RoadObject& other) //copy
 	for (int i = 0; i < sizeof(sprites) / sizeof(sprites[0]); i++)
 		sprites[i].setTexture(texture);
 	activeSpr = &sprites[3];
-	original_dimensions = sf::Vector2f(sprites[3].getLocalBounds().width, sprites[3].getLocalBounds().height);
+	base_transform = sprites[3].getTransform();
 
 }
 
@@ -54,7 +54,7 @@ RoadObject::RoadObject(RoadObject&& other) noexcept  //move
 		sprites[i].setTexture(texture);
 	other.activeSpr = nullptr;
 	activeSpr = &sprites[3];
-	original_dimensions = sf::Vector2f(sprites[3].getLocalBounds().width, sprites[3].getLocalBounds().height);
+	base_transform = base_transform = sprites[3].getTransform();
 	
 	
 	
@@ -73,29 +73,32 @@ RoadObject& RoadObject::operator=(const RoadObject& other)
 	for (int i = 0; i < sizeof(sprites) / sizeof(sprites[0]); i++)
 		ro.sprites[i].setTexture(ro.texture);
 	ro.activeSpr = &ro.sprites[3];
-	ro.original_dimensions = sf::Vector2f(sprites[3].getLocalBounds().width, sprites[3].getLocalBounds().height);
+	ro.base_transform = sprites[3].getTransform();
 	return ro;
 }
 
 void RoadObject::drawElement(sf::RenderTarget& w)
 {
-	
-	swapSprite();
-	upscale();
-	move();
-	w.draw(*activeSpr);
-	
-	
+	checkDraw();
+	if (draw)
+	{
+		swapSprite();
+		move();
+		upscale();
+		w.draw(*activeSpr);
+	}	
 
 }
 
 void RoadObject::move()
 {
+
 	float speed_scale = Racing::Util::convertRange(screen_y, 150, 200, 0.01f, 3); //scale the speed the object moves depending on proximity to bottom of screen
 	int idx = Track::lines.size() - 1;
 	screen_y += speed_scale * Track::speed;
-	idx = (screen_y - 150) < Track::lines.size() - 1 ? (screen_y -150) : idx; //the list of lines is 149 long
+	idx = (screen_y - 150) < Track::lines.size() - 1 ? (screen_y -150) : idx; //the list of lines is 149 element long
 
+	
 	if (left)
 		activeSpr->setPosition(sf::Vector2f(((Track::lines.at(idx).middlePt - Track::lines.at(idx).perspective) * GameGlobals::GAME_W) - activeSpr->getGlobalBounds().width,
 			screen_y - activeSpr->getGlobalBounds().height));
@@ -103,13 +106,8 @@ void RoadObject::move()
 		activeSpr->setPosition(sf::Vector2f(((Track::lines.at(idx).middlePt + Track::lines.at(idx).perspective) * GameGlobals::GAME_W) + activeSpr->getGlobalBounds().width,
 			screen_y - activeSpr->getGlobalBounds().height));
 
-	std::cout << idx << '\n';
-	if (idx > 130)
-	{
-		draw = false;
-		screen_y = GameGlobals::GAME_H / 2;
-		
-	}
+	
+	
 		
 }
 
@@ -131,9 +129,47 @@ void::RoadObject::swapSprite()
 
 void::RoadObject::upscale()
 {
-	float scale = Racing::Util::convertRange(screen_y, 150, 160, 0.5, 1);
+	float scale = Racing::Util::roundToDP(Racing::Util::convertRange(screen_y, 150, 160, 0.5f, 1),1);
 	activeSpr->setScale(scale, scale);
+
+	//may have to replace it with a copy that has the original transform scaled instead (only way to get original dimensions)
+	
 	
 
+}
+
+
+//could make this return a bool and check it in the game loop,
+void RoadObject::checkDraw()
+{
+	if (segId == Track::activeSeg->id && depth <= Track::activeSeg->screen_y - 150)
+		draw = true;
+	if (screen_y > 300 && Track::activeSeg->id!= segId)
+	{
+		draw = false;
+		screen_y = GameGlobals::GAME_H / 2;
+	}
+		
+
+}
+
+void RoadObject::loadSprites()
+{
+	int ix = 0;
+	int iy = 0;
+	int size = 32;
+	for (int i = 0; i < sizeof(sprites) / sizeof(sprites[0]); i++)
+	{
+		sprites[i] = sf::Sprite(texture, sf::IntRect(ix, iy, size, size));
+		sprites[i].setPosition(sf::Vector2f((0.5 + perspective + Track::tile_w) * GameGlobals::GAME_W, screen_y - activeSpr->getGlobalBounds().height / 2));
+		ix += size;
+		iy += 8;
+		size -= 8;
+		sprites[i].setOrigin(sf::Vector2f(sprites[i].getGlobalBounds().width / 2, 0));
+	}
+
+	//reassign default
+	activeSpr = &sprites[3];
+	base_transform = sprites[3].getTransform();
 }
 

@@ -39,11 +39,13 @@ void Track::drawElement(sf::RenderTarget& w)
 	}
 		
 	//debug
+	
 	sf::Vertex line[] =
 	{
 		sf::Vertex(sf::Vector2f(0,activeSeg->screen_y),sf::Color::White),
 		sf::Vertex(sf::Vector2f(GameGlobals::GAME_W, activeSeg->screen_y),sf::Color::White)
 	};
+	
 
 	w.draw(line, 2, sf::Lines);
 
@@ -155,7 +157,7 @@ void Track::nextSegment()
 
 void Track::moveSegment()
 {
-	activeSeg->screen_y += (0.7 * speed);
+	activeSeg->screen_y += (1 * speed);
 	addSegmentOffset();
 	nextSegment();
 
