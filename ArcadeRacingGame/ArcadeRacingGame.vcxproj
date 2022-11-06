@@ -172,6 +172,7 @@
   <ItemGroup>
     <ClInclude Include="Background.h" />
     <ClInclude Include="Drawable.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="GameGlobals.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Racer.h" />
@@ -180,6 +181,7 @@
     <ClInclude Include="RoadObject.h" />
     <ClInclude Include="Rock.h" />
     <ClInclude Include="Segment.h" />
+    <ClInclude Include="States.h" />
     <ClInclude Include="Track.h" />
     <ClInclude Include="Track1.h" />
     <ClInclude Include="TrackData.h" />

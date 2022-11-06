@@ -24,14 +24,13 @@ class RacingGame
 		Background bg;
 		UI ui;
 		std::vector<RoadObject> road_objects;
-		
-		
 
 		void start();
 		void gameLoop();
 		void handleInput();
 		void drawAllElements(sf::RenderTarget* rt);
 	private:
+		
 		sf::RenderWindow* _MainWindow;
 		Renderer*_Renderer;
 		sf::Clock _Clock;
