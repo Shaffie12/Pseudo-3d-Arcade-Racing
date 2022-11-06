@@ -14,9 +14,9 @@ Track1::Track1() :TrackData()
 	segments =
 	{
 		Segment(0,0,0),
-		Segment(1,-0.002f,70),
-		Segment(2,0.0015,1500),
-		Segment(3,0, 2000)
+		Segment(1,-0.002f,10),
+		Segment(2,0.0015,230),
+		Segment(3,0, 80)
 		//define track here
 		
 		

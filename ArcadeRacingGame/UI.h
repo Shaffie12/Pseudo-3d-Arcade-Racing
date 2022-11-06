@@ -19,6 +19,7 @@ class UI : public Drawable
 		sf::Font textFont;
 		sf::Text playerSpeed;
 		sf::Text distanceTravelled;
+		sf::Text laps;
 
 };
 

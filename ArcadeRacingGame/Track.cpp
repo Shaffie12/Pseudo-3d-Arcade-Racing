@@ -6,11 +6,13 @@ float Track::road_w = 0.9f;
 float Track::tile_w = 0.15;
 float Track::minRoad = 0.01;
 float Track::speed = 0;
-float Track::dist = 0;
+//float Track::dist = 0;
+float Track::totalDistance = 0;
 float Track::globalOffset = 0;
 float Track::segmentAmt = 0;
 std::vector<Track::Line> Track::lines = std::vector<Track::Line>(); 
 Segment* Track::activeSeg = nullptr;
+int Track::laps = 0;
 
 Track::Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segments):baseSeg ( Segment(-1,0, 0))
 {	
@@ -19,19 +21,20 @@ Track::Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segmen
 	this->segments = segments;
 	roadColors = colors;
 	activeSeg = &this->segments.at(0);
+	for (Segment s : segments)
+	{
+		totalTrackLength += s.distance;
+	}
 	
 	
 }
 
 void Track::drawElement(sf::RenderTarget& w)
 {
-
-	speed = Racing::Util::clamp(speed, 0, 1); //could move these
-	dist += speed * 1.5;
-	
+	updateSpeedDistance();
 	moveSegment();
 
-	update();
+	updateLines();
 
 	for (Line& l :lines)
 	{
@@ -39,19 +42,16 @@ void Track::drawElement(sf::RenderTarget& w)
 	}
 		
 	//debug
-	
 	sf::Vertex line[] =
 	{
 		sf::Vertex(sf::Vector2f(0,activeSeg->screen_y),sf::Color::White),
 		sf::Vertex(sf::Vector2f(GameGlobals::GAME_W, activeSeg->screen_y),sf::Color::White)
 	};
-	
-
 	w.draw(line, 2, sf::Lines);
 
 }
 
-void Track::update()
+void Track::updateLines()
 {
 	double dx = 0;
 	double ddx = 0;
@@ -67,9 +67,9 @@ void Track::update()
 		Line& line = *rit;
 		
 
-		line.colours[0] = sinf(30 * pow(1 - line.perspective, 10) + dist * 0.1) > 0.0f ? roadColors.find("grassLight")->second : roadColors.find("grassDark")->second;
-		line.colours[1] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? roadColors.find("rumble1")->second : roadColors.find("rumble2")->second;
-		line.colours[2] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? roadColors.find("roadLight")->second: roadColors.find("roadDark")->second;
+		line.colours[0] = sinf(30 * pow(1 - line.perspective, 10) + dist* 1.5f*0.1) > 0.0f ? roadColors.find("grassLight")->second : roadColors.find("grassDark")->second;
+		line.colours[1] = sinf(50 * pow(1 - line.perspective, 5) + dist*1.5f* 0.8) > 0.0f ? roadColors.find("rumble1")->second : roadColors.find("rumble2")->second;
+		line.colours[2] = sinf(50 * pow(1 - line.perspective, 5) + dist*1.5f* 0.8) > 0.0f ? roadColors.find("roadLight")->second: roadColors.find("roadDark")->second;
 
 		if (line.screenY < activeSeg->screen_y)
 			dx = td * ((1 - line.scaledY) *(1 - line.scaledY) / 6) * (((lines.at(lines.size()-1).scaledY) - line.scaledY) *2.5);
@@ -116,11 +116,17 @@ void Track::addPlayerOffset(float amount, bool add)
 		globalOffset -= amount;
 }
 
-//move this to global space
 void Track::addSpeed(float amount, bool add)
 { 
 	
 	if (add)speed += amount; else speed -= amount; 
+}
+
+void Track::updateSpeedDistance()
+{
+	speed = Racing::Util::clamp(speed, 0, 1); //could move these
+	segmentDistance += speed;
+	dist += speed;
 }
 
 void Track::addSegmentOffset()
@@ -138,10 +144,18 @@ void Track::addSegmentOffset()
 void Track::nextSegment()
 {
 
-	
 	if (activeSeg->screen_y>= GameGlobals::GAME_H)
 	{
+		segmentDistance = 0;
+		totalDistance += activeSeg->distance;
+		if (totalDistance == totalTrackLength)
+		{
+			lap();
+			totalDistance = 0;
+		}
+			
 		
+
 		baseSeg = *activeSeg; //copy
 		activeSeg->screen_y = GameGlobals::GAME_H / 2;
 		
@@ -149,18 +163,27 @@ void Track::nextSegment()
 		
 		activeSeg = &segments.at(currentSeg);
 		
-		
-		
 	}
 	
 }
 
 void Track::moveSegment()
 {
-	activeSeg->screen_y += (1 * speed);
-	addSegmentOffset();
-	nextSegment();
+	if (segmentDistance>= activeSeg->distance)
+	{
+		activeSeg->screen_y += (1 * speed);
+		addSegmentOffset();
+		nextSegment();
+	}
+	
+	
 
 		
+}
+
+void Track::lap()
+{
+	laps++;
+	//if laps > lap amount then race over
 }
 

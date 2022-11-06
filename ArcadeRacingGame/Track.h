@@ -37,16 +37,25 @@ public:
 		
 	};
 private:
-	void update();
+	void updateLines();
 	void moveSegment();
 	void addSegmentOffset();
 	void nextSegment();
+	void updateSpeedDistance();
+
+	void lap();
 
 	std::vector<Line>::reverse_iterator rit;
 	std::map<std::string, sf::Color> roadColors;
 	std::vector<Segment> segments;
 	Segment baseSeg;
 	int currentSeg = 0;
+	float dist; //artificially represents how far player has moved
+	float segmentDistance = 0;
+	int totalTrackLength;
+
+	
+
 	
 
 public:
@@ -61,8 +70,9 @@ public:
 	static std::vector<Line> lines;
 	static Segment* activeSeg;
 	static float speed; //artificially represent speed of player
-	static float dist; //artificially represents how far player has moved
+	static float totalDistance;
 	static float globalOffset;
+	static int laps;
 
 
 		

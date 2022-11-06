@@ -2,10 +2,13 @@
 #include "GameGlobals.h"
 #include<iostream>
 
+
+
 RacingGame::RacingGame(TrackData data) :_MainWindow(new sf::RenderWindow(sf::VideoMode(GameGlobals::SCREEN_W, GameGlobals::SCREEN_H), "Arcade Racing")), _Renderer(new Renderer()),
 player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)), track(data.colors,data.segments),road_objects(data.objects),bg(), ui()
 {	
 	//copy being called twice somewhere
+	
 	_MainWindow->setFramerateLimit(60);
 	_Renderer->init();
 	
