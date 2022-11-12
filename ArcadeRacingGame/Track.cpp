@@ -23,58 +23,40 @@ Track::Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segmen
 	
 }
 
-void Track::drawElement(sf::RenderTarget& w)
+void Track::update()
 {
-
 	speed = Racing::Util::clamp(speed, 0, 1); //could move these
 	dist += speed * 1.5;
-	
+
 	moveSegment();
-
-	update();
-
-	for (Line& l :lines)
-	{
-		w.draw(l.vertices, 10, sf::Lines);
-	}
-		
-	//debug
-	
-	sf::Vertex line[] =
-	{
-		sf::Vertex(sf::Vector2f(0,activeSeg->screen_y),sf::Color::White),
-		sf::Vertex(sf::Vector2f(GameGlobals::GAME_W, activeSeg->screen_y),sf::Color::White)
-	};
-	
-
-	w.draw(line, 2, sf::Lines);
+	updateTrackLines();
 
 }
 
-void Track::update()
+void Track::updateTrackLines()
 {
 	double dx = 0;
 	double ddx = 0;
 	double current_x = 0.5;
-	
+
 	float td = activeSeg->curvature;
-	float bd = baseSeg.curvature; 
+	float bd = baseSeg.curvature;
 
 	rit = lines.rbegin();
-	while(rit!=lines.rend())
+	while (rit != lines.rend())
 	{
-		
+
 		Line& line = *rit;
-		
+
 
 		line.colours[0] = sinf(30 * pow(1 - line.perspective, 10) + dist * 0.1) > 0.0f ? roadColors.find("grassLight")->second : roadColors.find("grassDark")->second;
 		line.colours[1] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? roadColors.find("rumble1")->second : roadColors.find("rumble2")->second;
-		line.colours[2] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? roadColors.find("roadLight")->second: roadColors.find("roadDark")->second;
+		line.colours[2] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? roadColors.find("roadLight")->second : roadColors.find("roadDark")->second;
 
 		if (line.screenY < activeSeg->screen_y)
-			dx = td * ((1 - line.scaledY) *(1 - line.scaledY) / 6) * (((lines.at(lines.size()-1).scaledY) - line.scaledY) *2.5);
+			dx = td * ((1 - line.scaledY) * (1 - line.scaledY) / 6) * (((lines.at(lines.size() - 1).scaledY) - line.scaledY) * 2.5);
 		else
-			dx = bd * ((1 - line.scaledY) * (1 - line.scaledY) /6) * (((lines.at(lines.size() - 1).scaledY ) - line.scaledY) * 2.5);
+			dx = bd * ((1 - line.scaledY) * (1 - line.scaledY) / 6) * (((lines.at(lines.size() - 1).scaledY) - line.scaledY) * 2.5);
 
 
 		ddx += dx;
@@ -104,9 +86,30 @@ void Track::update()
 
 		++rit;
 	}
+}
+
+
+void Track::drawElement(sf::RenderTarget& w)
+{
+
+	for (Line& l :lines)
+	{
+		w.draw(l.vertices, 10, sf::Lines);
+	}
+		
+	//debug only
+	
+	sf::Vertex line[] =
+	{
+		sf::Vertex(sf::Vector2f(0,activeSeg->screen_y),sf::Color::White),
+		sf::Vertex(sf::Vector2f(GameGlobals::GAME_W, activeSeg->screen_y),sf::Color::White)
+	};
 	
 
+	w.draw(line, 2, sf::Lines);
+
 }
+
 
 void Track::addPlayerOffset(float amount, bool add)
 {

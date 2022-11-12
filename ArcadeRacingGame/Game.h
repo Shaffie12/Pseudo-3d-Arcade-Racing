@@ -3,12 +3,32 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include "Renderer.h"
+#include "GameState.h"
+#include "TitleState.h"
+#include "Util.h"
+#include <memory>
 
 class Game
 {
-	sf::RenderWindow* _MainWindow;
-	Renderer* _Renderer;
-	sf::Clock _Clock;
+
+public:
+	Game();
+	~Game();
+	void runGameLoop();
+private:
+	sf::RenderWindow* mainWindow;
+	sf::Event e;
+	Renderer* renderer; 
+	sf::Clock clock;
+	float dt;
+	std::stack<State*>* states;
+
+	void initWindow();
+	void updateDT();
+	void pollSFEvents();
+	void renderCurrentState();
+	void initStates();
+	
 
 };
 #endif

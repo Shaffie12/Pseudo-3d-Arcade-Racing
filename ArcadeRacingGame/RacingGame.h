@@ -10,11 +10,13 @@
 #include "Background.h"
 #include "UI.h"
 
+
 //this is the game state
 //when start is pressed, create one of these with the track data selected, in main or previous state
 //states class will hold globals such as chosen track
 class RacingGame
 {
+	/*
 	public:
 		RacingGame(TrackData data);
 		~RacingGame();
@@ -34,6 +36,7 @@ class RacingGame
 		sf::RenderWindow* _MainWindow;
 		Renderer*_Renderer;
 		sf::Clock _Clock;
+		*/
 		
 		
 		
@@ -43,4 +46,5 @@ class RacingGame
 };
 
 #endif
+
 

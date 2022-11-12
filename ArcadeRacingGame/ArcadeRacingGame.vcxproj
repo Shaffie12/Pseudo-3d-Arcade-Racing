@@ -152,7 +152,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameGlobals.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Racer.cpp" />
@@ -161,6 +163,7 @@
     <ClCompile Include="RoadObject.cpp" />
     <ClCompile Include="Rock.cpp" />
     <ClCompile Include="Segment.cpp" />
+    <ClCompile Include="TitleState.cpp" />
     <ClCompile Include="Track.cpp" />
     <ClCompile Include="Track1.cpp" />
     <ClCompile Include="TrackData.cpp" />
@@ -174,6 +177,7 @@
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameGlobals.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Racer.h" />
     <ClInclude Include="RacingGame.h" />
@@ -181,7 +185,8 @@
     <ClInclude Include="RoadObject.h" />
     <ClInclude Include="Rock.h" />
     <ClInclude Include="Segment.h" />
-    <ClInclude Include="States.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="TitleState.h" />
     <ClInclude Include="Track.h" />
     <ClInclude Include="Track1.h" />
     <ClInclude Include="TrackData.h" />

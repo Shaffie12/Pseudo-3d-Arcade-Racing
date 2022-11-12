@@ -37,7 +37,7 @@ public:
 		
 	};
 private:
-	void update();
+	
 	void moveSegment();
 	void addSegmentOffset();
 	void nextSegment();
@@ -51,6 +51,8 @@ private:
 
 public:
 	Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segments); 
+	void update();
+	void updateTrackLines();
 	virtual void drawElement(sf::RenderTarget& w) override;
 	void addPlayerOffset(float amount, bool add);
 	void addSpeed(float amount, bool add);
