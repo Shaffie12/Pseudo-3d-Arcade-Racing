@@ -1,7 +1,7 @@
 #include "GameState.h"
 
 GameState::GameState(TrackData trackdata) : State(),
-track(trackdata.colors,trackdata.segments), 
+track(trackdata.colors,trackdata.segments,trackdata.totalTrackLength), 
 road_objects(trackdata.objects),
 player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)),
 bg(),
@@ -12,21 +12,28 @@ void GameState::handleInput(const float& dt)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		track.addSpeed(0.02, true);
+		Track::addAcceleration(0.02);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 			track.addPlayerOffset(0.02, true);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 			track.addPlayerOffset(0.02, false);
 	}
 	else
-		track.addSpeed(0.02, false);
+		Track::addAcceleration(-0.02);
 
 }
 
 //update all the elements in the state
 void GameState::update(const float& dt)
 {
-	track.update();
+	if (player.distanceToTrackEdge() > 780.0f)
+	{
+		Track::addAcceleration(-0.03f);
+	}
+
+	track.update(dt);
+	player.update(dt);
+	bg.update(dt);
 }
 
 //draw all the elements in the state to the rtx only

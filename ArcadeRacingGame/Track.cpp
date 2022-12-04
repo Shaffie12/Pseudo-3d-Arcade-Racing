@@ -5,30 +5,33 @@
 float Track::road_w = 0.9f;
 float Track::tile_w = 0.15;
 float Track::minRoad = 0.01;
-float Track::speed = 0;
 float Track::dist = 0;
 float Track::globalOffset = 0;
 float Track::segmentAmt = 0;
+float Track::acceleration = 0;
+int Track::LAP = 0;
 std::vector<Track::Line> Track::lines = std::vector<Track::Line>(); 
 Segment* Track::activeSeg = nullptr;
 
-Track::Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segments):baseSeg ( Segment(-1,0, 0))
+Track::Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segments, int totalTrackLen):baseSeg ( Segment(-1,0, 0))
 {	
 	for (int i = 1; i <=GameGlobals::GAME_H/2 ; i++)
 		lines.push_back(Line(i));
 	this->segments = segments;
 	roadColors = colors;
 	activeSeg = &this->segments.at(0);
+	distanceToSegmentEnd = activeSeg->length;
+	totalTrackLength = totalTrackLen;
 	
 	
 }
 
-void Track::update()
+void Track::update(float deltaTime)
 {
-	speed = Racing::Util::clamp(speed, 0, 1); //could move these
-	dist += speed * 1.5;
+	acceleration = Racing::Util::clamp(acceleration, 0, 1); //could move these
+	dist += acceleration * 100* deltaTime;
 
-	moveSegment();
+	moveSegment(deltaTime);
 	updateTrackLines();
 
 }
@@ -97,8 +100,8 @@ void Track::drawElement(sf::RenderTarget& w)
 		w.draw(l.vertices, 10, sf::Lines);
 	}
 		
-	//debug only
 	
+	//debug
 	sf::Vertex line[] =
 	{
 		sf::Vertex(sf::Vector2f(0,activeSeg->screen_y),sf::Color::White),
@@ -111,7 +114,7 @@ void Track::drawElement(sf::RenderTarget& w)
 }
 
 
-void Track::addPlayerOffset(float amount, bool add)
+void Track::addPlayerOffset(float amount, bool add) //change
 {
 	if (add)
 		globalOffset += amount;
@@ -119,18 +122,14 @@ void Track::addPlayerOffset(float amount, bool add)
 		globalOffset -= amount;
 }
 
-//move this to global space
-void Track::addSpeed(float amount, bool add)
-{ 
-	
-	if (add)speed += amount; else speed -= amount; 
-}
+
+void Track::addAcceleration(float amount){ acceleration += amount;}
 
 void Track::addSegmentOffset()
 {
 	if (activeSeg->screen_y >= GameGlobals::GAME_H-80 )
 	{
-		globalOffset += (activeSeg->curvature * 8 * speed); 
+		globalOffset += (activeSeg->curvature * 8 * acceleration); 
 		globalOffset = Racing::Util::clamp(globalOffset, -1.1f, 1.1f);
 		segmentAmt = activeSeg->curvature; //we dont really need this since active segment is public static now (used in bg)
 		
@@ -144,26 +143,32 @@ void Track::nextSegment()
 	
 	if (activeSeg->screen_y>= GameGlobals::GAME_H)
 	{
-		
-		baseSeg = *activeSeg; //copy
-		activeSeg->screen_y = GameGlobals::GAME_H / 2;
-		
-		currentSeg = ++currentSeg % segments.size();
-		
-		activeSeg = &segments.at(currentSeg);
-		
-		
-		
+		std::cout << progressAroundTrack << '\n';
+		baseSeg = *activeSeg; 
+		if (distanceToSegmentEnd <= 0)
+		{
+			activeSeg->screen_y = GameGlobals::GAME_H / 2;
+			progressAroundTrack += activeSeg->length;
+			if (progressAroundTrack == totalTrackLength)
+			{
+				LAP++;
+				progressAroundTrack = 0;
+			}
+			
+			currentSeg = ++currentSeg % segments.size();
+			distanceToSegmentEnd = segments.at(currentSeg).length;
+			activeSeg = &segments.at(currentSeg);
+		}
+	
 	}
 	
 }
 
-void Track::moveSegment()
+void Track::moveSegment(float deltaTime)
 {
-	activeSeg->screen_y += (1 * speed);
+	activeSeg->screen_y += (1 *acceleration);
+	distanceToSegmentEnd -= acceleration * 100 * deltaTime;
 	addSegmentOffset();
 	nextSegment();
-
-		
 }
 

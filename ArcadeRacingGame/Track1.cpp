@@ -13,27 +13,29 @@ Track1::Track1() :TrackData()
 	};
 	segments =
 	{
-		Segment(0,0,0),
-		Segment(1,-0.002f,70),
-		Segment(2,0.0015,1500),
-		Segment(3,0, 2000)
+		Segment(0,0,100),
+		Segment(1,-0.002f,500),
+		Segment(2,0.0015,100),
+		Segment(3,0, 500)
 		//define track here
 		
 		
 	};
-	objects = //i wanted to have a struture that couples the segments and the road objects but caused circular ref issues.
+	objects =
 	{
-		
+
 		Sign(0,130,true),
 		Rock(0,100,true),
 		Tree(0,30,false),
 		Tree(0,30,false),
 		Tree(0,0,true),
 		Tree(0,0,true),
-		
+
 
 		
 	};
+
+	calculateTotalLength();
 	
 
 };

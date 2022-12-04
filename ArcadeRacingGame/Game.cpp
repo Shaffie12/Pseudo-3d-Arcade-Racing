@@ -17,7 +17,7 @@ Game::~Game()
 
 	while (!states->empty())
 	{
-		delete states->top();
+		//delete states->top();
 		states->pop();
 		
 	}
@@ -38,7 +38,7 @@ void Game::initWindow()
 void Game::initStates()
 {
 	states->push(new GameState(Track1())); //we should get this from prev state, a member of this is causing crash on delete
-	states->push(new TitleState());
+	//states->push(new TitleState());
 }
 
 void Game::updateDT()

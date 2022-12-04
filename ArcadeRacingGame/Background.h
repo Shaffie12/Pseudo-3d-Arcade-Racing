@@ -13,8 +13,8 @@ public:
 	virtual void drawElement(sf::RenderTarget& w) override;
 	void scroll(float amount);
 	void setBackground(int bgNum);
+	void update(float deltaTime);
 
-	//rather than using a static from the track to get the offset, we can maybe use a friend fn
 private:
 	sf::Texture bgTex; //dont know if we need to store this here
 	std::vector<sf::Sprite> bg_list;

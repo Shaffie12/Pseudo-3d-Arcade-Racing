@@ -38,7 +38,7 @@ public:
 	};
 private:
 	
-	void moveSegment();
+	void moveSegment(float deltaTime);
 	void addSegmentOffset();
 	void nextSegment();
 
@@ -47,24 +47,29 @@ private:
 	std::vector<Segment> segments;
 	Segment baseSeg;
 	int currentSeg = 0;
+	int progressAroundTrack;
+	int totalTrackLength;
+	float distanceToSegmentEnd;
 	
 
 public:
-	Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segments); 
-	void update();
+	Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segments, int totalTrackDistance); 
+	void update(float deltaTime);
 	void updateTrackLines();
 	virtual void drawElement(sf::RenderTarget& w) override;
 	void addPlayerOffset(float amount, bool add);
-	void addSpeed(float amount, bool add);
+	static void addAcceleration(float amount);
 	static float road_w;
 	static float tile_w;
 	static float minRoad; //minimal amount of road at the highest point on road
 	static float segmentAmt;
 	static std::vector<Line> lines;
 	static Segment* activeSeg;
-	static float speed; //artificially represent speed of player
+	static float acceleration; //artificially represent acceleration of player
 	static float dist; //artificially represents how far player has moved
 	static float globalOffset;
+	static int LAP;
+
 
 
 		

@@ -44,9 +44,14 @@ void Background::setBackground(int bgNum) //just make it so the input for this i
 	
 }
 
+void Background::update(float deltaTime)
+{
+	scroll((-1 * Track::segmentAmt) * Track::acceleration);
+}
+
 void Background::drawElement(sf::RenderTarget& w)
 {
-	scroll((-1*Track::segmentAmt )*Track::speed);
+	
 	for (ScrollingBackground::ImagePart& part : gameBG->imgs)
 		if (part.onScreen())
 			w.draw(part.sprite);
@@ -65,12 +70,6 @@ void Background::drawElement(sf::RenderTarget& w)
 		 if (part.sprite.getPosition().x > 2 * part.sprite.getGlobalBounds().width)
 			 part.sprite.setPosition(sf::Vector2f(-part.sprite.getGlobalBounds().width + 2, 0));
 	 }
-
-	 
-
-
-	
-
  }
 
 
