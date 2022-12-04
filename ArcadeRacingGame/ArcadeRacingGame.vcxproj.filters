@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Roadside Objects">
+      <UniqueIdentifier>{365ff3e3-6126-4e6a-abe7-585ca0a34d3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game State Files">
+      <UniqueIdentifier>{588c8723-9e0a-4c30-b1cb-c21fadb60b1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Track Files">
+      <UniqueIdentifier>{dee286fd-fb1d-46c7-ba74-11e5c991e9b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RacingGame.cpp">
@@ -66,6 +75,15 @@
     <ClCompile Include="Tree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RacingGame.h">
@@ -86,19 +104,10 @@
     <ClInclude Include="Racer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Track.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Background.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RoadObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Sign.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UI.h">
@@ -107,17 +116,38 @@
     <ClInclude Include="TrackData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Segment.h">
+    <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Track1.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="State.h">
+      <Filter>Header Files\Game State Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RoadObject.h">
+      <Filter>Header Files\Roadside Objects</Filter>
     </ClInclude>
     <ClInclude Include="Rock.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Roadside Objects</Filter>
     </ClInclude>
     <ClInclude Include="Tree.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Roadside Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Sign.h">
+      <Filter>Header Files\Roadside Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Track1.h">
+      <Filter>Header Files\Track Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Segment.h">
+      <Filter>Header Files\Track Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files\Game State Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Track.h">
+      <Filter>Header Files\Track Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleState.h">
+      <Filter>Header Files\Game State Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

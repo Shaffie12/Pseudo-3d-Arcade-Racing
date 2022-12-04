@@ -1,5 +1,11 @@
 #include "TrackData.h"
 
-TrackData::TrackData() {};
+TrackData::TrackData() {}
+void TrackData::calculateTotalLength()
+{
+    for (Segment s : segments)
+        totalTrackLength += s.length;
+}
+;
 
 

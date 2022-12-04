@@ -10,14 +10,15 @@ class Racer :public Drawable
 	public:
 		Racer(sf::Vector2f startPosition);
 		virtual void drawElement(sf::RenderTarget& w) override;
-		void update(float amount, bool add);
+		void update(float deltaTime);
+		float distanceToTrackEdge();
 		
 		
 
 	private:
-		
-		sf::Texture playerTex;
-		std::vector<sf::Sprite> playerSprites;
+		sf::Vector2f RacerPosition;
+		sf::Texture racerTexture;
+		std::vector<sf::Sprite> racerSprites;
 
 };
 

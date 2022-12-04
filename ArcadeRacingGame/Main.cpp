@@ -1,11 +1,9 @@
-#include "Track1.h"
-#include "RacingGame.h"
+#include "Game.h"
 
 
 int main()
 {
-	
-	RacingGame game = RacingGame(Track1());
-	game.start();
+	Game game;
+	game.runGameLoop();
 	return 0;
 }

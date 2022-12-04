@@ -6,7 +6,7 @@ int RoadObject::sprite_limits[3] = { 152,155,160 };
 
 RoadObject::RoadObject(int segmentId, float depth, bool left) : activeSpr(&sprites[3]), segId(segmentId)
 { 
-	std::cout << "standard constructor was called" << '\n';
+	//std::cout << "standard constructor was called" << '\n';
 	this->left = left;
 	screen_y = GameGlobals::GAME_H / 2;
 	this->depth = depth;
@@ -18,7 +18,7 @@ RoadObject::RoadObject(int segmentId, float depth, bool left) : activeSpr(&sprit
 
 RoadObject::RoadObject(const RoadObject& other) //copy
 {
-	std::cout << "copy constructor was called" << '\n';
+	//std::cout << "copy constructor was called" << '\n';
 	segId = other.segId;
 	draw = other.draw;
 	left = other.left;
@@ -40,7 +40,7 @@ RoadObject::RoadObject(const RoadObject& other) //copy
 RoadObject::RoadObject(RoadObject&& other) noexcept  //move 
 {
 	
-	std::cout << "move constructor was called" << '\n';
+	//std::cout << "move constructor was called" << '\n';
 	segId = other.segId;
 	draw = other.draw;
 	left = other.left;
@@ -93,9 +93,9 @@ void RoadObject::drawElement(sf::RenderTarget& w)
 void RoadObject::move()
 {
 
-	float speed_scale = Racing::Util::convertRange(screen_y, 150, 200, 0.01f, 3); //scale the speed the object moves depending on proximity to bottom of screen
+	float acceleration_scale = Racing::Util::convertRange(screen_y, 150, 200, 0.01f, 3); //scale the acceleration the object moves depending on proximity to bottom of screen
 	int idx = Track::lines.size() - 1;
-	screen_y += speed_scale * Track::speed;
+	screen_y += acceleration_scale * Track::acceleration;
 	idx = (screen_y - 150) < Track::lines.size() - 1 ? (screen_y -150) : idx; //the list of lines is 149 element long
 
 	
@@ -133,11 +133,8 @@ void::RoadObject::upscale()
 	activeSpr->setScale(scale, scale);
 
 	//may have to replace it with a copy that has the original transform scaled instead (only way to get original dimensions)
-	
-	
 
 }
-
 
 //could make this return a bool and check it in the game loop,
 void RoadObject::checkDraw()
