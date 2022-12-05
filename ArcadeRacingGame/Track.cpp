@@ -12,7 +12,6 @@ float Track::acceleration = 0;
 int Track::LAP = 0;
 std::vector<Track::Line> Track::lines = std::vector<Track::Line>(); 
 Segment* Track::activeSeg = nullptr;
-int Track::laps = 0;
 
 Track::Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segments, int totalTrackLen):baseSeg ( Segment(-1,0, 0))
 {	
@@ -103,6 +102,7 @@ void Track::drawElement(sf::RenderTarget& w)
 		
 	
 	//debug
+	/*
 	sf::Vertex line[] =
 	{
 		sf::Vertex(sf::Vector2f(0,activeSeg->screen_y),sf::Color::White),
@@ -111,6 +111,7 @@ void Track::drawElement(sf::RenderTarget& w)
 	
 
 	w.draw(line, 2, sf::Lines);
+	*/
 
 }
 
@@ -143,7 +144,7 @@ void Track::nextSegment()
 
 	if (activeSeg->screen_y>= GameGlobals::GAME_H)
 	{
-		std::cout << progressAroundTrack << '\n';
+	
 		baseSeg = *activeSeg; 
 		if (distanceToSegmentEnd <= 0)
 		{
@@ -172,9 +173,4 @@ void Track::moveSegment(float deltaTime)
 	nextSegment();
 }
 
-void Track::lap()
-{
-	laps++;
-	//if laps > lap amount then race over
-}
 

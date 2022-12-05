@@ -10,10 +10,10 @@ UI::UI()
 		
 	}
 
-	playeraccelerationText.setFont(textFont);
-	playeraccelerationText.setFillColor(sf::Color::White);
-	playeraccelerationText.setPosition(50, 50);
-	playeraccelerationText.setScale(sf::Vector2f(0.5, 0.5));
+	speedText.setFont(textFont);
+	speedText.setFillColor(sf::Color::White);
+	speedText.setPosition(50, 50);
+	speedText.setScale(sf::Vector2f(0.5, 0.5));
 
 	lapText.setFont(textFont);
 	lapText.setFillColor(sf::Color::White);
@@ -35,9 +35,9 @@ void UI::drawElement(sf::RenderTarget& w)
 	ss >> lap;
 
 
-	playeraccelerationText.setString("acceleration: " + spd+ "km/h");
+	speedText.setString("speed: " + spd+ "km/h");
 	lapText.setString("LAP: " + lap);
-	w.draw(playeraccelerationText);
+	w.draw(speedText);
 	w.draw(lapText);
 
 }

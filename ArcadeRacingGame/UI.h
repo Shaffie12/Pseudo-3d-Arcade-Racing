@@ -17,7 +17,7 @@ class UI : public Drawable
 	private:
 		
 		sf::Font textFont;
-		sf::Text playeraccelerationText;
+		sf::Text speedText;
 		sf::Text lapText;
 
 };

@@ -14,22 +14,34 @@ Track1::Track1() :TrackData()
 	segments =
 	{
 		Segment(0,0,100),
-		Segment(1,-0.002f,500),
-		Segment(2,0.0015,100),
-		Segment(3,0, 500)
-		//define track here
+		Segment(1,0.001f,350),
+		Segment(2,0,100),
+		Segment(3,-0.001f, 500),
+		Segment(4,-0.002f,700),
+		Segment(5,-0.0022f,300),
+		Segment(6,-0.001f,350),
+		Segment(7,0.001f, 500),
+		Segment(8,0.002f,700),
+		Segment(9,0.0022f,300),
+		Segment(10,0.001f,350)
+
 		
 		
 	};
 	objects =
 	{
 
-		Sign(0,130,true),
 		Rock(0,100,true),
+		Tree(0,80,true),
+		Tree(0,80,false),
+		Tree(0,60,false),
+		Tree(0,60,true),
 		Tree(0,30,false),
-		Tree(0,30,false),
+		Tree(0,30,true),
 		Tree(0,0,true),
-		Tree(0,0,true),
+		Tree(0,0,false),
+		
+	
 
 
 		

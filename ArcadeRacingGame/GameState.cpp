@@ -26,7 +26,7 @@ void GameState::handleInput(const float& dt)
 //update all the elements in the state
 void GameState::update(const float& dt)
 {
-	if (player.distanceToTrackEdge() > 780.0f)
+	if (player.distanceToTrackEdge() > 400.0f)
 	{
 		Track::addAcceleration(-0.03f);
 	}
