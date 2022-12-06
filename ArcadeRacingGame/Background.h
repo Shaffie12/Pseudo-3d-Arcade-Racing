@@ -13,7 +13,7 @@ public:
 	virtual void drawElement(sf::RenderTarget& w) override;
 	void scroll(float amount);
 	void setBackground(int bgNum);
-	void update(float deltaTime);
+	void update(float dt) override;
 
 private:
 	sf::Texture bgTex; //dont know if we need to store this here

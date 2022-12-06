@@ -6,7 +6,7 @@ class Player : public Racer
 {
 	public:
 		Player(sf::Vector2f startPosition);
-		int testInt = 0;
+		
 		
 };
 #endif 

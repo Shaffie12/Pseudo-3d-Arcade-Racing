@@ -77,6 +77,8 @@ RoadObject& RoadObject::operator=(const RoadObject& other)
 	return ro;
 }
 
+void RoadObject::update(float dt){}
+
 void RoadObject::drawElement(sf::RenderTarget& w)
 {
 	checkDraw();

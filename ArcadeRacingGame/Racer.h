@@ -9,9 +9,9 @@ class Racer :public Drawable
 {
 	public:
 		Racer(sf::Vector2f startPosition);
-		virtual void drawElement(sf::RenderTarget& w) override;
-		void update(float deltaTime);
+		void drawElement(sf::RenderTarget& w) override;
 		float distanceToTrackEdge();
+		virtual void update(float dt) override;
 		
 		
 

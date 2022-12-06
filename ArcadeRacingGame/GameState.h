@@ -25,6 +25,10 @@ private:
 	Background bg;
 	UI ui;
 	std::vector<RoadObject> road_objects;
+	float raceTimer;
+	bool intro;
+
+	void decrementRaceTimer(float dt);
 
 
 
