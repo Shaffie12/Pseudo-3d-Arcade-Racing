@@ -26,7 +26,7 @@ void TitleState::update(const float& dt)
 	blink += dt;
 	sf::Color newCol = sinf(5 * blink) > 0 ? sf::Color::Transparent : sf::Color::Black;
 	titleText.setFillColor(newCol);
-		//(sf::Color::Transparent);
+		
 }
 
 void TitleState::drawToTexture(Renderer& renderer)

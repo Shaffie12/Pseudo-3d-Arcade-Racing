@@ -7,7 +7,7 @@ player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)),
 bg(),
 ui()
 {
-	raceTimer = 80.0f;
+	raceTimer = 30.0f;
 	intro = true;
 }
 
@@ -36,7 +36,6 @@ void GameState::update(const float& dt)
 		Track::addAcceleration(-0.03f);
 	}
 	
-
 	track.update(dt);
 	player.update(dt);
 	bg.update(dt);

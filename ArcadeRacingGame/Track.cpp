@@ -124,7 +124,6 @@ void Track::addPlayerOffset(float amount, bool add) //change
 		globalOffset -= amount;
 }
 
-
 void Track::addAcceleration(float amount){ acceleration += amount;}
 
 void Track::addSegmentOffset()

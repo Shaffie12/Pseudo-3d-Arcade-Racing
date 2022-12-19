@@ -84,6 +84,9 @@
     <ClCompile Include="TitleState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameOverState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RacingGame.h">
@@ -147,6 +150,9 @@
       <Filter>Header Files\Track Files</Filter>
     </ClInclude>
     <ClInclude Include="TitleState.h">
+      <Filter>Header Files\Game State Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverState.h">
       <Filter>Header Files\Game State Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -154,6 +154,7 @@
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameGlobals.cpp" />
+    <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -175,6 +176,7 @@
   <ItemGroup>
     <ClInclude Include="Background.h" />
     <ClInclude Include="Drawable.h" />
+    <ClInclude Include="GameOverState.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameGlobals.h" />
     <ClInclude Include="GameState.h" />

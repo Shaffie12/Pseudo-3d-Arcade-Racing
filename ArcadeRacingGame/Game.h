@@ -5,6 +5,7 @@
 #include "Renderer.h"
 #include "GameState.h"
 #include "TitleState.h"
+#include "GameOverState.h"
 #include "Util.h"
 #include <memory>
 
