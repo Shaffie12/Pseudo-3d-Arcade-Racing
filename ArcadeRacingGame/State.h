@@ -10,11 +10,12 @@
 class State
 {
 public:
-	
+	bool exited = false;
 	virtual void handleInput(const float& dt) = 0;
 	virtual void update(const float& dt) = 0;
 	virtual void drawToTexture(Renderer& renderer) = 0;
 	virtual void quit() = 0;
+	virtual int nextState() = 0;
 };
 
 #endif 

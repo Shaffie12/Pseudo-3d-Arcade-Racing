@@ -6,6 +6,7 @@
 #include "GameState.h"
 #include "TitleState.h"
 #include "GameOverState.h"
+#include "WinState.h"
 #include "Util.h"
 #include <memory>
 
@@ -29,6 +30,7 @@ private:
 	void pollSFEvents();
 	void renderCurrentState();
 	void initStates();
+	State* getNextState(State* currentState);
 	
 
 };

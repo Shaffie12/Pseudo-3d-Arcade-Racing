@@ -21,9 +21,7 @@ Game::~Game()
 		states->pop();
 		
 	}
-	delete states;
-	
-	
+	delete states;	
 		
 }
 
@@ -37,9 +35,10 @@ void Game::initWindow()
 
 void Game::initStates()
 {
-	states->push(new GameState(Track1())); //we should get this from prev state, a member of this is causing crash on delete
-	states->push(new TitleState());
-	states->push(new GameOverState());
+	states->push(new GameState(Track1())); 
+	//states->push(new TitleState());
+	
+	
 }
 
 void Game::updateDT()
@@ -68,11 +67,22 @@ void Game::renderCurrentState()
 	if (GameGlobals::isActiveWindow)
 		if (!states->empty())
 		{
-			states->top()->handleInput(dt);
-			states->top()->update(dt);
-			states->top()->drawToTexture(*renderer);
-			mainWindow->draw(*renderer->sprite);
-			mainWindow->display();
+			if (!states->top()->exited)
+			{
+				states->top()->handleInput(dt);
+				states->top()->update(dt);
+				states->top()->drawToTexture(*renderer);
+				mainWindow->draw(*renderer->sprite);
+				mainWindow->display();
+			}
+			else
+			{
+				State* s = getNextState(states->top());
+				states->pop();
+				states->push(s);
+				
+			}
+			
 		}
 		
 }
@@ -84,5 +94,16 @@ void Game::runGameLoop()
 		updateDT();
 		pollSFEvents();
 		renderCurrentState();
+	}
+}
+
+State* Game::getNextState(State*currentState)
+{
+	if (GameState* gs = dynamic_cast<GameState*>(currentState))
+	{
+		if (gs->nextState() == 0)
+			return new WinState();
+		return new GameOverState();
+		
 	}
 }

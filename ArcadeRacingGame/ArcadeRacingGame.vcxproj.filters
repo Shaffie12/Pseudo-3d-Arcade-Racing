@@ -22,6 +22,9 @@
     <Filter Include="Header Files\Track Files">
       <UniqueIdentifier>{dee286fd-fb1d-46c7-ba74-11e5c991e9b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game State Files">
+      <UniqueIdentifier>{e5fa2405-f655-4fc6-ada6-b0989fd8c97d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RacingGame.cpp">
@@ -78,14 +81,17 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameOverState.cpp">
+      <Filter>Source Files\Game State Files</Filter>
+    </ClCompile>
     <ClCompile Include="GameState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game State Files</Filter>
     </ClCompile>
     <ClCompile Include="TitleState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game State Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameOverState.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="WinState.cpp">
+      <Filter>Source Files\Game State Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +159,9 @@
       <Filter>Header Files\Game State Files</Filter>
     </ClInclude>
     <ClInclude Include="GameOverState.h">
+      <Filter>Header Files\Game State Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WinState.h">
       <Filter>Header Files\Game State Files</Filter>
     </ClInclude>
   </ItemGroup>

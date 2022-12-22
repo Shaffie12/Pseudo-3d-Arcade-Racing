@@ -64,13 +64,12 @@ public:
 	static float road_w;
 	static float tile_w;
 	static float minRoad; 
-	static float segmentAmt;
 	static std::vector<Line> lines;
 	static Segment* activeSeg;
 	static float acceleration; 
 	static float dist; 
-	static float globalOffset;
-	static int LAP;
+	static float trackOffset;
+	int lapsDone;
 
 
 

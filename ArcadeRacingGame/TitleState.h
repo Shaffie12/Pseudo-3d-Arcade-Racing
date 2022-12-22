@@ -14,6 +14,7 @@ public:
 	void handleInput(const float& dt) override;
 	void update(const float& dt) override;
 	void drawToTexture(Renderer& renderer) override;
+	int nextState() override;
 	void quit() override;
 private:
 	float blink;

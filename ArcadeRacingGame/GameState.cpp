@@ -7,7 +7,8 @@ player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)),
 bg(),
 ui()
 {
-	raceTimer = 30.0f;
+	exited = false;
+	raceTimer = TIMER_START;
 	intro = true;
 }
 
@@ -30,7 +31,6 @@ void GameState::handleInput(const float& dt)
 void GameState::update(const float& dt)
 {
 	decrementRaceTimer(dt);
-	ui.getRaceTimer(raceTimer);
 	if (player.distanceToTrackEdge() > 400.0f)
 	{
 		Track::addAcceleration(-0.03f);
@@ -39,12 +39,29 @@ void GameState::update(const float& dt)
 	track.update(dt);
 	player.update(dt);
 	bg.update(dt);
+	updateUI();
 	ui.update(dt);
+
+	if (isGameFinished())
+		exited = true;
+
+}
+
+void GameState::updateUI()
+{
+	ui.getRaceTimer(raceTimer);
+	ui.getCurrentLap(track.lapsDone);
+	
 }
 
 void GameState::decrementRaceTimer(float dt)
 {
-	raceTimer -= dt;
+	raceTimer = Racing::Util::clamp(raceTimer -= dt,0, TIMER_START);
+}
+
+bool GameState::isGameFinished()
+{
+	return raceTimer <= 0 || track.lapsDone == 3;
 }
 
 
@@ -68,8 +85,14 @@ void GameState::drawToTexture(Renderer& renderer)
 
 }
 
+int GameState::nextState()
+{
+	return raceTimer > 0 && track.lapsDone == 3 ? 0 : 1;
+}
+
 void GameState::quit()
 {
+
 }
 
 

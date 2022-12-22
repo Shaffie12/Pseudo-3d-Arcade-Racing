@@ -17,6 +17,7 @@ public:
 	void handleInput(const float& dt) override;
 	void update(const float& dt) override;
 	void drawToTexture(Renderer& renderer) override;
+	int nextState() override;
 	void quit() override;
 
 private:
@@ -25,10 +26,14 @@ private:
 	Background bg;
 	UI ui;
 	std::vector<RoadObject> road_objects;
+	const int TIMER_START = 80;
 	float raceTimer;
 	bool intro;
 
+	void updateUI();
 	void decrementRaceTimer(float dt);
+	bool isGameFinished();
+	
 
 
 

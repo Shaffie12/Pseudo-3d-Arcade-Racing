@@ -2,13 +2,14 @@
 
 TitleState::TitleState() : State()
 {
-	blink = 0;
-	bgFill = sf::Color::Cyan;
+	
 	if (!titleFont.loadFromFile("assets/Fonts/VT323.ttf"))
 	{
 		std::cout << "could not load fonts" << '\n';
 
 	}
+	blink = 0;
+	bgFill = sf::Color::Cyan;
 	titleText.setString("TITLE SCREEN");
 	titleText.setFont(titleFont);
 	titleText.setFillColor(sf::Color::Black);
@@ -37,6 +38,11 @@ void TitleState::drawToTexture(Renderer& renderer)
 	renderer.rtx->display();
 	renderer.sprite->setTexture(renderer.rtx->getTexture());
 	renderer.sprite->setScale(sf::Vector2f(2, 2));
+}
+
+int TitleState::nextState()
+{
+	return 0;
 }
 
 void TitleState::quit()

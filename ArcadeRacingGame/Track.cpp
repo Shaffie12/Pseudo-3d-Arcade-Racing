@@ -6,10 +6,8 @@ float Track::road_w = 0.9f;
 float Track::tile_w = 0.15;
 float Track::minRoad = 0.01;
 float Track::dist = 0;
-float Track::globalOffset = 0;
-float Track::segmentAmt = 0;
+float Track::trackOffset = 0;
 float Track::acceleration = 0;
-int Track::LAP = 0;
 std::vector<Track::Line> Track::lines = std::vector<Track::Line>(); 
 Segment* Track::activeSeg = nullptr;
 
@@ -22,6 +20,7 @@ Track::Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segmen
 	activeSeg = &this->segments.at(0);
 	distanceToSegmentEnd = activeSeg->length;
 	totalTrackLength = totalTrackLen;
+	lapsDone = 0;
 	
 	
 }
@@ -64,7 +63,7 @@ void Track::updateTrackLines()
 
 		ddx += dx;
 		current_x += ddx;
-		line.middlePt = current_x + globalOffset;
+		line.middlePt = current_x + trackOffset;
 
 
 		//grass left
@@ -90,7 +89,6 @@ void Track::updateTrackLines()
 		++rit;
 	}
 }
-
 
 void Track::drawElement(sf::RenderTarget& w)
 {
@@ -119,9 +117,9 @@ void Track::drawElement(sf::RenderTarget& w)
 void Track::addPlayerOffset(float amount, bool add) //change
 {
 	if (add)
-		globalOffset += amount;
+		trackOffset += amount;
 	else
-		globalOffset -= amount;
+		trackOffset -= amount;
 }
 
 void Track::addAcceleration(float amount){ acceleration += amount;}
@@ -130,9 +128,8 @@ void Track::addSegmentOffset()
 {
 	if (activeSeg->screen_y >= GameGlobals::GAME_H-80 )
 	{
-		globalOffset += (activeSeg->curvature * 8 * acceleration); 
-		globalOffset = Racing::Util::clamp(globalOffset, -1.1f, 1.1f);
-		segmentAmt = activeSeg->curvature; //we dont really need this since active segment is public static now (used in bg)
+		trackOffset += (activeSeg->curvature * 8 * acceleration); 
+		trackOffset = Racing::Util::clamp(trackOffset, -1.1f, 1.1f);
 		
 	}
 
@@ -151,7 +148,7 @@ void Track::nextSegment()
 			progressAroundTrack += activeSeg->length;
 			if (progressAroundTrack == totalTrackLength)
 			{
-				LAP++;
+				lapsDone++;
 				progressAroundTrack = 0;
 			}
 			

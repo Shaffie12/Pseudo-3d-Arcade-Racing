@@ -46,7 +46,7 @@ void Background::setBackground(int bgNum) //just make it so the input for this i
 
 void Background::update(float deltaTime)
 {
-	scroll((-1 * Track::segmentAmt) * Track::acceleration);
+	scroll((-1 * Track::activeSeg->curvature) * Track::acceleration);
 }
 
 void Background::drawElement(sf::RenderTarget& w)

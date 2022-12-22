@@ -52,17 +52,17 @@ void UI::getCurrentLap(int lapNumber)
 void UI::update(float dt)
 {
 	ss.clear();
-	ss << Racing::Util::roundToDP(Track::acceleration, 3) * 100 << ';' << Track::LAP << ';' << timer;
+	ss << Racing::Util::roundToDP(Track::acceleration, 3) * 100 << ';' << lap << ';' << timer;
 	std::string spd;
-	std::string lap;
+	std::string lap_string;
 	std::string time;
 	std::getline(ss, spd, ';');
-	std::getline(ss, lap, ';');
+	std::getline(ss, lap_string, ';');
 	ss >> time;
 
 
 	speedText.setString("speed: " + spd + "km/h");
-	lapText.setString("LAP: " + lap);
+	lapText.setString("LAP: " + lap_string);
 	timerText.setString("TIME: "+time);
 }
 
