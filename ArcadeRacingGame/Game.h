@@ -19,7 +19,7 @@ public:
 	void runGameLoop();
 private:
 	sf::RenderWindow* mainWindow;
-	sf::Event e;
+	sf::Event sfEvent;
 	Renderer* renderer; 
 	sf::Clock clock;
 	float dt;

@@ -14,7 +14,7 @@ class GameState : public State
 public:
 	GameState(TrackData trackData);
 
-	void handleInput(const float& dt) override;
+	void handleInput(sf::Event& e) override;
 	void update(const float& dt) override;
 	void drawToTexture(Renderer& renderer) override;
 	int nextState() override;
@@ -29,6 +29,7 @@ private:
 	const int TIMER_START = 80;
 	float raceTimer;
 	bool intro;
+	bool moving = false;
 
 	void updateUI();
 	void decrementRaceTimer(float dt);

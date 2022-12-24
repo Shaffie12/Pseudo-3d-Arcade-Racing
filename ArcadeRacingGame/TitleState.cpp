@@ -10,7 +10,7 @@ TitleState::TitleState() : State()
 	}
 	blink = 0;
 	bgFill = sf::Color::Cyan;
-	titleText.setString("TITLE SCREEN");
+	titleText.setString("PRESS ANY KEY TO START");
 	titleText.setFont(titleFont);
 	titleText.setFillColor(sf::Color::Black);
 	titleText.setPosition(GameGlobals::GAME_W/2-titleText.getGlobalBounds().width/2, GameGlobals::GAME_H/2-titleText.getGlobalBounds().height/2);
@@ -18,8 +18,10 @@ TitleState::TitleState() : State()
 
 }
 
-void TitleState::handleInput(const float& dt)
+void TitleState::handleInput(sf::Event& e)
 {
+	if (e.type == sf::Event::KeyPressed)
+		exited = true;
 }
 
 void TitleState::update(const float& dt)

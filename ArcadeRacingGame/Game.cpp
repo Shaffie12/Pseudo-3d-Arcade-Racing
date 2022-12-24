@@ -17,7 +17,6 @@ Game::~Game()
 
 	while (!states->empty())
 	{
-		//delete states->top();
 		states->pop();
 		
 	}
@@ -35,8 +34,8 @@ void Game::initWindow()
 
 void Game::initStates()
 {
-	states->push(new GameState(Track1())); 
-	//states->push(new TitleState());
+	 
+	states->push(new TitleState());
 	
 	
 }
@@ -49,16 +48,20 @@ void Game::updateDT()
 void Game::pollSFEvents()
 {
 	
-	while (mainWindow->pollEvent(e))
+	while (mainWindow->pollEvent(sfEvent))
 	{
-		if (e.type == sf::Event::Closed)
+		if (sfEvent.type == sf::Event::Closed)
 			mainWindow->close();
-		if (e.type == sf::Event::LostFocus)
+		if (sfEvent.type == sf::Event::LostFocus)
 			GameGlobals::isActiveWindow = false;
-		if (e.type == sf::Event::GainedFocus)
+		if (sfEvent.type == sf::Event::GainedFocus)
 			GameGlobals::isActiveWindow = true;
+		if(!states->empty())
+			states->top()->handleInput(sfEvent);
+		
 
 	}
+	
 }
 
 void Game::renderCurrentState()
@@ -69,7 +72,6 @@ void Game::renderCurrentState()
 		{
 			if (!states->top()->exited)
 			{
-				states->top()->handleInput(dt);
 				states->top()->update(dt);
 				states->top()->drawToTexture(*renderer);
 				mainWindow->draw(*renderer->sprite);
@@ -105,5 +107,9 @@ State* Game::getNextState(State*currentState)
 			return new WinState();
 		return new GameOverState();
 		
+	}
+	else if (TitleState* gs = dynamic_cast<TitleState*>(currentState))
+	{
+		return new GameState(Track1());
 	}
 }

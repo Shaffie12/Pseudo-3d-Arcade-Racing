@@ -11,7 +11,7 @@ class State
 {
 public:
 	bool exited = false;
-	virtual void handleInput(const float& dt) = 0;
+	virtual void handleInput(sf::Event& e) = 0;
 	virtual void update(const float& dt) = 0;
 	virtual void drawToTexture(Renderer& renderer) = 0;
 	virtual void quit() = 0;

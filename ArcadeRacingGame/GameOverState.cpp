@@ -18,7 +18,7 @@ GameOverState::GameOverState()
 	
 }
 
-void GameOverState::handleInput(const float& dt)
+void GameOverState::handleInput(sf::Event& e)
 {
 }
 

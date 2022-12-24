@@ -17,7 +17,7 @@ WinState::WinState()
 	winText.setFillColor(sf::Color::Black);
 }
 
-void WinState::handleInput(const float& dt)
+void WinState::handleInput(sf::Event& e)
 {
 }
 

@@ -7,7 +7,7 @@ class WinState : public State
 {
 public:
 	WinState();
-	void handleInput(const float& dt) override;
+	void handleInput(sf::Event& e) override;
 	void update(const float& dt) override;
 	void drawToTexture(Renderer& renderer) override;
 	void quit() override;

@@ -12,9 +12,9 @@ ui()
 	intro = true;
 }
 
-void GameState::handleInput(const float& dt)
+void GameState::handleInput(sf::Event& e)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	if (e.type == sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
 		Track::addAcceleration(0.02);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))

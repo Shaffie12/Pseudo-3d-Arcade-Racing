@@ -11,7 +11,7 @@ class TitleState : public State
 {
 public:
 	TitleState();
-	void handleInput(const float& dt) override;
+	void handleInput(sf::Event& e) override;
 	void update(const float& dt) override;
 	void drawToTexture(Renderer& renderer) override;
 	int nextState() override;
