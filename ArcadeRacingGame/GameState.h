@@ -30,6 +30,8 @@ private:
 	float raceTimer;
 	bool intro;
 	bool moving = false;
+	bool left = false;
+	bool right = false;
 
 	void updateUI();
 	void decrementRaceTimer(float dt);

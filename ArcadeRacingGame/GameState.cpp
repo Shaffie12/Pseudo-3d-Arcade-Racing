@@ -14,22 +14,40 @@ ui()
 
 void GameState::handleInput(sf::Event& e)
 {
-	if (e.type == sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	if (e.type == sf::Event::KeyPressed)
 	{
-		Track::addAcceleration(0.02);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-			track.addPlayerOffset(0.02, true);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			track.addPlayerOffset(0.02, false);
+		if (e.key.code == sf::Keyboard::W)
+			moving = true;
+		else if (e.key.code == sf::Keyboard::D)
+			right = true;
+		else if (e.key.code == sf::Keyboard::A)
+			left = true;
 	}
-	else
-		Track::addAcceleration(-0.02);
+	if (e.type == sf::Event::KeyReleased)
+	{
+		if (e.key.code == sf::Keyboard::W)
+			moving = false;
+		else if (e.key.code == sf::Keyboard::D)
+			right = false;
+		else if (e.key.code == sf::Keyboard::A)
+			left = false;
+	}
+	
 
 }
 
 //update all the elements in the state
 void GameState::update(const float& dt)
 {
+	if(moving)
+		Track::addAcceleration(0.02);
+	else
+		Track::addAcceleration(-0.02);
+	if(left)
+		track.addPlayerOffset(0.02, true);
+	if (right)
+		track.addPlayerOffset(0.02, false);
+
 	decrementRaceTimer(dt);
 	if (player.distanceToTrackEdge() > 400.0f)
 	{
