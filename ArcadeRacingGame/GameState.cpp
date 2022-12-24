@@ -10,6 +10,15 @@ ui()
 	exited = false;
 	raceTimer = TIMER_START;
 	intro = true;
+	if (!b1_buf.loadFromFile("assets/sounds/beep1.wav") || !b2_buf.loadFromFile("assets/sounds/beep2.wav"))
+	{
+		std::cout << "failed to load sounds";
+	}
+	beep_1.setBuffer(b1_buf);
+	beep_2.setBuffer(b2_buf);
+	
+	
+
 }
 
 void GameState::handleInput(sf::Event& e)
@@ -39,25 +48,23 @@ void GameState::handleInput(sf::Event& e)
 //update all the elements in the state
 void GameState::update(const float& dt)
 {
-	if(moving)
-		Track::addAcceleration(0.02);
-	else
-		Track::addAcceleration(-0.02);
-	if(left)
-		track.addPlayerOffset(0.02, true);
-	if (right)
-		track.addPlayerOffset(0.02, false);
-
-	decrementRaceTimer(dt);
-	if (player.distanceToTrackEdge() > 400.0f)
+	if (!intro)
 	{
-		Track::addAcceleration(-0.03f);
+		checkPlayerMovement();
+		decrementRaceTimer(dt);
+		if (player.distanceToTrackEdge() > 400.0f)
+		{
+			Track::addAcceleration(-0.03f);
+		}	
 	}
-	
+	else
+	{
+		doIntroBeeps(dt);
+	}
 	track.update(dt);
 	player.update(dt);
 	bg.update(dt);
-	updateUI();
+	sendVarsToUI();
 	ui.update(dt);
 
 	if (isGameFinished())
@@ -65,7 +72,7 @@ void GameState::update(const float& dt)
 
 }
 
-void GameState::updateUI()
+void GameState::sendVarsToUI()
 {
 	ui.getRaceTimer(raceTimer);
 	ui.getCurrentLap(track.lapsDone);
@@ -80,6 +87,46 @@ void GameState::decrementRaceTimer(float dt)
 bool GameState::isGameFinished()
 {
 	return raceTimer <= 0 || track.lapsDone == 3;
+}
+
+void GameState::checkPlayerMovement()
+{
+	if (moving)
+		Track::addAcceleration(0.02);
+	else
+		Track::addAcceleration(-0.02);
+	if (left)
+		track.addPlayerOffset(0.02, true);
+	if (right)
+		track.addPlayerOffset(0.02, false);
+}
+
+void GameState::doIntroBeeps(const float& dt)
+{
+	
+		beep_timer += dt;
+		if (!beeps[0] && beep_timer >= 1.2f)
+		{
+			beep_1.play();
+			beeps[0] = true;
+		}
+		else if (!beeps[1] && beep_timer >= 2.4f)
+		{
+			beep_1.play();
+			beeps[1] = true;
+		}	
+		else if (!beeps[2] && beep_timer >= 3.6f)
+		{
+			beep_1.play();
+			beeps[2] = true;
+		}
+
+		if (beeps[0] && beeps[1] && beeps[2] && beep_timer >= 4.8f)
+		{
+			intro = false;
+			beep_2.play();
+		}
+	
 }
 
 

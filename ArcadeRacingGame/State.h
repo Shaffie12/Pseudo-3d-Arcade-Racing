@@ -1,6 +1,7 @@
 #ifndef _STATE_H_
 #define _STATE_H_
 #include <stack>
+#include <SFML/Audio.hpp>
 #include <map>
 #include <vector>
 #include <SFML/Graphics/RenderTarget.hpp>
