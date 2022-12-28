@@ -4,16 +4,31 @@
 int RoadObject::slow_limiter = 10;
 int RoadObject::sprite_limits[3] = { 152,155,160 };
 
-RoadObject::RoadObject(int segmentId, float depth, bool left) : activeSpr(&sprites[3]), segId(segmentId)
+RoadObject::RoadObject(int screeny, int segmentId, float depth, bool left) : activeSpr(&sprites[3]), segId(segmentId)
 { 
 	//std::cout << "standard constructor was called" << '\n';
 	this->left = left;
-	screen_y = GameGlobals::GAME_H / 2;
+	if (screeny < GameGlobals::GAME_H / 2)
+		screen_y = GameGlobals::GAME_H / 2;
+	else
+		screen_y = screeny;
 	this->depth = depth;
 	float scaledY = Racing::Util::convertRange(screen_y, 1, GameGlobals::GAME_H/2, 1, 0);
 	perspective = Track::minRoad + 0.035+scaledY * Track::road_w;
 
 	
+};
+
+RoadObject::RoadObject(int segmentId, float depth, bool left) : activeSpr(&sprites[3]), segId(segmentId)
+{
+	//std::cout << "standard constructor was called" << '\n';
+	this->left = left;
+	screen_y = GameGlobals::GAME_H / 2;
+	this->depth = depth;
+	float scaledY = Racing::Util::convertRange(screen_y, 1, GameGlobals::GAME_H / 2, 1, 0);
+	perspective = Track::minRoad + 0.035 + scaledY * Track::road_w;
+
+
 };
 
 RoadObject::RoadObject(const RoadObject& other) //copy
@@ -107,9 +122,6 @@ void RoadObject::move()
 	else
 		activeSpr->setPosition(sf::Vector2f(((Track::lines.at(idx).middlePt + Track::lines.at(idx).perspective) * GameGlobals::GAME_W) + activeSpr->getGlobalBounds().width,
 			screen_y - activeSpr->getGlobalBounds().height));
-
-	
-	
 		
 }
 

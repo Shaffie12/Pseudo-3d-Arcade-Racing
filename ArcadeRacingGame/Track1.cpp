@@ -40,6 +40,7 @@ Track1::Track1() :TrackData()
 		Tree(0,30,true),
 		Tree(0,0,true),
 		Tree(0,0,false),
+		Sign(180,0,0,false)
 		
 	
 

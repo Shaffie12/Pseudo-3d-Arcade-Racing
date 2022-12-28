@@ -7,6 +7,7 @@
 class Sign : public RoadObject
 {
 	public:
+		Sign(int screeny, int segmentId, float depth, bool left);
 		Sign(int segmentId, float depth, bool left);
 	
 };

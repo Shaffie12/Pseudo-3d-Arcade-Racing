@@ -25,7 +25,7 @@ private:
 	Background bg;
 	UI ui;
 	std::vector<RoadObject> road_objects;
-	const int TIMER_START = 5;
+	const int TIMER_START = 80;
 	float raceTimer;
 	bool moving = false;
 	bool left = false;

@@ -12,6 +12,7 @@ class Track;
 class RoadObject : public Drawable
 {
 public:
+	RoadObject(int screeny, int segmentID, float depth, bool left);
 	RoadObject(int segmentID, float depth, bool left);
 	RoadObject(const RoadObject& other);
 	RoadObject(RoadObject&& other) noexcept;

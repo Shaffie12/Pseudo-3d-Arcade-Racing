@@ -10,7 +10,7 @@ class TrackData //this should never be instantiated
 	
 public:
 	TrackData();
-	int totalTrackLength;
+	int totalTrackLength = 0;
 	std::vector<Segment> segments;
 	std::vector<RoadObject> objects;
 	std::map<std::string,sf::Color> colors; 
