@@ -15,11 +15,25 @@ GameOverState::GameOverState()
 	gameOverText.setPosition(GameGlobals::GAME_W / 2 - gameOverText.getGlobalBounds().width/2,
 		GameGlobals::GAME_H / 2 - gameOverText.getGlobalBounds().height/2);
 	gameOverText.setFillColor(sf::Color::White);
+
+	restartText.setString("PRESS ENTER TO RETURN TO TITLE");
+	restartText.setFont(textFont);
+	restartText.setScale(1, 1);
+	restartText.setPosition(GameGlobals::GAME_W / 2 - restartText.getGlobalBounds().width / 2,
+		(GameGlobals::GAME_H / 2 - gameOverText.getGlobalBounds().height / 2) +100) ;
+	restartText.setFillColor(sf::Color::White);
 	
 }
 
 void GameOverState::handleInput(sf::Event& e)
 {
+	if (e.type == sf::Event::KeyPressed)
+	{
+		if(e.key.code==sf::Keyboard::Enter)
+			exited = true;
+	}
+		
+	
 }
 
 void GameOverState::update(const float& dt)
@@ -30,6 +44,7 @@ void GameOverState::drawToTexture(Renderer& renderer)
 {
 	renderer.rtx->clear(bgFill);
 	renderer.rtx->draw(gameOverText);
+	renderer.rtx->draw(restartText);
 
 	renderer.rtx->display();
 	renderer.sprite->setTexture(renderer.rtx->getTexture());

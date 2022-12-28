@@ -16,6 +16,7 @@ public:
 	int nextState() override;
 private:
 	sf::Text gameOverText;
+	sf::Text restartText;
 	sf::Font textFont;
 	sf::Color bgFill;
 	sf::Color textFill;

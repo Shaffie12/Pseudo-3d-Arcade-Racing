@@ -7,22 +7,22 @@ player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)),
 bg(),
 ui()
 {
-	exited = false;
+	
 	raceTimer = TIMER_START;
 	intro = true;
-	if (!b1_buf.loadFromFile("assets/sounds/beep1.wav") || !b2_buf.loadFromFile("assets/sounds/beep2.wav"))
+	if (!b1_buf.loadFromFile("assets/sounds/beep1.wav") || !music_buf.loadFromFile("assets/sounds/music.wav"))
 	{
 		std::cout << "failed to load sounds";
 	}
 	beep_1.setBuffer(b1_buf);
-	beep_2.setBuffer(b2_buf);
-	
 	
 
 }
 
+
 void GameState::handleInput(sf::Event& e)
 {
+
 	if (e.type == sf::Event::KeyPressed)
 	{
 		if (e.key.code == sf::Keyboard::W)
@@ -42,7 +42,6 @@ void GameState::handleInput(sf::Event& e)
 			left = false;
 	}
 	
-
 }
 
 //update all the elements in the state
@@ -105,6 +104,7 @@ void GameState::doIntroBeeps(const float& dt)
 {
 	
 		beep_timer += dt;
+
 		if (!beeps[0] && beep_timer >= 1.2f)
 		{
 			beep_1.play();
@@ -124,7 +124,9 @@ void GameState::doIntroBeeps(const float& dt)
 		if (beeps[0] && beeps[1] && beeps[2] && beep_timer >= 4.8f)
 		{
 			intro = false;
-			beep_2.play();
+			beep_1.setPitch(2);
+			beep_1.play();
+			
 		}
 	
 }

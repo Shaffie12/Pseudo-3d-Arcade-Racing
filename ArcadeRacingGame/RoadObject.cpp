@@ -138,7 +138,6 @@ void::RoadObject::upscale()
 
 }
 
-//could make this return a bool and check it in the game loop,
 void RoadObject::checkDraw()
 {
 	if (segId == Track::activeSeg->id && depth <= Track::activeSeg->screen_y - 150)

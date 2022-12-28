@@ -112,4 +112,12 @@ State* Game::getNextState(State*currentState)
 	{
 		return new GameState(Track1());
 	}
+	else if (GameOverState* gs = dynamic_cast<GameOverState*>(currentState))
+	{
+		return new TitleState();
+	}
+	else if (WinState* gs = dynamic_cast<WinState*>(currentState))
+	{
+		return new TitleState();
+	}
 }

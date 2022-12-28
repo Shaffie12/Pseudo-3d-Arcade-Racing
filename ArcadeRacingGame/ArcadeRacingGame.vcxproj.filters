@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Game State Files">
       <UniqueIdentifier>{e5fa2405-f655-4fc6-ada6-b0989fd8c97d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Track Files">
+      <UniqueIdentifier>{c6fba548-49ad-4859-a2cc-aee3cd2581c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Roadside Objects">
+      <UniqueIdentifier>{bbc60dac-ec1d-47ae-beee-cfdf5c07a6cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RacingGame.cpp">
@@ -42,9 +48,6 @@
     <ClCompile Include="Util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Track.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -54,28 +57,7 @@
     <ClCompile Include="Background.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RoadObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Sign.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="UI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TrackData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Track1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Segment.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Rock.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
@@ -92,6 +74,30 @@
     </ClCompile>
     <ClCompile Include="WinState.cpp">
       <Filter>Source Files\Game State Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Track.cpp">
+      <Filter>Source Files\Track Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Track1.cpp">
+      <Filter>Source Files\Track Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackData.cpp">
+      <Filter>Source Files\Track Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RoadObject.cpp">
+      <Filter>Source Files\Roadside Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Rock.cpp">
+      <Filter>Source Files\Roadside Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Sign.cpp">
+      <Filter>Source Files\Roadside Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Tree.cpp">
+      <Filter>Source Files\Roadside Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Segment.cpp">
+      <Filter>Source Files\Track Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -120,9 +126,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TrackData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
@@ -163,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="WinState.h">
       <Filter>Header Files\Game State Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackData.h">
+      <Filter>Header Files\Track Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

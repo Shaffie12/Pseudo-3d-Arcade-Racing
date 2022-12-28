@@ -13,7 +13,6 @@ class GameState : public State
 {
 public:
 	GameState(TrackData trackData);
-
 	void handleInput(sf::Event& e) override;
 	void update(const float& dt) override;
 	void drawToTexture(Renderer& renderer) override;
@@ -26,7 +25,7 @@ private:
 	Background bg;
 	UI ui;
 	std::vector<RoadObject> road_objects;
-	const int TIMER_START = 80;
+	const int TIMER_START = 5;
 	float raceTimer;
 	bool moving = false;
 	bool left = false;
@@ -37,11 +36,9 @@ private:
 	const float INITIAL_WAIT = 4.1f*1000.0f;
 	bool beeps[3] = { false,false,false};
 	sf::SoundBuffer b1_buf;
-	sf::SoundBuffer b2_buf;
 	sf::SoundBuffer music_buf;
 	sf::Sound beep_1;
-	sf::Sound beep_2;
-	sf::Sound music;
+	sf::Music music;
 
 	void sendVarsToUI();
 	void decrementRaceTimer(float dt);
