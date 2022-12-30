@@ -6,9 +6,6 @@
 #include "Track.h"
 
 class Track;
-
-
-
 class RoadObject : public Drawable
 {
 public:
@@ -32,8 +29,9 @@ protected:
 	sf::Texture texture;
 	sf::Sprite sprites[4];
 	sf::Sprite* activeSpr;
+	bool drawAtStart = false;
 	
-	void loadSprites();
+	virtual void loadSprites();
 	void swapSprite();
 	void upscale();
 	void move();

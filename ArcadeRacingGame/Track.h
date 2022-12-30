@@ -45,7 +45,7 @@ private:
 	std::vector<Line>::reverse_iterator rit;
 	std::map<std::string, sf::Color> roadColors;
 	std::vector<Segment> segments;
-	Segment baseSeg;
+	
 	int currentSeg = 0;
 	int progressAroundTrack;
 	int totalTrackLength;
@@ -66,8 +66,9 @@ public:
 	static float minRoad; 
 	static std::vector<Line> lines;
 	static Segment* activeSeg;
+	static Segment* baseSeg;
 	static float acceleration; 
-	static float dist; 
+	float dist; 
 	static float trackOffset;
 	int lapsDone;
 

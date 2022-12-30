@@ -12,6 +12,8 @@ RoadObject::RoadObject(int screeny, int segmentId, float depth, bool left) : act
 		screen_y = GameGlobals::GAME_H / 2;
 	else
 		screen_y = screeny;
+	drawAtStart = true;
+
 	this->depth = depth;
 	float scaledY = Racing::Util::convertRange(screen_y, 1, GameGlobals::GAME_H/2, 1, 0);
 	perspective = Track::minRoad + 0.035+scaledY * Track::road_w;
@@ -27,7 +29,7 @@ RoadObject::RoadObject(int segmentId, float depth, bool left) : activeSpr(&sprit
 	this->depth = depth;
 	float scaledY = Racing::Util::convertRange(screen_y, 1, GameGlobals::GAME_H / 2, 1, 0);
 	perspective = Track::minRoad + 0.035 + scaledY * Track::road_w;
-
+	
 
 };
 
@@ -40,6 +42,7 @@ RoadObject::RoadObject(const RoadObject& other) //copy
 	screen_y = other.screen_y;
 	perspective = other.perspective;
 	depth = other.depth;
+	drawAtStart = other.drawAtStart;
 	sf::Image img = other.texture.copyToImage();
 	texture.loadFromImage(img);
 
@@ -62,6 +65,7 @@ RoadObject::RoadObject(RoadObject&& other) noexcept  //move
 	screen_y = other.screen_y;
 	perspective = other.perspective;
 	depth=other.depth;
+	drawAtStart = other.drawAtStart;
 	texture.swap(other.texture);
 
 	memcpy(sprites, other.sprites, sizeof(sprites));
@@ -145,17 +149,16 @@ void::RoadObject::upscale()
 {
 	float scale = Racing::Util::roundToDP(Racing::Util::convertRange(screen_y, 150, 160, 0.5f, 1),1);
 	activeSpr->setScale(scale, scale);
-
-	//may have to replace it with a copy that has the original transform scaled instead (only way to get original dimensions)
-
 }
 
 void RoadObject::checkDraw()
-{
-	if (segId == Track::activeSeg->id && depth <= Track::activeSeg->screen_y - 150)
+{		
+
+	if ((segId == Track::activeSeg->id  && depth <= Track::activeSeg->screen_y - 150) || (segId == Track::baseSeg->id && depth <= Track::baseSeg->screen_y && drawAtStart))
 		draw = true;
 	if (screen_y > 300 && Track::activeSeg->id!= segId)
 	{
+		drawAtStart = false;
 		draw = false;
 		screen_y = GameGlobals::GAME_H / 2;
 	}

@@ -6,13 +6,13 @@ float Track::road_w = 0.9f;
 float Track::tile_w = 0.15;
 float Track::minRoad = 0.01;
 //these shouldnt be static.
-float Track::dist = 0;
 float Track::trackOffset = 0;
 float Track::acceleration = 0; 
 std::vector<Track::Line> Track::lines = std::vector<Track::Line>(); 
 Segment* Track::activeSeg = nullptr;
+Segment* Track::baseSeg = nullptr;
 
-Track::Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segments, int totalTrackLen):baseSeg ( Segment(-1,0, 0))
+Track::Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segments, int totalTrackLen)
 {	
 	acceleration = 0;
 	dist = 0;
@@ -24,6 +24,7 @@ Track::Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segmen
 	this->segments = segments;
 	roadColors = colors;
 	activeSeg = &this->segments.at(0);
+	baseSeg = &this->segments.at(this->segments.size() - 1);
 	distanceToSegmentEnd = activeSeg->length;
 	totalTrackLength = totalTrackLen;
 	lapsDone = 0;
@@ -48,7 +49,7 @@ void Track::updateTrackLines()
 	double current_x = 0.5;
 
 	float td = activeSeg->curvature;
-	float bd = baseSeg.curvature;
+	float bd = baseSeg->curvature;
 
 	rit = lines.rbegin();
 	while (rit != lines.rend())
@@ -106,7 +107,7 @@ void Track::drawElement(sf::RenderTarget& w)
 		
 	
 	//debug
-	/*
+	
 	sf::Vertex line[] =
 	{
 		sf::Vertex(sf::Vector2f(0,activeSeg->screen_y),sf::Color::White),
@@ -115,7 +116,7 @@ void Track::drawElement(sf::RenderTarget& w)
 	
 
 	w.draw(line, 2, sf::Lines);
-	*/
+	
 
 }
 
@@ -147,7 +148,7 @@ void Track::nextSegment()
 	if (activeSeg->screen_y>= GameGlobals::GAME_H)
 	{
 	
-		baseSeg = *activeSeg; 
+		baseSeg = activeSeg; 
 		if (distanceToSegmentEnd <= 0)
 		{
 			

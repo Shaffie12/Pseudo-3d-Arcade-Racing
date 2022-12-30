@@ -13,17 +13,15 @@ Track1::Track1() :TrackData()
 	};
 	segments =
 	{
-		Segment(0,0,100),
+		Segment(0,0,300),
 		Segment(1,0.001f,350),
-		Segment(2,0,100),
-		Segment(3,-0.001f, 500),
-		Segment(4,-0.002f,700),
-		Segment(5,-0.0022f,300),
-		Segment(6,-0.001f,350),
-		Segment(7,0.001f, 500),
-		Segment(8,0.002f,700),
-		Segment(9,0.0022f,300),
-		Segment(10,0.001f,350)
+		Segment(2,0.0001f, 600),
+		Segment(3,-0.001f,100),
+		Segment(4,0.0015f,50),
+		Segment(5,0,150),
+		Segment(6,0.0001f,100),
+		Segment(7,0,70)
+
 
 		
 		
@@ -40,11 +38,8 @@ Track1::Track1() :TrackData()
 		Tree(0,30,true),
 		Tree(0,0,true),
 		Tree(0,0,false),
-		Sign(180,0,0,false)
-		
+		Sign(180, 7, 75,false)
 	
-
-
 		
 	};
 
