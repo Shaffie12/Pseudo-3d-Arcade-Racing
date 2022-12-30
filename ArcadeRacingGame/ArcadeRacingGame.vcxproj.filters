@@ -99,6 +99,9 @@
     <ClCompile Include="Segment.cpp">
       <Filter>Source Files\Track Files</Filter>
     </ClCompile>
+    <ClCompile Include="StartSign.cpp">
+      <Filter>Source Files\Roadside Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RacingGame.h">
@@ -169,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="TrackData.h">
       <Filter>Header Files\Track Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StartSign.h">
+      <Filter>Header Files\Roadside Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

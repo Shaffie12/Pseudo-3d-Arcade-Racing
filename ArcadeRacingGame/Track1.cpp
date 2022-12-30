@@ -20,10 +20,7 @@ Track1::Track1() :TrackData()
 		Segment(4,0.0015f,50),
 		Segment(5,0,150),
 		Segment(6,0.0001f,100),
-		Segment(7,0,70)
-
-
-		
+		Segment(7,0,70)	
 		
 	};
 	objects =
@@ -38,7 +35,7 @@ Track1::Track1() :TrackData()
 		Tree(0,30,true),
 		Tree(0,0,true),
 		Tree(0,0,false),
-		Sign(180, 7, 75,false)
+		StartSign(180, 7, 75,false)
 	
 		
 	};

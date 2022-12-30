@@ -164,6 +164,7 @@
     <ClCompile Include="RoadObject.cpp" />
     <ClCompile Include="Rock.cpp" />
     <ClCompile Include="Segment.cpp" />
+    <ClCompile Include="StartSign.cpp" />
     <ClCompile Include="TitleState.cpp" />
     <ClCompile Include="Track.cpp" />
     <ClCompile Include="Track1.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="RoadObject.h" />
     <ClInclude Include="Rock.h" />
     <ClInclude Include="Segment.h" />
+    <ClInclude Include="StartSign.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="TitleState.h" />
     <ClInclude Include="Track.h" />

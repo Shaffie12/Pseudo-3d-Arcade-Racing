@@ -4,6 +4,7 @@
 #include "Sign.h"
 #include "Rock.h"
 #include "Tree.h"
+#include "StartSign.h"
 
 class TrackData //this should never be instantiated
 {

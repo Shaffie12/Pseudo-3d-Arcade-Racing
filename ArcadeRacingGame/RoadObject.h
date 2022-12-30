@@ -31,7 +31,7 @@ protected:
 	sf::Sprite* activeSpr;
 	bool drawAtStart = false;
 	
-	virtual void loadSprites();
+	virtual void loadSprites(); 
 	void swapSprite();
 	void upscale();
 	void move();
