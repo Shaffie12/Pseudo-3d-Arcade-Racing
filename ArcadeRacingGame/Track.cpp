@@ -8,6 +8,7 @@ float Track::minRoad = 0.01;
 //these shouldnt be static.
 float Track::trackOffset = 0;
 float Track::acceleration = 0; 
+int Track::lapsDone = 0;
 std::vector<Track::Line> Track::lines = std::vector<Track::Line>(); 
 Segment* Track::activeSeg = nullptr;
 Segment* Track::baseSeg = nullptr;
@@ -18,7 +19,9 @@ Track::Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segmen
 	dist = 0;
 	trackOffset = 0;
 	activeSeg = nullptr;
+	lapsDone = 0;
 	lines = std::vector<Track::Line>();
+
 	for (int i = 1; i <=GameGlobals::GAME_H/2 ; i++)
 		lines.push_back(Line(i));
 	this->segments = segments;
@@ -32,9 +35,9 @@ Track::Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segmen
 	
 }
 
-void Track::update(float deltaTime)
+void Track::update(const float& deltaTime)
 {
-	acceleration = Racing::Util::clamp(acceleration, 0, 1); //could move these
+	acceleration = Racing::Util::clamp(acceleration, 0, 1); 
 	dist += acceleration * 100* deltaTime;
 
 	moveSegment(deltaTime);

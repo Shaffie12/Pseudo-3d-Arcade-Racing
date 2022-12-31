@@ -2,7 +2,7 @@
 
 StartSign::StartSign(int screeny, int segmentId, float depth, bool left) : RoadObject(screeny, segmentId, depth, left)
 {
-	if (!texture.loadFromFile("assets/roadside/startsheet.png"))
+	if ( (!texture.loadFromFile("assets/roadside/startsheet.png")) || (!checkTexture.loadFromFile("assets/roadside/checksheet.png")) || (!goalTexture.loadFromFile("assets/roadside/goalsheet.png")) )
 		std::cout << "error loading assets" << '\n';
 
 	loadSprites();
@@ -34,4 +34,37 @@ void StartSign::loadSprites()
 	//reassign default
 	activeSpr = &sprites[3];
 	base_transform = sprites[3].getTransform();
+}
+
+void StartSign::update(const float& dt)
+{
+	checkSwapTexture();
+}
+
+void StartSign::checkSwapTexture()
+{
+	if (!drawAtStart)
+	{
+		if (Track::lapsDone < 2 && currentTexture!=1)
+		{
+			for (int i = 0; i < sizeof(sprites) / sizeof(sprites[0]); i++)
+			{
+				sprites[i].setTexture(checkTexture);
+			}
+			currentTexture = 1;
+		}
+		else if (Track::lapsDone == 2 && currentTexture != 2)
+		{
+			if (screen_y > 300)
+			{
+				for (int i = 0; i < sizeof(sprites) / sizeof(sprites[0]); i++)
+				{
+					sprites[i].setTexture(goalTexture);
+				}
+				currentTexture = 2;
+			}
+			
+		}
+			
+	}
 }

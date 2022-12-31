@@ -1,7 +1,5 @@
 #include "UI.h"
 
-
-
 UI::UI() 
 {
 	if (!textFont.loadFromFile("assets/Fonts/VT323.ttf"))
@@ -9,8 +7,6 @@ UI::UI()
 		std::cout<<"could not load fonts"<<'\n';
 		
 	}
-
-	lap = 0;
 	speed = 0;
 	timer = 0;
 
@@ -39,20 +35,10 @@ void UI::getRaceTimer(float timer)
 	this->timer = timer;
 }
 
-void UI::getTrackSpeed(float Trackspeed)
-{
-	speed = Trackspeed;
-}
-
-void UI::getCurrentLap(int lapNumber)
-{
-	lap = lapNumber;
-}
-
-void UI::update(float dt)
+void UI::update(const float& dt)
 {
 	ss.clear();
-	ss << Racing::Util::roundToDP(Track::acceleration, 3) * 100 << ';' << lap << ';' << timer;
+	ss << Racing::Util::roundToDP(Track::acceleration, 3) * 100 << ';' << Track::lapsDone << ';' << timer;
 	std::string spd;
 	std::string lap_string;
 	std::string time;

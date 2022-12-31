@@ -15,7 +15,7 @@ public:
 	RoadObject(RoadObject&& other) noexcept;
 	RoadObject& operator=(const RoadObject& other);
 	virtual void drawElement(sf::RenderTarget& w) override;
-	virtual void update(float dt)override;
+	virtual void update(const float& dt) override;
 	float depth; //at what point relative to the segment progress down the screen, should we start drawing this object
 	int segId;
 	bool draw = false; //was doing this check in the racing game before
@@ -31,7 +31,7 @@ protected:
 	sf::Sprite* activeSpr;
 	bool drawAtStart = false;
 	
-	virtual void loadSprites(); 
+	virtual void loadSprites();
 	void swapSprite();
 	void upscale();
 	void move();

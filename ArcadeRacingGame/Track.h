@@ -56,7 +56,7 @@ private:
 
 public:
 	Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segments, int totalTrackDistance); 
-	void update(float deltaTime) override;
+	void update(const float& deltaTime) override;
 	void updateTrackLines();
 	virtual void drawElement(sf::RenderTarget& w) override;
 	void addPlayerOffset(float amount, bool add);
@@ -70,7 +70,7 @@ public:
 	static float acceleration; 
 	float dist; 
 	static float trackOffset;
-	int lapsDone;
+	static int lapsDone;
 
 
 

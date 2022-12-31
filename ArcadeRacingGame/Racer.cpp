@@ -27,7 +27,7 @@ void Racer::drawElement(sf::RenderTarget& w)
 	w.draw(racerSprites.at(2));//can go out of range
 }
 
-void Racer::update(float deltaTime)
+void Racer::update(const float& dt)
 {
 	
 	

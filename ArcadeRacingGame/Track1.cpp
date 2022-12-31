@@ -14,28 +14,35 @@ Track1::Track1() :TrackData()
 	segments =
 	{
 		Segment(0,0,300),
-		Segment(1,0.001f,350),
-		Segment(2,0.0001f, 600),
-		Segment(3,-0.001f,100),
+		Segment(1,0.003f,350),
+		Segment(2,0.001f, 600),
+		Segment(3,-0.0033f,500),
 		Segment(4,0.0015f,50),
 		Segment(5,0,150),
-		Segment(6,0.0001f,100),
+		Segment(6,0.002f,100),
 		Segment(7,0,70)	
 		
 	};
 	objects =
 	{
+		//segmeent 0 objects
+		new Rock(0,100,true),
+		new Tree(0,80,true),
+		new Tree(0,80,false),
+		new Tree(0,60,false),
+		new Tree(0,60,true),
+		new Tree(0,30,false),
+		new Tree(0,30,true),
+		new Tree(0,0,true),
+		new Tree(0,0,false),
 
-		Rock(0,100,true),
-		Tree(0,80,true),
-		Tree(0,80,false),
-		Tree(0,60,false),
-		Tree(0,60,true),
-		Tree(0,30,false),
-		Tree(0,30,true),
-		Tree(0,0,true),
-		Tree(0,0,false),
-		StartSign(180, 7, 75,false)
+		//segment 1
+
+
+
+		//segment 7
+		new StartSign(180, 7, 30,false)
+		
 	
 		
 	};

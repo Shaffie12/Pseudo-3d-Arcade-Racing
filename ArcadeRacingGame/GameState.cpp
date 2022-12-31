@@ -63,6 +63,8 @@ void GameState::update(const float& dt)
 	track.update(dt);
 	player.update(dt);
 	bg.update(dt);
+	for (RoadObject* r : road_objects)
+		r->update(dt);
 	sendVarsToUI();
 	ui.update(dt);
 
@@ -74,8 +76,6 @@ void GameState::update(const float& dt)
 void GameState::sendVarsToUI()
 {
 	ui.getRaceTimer(raceTimer);
-	ui.getCurrentLap(track.lapsDone);
-	
 }
 
 void GameState::decrementRaceTimer(float dt)
@@ -140,8 +140,8 @@ void GameState::drawToTexture(Renderer& renderer)
 	track.drawElement(*renderer.rtx);
 	player.drawElement(*renderer.rtx);
 	bg.drawElement(*renderer.rtx);
-	for (RoadObject& r : road_objects)
-		r.drawElement(*renderer.rtx);
+	for (RoadObject* r : road_objects)
+		r->drawElement(*renderer.rtx);
 	ui.drawElement(*renderer.rtx);
 
 	

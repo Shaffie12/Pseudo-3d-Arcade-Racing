@@ -11,7 +11,7 @@ class Racer :public Drawable
 		Racer(sf::Vector2f startPosition);
 		void drawElement(sf::RenderTarget& w) override;
 		float distanceToTrackEdge();
-		virtual void update(float dt) override;
+		virtual void update(const float& dt) override;
 		
 		
 

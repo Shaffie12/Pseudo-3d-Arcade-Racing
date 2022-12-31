@@ -24,7 +24,7 @@ private:
 	Player player;
 	Background bg;
 	UI ui;
-	std::vector<RoadObject> road_objects;
+	std::vector<RoadObject*> road_objects;
 	const int TIMER_START = 80;
 	float raceTimer;
 	bool moving = false;
@@ -41,6 +41,7 @@ private:
 	sf::Music music;
 
 	void sendVarsToUI();
+	void sendVarsToObjects();
 	void decrementRaceTimer(float dt);
 	bool isGameFinished();
 	void checkPlayerMovement();
