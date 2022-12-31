@@ -102,6 +102,9 @@
     <ClCompile Include="StartSign.cpp">
       <Filter>Source Files\Roadside Objects</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RacingGame.h">
@@ -175,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="StartSign.h">
       <Filter>Header Files\Roadside Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -35,13 +35,8 @@ private:
 	float beep_timer = 0.0f;
 	const float INITIAL_WAIT = 4.1f*1000.0f;
 	bool beeps[3] = { false,false,false};
-	sf::SoundBuffer b1_buf;
-	sf::SoundBuffer music_buf;
-	sf::Sound beep_1;
-	sf::Music music;
 
 	void sendVarsToUI();
-	void sendVarsToObjects();
 	void decrementRaceTimer(float dt);
 	bool isGameFinished();
 	void checkPlayerMovement();

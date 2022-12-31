@@ -4,6 +4,7 @@
 #include "GameGlobals.h"
 #include "Segment.h"
 #include "Util.h"
+#include "SoundManager.h"
 #include <SFML/Graphics.hpp>
 #include<vector>
 #include<iostream>

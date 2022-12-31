@@ -3,10 +3,13 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include "Renderer.h"
+#include "SoundManager.h"
 #include "GameState.h"
 #include "TitleState.h"
 #include "GameOverState.h"
 #include "WinState.h"
+#include"Track1.h"//remove later
+#include<iostream>
 #include "Util.h"
 #include <memory>
 

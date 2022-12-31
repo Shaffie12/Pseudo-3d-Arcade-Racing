@@ -160,6 +160,7 @@ void Track::nextSegment()
 			if (progressAroundTrack == totalTrackLength)
 			{
 				lapsDone++;
+				SoundManager::GetInstance()->checkpoint.play();
 				progressAroundTrack = 0;
 			}
 			

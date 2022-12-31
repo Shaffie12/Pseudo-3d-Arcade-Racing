@@ -1,6 +1,5 @@
 #include "Game.h"
-#include"Track1.h"//remove later
-#include<iostream>
+
 
 Game::Game() :mainWindow(new sf::RenderWindow(sf::VideoMode(GameGlobals::SCREEN_W, GameGlobals::SCREEN_H), "Arcade Racing")), renderer(new Renderer()),
 states(new std::stack<State*>)
@@ -34,7 +33,7 @@ void Game::initWindow()
 
 void Game::initStates()
 {
-	 
+	SoundManager::GetInstance();
 	states->push(new TitleState());
 	
 	

@@ -10,12 +10,6 @@ ui()
 	
 	raceTimer = TIMER_START;
 	intro = true;
-	if (!b1_buf.loadFromFile("assets/sounds/beep1.wav") || !music_buf.loadFromFile("assets/sounds/music.wav"))
-	{
-		std::cout << "failed to load sounds";
-	}
-	beep_1.setBuffer(b1_buf);
-	
 
 }
 
@@ -107,25 +101,25 @@ void GameState::doIntroBeeps(const float& dt)
 
 		if (!beeps[0] && beep_timer >= 1.2f)
 		{
-			beep_1.play();
+			SoundManager::GetInstance()->beep_1.play();
 			beeps[0] = true;
 		}
 		else if (!beeps[1] && beep_timer >= 2.4f)
 		{
-			beep_1.play();
+			SoundManager::GetInstance()->beep_1.play();
 			beeps[1] = true;
 		}	
 		else if (!beeps[2] && beep_timer >= 3.6f)
 		{
-			beep_1.play();
+			SoundManager::GetInstance()->beep_1.play();
 			beeps[2] = true;
 		}
 
 		if (beeps[0] && beeps[1] && beeps[2] && beep_timer >= 4.8f)
 		{
 			intro = false;
-			beep_1.setPitch(2);
-			beep_1.play();
+			SoundManager::GetInstance()->beep_1.setPitch(2);
+			SoundManager::GetInstance()->beep_1.play();
 			
 		}
 	
