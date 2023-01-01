@@ -61,9 +61,14 @@ void GameState::update(const float& dt)
 		r->update(dt);
 	sendVarsToUI();
 	ui.update(dt);
-
+	if (laps != track.lapsDone)
+	{
+		laps++;
+		incrementRaceTimer(8);
+	}
+		
 	if (isGameFinished())
-		exited = true;
+		quit();
 
 }
 
@@ -75,6 +80,11 @@ void GameState::sendVarsToUI()
 void GameState::decrementRaceTimer(float dt)
 {
 	raceTimer = Racing::Util::clamp(raceTimer -= dt,0, TIMER_START);
+}
+
+void GameState::incrementRaceTimer(float amount)
+{
+	raceTimer += amount;
 }
 
 bool GameState::isGameFinished()
@@ -153,7 +163,7 @@ int GameState::nextState()
 
 void GameState::quit()
 {
-
+	exited = true;
 }
 
 

@@ -29,8 +29,8 @@ void GameOverState::handleInput(sf::Event& e)
 {
 	if (e.type == sf::Event::KeyPressed)
 	{
-		if(e.key.code==sf::Keyboard::Enter)
-			exited = true;
+		if (e.key.code == sf::Keyboard::Enter)
+			quit();
 	}
 		
 	
@@ -58,4 +58,5 @@ int GameOverState::nextState()
 
 void GameOverState::quit()
 {
+	exited = true;
 }

@@ -103,7 +103,7 @@ State* Game::getNextState(State*currentState)
 	if (GameState* gs = dynamic_cast<GameState*>(currentState))
 	{
 		if (gs->nextState() == 0)
-			return new WinState();
+			return new WinState(gs->raceTimer);
 		return new GameOverState();
 		
 	}

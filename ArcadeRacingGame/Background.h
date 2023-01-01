@@ -16,7 +16,7 @@ public:
 	void update(const float& dt) override;
 
 private:
-	sf::Texture bgTex; //dont know if we need to store this here
+	sf::Texture bgTex; 
 	std::vector<sf::Sprite> bg_list;
 	sf::Sprite* selected_bg;
 
@@ -26,9 +26,13 @@ private:
 		
 		ScrollingBackground(sf::Sprite& image) 
 		{
-			imgs.push_back(ImagePart(image, -image.getGlobalBounds().width, 0));
+			imgs.push_back(ImagePart(image, -image.getGlobalBounds().width, 0)); //0
 			imgs.push_back(ImagePart(image));
-			imgs.push_back(ImagePart(image, image.getGlobalBounds().width, 0));
+			imgs.push_back(ImagePart(image, image.getGlobalBounds().width, 0)); 
+			
+
+			
+			
 		}
 			
 		
@@ -50,8 +54,11 @@ private:
 			sf::Sprite sprite;
 			bool onScreen()
 			{
-				return !(sprite.getPosition().x > GameGlobals::GAME_W || sprite.getPosition().x + sprite.getGlobalBounds().width < 0);
+				return sprite.getPosition().x <= 0 && sprite.getPosition().x + sprite.getGlobalBounds().width <= GameGlobals::GAME_W + 100;
+				
 			}
+
+			
 
 		};
 

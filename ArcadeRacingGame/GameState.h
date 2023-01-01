@@ -18,6 +18,7 @@ public:
 	void drawToTexture(Renderer& renderer) override;
 	int nextState() override;
 	void quit() override;
+	float raceTimer;
 
 private:
 	Track track;
@@ -26,7 +27,8 @@ private:
 	UI ui;
 	std::vector<RoadObject*> road_objects;
 	const int TIMER_START = 80;
-	float raceTimer;
+	
+	int laps = 0;
 	bool moving = false;
 	bool left = false;
 	bool right = false;
@@ -38,6 +40,7 @@ private:
 
 	void sendVarsToUI();
 	void decrementRaceTimer(float dt);
+	void incrementRaceTimer(float amount);
 	bool isGameFinished();
 	void checkPlayerMovement();
 	void doIntroBeeps(const float& dt);

@@ -1,24 +1,37 @@
 #include "WinState.h"
 
-WinState::WinState()
+WinState::WinState(float& timer)
 {
 	if (!textFont.loadFromFile("assets/Fonts/VT323.ttf"))
 	{
 		std::cout << "could not load fonts" << '\n';
 
 	}
-
+	
 	bgFill = sf::Color::Yellow;
-	winText.setString("YOU WIN");
+	winText.setString("WIN!");
 	winText.setFont(textFont);
 	winText.setScale(1, 1);
 	winText.setPosition(GameGlobals::GAME_W / 2 - winText.getGlobalBounds().width / 2,
 		GameGlobals::GAME_H / 2 - winText.getGlobalBounds().height / 2);
 	winText.setFillColor(sf::Color::Black);
+
+	std::stringstream s;
+	s << std::fixed << std::setprecision(2) << timer;
+	std::string time = s.str();
+	timerText.setString("Your time was: " + time+ " seconds. ");
+	timerText.setFont(textFont);
+	timerText.setScale(1, 1);
+	timerText.setPosition(GameGlobals::GAME_W / 2 - timerText.getGlobalBounds().width / 2, GameGlobals::GAME_H / 2 + 60);
+	timerText.setFillColor(sf::Color::Black);
 }
 
 void WinState::handleInput(sf::Event& e)
 {
+	if (e.type == sf::Event::KeyPressed)
+	{
+		quit();
+	}
 }
 
 void WinState::update(const float& dt)
@@ -29,6 +42,7 @@ void WinState::drawToTexture(Renderer& renderer)
 {
 	renderer.rtx->clear(bgFill);
 	renderer.rtx->draw(winText);
+	renderer.rtx->draw(timerText);
 
 	renderer.rtx->display();
 	renderer.sprite->setTexture(renderer.rtx->getTexture());
@@ -37,6 +51,7 @@ void WinState::drawToTexture(Renderer& renderer)
 
 void WinState::quit()
 {
+	exited = true;
 }
 
 int WinState::nextState()

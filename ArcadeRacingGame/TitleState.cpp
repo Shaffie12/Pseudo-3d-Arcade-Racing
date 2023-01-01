@@ -21,7 +21,7 @@ TitleState::TitleState() : State()
 void TitleState::handleInput(sf::Event& e)
 {
 	if (e.type == sf::Event::KeyPressed)
-		exited = true;
+		quit();
 }
 
 void TitleState::update(const float& dt)
@@ -49,4 +49,5 @@ int TitleState::nextState()
 
 void TitleState::quit()
 {
+	exited = true;
 }
