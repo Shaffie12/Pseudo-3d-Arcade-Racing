@@ -7,23 +7,11 @@ WinState::WinState(float& timer)
 		std::cout << "could not load fonts" << '\n';
 
 	}
-	
+	score = timer;
 	bgFill = sf::Color::Yellow;
-	winText.setString("WIN!");
-	winText.setFont(textFont);
-	winText.setScale(1, 1);
-	winText.setPosition(GameGlobals::GAME_W / 2 - winText.getGlobalBounds().width / 2,
-		GameGlobals::GAME_H / 2 - winText.getGlobalBounds().height / 2);
-	winText.setFillColor(sf::Color::Black);
-
-	std::stringstream s;
-	s << std::fixed << std::setprecision(2) << timer;
-	std::string time = s.str();
-	timerText.setString("Your time was: " + time+ " seconds. ");
-	timerText.setFont(textFont);
-	timerText.setScale(1, 1);
-	timerText.setPosition(GameGlobals::GAME_W / 2 - timerText.getGlobalBounds().width / 2, GameGlobals::GAME_H / 2 + 60);
-	timerText.setFillColor(sf::Color::Black);
+	
+	formatWinText();
+	formatScore(timer);
 }
 
 void WinState::handleInput(sf::Event& e)
@@ -49,6 +37,28 @@ void WinState::drawToTexture(Renderer& renderer)
 	renderer.sprite->setScale(sf::Vector2f(2, 2));
 }
 
+void WinState::formatWinText()
+{
+	winText.setString("WIN!");
+	winText.setFont(textFont);
+	winText.setScale(1, 1);
+	winText.setPosition(GameGlobals::GAME_W / 2 - winText.getGlobalBounds().width / 2,
+		GameGlobals::GAME_H / 2 - winText.getGlobalBounds().height / 2);
+	winText.setFillColor(sf::Color::Black);
+}
+
+void WinState::formatScore(float& timer)
+{
+	std::stringstream s;
+	s << std::fixed << std::setprecision(2) << 80.0f - timer;
+	std::string time = s.str();
+	timerText.setString("Your time was: " + time + " seconds. ");
+	timerText.setFont(textFont);
+	timerText.setScale(1, 1);
+	timerText.setPosition(GameGlobals::GAME_W / 2 - timerText.getGlobalBounds().width / 2, GameGlobals::GAME_H / 2 + 60);
+	timerText.setFillColor(sf::Color::Black);
+}
+
 void WinState::quit()
 {
 	exited = true;
@@ -57,4 +67,12 @@ void WinState::quit()
 int WinState::nextState()
 {
 	return 0;
+}
+
+void WinState::WriteSaveData()
+{
+	SaveData data;
+	data.writeScore(score);
+
+	
 }

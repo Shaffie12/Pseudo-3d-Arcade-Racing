@@ -5,7 +5,7 @@
 float Track::road_w = 0.9f;
 float Track::tile_w = 0.15;
 float Track::minRoad = 0.01;
-//these shouldnt be static.
+//maybe could use friend functions for these
 float Track::trackOffset = 0;
 float Track::acceleration = 0; 
 int Track::lapsDone = 0;
@@ -110,7 +110,7 @@ void Track::drawElement(sf::RenderTarget& w)
 		
 	
 	//debug
-	
+	/*
 	sf::Vertex line[] =
 	{
 		sf::Vertex(sf::Vector2f(0,activeSeg->screen_y),sf::Color::White),
@@ -119,6 +119,7 @@ void Track::drawElement(sf::RenderTarget& w)
 	
 
 	w.draw(line, 2, sf::Lines);
+	*/
 	
 
 }

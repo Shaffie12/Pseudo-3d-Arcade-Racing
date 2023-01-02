@@ -163,6 +163,7 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RoadObject.cpp" />
     <ClCompile Include="Rock.cpp" />
+    <ClCompile Include="SaveData.cpp" />
     <ClCompile Include="Segment.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="StartSign.cpp" />
@@ -183,12 +184,14 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameGlobals.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="Saveable.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Racer.h" />
     <ClInclude Include="RacingGame.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RoadObject.h" />
     <ClInclude Include="Rock.h" />
+    <ClInclude Include="SaveData.h" />
     <ClInclude Include="Segment.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="StartSign.h" />

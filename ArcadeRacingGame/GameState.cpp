@@ -64,7 +64,8 @@ void GameState::update(const float& dt)
 	if (laps != track.lapsDone)
 	{
 		laps++;
-		incrementRaceTimer(8);
+		if(laps!=3)
+			incrementRaceTimer(8);
 	}
 		
 	if (isGameFinished())
@@ -131,6 +132,7 @@ void GameState::doIntroBeeps(const float& dt)
 			SoundManager::GetInstance()->beep_1.setPitch(2);
 			SoundManager::GetInstance()->beep_1.play();
 			
+			
 		}
 	
 }
@@ -163,6 +165,8 @@ int GameState::nextState()
 
 void GameState::quit()
 {
+	
+	SoundManager::GetInstance()->beep_1.setPitch(1);
 	exited = true;
 }
 
