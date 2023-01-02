@@ -18,7 +18,7 @@ public:
 	void formatScore(float& timer);
 	void quit() override;
 	int nextState() override;
-	void WriteSaveData() override;
+	SaveData WriteSaveData() override;
 
 private:
 	float score;

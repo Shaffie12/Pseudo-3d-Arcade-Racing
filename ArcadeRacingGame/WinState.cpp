@@ -12,6 +12,9 @@ WinState::WinState(float& timer)
 	
 	formatWinText();
 	formatScore(timer);
+	SaveData data = WriteSaveData();
+	WriteToFile(data);
+	
 }
 
 void WinState::handleInput(sf::Event& e)
@@ -69,10 +72,11 @@ int WinState::nextState()
 	return 0;
 }
 
-void WinState::WriteSaveData()
+SaveData WinState::WriteSaveData()
 {
-	SaveData data;
-	data.writeScore(score);
-
+	SaveData data = ReadFromFile();
+	float time = 80.0f - score;
+	data.writeScore(time);
+	return data;
 	
 }

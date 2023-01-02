@@ -6,8 +6,10 @@ class SaveData
 public:
 	void writeScore(float& score);
 	void writeSettings();
+	friend class Saveable;
 private:
 	float timeScore = 0;
+	
 
 
 };

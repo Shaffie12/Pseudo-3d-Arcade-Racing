@@ -163,6 +163,7 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RoadObject.cpp" />
     <ClCompile Include="Rock.cpp" />
+    <ClCompile Include="Saveable.cpp" />
     <ClCompile Include="SaveData.cpp" />
     <ClCompile Include="Segment.cpp" />
     <ClCompile Include="SoundManager.cpp" />

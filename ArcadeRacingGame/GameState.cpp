@@ -1,5 +1,7 @@
 #include "GameState.h"
 
+const int GameState::REQUIRED_LAPS = 1;
+
 GameState::GameState(TrackData trackdata) : State(),
 track(trackdata.colors,trackdata.segments,trackdata.totalTrackLength), 
 road_objects(trackdata.objects),
@@ -64,7 +66,7 @@ void GameState::update(const float& dt)
 	if (laps != track.lapsDone)
 	{
 		laps++;
-		if(laps!=3)
+		if(laps!=REQUIRED_LAPS)
 			incrementRaceTimer(8);
 	}
 		
@@ -90,7 +92,7 @@ void GameState::incrementRaceTimer(float amount)
 
 bool GameState::isGameFinished()
 {
-	return raceTimer <= 0 || track.lapsDone == 3;
+	return raceTimer <= 0 || track.lapsDone == REQUIRED_LAPS;
 }
 
 void GameState::checkPlayerMovement()
@@ -160,7 +162,7 @@ void GameState::drawToTexture(Renderer& renderer)
 
 int GameState::nextState()
 {
-	return raceTimer > 0 && track.lapsDone == 3 ? 0 : 1;
+	return raceTimer > 0 && track.lapsDone == REQUIRED_LAPS ? 0 : 1;
 }
 
 void GameState::quit()

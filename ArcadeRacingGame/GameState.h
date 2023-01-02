@@ -18,6 +18,7 @@ public:
 	void drawToTexture(Renderer& renderer) override;
 	int nextState() override;
 	void quit() override;
+	static const int REQUIRED_LAPS;
 	float raceTimer;
 
 private:
