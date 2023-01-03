@@ -2,6 +2,7 @@
 #define _TITLE_STATE_H_
 
 #include "State.h"
+#include "FontsManager.h"
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <iostream>
@@ -19,7 +20,6 @@ public:
 private:
 	float blink;
 	sf::Color bgFill;
-	sf::Font titleFont;
 	sf::Text titleText;
 	sf::Text optionsText;
 	sf::Text startText;

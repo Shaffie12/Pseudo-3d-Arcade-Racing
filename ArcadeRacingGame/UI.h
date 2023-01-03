@@ -1,6 +1,7 @@
 #ifndef UI_H_
 #define UI_H_
 #include "Drawable.h"
+#include "FontsManager.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <sstream>
@@ -17,7 +18,6 @@ class UI : public Drawable
 		
 	private:
 		std::stringstream ss;
-		sf::Font textFont;
 		sf::Text speedText;
 		sf::Text lapText;
 		sf::Text timerText;

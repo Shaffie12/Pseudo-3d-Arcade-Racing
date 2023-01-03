@@ -2,11 +2,6 @@
 
 WinState::WinState(float& timer)
 {
-	if (!textFont.loadFromFile("assets/Fonts/VT323.ttf"))
-	{
-		std::cout << "could not load fonts" << '\n';
-
-	}
 	score = timer;
 	bgFill = sf::Color::Yellow;
 	
@@ -21,7 +16,8 @@ void WinState::handleInput(sf::Event& e)
 {
 	if (e.type == sf::Event::KeyPressed)
 	{
-		quit();
+		if(e.key.code == sf::Keyboard::Enter || e.key.code == sf::Keyboard::Space)
+			quit();
 	}
 }
 
@@ -43,7 +39,7 @@ void WinState::drawToTexture(Renderer& renderer)
 void WinState::formatWinText()
 {
 	winText.setString("WIN!");
-	winText.setFont(textFont);
+	winText.setFont(FontsManager::GetInstance()->font);
 	winText.setScale(1, 1);
 	winText.setPosition(GameGlobals::GAME_W / 2 - winText.getGlobalBounds().width / 2,
 		GameGlobals::GAME_H / 2 - winText.getGlobalBounds().height / 2);

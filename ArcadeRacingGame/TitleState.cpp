@@ -2,16 +2,10 @@
 
 TitleState::TitleState() : State()
 {
-	
-	if (!titleFont.loadFromFile("assets/Fonts/VT323.ttf"))
-	{
-		std::cout << "could not load fonts" << '\n';
-
-	}
 	blink = 0;
 	bgFill = sf::Color::Cyan;
 	titleText.setString("PRESS ANY KEY TO START");
-	titleText.setFont(titleFont);
+	titleText.setFont(FontsManager::GetInstance()->font);
 	titleText.setFillColor(sf::Color::Black);
 	titleText.setPosition(GameGlobals::GAME_W/2-titleText.getGlobalBounds().width/2, GameGlobals::GAME_H/2-titleText.getGlobalBounds().height/2);
 	titleText.setScale(sf::Vector2f(1, 1));
@@ -21,7 +15,9 @@ TitleState::TitleState() : State()
 void TitleState::handleInput(sf::Event& e)
 {
 	if (e.type == sf::Event::KeyPressed)
-		quit();
+	{
+			quit();
+	}
 }
 
 void TitleState::update(const float& dt)

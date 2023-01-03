@@ -3,6 +3,7 @@
 #include "State.h"
 #include "Util.h"
 #include "Saveable.h"
+#include "FontsManager.h"
 #include<iostream>
 #include <sstream>
 #include <iomanip>
@@ -24,7 +25,6 @@ private:
 	float score;
 	sf::Text winText;
 	sf::Text timerText;
-	sf::Font textFont;
 	sf::Color bgFill;
 	sf::Color textFill;
 	

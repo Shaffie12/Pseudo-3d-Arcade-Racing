@@ -33,6 +33,7 @@ void Game::initWindow()
 
 void Game::initStates()
 {
+	FontsManager::GetInstance();
 	SoundManager::GetInstance();
 	states->push(new TitleState());
 	

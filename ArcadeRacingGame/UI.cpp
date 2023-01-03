@@ -2,25 +2,21 @@
 
 UI::UI() 
 {
-	if (!textFont.loadFromFile("assets/Fonts/VT323.ttf"))
-	{
-		std::cout<<"could not load fonts"<<'\n';
-		
-	}
+
 	speed = 0;
 	timer = 0;
 
-	speedText.setFont(textFont);
+	speedText.setFont(FontsManager::GetInstance()->font);
 	speedText.setFillColor(sf::Color::White);
 	speedText.setPosition(50, 50);
 	speedText.setScale(sf::Vector2f(0.5, 0.5));
 
-	lapText.setFont(textFont);
+	lapText.setFont(FontsManager::GetInstance()->font);
 	lapText.setFillColor(sf::Color::White);
 	lapText.setPosition(230, 50);
 	lapText.setScale(sf::Vector2f(0.5, 0.5));
 
-	timerText.setFont(textFont);
+	timerText.setFont(FontsManager::GetInstance()->font);
 	timerText.setFillColor(sf::Color::White);
 	timerText.setPosition(230,70);
 	timerText.setScale(sf::Vector2f(0.5, 0.5));

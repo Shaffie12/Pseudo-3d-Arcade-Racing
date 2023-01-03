@@ -2,6 +2,7 @@
 #define _GAMEOVER_STATE_H_
 #include "State.h"
 #include "Renderer.h"
+#include "FontsManager.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -17,7 +18,6 @@ public:
 private:
 	sf::Text gameOverText;
 	sf::Text restartText;
-	sf::Font textFont;
 	sf::Color bgFill;
 	sf::Color textFill;
 

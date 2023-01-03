@@ -2,22 +2,16 @@
 
 GameOverState::GameOverState()
 {
-	
-	if (!textFont.loadFromFile("assets/Fonts/VT323.ttf"))
-	{
-		std::cout << "could not load fonts" << '\n';
-
-	}
 	bgFill = sf::Color::Black;
 	gameOverText.setString("GAME OVER");
-	gameOverText.setFont(textFont);
+	gameOverText.setFont(FontsManager::GetInstance()->font);
 	gameOverText.setScale(1, 1);
 	gameOverText.setPosition(GameGlobals::GAME_W / 2 - gameOverText.getGlobalBounds().width/2,
 		GameGlobals::GAME_H / 2 - gameOverText.getGlobalBounds().height/2);
 	gameOverText.setFillColor(sf::Color::White);
 
 	restartText.setString("PRESS ENTER TO RETURN TO TITLE");
-	restartText.setFont(textFont);
+	restartText.setFont(FontsManager::GetInstance()->font);
 	restartText.setScale(1, 1);
 	restartText.setPosition(GameGlobals::GAME_W / 2 - restartText.getGlobalBounds().width / 2,
 		(GameGlobals::GAME_H / 2 - gameOverText.getGlobalBounds().height / 2) +100) ;
