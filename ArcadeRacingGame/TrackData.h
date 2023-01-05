@@ -6,7 +6,7 @@
 #include "Tree.h"
 #include "StartSign.h"
 
-class TrackData //this should never be instantiated
+class TrackData 
 {
 	
 public:

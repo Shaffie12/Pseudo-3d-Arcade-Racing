@@ -1,5 +1,6 @@
 #include "FontsManager.h"
 
+FontsManager* FontsManager::_fontsManager = nullptr;
 
 FontsManager::FontsManager()
 {

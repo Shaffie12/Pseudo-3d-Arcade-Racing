@@ -52,7 +52,7 @@ void WinState::formatScore(float& timer)
 	s << std::fixed << std::setprecision(2) << 80.0f - timer;
 	std::string time = s.str();
 	timerText.setString("Your time was: " + time + " seconds. ");
-	timerText.setFont(textFont);
+	timerText.setFont(FontsManager::GetInstance()->font);
 	timerText.setScale(1, 1);
 	timerText.setPosition(GameGlobals::GAME_W / 2 - timerText.getGlobalBounds().width / 2, GameGlobals::GAME_H / 2 + 60);
 	timerText.setFillColor(sf::Color::Black);

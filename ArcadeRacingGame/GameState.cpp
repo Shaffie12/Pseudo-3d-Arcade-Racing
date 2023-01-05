@@ -2,7 +2,7 @@
 
 const int GameState::REQUIRED_LAPS = 3;
 
-GameState::GameState(TrackData trackdata) : State(),
+GameState::GameState(TrackData trackdata) : 
 track(trackdata.colors,trackdata.segments,trackdata.totalTrackLength), 
 road_objects(trackdata.objects),
 player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)),

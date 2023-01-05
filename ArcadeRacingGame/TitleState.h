@@ -2,6 +2,7 @@
 #define _TITLE_STATE_H_
 
 #include "State.h"
+#include "Menu.h"
 #include "FontsManager.h"
 #include <SFML/Graphics.hpp>
 #include <string>
@@ -21,8 +22,8 @@ private:
 	float blink;
 	sf::Color bgFill;
 	sf::Text titleText;
-	sf::Text optionsText;
-	sf::Text startText;
+	Menu menu;
+	
 
 };
 
