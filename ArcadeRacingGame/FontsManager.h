@@ -15,7 +15,8 @@ public:
 	void operator=(const FontsManager& other) = delete;
 
 	static FontsManager* GetInstance();
-	sf::Font font;
+	sf::Font font_basic;
+	sf::Font font_title;
 
 
 };

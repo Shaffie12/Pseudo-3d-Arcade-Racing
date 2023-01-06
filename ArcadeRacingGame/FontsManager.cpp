@@ -4,7 +4,7 @@ FontsManager* FontsManager::_fontsManager = nullptr;
 
 FontsManager::FontsManager()
 {
-	if (!font.loadFromFile("assets/Fonts/VT323.ttf"))
+	if (!font_basic.loadFromFile("assets/Fonts/VT323.ttf") || !font_title.loadFromFile("assets/fonts/GravityBold.ttf"))
 	{
 		std::cout << "could not load fonts" << '\n';
 

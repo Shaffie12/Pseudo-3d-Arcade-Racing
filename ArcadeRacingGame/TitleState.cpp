@@ -1,15 +1,19 @@
 #include "TitleState.h"
 
-TitleState::TitleState(): menu(GameGlobals::GAME_W, GameGlobals::GAME_H, 3)
+
+
+TitleState::TitleState() : menu(GameGlobals::GAME_W, 177, 3, {"START", "LEADERBOARD", "OPTIONS"})
 {
-	blink = 0;
+	
 	bgFill = sf::Color::Cyan;
 
 	titleText.setString("ARCADE RACER LITE");
-	titleText.setFont(FontsManager::GetInstance()->font);
+	titleText.setFont(FontsManager::GetInstance()->font_title);
 	titleText.setFillColor(sf::Color::Black);
 	titleText.setPosition(GameGlobals::GAME_W/2-titleText.getGlobalBounds().width/2, (GameGlobals::GAME_H/2-titleText.getGlobalBounds().height/2)-100);
 	titleText.setScale(sf::Vector2f(1, 1));	
+
+	
 
 }
 
@@ -17,16 +21,22 @@ void TitleState::handleInput(sf::Event& e)
 {
 	if (e.type == sf::Event::KeyPressed)
 	{
+		if (e.key.code == sf::Keyboard::W)
+			menu.MoveUp();
+		else if (e.key.code == sf::Keyboard::S)
+			menu.MoveDown();
+		else if (e.key.code == sf::Keyboard::Enter && menu.getSelected() == 0)
+		{
+			SoundManager::GetInstance()->menuSelect.play();
 			quit();
+		}
+			
 	}
 }
 
 void TitleState::update(const float& dt)
 {
-	blink += dt;
-	sf::Color newCol = sinf(5 * blink) > 0 ? sf::Color::Transparent : sf::Color::Black;
-	titleText.setFillColor(newCol);
-		
+	menu.update(dt);	
 }
 
 void TitleState::drawToTexture(Renderer& renderer)

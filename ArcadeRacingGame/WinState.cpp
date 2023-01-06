@@ -39,7 +39,7 @@ void WinState::drawToTexture(Renderer& renderer)
 void WinState::formatWinText()
 {
 	winText.setString("WIN!");
-	winText.setFont(FontsManager::GetInstance()->font);
+	winText.setFont(FontsManager::GetInstance()->font_basic);
 	winText.setScale(1, 1);
 	winText.setPosition(GameGlobals::GAME_W / 2 - winText.getGlobalBounds().width / 2,
 		GameGlobals::GAME_H / 2 - winText.getGlobalBounds().height / 2);
@@ -52,7 +52,7 @@ void WinState::formatScore(float& timer)
 	s << std::fixed << std::setprecision(2) << 80.0f - timer;
 	std::string time = s.str();
 	timerText.setString("Your time was: " + time + " seconds. ");
-	timerText.setFont(FontsManager::GetInstance()->font);
+	timerText.setFont(FontsManager::GetInstance()->font_basic);
 	timerText.setScale(1, 1);
 	timerText.setPosition(GameGlobals::GAME_W / 2 - timerText.getGlobalBounds().width / 2, GameGlobals::GAME_H / 2 + 60);
 	timerText.setFillColor(sf::Color::Black);

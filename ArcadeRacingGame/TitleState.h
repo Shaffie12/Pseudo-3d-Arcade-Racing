@@ -9,6 +9,7 @@
 #include <iostream>
 #include <cmath>
 
+
 class TitleState : public State
 {
 public:
@@ -19,10 +20,10 @@ public:
 	int nextState() override;
 	void quit() override;
 private:
-	float blink;
 	sf::Color bgFill;
 	sf::Text titleText;
 	Menu menu;
+	
 	
 
 };

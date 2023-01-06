@@ -10,6 +10,9 @@ private:
 	~SoundManager();
 	static SoundManager* _soundManager;
 
+	sf::SoundBuffer nav_buf;
+	sf::SoundBuffer select_buf;
+
 	sf::SoundBuffer music_buf;
 	sf::SoundBuffer b1_buf;
 	sf::SoundBuffer ch_buf;
@@ -21,9 +24,13 @@ public:
 
 	static SoundManager* GetInstance();
 
-	sf::Music music;
+	sf::Sound menuNavigate;
+	sf::Sound menuSelect;
+
+	sf::Music trackMusic1;
 	sf::Sound beep_1;
 	sf::Sound checkpoint;
+	
 
 };
 

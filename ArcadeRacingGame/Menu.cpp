@@ -1,36 +1,46 @@
 #include "Menu.h"
-#include <iostream>
 
 
 
-Menu::Menu(float width, float height, int numberOfElements)
+
+Menu::Menu(float width, float height, int numberOfElements, std::vector<std::string> menuItems)
 {
-	int elements = 0;
 	elements = numberOfElements > MAX_ELEMENTS ? MAX_ELEMENTS : numberOfElements;
 
 	for (int i = 0; i < elements; i++)
 	{
-		menuTexts[i].setString("item " + i);
-		menuTexts[i].setFont(FontsManager::GetInstance()->font);
+		menuTexts[i].setString(menuItems.at(i));
+		menuTexts[i].setFont(FontsManager::GetInstance()->font_basic);
 		menuTexts[i].setFillColor(sf::Color::Black);
-		menuTexts[i].setPosition(sf::Vector2f(width / 2, height / (MAX_ELEMENTS + 1) * i + 1));
+		menuTexts[i].setPosition(sf::Vector2f(width / 2- menuTexts[i].getGlobalBounds().width/2, (height / (MAX_ELEMENTS + 1) * i + 1)+180));
 		
 	}
-
-	//set default selected 
-	menuTexts[0].setFillColor(sf::Color::Red);
 }
 
 void Menu::MoveUp()
 {
+	SoundManager::GetInstance()->menuNavigate.play();
+	menuTexts[selected].setFillColor(sf::Color::Black);
+	selected -= 1;
+	if (selected < 0)
+		selected = elements-1;
+	menuTexts[selected].setFillColor(sf::Color::Red);
+	
 }
 
 void Menu::MoveDown()
 {
+	SoundManager::GetInstance()->menuNavigate.play();
+	menuTexts[selected].setFillColor(sf::Color::Black);
+	selected += 1;
+	if (selected > elements - 1)
+		selected = 0;
+	menuTexts[selected].setFillColor(sf::Color::Red);
 }
 
-void Menu::setElementText(int element)
+int Menu::getSelected()
 {
+	return selected;
 }
 
 void Menu::drawElement(sf::RenderTarget& w)
@@ -43,4 +53,7 @@ void Menu::drawElement(sf::RenderTarget& w)
 
 void Menu::update(const float& dt)
 {
+	blink += dt;
+	sf::Color newCol = sinf(10 * blink) > 0 ? sf::Color::Transparent : sf::Color::Black;
+	menuTexts[selected].setFillColor(newCol);
 }
