@@ -2,7 +2,7 @@
 
 
 
-TitleState::TitleState() : menu(GameGlobals::GAME_W, 177, 3, {"START", "LEADERBOARD", "OPTIONS"})
+TitleState::TitleState() : menu(GameGlobals::GAME_W, 177, 3, {"START", "LEADERBOARD", "OPTIONS"}),track(sample.colors, sample.segments,sample.totalTrackLength)
 {
 	
 	bgFill = sf::Color::Cyan;
@@ -32,18 +32,24 @@ void TitleState::handleInput(sf::Event& e)
 		}
 			
 	}
+
 }
 
 void TitleState::update(const float& dt)
 {
-	menu.update(dt);	
+	menu.update(dt);
+	track.acceleration += 1 * dt;
+	track.update(dt);
 }
 
 void TitleState::drawToTexture(Renderer& renderer)
 {
-	renderer.rtx->clear(bgFill);
+	renderer.rtx->clear();
+	bg.drawElement(*renderer.rtx);
 	renderer.rtx->draw(titleText);
+	track.drawElement(*renderer.rtx);
 	menu.drawElement(*renderer.rtx);
+	
 
 	renderer.rtx->display();
 	renderer.sprite->setTexture(renderer.rtx->getTexture());

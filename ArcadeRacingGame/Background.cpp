@@ -1,47 +1,15 @@
 #include "Background.h"
 #include <iostream>
 
-Background::Background()
+Background::Background(int bgNumber)
 {
-	
-	if (!bgTex.loadFromFile("assets/scenes.png"))
-	{
-		std::cout << "could not load background images" << '\n';
+	if (bgNumber > ImageManager::GetInstance()->bg_list.size())
+		bgNumber = ImageManager::GetInstance()->bg_list.size();
 
-	}
-
-	int startPix = 4;
-	int ix = 260; //full image sizes
-	int iy = 320; 
-	int row = 0;
-
-	
-	int i = 0;
-	int j = 0;
-	while (i < 17)
-	{
-		int x = startPix + ((j * ix) % bgTex.getSize().x);
-		if (x == 4 && i != 0)
-			row++;	
-		int y = 4 + (row * iy)+(row*4);
-		
-		bg_list.push_back(sf::Sprite(bgTex, sf::IntRect(x, y, ix - 4, iy - 64)));
-		bg_list.at(i).setScale(2 , 0.588); //just calculate using the img dimensions of the screen keep aspect ratio same
-		
-
-		j = ++j % 3;
-		i++;
-	}
-	//default
-	selected_bg = &bg_list.at(0);
+	selected_bg = &ImageManager::GetInstance()->bg_list.at(bgNumber);
 	gameBG = new ScrollingBackground(*selected_bg); 
 	
 
-}
-
-void Background::setBackground(int bgNum) //just make it so the input for this in the menu cannot go above the size of the bg array
-{
-	
 }
 
 void Background::update(const float& dt)

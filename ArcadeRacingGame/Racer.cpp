@@ -20,17 +20,15 @@ Racer::Racer(sf::Vector2f startPosition)
 
 void Racer::drawElement(sf::RenderTarget& w)
 {
-
-	racerSprites.at(2).setPosition(
-		sf::Vector2f((GameGlobals::GAME_W/2) - racerSprites.at(2).getGlobalBounds().width / 2,
-			(GameGlobals::GAME_H) - racerSprites.at(2).getGlobalBounds().height - 10));
 	w.draw(racerSprites.at(2));//can go out of range
 }
 
 void Racer::update(const float& dt)
 {
 	
-	
+	racerSprites.at(2).setPosition(
+		sf::Vector2f((GameGlobals::GAME_W / 2) - racerSprites.at(2).getGlobalBounds().width / 2,
+			(GameGlobals::GAME_H)-racerSprites.at(2).getGlobalBounds().height - 10));
 
 }
 

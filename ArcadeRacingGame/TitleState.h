@@ -3,12 +3,12 @@
 
 #include "State.h"
 #include "Menu.h"
+#include "Track.h"
+#include "Background.h"
+#include "SampleTrack.h"
 #include "FontsManager.h"
 #include <SFML/Graphics.hpp>
-#include <string>
-#include <iostream>
-#include <cmath>
-
+#include <stdlib.h>
 
 class TitleState : public State
 {
@@ -23,7 +23,10 @@ private:
 	sf::Color bgFill;
 	sf::Text titleText;
 	Menu menu;
+	const SampleTrack sample = SampleTrack();
 	
+	Background bg = Background(std::rand() %16);
+	Track track;
 	
 
 };

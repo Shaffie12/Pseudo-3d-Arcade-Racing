@@ -1,23 +1,21 @@
-#ifndef PROPS_H_
-#define _PROPS_H_
+#ifndef _BACKGROUND_H_
+#define _BACKGROUND_H_
 #include "Drawable.h"
 #include "GameGlobals.h"
 #include "Track.h"
+#include "ImageManager.h"
 #include <memory>
-#include<list>
+#include <list>
 
 class Background :public Drawable
 {
 public:
-	Background();
-	virtual void drawElement(sf::RenderTarget& w) override;
+	Background(int bgNumber);
+	void drawElement(sf::RenderTarget& w) override;
 	void scroll(float amount);
-	void setBackground(int bgNum);
 	void update(const float& dt) override;
 
-private:
-	sf::Texture bgTex; 
-	std::vector<sf::Sprite> bg_list;
+private: 
 	sf::Sprite* selected_bg;
 
 	class ScrollingBackground
@@ -28,15 +26,10 @@ private:
 		{
 			imgs.push_back(ImagePart(image, -image.getGlobalBounds().width, 0)); //0
 			imgs.push_back(ImagePart(image));
-			imgs.push_back(ImagePart(image, image.getGlobalBounds().width, 0)); 
-			
-
-			
+			imgs.push_back(ImagePart(image, image.getGlobalBounds().width, 0)); 	
 			
 		}
-			
 		
-
 		struct ImagePart
 		{
 			

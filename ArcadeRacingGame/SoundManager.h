@@ -19,7 +19,7 @@ private:
 	
 
 public:
-	SoundManager(SoundManager& other) = delete;
+	SoundManager(const SoundManager& other) = delete;
 	void operator=(const SoundManager&) = delete;
 
 	static SoundManager* GetInstance();

@@ -2,11 +2,12 @@
 
 const int GameState::REQUIRED_LAPS = 3;
 
+//pass an int for the bg number here or have the track data store that number
 GameState::GameState(TrackData trackdata) : 
 track(trackdata.colors,trackdata.segments,trackdata.totalTrackLength), 
 road_objects(trackdata.objects),
 player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)),
-bg(),
+bg(0),
 ui()
 {
 	
@@ -65,6 +66,7 @@ void GameState::update(const float& dt)
 	ui.update(dt);
 	if (laps != track.lapsDone)
 	{
+		SoundManager::GetInstance()->checkpoint.play();
 		laps++;
 		if(laps!=REQUIRED_LAPS)
 			incrementRaceTimer(8);
