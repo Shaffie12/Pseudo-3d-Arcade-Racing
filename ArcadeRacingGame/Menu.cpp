@@ -43,6 +43,11 @@ int Menu::getSelected()
 	return selected;
 }
 
+int Menu::getNumberOfElements()
+{
+	return elements;
+}
+
 void Menu::drawElement(sf::RenderTarget& w)
 {
 	for (sf::Text& text : menuTexts)

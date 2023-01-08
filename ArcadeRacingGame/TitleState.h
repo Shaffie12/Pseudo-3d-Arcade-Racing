@@ -3,6 +3,7 @@
 
 #include "State.h"
 #include "Menu.h"
+#include "TextInput.h"
 #include "Track.h"
 #include "Background.h"
 #include "SampleTrack.h"
@@ -23,8 +24,8 @@ private:
 	sf::Color bgFill;
 	sf::Text titleText;
 	Menu menu;
+	TextInput userName;
 	const SampleTrack sample = SampleTrack();
-	
 	Background bg = Background(std::rand() %16);
 	Track track;
 	
