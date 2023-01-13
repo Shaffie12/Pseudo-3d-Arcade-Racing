@@ -10,7 +10,7 @@
 class LeaderboardState : public State
 {
 
-	Table<std::string,float> table;
+	Table table;
 	std::vector<std::pair<std::string,float>> sortScoreData(std::map<std::string,float>& src);
 		
 public:

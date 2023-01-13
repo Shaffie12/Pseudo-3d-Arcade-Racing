@@ -34,7 +34,7 @@ void ScoreSaveData::ReadFromFile()
 				}
 				catch (std::invalid_argument) { std::cout << "could not convert score data" << '\n'; score = 0; }
 
-				scores.insert(std::pair<std::string,float>(next.substr(next.find(';')), score));
+				scores.insert(std::pair<std::string,float>(next.substr(0,next.find(';')), score));
 			}
 
 

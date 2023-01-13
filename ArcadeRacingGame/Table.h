@@ -5,37 +5,23 @@
 #include "FontsManager.h"
 #include "GameGlobals.h"
 #include <map>
+#include <sstream>
 
-template <typename A, typename B>
+
 class Table : public Drawable
 {
-	std::vector<std::pair<A,B>> tableData;
-	sf::Text titleText;
+	std::vector<std::pair<std::string,float>> tableData;
+	sf::Text headingsText[3];
+	sf::Text ranks[10];
+	sf::Text names[10];
+	sf::Text scores[10];
+	void setupTable();
 public:
-	Table(std::vector<std::pair<A,B>> data) :tableData(data) 
-	{ 
-		titleText.setString("TOP 10 RACERS"); 
-		titleText.setFont(FontsManager::GetInstance()->font_basic);
-		titleText.setPosition(sf::Vector2f(GameGlobals::GAME_W / 2 - titleText.getGlobalBounds().width / 2, GameGlobals::GAME_H / 2-130));
-		titleText.setFillColor(sf::Color::White); 
-		titleText.setScale(sf::Vector2f(1, 1));
-	};
-	Table()
-	{
-		titleText.setString("TOP 10 RACERS");
-		titleText.setFont(FontsManager::GetInstance()->font_basic);
-		titleText.setPosition(sf::Vector2f(GameGlobals::GAME_W / 2 - titleText.getGlobalBounds().width / 2, GameGlobals::GAME_H / 2-130));
-		titleText.setFillColor(sf::Color::White);
-		titleText.setScale(sf::Vector2f(1, 1));
-	}
-		
-	void loadData(std::vector<std::pair<A,B>> data) { tableData = data; };
-	void drawElement(sf::RenderTarget& w) override 
-	{ 
-		w.draw(titleText); 
-		
-	};
-	void update(const float& dt) override {};
+	Table(std::vector<std::pair<std::string, float>> data);
+	Table();
+	void loadData(std::vector<std::pair<std::string, float>> data);
+	void drawElement(sf::RenderTarget& w) override;
+	void update(const float& dt) override;
 
 };
 #endif

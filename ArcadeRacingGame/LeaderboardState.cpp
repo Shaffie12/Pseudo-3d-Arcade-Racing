@@ -5,7 +5,7 @@ std::vector<std::pair<std::string, float>> LeaderboardState::sortScoreData(std::
 	std::vector<std::pair<std::string, float>> sortedScores;
 	for (auto it = src.begin(); it != src.end(); it++)
 		sortedScores.push_back(*it);
-	std::sort(sortedScores.begin(), sortedScores.end(), [](std::pair<std::string, float>& p1, std::pair<std::string, float>& p2) {return p1.second > p2.second; });
+	std::sort(sortedScores.begin(), sortedScores.end(), [](std::pair<std::string, float>& p1, std::pair<std::string, float>& p2) {return p1.second < p2.second; });
 	return sortedScores;
 
 }
