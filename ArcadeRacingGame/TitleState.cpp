@@ -42,7 +42,7 @@ void TitleState::handleInput(sf::Event& e)
 				else
 					menu.MoveDown();
 			}
-			else if (e.key.code == sf::Keyboard::Enter && menu.getSelected() == 0)
+			else if (e.key.code == sf::Keyboard::Enter)
 			{
 				SoundManager::GetInstance()->menuSelect.play();
 				quit();
@@ -84,8 +84,6 @@ void TitleState::update(const float& dt)
 	{
 		userName.update(dt);
 	}
-		
-
 	track.acceleration += 1 * dt;
 	track.update(dt);
 }
@@ -100,17 +98,31 @@ void TitleState::drawToTexture(Renderer& renderer)
 	userName.drawElement(*renderer.rtx);
 	
 
-	renderer.rtx->display();
+	
 	renderer.sprite->setTexture(renderer.rtx->getTexture());
 	renderer.sprite->setScale(sf::Vector2f(2, 2));
+	renderer.rtx->display();
 }
 
 int TitleState::nextState()
 {
-	return 0;
+	switch (menu.getSelected())
+	{
+	case 0:
+		return 0;
+		break;
+	case 1:
+		return 1;
+		break;
+	case 2:
+		return 2;
+		break;
+	}
 }
 
 void TitleState::quit()
 {
 	exited = true;
 }
+
+

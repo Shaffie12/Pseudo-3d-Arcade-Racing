@@ -2,13 +2,24 @@
 
 WinState::WinState(float& timer)
 {
-	score = timer;
 	bgFill = sf::Color::Yellow;
 	
 	formatWinText();
 	formatScore(timer);
-	SaveData data = WriteSaveData();
-	WriteToFile(data);
+	
+	
+}
+
+WinState::WinState(float& timer, std::string username)
+{
+	
+	bgFill = sf::Color::Yellow;
+
+	formatWinText();
+	formatScore(timer);
+
+	//this should be a new fn
+	float time = 80.0f - timer;
 	
 }
 
@@ -68,11 +79,36 @@ int WinState::nextState()
 	return 0;
 }
 
-SaveData WinState::WriteSaveData()
+/*/
+SaveData* WinState::ReadFromFile(const std::string& path)
 {
-	SaveData data = ReadFromFile();
-	float time = 80.0f - score;
-	data.writeScore(time);
+	ScoreSaveData* data = new ScoreSaveData;
+	float score;
+	in.open(ScoreSaveData::SCORE_SAVE_PATH);
+	if (in)
+	{
+		while (in)
+		{
+			std::string next;
+
+			in >> next;
+			if (next.size() > 0)
+			{
+				try
+				{
+					std::stof(next);
+				}
+				catch (std::invalid_argument e)
+				{
+
+				}
+			}
+
+
+		}
+
+	}
+	in.close();
 	return data;
-	
 }
+*/

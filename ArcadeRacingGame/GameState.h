@@ -13,6 +13,7 @@ class GameState : public State
 {
 public:
 	GameState(TrackData trackData);
+	GameState(TrackData trackdata, std::string username);
 	void handleInput(sf::Event& e) override;
 	void update(const float& dt) override;
 	void drawToTexture(Renderer& renderer) override;
@@ -38,6 +39,8 @@ private:
 	float beep_timer = 0.0f;
 	const float INITIAL_WAIT = 4.1f*1000.0f;
 	bool beeps[3] = { false,false,false};
+
+	std::string username;
 
 	void sendVarsToUI();
 	void decrementRaceTimer(float dt);

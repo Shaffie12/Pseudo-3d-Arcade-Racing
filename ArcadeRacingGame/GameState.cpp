@@ -16,6 +16,18 @@ ui()
 
 }
 
+GameState::GameState(TrackData trackdata, std::string username): 
+track(trackdata.colors, trackdata.segments, trackdata.totalTrackLength),
+road_objects(trackdata.objects),
+player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)),
+bg(0),
+ui()
+{
+	this->username = username;
+	raceTimer = TIMER_START;
+	intro = true;
+}
+
 
 void GameState::handleInput(sf::Event& e)
 {
@@ -141,8 +153,6 @@ void GameState::doIntroBeeps(const float& dt)
 	
 }
 
-
-//draw all the elements in the state to the rtx only
 void GameState::drawToTexture(Renderer& renderer)
 {
 	renderer.rtx->clear();

@@ -48,7 +48,6 @@ void TextInput::handleInput(sf::Event& e)
 		{
 			if (input.tellp() > 0)
 			{
-				std::cout << input.tellp();
 				input.seekp(-1, std::ios::cur);
 				input << '_';
 				input.seekp(-1, std::ios::cur);

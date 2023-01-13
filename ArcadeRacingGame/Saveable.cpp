@@ -1,17 +1,19 @@
 #include "Saveable.h"
 
-
+/*
 void Saveable::WriteToFile(SaveData& sd)
 {
 	out.open(GameGlobals::SAVE_LOC, std::ios::app);
-	float time = sd.timeScore;
-	out << sd.timeScore << '\n';
-	//also pipe settings
+	out << sd.username<<';'<< sd.timeScore << '\n';
+	
 	out.close();
 
 }
+*/
 
-SaveData Saveable::ReadFromFile()
+/*
+
+SaveData* Saveable::ReadFromFile(const std::string& path)
 {
 	SaveData data;
 	float score;
@@ -23,8 +25,18 @@ SaveData Saveable::ReadFromFile()
 			std::string next;
 			
 			in >> next;
-			if(next.size()>0)
-				data.timeScore = std::stof(next);
+			if (next.size() > 0)
+			{
+				try
+				{
+					std::stof(next);
+				}
+				catch (std::invalid_argument e)
+				{
+
+				}
+			}
+				
 
 		}
 		
@@ -33,3 +45,4 @@ SaveData Saveable::ReadFromFile()
 	return data;
 
 }
+*/

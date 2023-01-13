@@ -8,10 +8,11 @@
 #include <sstream>
 #include <iomanip>
 
-class WinState : public State, Saveable
+class WinState : public State
 {
 public:
 	WinState(float& timer);
+	WinState(float& timer, std::string username);
 	void handleInput(sf::Event& e) override;
 	void update(const float& dt) override;
 	void drawToTexture(Renderer& renderer) override;
@@ -19,10 +20,10 @@ public:
 	void formatScore(float& timer);
 	void quit() override;
 	int nextState() override;
-	SaveData WriteSaveData() override;
+
+
 
 private:
-	float score;
 	sf::Text winText;
 	sf::Text timerText;
 	sf::Color bgFill;

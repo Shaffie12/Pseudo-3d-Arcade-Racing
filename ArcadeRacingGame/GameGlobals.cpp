@@ -7,4 +7,3 @@ const float GameGlobals::GAME_W = 500;
 const float GameGlobals::GAME_H = 300;
 bool GameGlobals::isActiveWindow = true;
 float GameGlobals::elapsedTime = 0;
-const std::string GameGlobals::SAVE_LOC = "save.txt";

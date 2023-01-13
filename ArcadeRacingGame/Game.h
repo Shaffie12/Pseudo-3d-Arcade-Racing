@@ -7,6 +7,8 @@
 #include "FontsManager.h"
 #include "GameState.h"
 #include "TitleState.h"
+#include "LeaderboardState.h"
+#include "OptionsState.h"
 #include "GameOverState.h"
 #include "WinState.h"
 #include"Track1.h"

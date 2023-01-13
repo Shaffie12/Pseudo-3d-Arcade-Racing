@@ -111,7 +111,10 @@ State* Game::getNextState(State*currentState)
 	}
 	else if (TitleState* gs = dynamic_cast<TitleState*>(currentState))
 	{
-		return new GameState(Track1());
+		if (gs->nextState() == 0)
+			return new GameState(Track1());
+		else if (gs->nextState() == 1)
+			return new LeaderboardState();
 	}
 	else if (GameOverState* gs = dynamic_cast<GameOverState*>(currentState))
 	{
