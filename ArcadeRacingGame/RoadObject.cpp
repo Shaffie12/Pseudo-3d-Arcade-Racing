@@ -98,7 +98,7 @@ RoadObject& RoadObject::operator=(const RoadObject& other)
 
 void RoadObject::update(const float& dt){}
 
-void RoadObject::drawElement(sf::RenderTarget& w)
+void RoadObject::drawElement(sf::RenderTarget& w) //should be move to update
 {
 	checkDraw();
 	if (draw)

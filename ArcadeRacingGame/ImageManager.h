@@ -9,6 +9,7 @@ private:
 	ImageManager();
 	~ImageManager();
 	sf::Texture backgroundsTexture;
+	
 
 	static ImageManager* _imageManager;
 
@@ -20,6 +21,8 @@ public:
 	static ImageManager* GetInstance();
 
 	std::vector<sf::Sprite> bg_list;
+	sf::Texture trophyTexture;
+	
 
 	
 };

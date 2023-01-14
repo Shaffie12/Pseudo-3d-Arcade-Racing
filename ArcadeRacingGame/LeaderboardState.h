@@ -5,12 +5,13 @@
 #include "State.h"
 #include "Table.h"
 #include "ScoreSaveData.h"
-
+#include "ImageManager.h"
 
 class LeaderboardState : public State
 {
 
 	Table table;
+	sf::Sprite trophySprite;
 	std::vector<std::pair<std::string,float>> sortScoreData(std::map<std::string,float>& src);
 		
 public:

@@ -5,9 +5,9 @@ ImageManager* ImageManager::_imageManager = nullptr;
 ImageManager::ImageManager()
 {
 
-	if (!backgroundsTexture.loadFromFile("assets/scenes.png"))
+	if (!backgroundsTexture.loadFromFile("assets/scenes.png")||!trophyTexture.loadFromFile("assets/trophy.png"))
 	{
-		std::cout << "could not load background images" << '\n';
+		std::cout << "could not load images" << '\n';
 
 	}
 

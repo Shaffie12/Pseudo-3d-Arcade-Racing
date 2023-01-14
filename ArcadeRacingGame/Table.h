@@ -6,6 +6,7 @@
 #include "GameGlobals.h"
 #include <map>
 #include <sstream>
+#include <iomanip>
 
 
 class Table : public Drawable

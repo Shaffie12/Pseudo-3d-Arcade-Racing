@@ -31,6 +31,7 @@ void ScoreSaveData::ReadFromFile()
 				try
 				{
 					score = stof(next.substr(next.find(';') + 1));
+					
 				}
 				catch (std::invalid_argument) { std::cout << "could not convert score data" << '\n'; score = 0; }
 

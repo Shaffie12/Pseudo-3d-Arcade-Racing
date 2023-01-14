@@ -7,7 +7,7 @@
 class ScoreSaveData  : public Saveable
 {
 	std::map<std::string, float> scores;
-	const std::string SCORE_SAVE_PATH = "Savedata/save.txt";
+	const std::string SCORE_SAVE_PATH = "Savedata/leaderboard.txt";
 
 public:
 	ScoreSaveData();
