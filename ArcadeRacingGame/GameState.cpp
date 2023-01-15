@@ -174,7 +174,7 @@ void GameState::drawToTexture(Renderer& renderer)
 
 int GameState::nextState()
 {
-	return raceTimer > 0 && track.lapsDone == REQUIRED_LAPS ? 0 : 1;
+	return raceTimer > 0 && track.lapsDone == REQUIRED_LAPS ? 1 : 2;
 }
 
 void GameState::quit()

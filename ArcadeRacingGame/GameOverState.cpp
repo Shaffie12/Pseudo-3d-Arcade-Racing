@@ -47,7 +47,7 @@ void GameOverState::drawToTexture(Renderer& renderer)
 
 int GameOverState::nextState()
 {
-	return 0;
+	return -2;
 }
 
 void GameOverState::quit()

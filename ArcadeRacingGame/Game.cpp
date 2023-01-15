@@ -80,9 +80,27 @@ void Game::renderCurrentState()
 			}
 			else
 			{
-				State* s = getNextState(states->top());
-				states->pop();
-				states->push(s);
+				int nextState = states->top()->nextState();
+				
+
+				if (nextState > 0) //means we will push a new state
+				{
+					State* s = getNextState(states->top());
+					states->top()->exited = false;
+					states->push(s);
+					std::cout << states->size();
+				}	
+				else //means we will pop the state only to get to a previous one
+				{
+					for (int i = 0; i > nextState; i--)
+						states->pop();	
+				}
+				
+						
+				
+				
+				//states->pop();
+				//states->push(s);
 				
 			}
 			
@@ -104,18 +122,22 @@ State* Game::getNextState(State*currentState)
 {
 	if (GameState* gs = dynamic_cast<GameState*>(currentState))
 	{
-		if (gs->nextState() == 0)
+		if (gs->nextState() == 1)
 			return new WinState(gs->raceTimer);
 		return new GameOverState();
 		
 	}
 	else if (TitleState* gs = dynamic_cast<TitleState*>(currentState))
 	{
-		if (gs->nextState() == 0)
+		if (gs->nextState() == 1)
 			return new GameState(Track1());
-		else if (gs->nextState() == 1)
+		else if (gs->nextState() == 2)
 			return new LeaderboardState();
+		//else if(gs->nextState() ==3 )
+		//return new SettingsState
+			
 	}
+	/*
 	else if (GameOverState* gs = dynamic_cast<GameOverState*>(currentState))
 	{
 		return new TitleState();
@@ -124,4 +146,5 @@ State* Game::getNextState(State*currentState)
 	{
 		return new TitleState();
 	}
+	*/
 }

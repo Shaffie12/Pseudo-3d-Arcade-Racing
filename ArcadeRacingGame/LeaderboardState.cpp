@@ -58,7 +58,7 @@ void LeaderboardState::quit()
 
 int LeaderboardState::nextState()
 {
-	return 0;
+	return -1;
 }
 
 

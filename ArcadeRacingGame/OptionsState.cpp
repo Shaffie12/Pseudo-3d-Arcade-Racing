@@ -19,5 +19,5 @@ void OptionsState::quit()
 
 int OptionsState::nextState()
 {
-	return 0;
+	return -1;
 }

@@ -76,7 +76,7 @@ void WinState::quit()
 
 int WinState::nextState()
 {
-	return 0;
+	return -2;
 }
 
 /*/
