@@ -4,8 +4,9 @@
 int RoadObject::slow_limiter = 10;
 int RoadObject::sprite_limits[3] = { 152,155,160 };
 
-RoadObject::RoadObject(int screeny, int segmentId, float depth, bool left) : activeSpr(&sprites[3]), segId(segmentId)
+RoadObject::RoadObject(int screeny, int segmentId, float depth, bool left, Track& t) : activeSpr(&sprites[3]), segId(segmentId), track(&t)
 { 
+	
 	//std::cout << "standard constructor was called" << '\n';
 	this->left = left;
 	if (screeny < GameGlobals::GAME_H / 2)
@@ -16,13 +17,14 @@ RoadObject::RoadObject(int screeny, int segmentId, float depth, bool left) : act
 
 	this->depth = depth;
 	float scaledY = Racing::Util::convertRange(screen_y, 1, GameGlobals::GAME_H/2, 1, 0);
-	perspective = Track::minRoad + 0.035+scaledY * Track::road_w;
+	perspective = Track::minRoad+ 0.035+scaledY * Track::road_w;
 
 	
 };
 
-RoadObject::RoadObject(int segmentId, float depth, bool left) : activeSpr(&sprites[3]), segId(segmentId)
+RoadObject::RoadObject(int segmentId, float depth, bool left, Track& t) : activeSpr(&sprites[3]), segId(segmentId), track(&t)
 {
+	
 	//std::cout << "standard constructor was called" << '\n';
 	this->left = left;
 	screen_y = GameGlobals::GAME_H / 2;
@@ -31,7 +33,7 @@ RoadObject::RoadObject(int segmentId, float depth, bool left) : activeSpr(&sprit
 	perspective = Track::minRoad + 0.035 + scaledY * Track::road_w;
 	
 
-};
+}
 
 RoadObject::RoadObject(const RoadObject& other) //copy
 {
@@ -39,6 +41,9 @@ RoadObject::RoadObject(const RoadObject& other) //copy
 	segId = other.segId;
 	draw = other.draw;
 	left = other.left;
+	track = &*other.track;
+	
+	
 	screen_y = other.screen_y;
 	perspective = other.perspective;
 	depth = other.depth;
@@ -67,26 +72,26 @@ RoadObject::RoadObject(RoadObject&& other) noexcept  //move
 	depth=other.depth;
 	drawAtStart = other.drawAtStart;
 	texture.swap(other.texture);
-
+	track = &*other.track;
+	
 	memcpy(sprites, other.sprites, sizeof(sprites));
 	for (int i = 0; i < sizeof(sprites) / sizeof(sprites[0]); i++)
 		sprites[i].setTexture(texture);
 	other.activeSpr = nullptr;
 	activeSpr = &sprites[3];
-	base_transform = base_transform = sprites[3].getTransform();
-	
-	
+	base_transform = base_transform = sprites[3].getTransform();	
 	
 }
 
 RoadObject& RoadObject::operator=(const RoadObject& other) 
 {
-	RoadObject ro(other.segId, other.depth, other.left);
+	RoadObject ro(other.segId, other.depth, other.left, *other.track);
 	ro.screen_y = other.screen_y;
 	ro.draw = other.draw;
 	ro.perspective = other.perspective;
 	ro.left = other.left;
 	ro.texture = other.texture;
+
 
 	memcpy(ro.sprites, other.sprites, sizeof(ro.sprites));
 	for (int i = 0; i < sizeof(sprites) / sizeof(sprites[0]); i++)
@@ -98,7 +103,7 @@ RoadObject& RoadObject::operator=(const RoadObject& other)
 
 void RoadObject::update(const float& dt){}
 
-void RoadObject::drawElement(sf::RenderTarget& w) //should be move to update
+void RoadObject::drawElement(sf::RenderTarget& w) //should be moved to update
 {
 	checkDraw();
 	if (draw)
@@ -115,16 +120,16 @@ void RoadObject::move()
 {
 
 	float acceleration_scale = Racing::Util::convertRange(screen_y, 150, 200, 0.001f, 3); //scale the acceleration the object moves depending on proximity to bottom of screen
-	int idx = Track::lines.size() - 1;
-	screen_y += acceleration_scale * Track::acceleration;
-	idx = (screen_y - 150) < Track::lines.size() - 1 ? (screen_y -150) : idx; //the list of lines is 149 element long
+	int idx = track->lines.size() - 1;
+	screen_y += acceleration_scale * track->acceleration;
+	idx = (screen_y - 150) < track->lines.size() - 1 ? (screen_y -150) : idx; //the list of lines is 149 element long
 
 	
 	if (left)
-		activeSpr->setPosition(sf::Vector2f(((Track::lines.at(idx).middlePt - Track::lines.at(idx).perspective) * GameGlobals::GAME_W) - activeSpr->getGlobalBounds().width,
+		activeSpr->setPosition(sf::Vector2f(((track->lines.at(idx).middlePt - track->lines.at(idx).perspective) * GameGlobals::GAME_W) - activeSpr->getGlobalBounds().width,
 			screen_y - activeSpr->getGlobalBounds().height));
 	else
-		activeSpr->setPosition(sf::Vector2f(((Track::lines.at(idx).middlePt + Track::lines.at(idx).perspective) * GameGlobals::GAME_W) + activeSpr->getGlobalBounds().width,
+		activeSpr->setPosition(sf::Vector2f(((track->lines.at(idx).middlePt + track->lines.at(idx).perspective) * GameGlobals::GAME_W) + activeSpr->getGlobalBounds().width,
 			screen_y - activeSpr->getGlobalBounds().height));
 		
 }
@@ -154,9 +159,9 @@ void::RoadObject::upscale()
 void RoadObject::checkDraw()
 {		
 
-	if ((segId == Track::activeSeg->id  && depth <= Track::activeSeg->screen_y - 150) || (segId == Track::baseSeg->id && depth <= Track::baseSeg->screen_y && drawAtStart))
+	if ((segId == track->activeSeg->id  && depth <= track->activeSeg->screen_y - 150) || (segId == track->baseSeg->id && depth <= track->baseSeg->screen_y && drawAtStart))
 		draw = true;
-	if (screen_y > 300 && Track::activeSeg->id!= segId)
+	if (screen_y > 300 && track->activeSeg->id!= segId)
 	{
 		drawAtStart = false;
 		draw = false;

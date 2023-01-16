@@ -2,13 +2,12 @@
 
 const int GameState::REQUIRED_LAPS = 3;
 
-//pass an int for the bg number here or have the track data store that number
 GameState::GameState(TrackData trackdata) : 
 track(trackdata.colors,trackdata.segments,trackdata.totalTrackLength), 
-road_objects(trackdata.objects),
-player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)),
-bg(0),
-ui()
+roadObjectsContainer(trackdata.objects,track),
+player(track, sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)),
+bg(track,0),
+ui(track)
 {
 	
 	raceTimer = TIMER_START;
@@ -18,10 +17,10 @@ ui()
 
 GameState::GameState(TrackData trackdata, std::string username): 
 track(trackdata.colors, trackdata.segments, trackdata.totalTrackLength),
-road_objects(trackdata.objects),
-player(sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)),
-bg(0),
-ui()
+roadObjectsContainer(trackdata.objects,track),
+player(track, sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30)),
+bg(track, 0),
+ui(track)
 {
 	this->username = username;
 	raceTimer = TIMER_START;
@@ -62,7 +61,7 @@ void GameState::update(const float& dt)
 		decrementRaceTimer(dt);
 		if (player.distanceToTrackEdge() > 400.0f)
 		{
-			Track::addAcceleration(-0.03f);
+			track.addAcceleration(-0.03f);
 		}	
 	}
 	else
@@ -72,7 +71,7 @@ void GameState::update(const float& dt)
 	track.update(dt);
 	player.update(dt);
 	bg.update(dt);
-	for (RoadObject* r : road_objects)
+	for (RoadObject* r : roadObjectsContainer.objects)
 		r->update(dt);
 	sendVarsToUI();
 	ui.update(dt);
@@ -112,9 +111,9 @@ bool GameState::isGameFinished()
 void GameState::checkPlayerMovement()
 {
 	if (moving)
-		Track::addAcceleration(0.02);
+		track.addAcceleration(0.02);
 	else
-		Track::addAcceleration(-0.02);
+		track.addAcceleration(-0.02);
 	if (left)
 		track.addPlayerOffset(0.02, true);
 	if (right)
@@ -160,7 +159,7 @@ void GameState::drawToTexture(Renderer& renderer)
 	track.drawElement(*renderer.rtx);
 	player.drawElement(*renderer.rtx);
 	bg.drawElement(*renderer.rtx);
-	for (RoadObject* r : road_objects)
+	for (RoadObject* r : roadObjectsContainer.objects)
 		r->drawElement(*renderer.rtx);
 	ui.drawElement(*renderer.rtx);
 
@@ -179,9 +178,9 @@ int GameState::nextState()
 
 void GameState::quit()
 {
-	
 	SoundManager::GetInstance()->beep_1.setPitch(1);
 	exited = true;
+	//we might need to push a new track
 }
 
 

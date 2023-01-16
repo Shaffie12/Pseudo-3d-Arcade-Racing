@@ -1,7 +1,7 @@
 #include "Background.h"
 #include <iostream>
 
-Background::Background(int bgNumber)
+Background::Background(Track& t, int bgNumber): track(&t)
 {
 	if (bgNumber > ImageManager::GetInstance()->bg_list.size())
 		bgNumber = ImageManager::GetInstance()->bg_list.size();
@@ -14,7 +14,7 @@ Background::Background(int bgNumber)
 
 void Background::update(const float& dt)
 {
-	scroll((-1 * Track::activeSeg->curvature) * Track::acceleration );
+	scroll((-1 * track->activeSeg->curvature) * track->acceleration );
 }
 
 void Background::drawElement(sf::RenderTarget& w)

@@ -25,8 +25,19 @@ Track1::Track1() :TrackData()
 	};
 	objects =
 	{
-		//segmeent 0 objects
-		new Rock(0,100,true),
+		//segment 0 objects
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Rock,0,100,true),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,0,80,true),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,0,80,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,0,60,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,0,60,true),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,0,30,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,0,30,true),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,0,0,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,0,0,true),
+
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Start,180,7,30,false)
+		/*
 		new Tree(0,80,true),
 		new Tree(0,80,false),
 		new Tree(0,60,false),
@@ -42,7 +53,7 @@ Track1::Track1() :TrackData()
 
 		//segment 7
 		new StartSign(180, 7, 30,false)
-		
+		*/
 	
 		
 	};

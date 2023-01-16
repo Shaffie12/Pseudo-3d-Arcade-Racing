@@ -10,14 +10,14 @@
 class Background :public Drawable
 {
 public:
-	Background(int bgNumber);
+	Background(Track& t, int bgNumber);
 	void drawElement(sf::RenderTarget& w) override;
 	void scroll(float amount);
 	void update(const float& dt) override;
 
 private: 
 	sf::Sprite* selected_bg;
-
+	Track* track;
 	class ScrollingBackground
 	{
 	public:

@@ -8,7 +8,7 @@
 class Racer :public Drawable
 {
 	public:
-		Racer(sf::Vector2f startPosition);
+		Racer(Track& t, sf::Vector2f startPosition);
 		void drawElement(sf::RenderTarget& w) override;
 		float distanceToTrackEdge();
 		virtual void update(const float& dt) override;
@@ -19,6 +19,7 @@ class Racer :public Drawable
 		sf::Vector2f RacerPosition;
 		sf::Texture racerTexture;
 		std::vector<sf::Sprite> racerSprites;
+		Track& track;
 
 };
 

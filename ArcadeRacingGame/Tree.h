@@ -5,8 +5,8 @@
 class Tree : public RoadObject
 {
 public:
-	Tree(int screeeny, int segmentId, float depth, bool left);
-	Tree(int segmentId, float depth, bool left);
+	Tree(int screeeny, int segmentId, float depth, bool left,Track& t);
+	Tree(int segmentId, float depth, bool left, Track& t);
 	
 };
 

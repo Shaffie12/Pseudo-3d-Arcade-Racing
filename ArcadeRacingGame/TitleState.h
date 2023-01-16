@@ -5,8 +5,8 @@
 #include "Menu.h"
 #include "TextInput.h"
 #include "Track.h"
-#include "Background.h"
 #include "SampleTrack.h"
+#include "Background.h"
 #include "FontsManager.h"
 #include <SFML/Graphics.hpp>
 #include <stdlib.h>
@@ -21,13 +21,14 @@ public:
 	int nextState() override;
 	void quit() override;
 private:
-	sf::Color bgFill;
 	sf::Text titleText;
+	SampleTrack sample;
+	Track track;
 	Menu menu;
 	TextInput userName;
-	const SampleTrack sample = SampleTrack();
-	Background bg = Background(std::rand() %16);
-	Track track;
+	Background bg;
+	
+	
 	
 
 };

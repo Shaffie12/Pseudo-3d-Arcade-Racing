@@ -11,12 +11,13 @@
 class UI : public Drawable
 {
 	public:
-		UI();
+		UI(Track& t);
 		void drawElement(sf::RenderTarget& w);
 		void update(const float& dt) override;
 		void getRaceTimer(float timer);
 		
 	private:
+		Track& track;
 		std::stringstream ss;
 		sf::Text speedText;
 		sf::Text lapText;

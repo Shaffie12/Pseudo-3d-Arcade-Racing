@@ -1,6 +1,6 @@
 #include "UI.h"
 
-UI::UI() 
+UI::UI(Track& t) : track(t)
 {
 
 	speed = 0;
@@ -34,7 +34,7 @@ void UI::getRaceTimer(float timer)
 void UI::update(const float& dt)
 {
 	ss.clear();
-	ss << Racing::Util::roundToDP(Track::acceleration, 3) * 100 << ';' << Track::lapsDone << ';' << timer;
+	ss << Racing::Util::roundToDP(track.acceleration, 3) * 100 << ';' << Track::lapsDone << ';' << timer;
 	std::string spd;
 	std::string lap_string;
 	std::string time;

@@ -1,7 +1,7 @@
 #include "Racer.h"
 #include <iostream>
 
-Racer::Racer(sf::Vector2f startPosition)
+Racer::Racer(Track& t, sf::Vector2f startPosition) : track(t)
 {
 	
 
@@ -34,6 +34,6 @@ void Racer::update(const float& dt)
 
 float Racer::distanceToTrackEdge()
 {
-	return std::abs(Track::lines.at(Track::lines.size() - 1).middlePt * GameGlobals::GAME_W - GameGlobals::GAME_W / 2);
+	return std::abs(track.lines.at(track.lines.size() - 1).middlePt * GameGlobals::GAME_W - GameGlobals::GAME_W / 2);
 }
 

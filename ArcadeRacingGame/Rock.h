@@ -5,8 +5,8 @@
 class Rock : public RoadObject
 {
 public:
-	Rock(int screeny, int segmentId, float depth, bool left);
-	Rock(int segmentId, float depth, bool left);
+	Rock(int screeny, int segmentId, float depth, bool left, Track& t);
+	Rock(int segmentId, float depth, bool left, Track& t);
 };
 
 #endif 

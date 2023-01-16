@@ -6,8 +6,8 @@ class StartSign : public RoadObject
 {
 public:
 	
-	StartSign(int screeny, int segmentId, float depth, bool left);
-	StartSign(int segmentId, float depth, bool left);
+	StartSign(int screeny, int segmentId, float depth, bool left, Track& t);
+	StartSign(int segmentId, float depth, bool left,Track& t);
 	void loadSprites() override;
 	void update(const float& dt) override;
 	void checkSwapTexture();

@@ -5,12 +5,11 @@
 #include "GameGlobals.h"
 #include "Track.h"
 
-class Track;
 class RoadObject : public Drawable
 {
 public:
-	RoadObject(int screeny, int segmentID, float depth, bool left);
-	RoadObject(int segmentID, float depth, bool left);
+	RoadObject(int screeny, int segmentID, float depth, bool left, Track& t);
+	RoadObject(int segmentID, float depth, bool left, Track& t);
 	RoadObject(const RoadObject& other);
 	RoadObject(RoadObject&& other) noexcept;
 	RoadObject& operator=(const RoadObject& other);
@@ -18,8 +17,9 @@ public:
 	virtual void update(const float& dt) override;
 	float depth; //at what point relative to the segment progress down the screen, should we start drawing this object
 	int segId;
-	bool draw = false; //was doing this check in the racing game before
+	bool draw = false; 
 protected:
+	Track* track;
 	bool left;
 	float perspective;
 	float screen_y;

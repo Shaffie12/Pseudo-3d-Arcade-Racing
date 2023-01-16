@@ -5,7 +5,7 @@
 class Player : public Racer
 {
 	public:
-		Player(sf::Vector2f startPosition);
+		Player(Track& t, sf::Vector2f startPosition);
 		
 		
 };

@@ -6,6 +6,7 @@
 #include "Track.h"
 #include "TrackData.h"
 #include "Background.h"
+#include "RoadObjectLinker.h"
 #include "UI.h"
 
 
@@ -27,7 +28,8 @@ private:
 	Player player;
 	Background bg;
 	UI ui;
-	std::vector<RoadObject*> road_objects;
+	RoadObjectLinker roadObjectsContainer;
+	//std::vector<RoadObject*> road_objects;
 	const int TIMER_START = 80;
 	
 	int laps = 0;

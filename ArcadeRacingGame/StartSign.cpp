@@ -1,6 +1,6 @@
 #include "StartSign.h"
 
-StartSign::StartSign(int screeny, int segmentId, float depth, bool left) : RoadObject(screeny, segmentId, depth, left)
+StartSign::StartSign(int screeny, int segmentId, float depth, bool left, Track& t) : RoadObject(screeny, segmentId, depth, left,t)
 {
 	if ( (!texture.loadFromFile("assets/roadside/startsheet.png")) || (!checkTexture.loadFromFile("assets/roadside/checksheet.png")) || (!goalTexture.loadFromFile("assets/roadside/goalsheet.png")) )
 		std::cout << "error loading assets" << '\n';
@@ -8,7 +8,7 @@ StartSign::StartSign(int screeny, int segmentId, float depth, bool left) : RoadO
 	loadSprites();
 }
 
-StartSign::StartSign(int segmentId, float depth, bool left):RoadObject(segmentId, depth, left)
+StartSign::StartSign(int segmentId, float depth, bool left,Track& t):RoadObject(segmentId, depth, left,t)
 {
 	if (!texture.loadFromFile("assets/roadside/startsheet.png"))
 		std::cout << "error loading assets" << '\n';

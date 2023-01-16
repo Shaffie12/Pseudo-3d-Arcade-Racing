@@ -2,28 +2,28 @@
 #include<iostream>
 #include <cmath>
 
-float Track::road_w = 0.9f;
-float Track::tile_w = 0.15;
-float Track::minRoad = 0.01;
+const float Track::road_w = 0.9f;
+const float Track::tile_w = 0.15;
+const float Track::minRoad = 0.01;
 //maybe could use friend functions for these
-float Track::trackOffset = 0;
-float Track::acceleration = 0; 
+//float Track::trackOffset = 0;
+//float Track::acceleration = 0; 
 int Track::lapsDone = 0;
-std::vector<Track::Line> Track::lines = std::vector<Track::Line>(); 
-Segment* Track::activeSeg = nullptr;
-Segment* Track::baseSeg = nullptr;
+//std::vector<Track::Line> Track::lines = std::vector<Track::Line>(); 
+//Segment* Track::activeSeg = nullptr;
+//Segment* Track::baseSeg = nullptr;
 
 Track::Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segments, int totalTrackLen)
 {	
-	acceleration = 0;
-	dist = 0;
-	trackOffset = 0;
-	activeSeg = nullptr;
-	lapsDone = 0;
-	lines = std::vector<Track::Line>();
+	//acceleration = 0;
+	//dist = 0;
+	//trackOffset = 0;
+	//activeSeg = nullptr;
+	//lapsDone = 0;
+	//lines = std::vector<Track::Line>();
 
 	for (int i = 1; i <=GameGlobals::GAME_H/2 ; i++)
-		lines.push_back(Line(i));
+		lines.push_back(Line(i,*this));
 	this->segments = segments;
 	roadColors = colors;
 	activeSeg = &this->segments.at(0);
@@ -33,6 +33,12 @@ Track::Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segmen
 	lapsDone = 0;
 	
 	
+}
+
+Track::~Track()
+{
+	delete activeSeg;
+	delete baseSeg;
 }
 
 void Track::update(const float& deltaTime)

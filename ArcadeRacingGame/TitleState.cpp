@@ -2,11 +2,9 @@
 
 
 
-TitleState::TitleState() : menu(GameGlobals::GAME_W, 177, 3, {"START", "LEADERBOARD", "OPTIONS"}),track(sample.colors, sample.segments,sample.totalTrackLength)
+TitleState::TitleState() : menu(GameGlobals::GAME_W, 177, 3, {"START", "LEADERBOARD", "OPTIONS"}),track(sample.colors, sample.segments,sample.totalTrackLength), bg(track, std::rand() % 16)
 {
 	userName = TextInput();
-	bgFill = sf::Color::Cyan;
-
 	titleText.setString("ARCADE RACER LITE");
 	titleText.setFont(FontsManager::GetInstance()->font_title);
 	titleText.setFillColor(sf::Color::Black);
@@ -84,7 +82,7 @@ void TitleState::update(const float& dt)
 	{
 		userName.update(dt);
 	}
-	track.acceleration += 1 * dt;
+	track.addAcceleration(1 * dt);
 	track.update(dt);
 }
 
@@ -124,5 +122,3 @@ void TitleState::quit()
 {
 	exited = true;
 }
-
-
