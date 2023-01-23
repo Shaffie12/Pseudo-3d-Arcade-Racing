@@ -2,7 +2,7 @@
 #define _WINSTATE_H_
 #include "State.h"
 #include "Util.h"
-#include "Saveable.h"
+#include "ScoreSaveData.h"
 #include "FontsManager.h"
 #include<iostream>
 #include <sstream>

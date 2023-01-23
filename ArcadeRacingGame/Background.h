@@ -17,7 +17,7 @@ public:
 
 private: 
 	sf::Sprite* selected_bg;
-	Track* track;
+	Track& track;
 	class ScrollingBackground
 	{
 	public:

@@ -6,8 +6,6 @@ WinState::WinState(float& timer)
 	
 	formatWinText();
 	formatScore(timer);
-	
-	
 }
 
 WinState::WinState(float& timer, std::string username)
@@ -20,6 +18,10 @@ WinState::WinState(float& timer, std::string username)
 
 	//this should be a new fn
 	float time = 80.0f - timer;
+
+	ScoreSaveData data;
+	std::pair<std::string, float> val = std::make_pair(username, time);
+	data.MakeEntry(val);
 	
 }
 

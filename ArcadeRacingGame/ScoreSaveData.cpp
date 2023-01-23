@@ -12,7 +12,13 @@ std::map<std::string, float> ScoreSaveData::getScores() const
 
 void ScoreSaveData::WriteToFile()
 {
+	out.open(SCORE_SAVE_PATH, std::ios::app);
+	out << nextEntry.first << ';' << nextEntry.second << '\n';
+
+	out.close();
 }
+
+
 
 void ScoreSaveData::ReadFromFile()
 {
@@ -43,4 +49,9 @@ void ScoreSaveData::ReadFromFile()
 
 	}
 	in.close();
+}
+
+void ScoreSaveData::MakeEntry(std::pair<std::string, float>& entry)
+{
+	nextEntry = entry;
 }

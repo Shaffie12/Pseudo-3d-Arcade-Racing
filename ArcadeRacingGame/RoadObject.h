@@ -19,7 +19,7 @@ public:
 	int segId;
 	bool draw = false; 
 protected:
-	Track* track;
+	Track& track;
 	bool left;
 	float perspective;
 	float screen_y;

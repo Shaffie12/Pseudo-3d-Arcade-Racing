@@ -1,7 +1,7 @@
 #include "Background.h"
 #include <iostream>
 
-Background::Background(Track& t, int bgNumber): track(&t)
+Background::Background(Track& t, int bgNumber): track(t)
 {
 	if (bgNumber > ImageManager::GetInstance()->bg_list.size())
 		bgNumber = ImageManager::GetInstance()->bg_list.size();
@@ -14,7 +14,7 @@ Background::Background(Track& t, int bgNumber): track(&t)
 
 void Background::update(const float& dt)
 {
-	scroll((-1 * track->activeSeg->curvature) * track->acceleration );
+	scroll((-1 * track.activeSeg->curvature) * track.acceleration );
 }
 
 void Background::drawElement(sf::RenderTarget& w)
@@ -52,17 +52,6 @@ void Background::drawElement(sf::RenderTarget& w)
 			 gameBG->imgs.at(1) = gameBG->imgs.at(0);
 			 gameBG->imgs.at(0) = temp;
 		 }
-		 
-		 
-
-		 /*
-		 part.sprite.setPosition(sf::Vector2f(std::floor(part.sprite.getPosition().x + (amount*GameGlobals::GAME_W)), 0));
-
-		 if (part.sprite.getPosition().x < -2 * part.sprite.getGlobalBounds().width)
-			 part.sprite.setPosition(sf::Vector2f(part.sprite.getGlobalBounds().width, 0));
-		 if (part.sprite.getPosition().x > 2 * part.sprite.getGlobalBounds().width)
-			 part.sprite.setPosition(sf::Vector2f(-part.sprite.getGlobalBounds().width + 2, 0));
-			 */
 	 }
  }
 
