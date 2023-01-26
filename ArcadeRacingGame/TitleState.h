@@ -20,12 +20,12 @@ public:
 	void drawToTexture(Renderer& renderer) override;
 	int nextState() override;
 	void quit() override;
+	TextInput userName;
 private:
 	sf::Text titleText;
 	SampleTrack sample;
 	Track track;
 	Menu menu;
-	TextInput userName;
 	Background bg;
 	
 	

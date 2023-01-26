@@ -1,6 +1,6 @@
 #include "GameState.h"
 
-const int GameState::REQUIRED_LAPS = 3;
+const int GameState::REQUIRED_LAPS = 1;
 
 GameState::GameState(TrackData trackdata) : 
 track(trackdata.colors,trackdata.segments,trackdata.totalTrackLength), 

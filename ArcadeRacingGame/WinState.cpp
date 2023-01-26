@@ -22,6 +22,7 @@ WinState::WinState(float& timer, std::string username)
 	ScoreSaveData data;
 	std::pair<std::string, float> val = std::make_pair(username, time);
 	data.MakeEntry(val);
+	data.WriteToFile();
 	
 }
 
@@ -81,36 +82,4 @@ int WinState::nextState()
 	return -2;
 }
 
-/*/
-SaveData* WinState::ReadFromFile(const std::string& path)
-{
-	ScoreSaveData* data = new ScoreSaveData;
-	float score;
-	in.open(ScoreSaveData::SCORE_SAVE_PATH);
-	if (in)
-	{
-		while (in)
-		{
-			std::string next;
 
-			in >> next;
-			if (next.size() > 0)
-			{
-				try
-				{
-					std::stof(next);
-				}
-				catch (std::invalid_argument e)
-				{
-
-				}
-			}
-
-
-		}
-
-	}
-	in.close();
-	return data;
-}
-*/

@@ -16,10 +16,7 @@ Game::~Game()
 	delete renderer;
 
 	while (!states->empty())
-	{
-		states->pop();
-		
-	}
+		states->pop();	
 	delete states;	
 		
 }
@@ -36,7 +33,9 @@ void Game::initStates()
 {
 	FontsManager::GetInstance();
 	SoundManager::GetInstance();
-	states->push(new TitleState());
+	TitleState* ts = new TitleState();
+	username = &ts->userName.text.getString();
+	states->push(ts);
 	
 	
 }
@@ -115,7 +114,11 @@ State* Game::getNextState(State* currentState)
 	if (GameState* gs = dynamic_cast<GameState*>(currentState))
 	{
 		if (gs->nextState() == 1)
+		{
+			if (username->toAnsiString() != "___")
+				return new WinState(gs->raceTimer, username->toAnsiString());
 			return new WinState(gs->raceTimer);
+		}
 		return new GameOverState();
 
 	}
@@ -125,8 +128,8 @@ State* Game::getNextState(State* currentState)
 			return new GameState(Track1());
 		else if (gs->nextState() == 2)
 			return new LeaderboardState();
-		//else if(gs->nextState() ==3 )
-		//return new SettingsState
+		else if (gs->nextState() == 3)
+			return new OptionsState();
 
 	}
 }

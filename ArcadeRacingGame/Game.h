@@ -2,6 +2,7 @@
 #define _GAME_H_
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <SFML/Graphics.hpp>
 #include "Renderer.h"
 #include "SoundManager.h"
 #include "FontsManager.h"
@@ -30,6 +31,7 @@ private:
 	sf::Clock clock;
 	float dt;
 	std::stack<State*>* states;
+	const sf::String* username;
 
 	void initWindow();
 	void updateDT();
