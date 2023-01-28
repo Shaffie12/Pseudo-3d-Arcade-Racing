@@ -1,6 +1,6 @@
 #include "GameState.h"
 
-const int GameState::REQUIRED_LAPS = 1;
+const int GameState::REQUIRED_LAPS = 3;
 
 GameState::GameState(TrackData trackdata) : 
 track(trackdata.colors,trackdata.segments,trackdata.totalTrackLength), 
@@ -72,7 +72,11 @@ void GameState::update(const float& dt)
 	player.update(dt);
 	bg.update(dt);
 	for (RoadObject* r : roadObjectsContainer.objects)
+	{
 		r->update(dt);
+		doColiisionDetection(r);
+	}
+		
 	sendVarsToUI();
 	ui.update(dt);
 	if (laps != track.lapsDone)
@@ -87,6 +91,20 @@ void GameState::update(const float& dt)
 		quit();
 
 }
+
+
+void GameState::doColiisionDetection(RoadObject*& r)
+{
+	
+	if (r->screen_y >= GameGlobals::GAME_H - 50 && player.distanceToTrackEdge() >= 390)
+		if (track.getAcceleration() <= 0.4f)
+			track.addAcceleration(-track.getAcceleration());
+		else
+			std::cout << "dead" << '\n';
+	
+			
+}
+
 
 void GameState::sendVarsToUI()
 {

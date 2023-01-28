@@ -18,11 +18,11 @@ public:
 	float depth; //at what point relative to the segment progress down the screen, should we start drawing this object
 	int segId;
 	bool draw = false; 
+	float screen_y;
 protected:
 	Track& track;
 	bool left;
 	float perspective;
-	float screen_y;
 	sf::Transform base_transform;
 	static int slow_limiter;
 	static int sprite_limits[3];

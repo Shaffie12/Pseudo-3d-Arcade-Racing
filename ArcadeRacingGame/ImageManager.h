@@ -22,6 +22,8 @@ public:
 
 	std::vector<sf::Sprite> bg_list;
 	sf::Texture trophyTexture;
+	sf::Texture deathTextures[3];
+	sf::Sprite deathSprites[3];
 	
 
 	

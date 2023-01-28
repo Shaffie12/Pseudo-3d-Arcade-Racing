@@ -29,7 +29,6 @@ private:
 	Background bg;
 	UI ui;
 	RoadObjectLinker roadObjectsContainer;
-	//std::vector<RoadObject*> road_objects;
 	const int TIMER_START = 80;
 	
 	int laps = 0;
@@ -50,6 +49,7 @@ private:
 	bool isGameFinished();
 	void checkPlayerMovement();
 	void doIntroBeeps(const float& dt);
+	void doColiisionDetection(RoadObject*& r);
 	
 
 

@@ -73,6 +73,7 @@ public:
 	virtual void drawElement(sf::RenderTarget& w) override;
 	void addPlayerOffset(float amount, bool add);
 	void addAcceleration(float amount);
+	float& getAcceleration();
 	static const float road_w;
 	static const float tile_w;
 	static const float minRoad;

@@ -141,6 +141,11 @@ void Track::addPlayerOffset(float amount, bool add) //change
 
 void Track::addAcceleration(float amount){ acceleration += amount;}
 
+float& Track::getAcceleration()
+{
+	return acceleration;
+}
+
 void Track::addSegmentOffset()
 {
 	if (activeSeg->screen_y >= GameGlobals::GAME_H-80 )
