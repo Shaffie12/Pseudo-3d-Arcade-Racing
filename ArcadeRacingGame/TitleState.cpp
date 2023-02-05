@@ -9,8 +9,7 @@ TitleState::TitleState() : menu(GameGlobals::GAME_W, 177, 3, {"START", "LEADERBO
 	titleText.setFont(FontsManager::GetInstance()->font_title);
 	titleText.setFillColor(sf::Color::Black);
 	titleText.setPosition(GameGlobals::GAME_W/2-titleText.getGlobalBounds().width/2, (GameGlobals::GAME_H/2-titleText.getGlobalBounds().height/2)-100);
-	titleText.setScale(sf::Vector2f(1, 1));		
-
+	titleText.setScale(sf::Vector2f(1, 1));	
 }
 
 void TitleState::handleInput(sf::Event& e)
@@ -67,9 +66,6 @@ void TitleState::handleInput(sf::Event& e)
 			userName.handleInput(e);
 		}
 	}
-		
-	
-
 }
 
 void TitleState::update(const float& dt)
@@ -121,4 +117,10 @@ int TitleState::nextState()
 void TitleState::quit()
 {
 	exited = true;
+}
+
+void TitleState::SetupMusic()
+{
+	SoundManager::GetInstance()->trackMusic1.setLoop(true);
+	SoundManager::GetInstance()->trackMusic1.play();
 }

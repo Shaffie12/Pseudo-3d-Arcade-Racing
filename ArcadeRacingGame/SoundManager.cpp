@@ -6,7 +6,7 @@ SoundManager* SoundManager::_soundManager = nullptr;
 SoundManager::SoundManager()
 {
 	if (!b1_buf.loadFromFile("assets/sounds/beep1.wav") || 
-		!music_buf.loadFromFile("assets/sounds/music.wav") || 
+		!trackMusic1.openFromFile("assets/sounds/music.wav") || 
 		!ch_buf.loadFromFile("assets/sounds/check.wav") ||
 		!nav_buf.loadFromFile("assets/sounds/nav.wav") ||
 		!select_buf.loadFromFile("assets/sounds/select.wav")

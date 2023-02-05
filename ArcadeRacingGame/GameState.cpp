@@ -100,7 +100,7 @@ void GameState::doColiisionDetection(RoadObject*& r)
 		if (track.getAcceleration() <= 0.4f)
 			track.addAcceleration(-track.getAcceleration());
 		else
-			std::cout << "dead" << '\n';
+			player.Destroy();
 	
 			
 }
@@ -128,13 +128,13 @@ bool GameState::isGameFinished()
 
 void GameState::checkPlayerMovement()
 {
-	if (moving)
+	if (!player.isDead() && moving)
 		track.addAcceleration(0.02);
 	else
 		track.addAcceleration(-0.02);
-	if (left)
+	if (!player.isDead() && left)
 		track.addPlayerOffset(0.02, true);
-	if (right)
+	if (!player.isDead() && right)
 		track.addPlayerOffset(0.02, false);
 }
 

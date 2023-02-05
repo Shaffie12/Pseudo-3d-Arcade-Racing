@@ -22,6 +22,7 @@ public:
 	void quit() override;
 	TextInput userName;
 private:
+	void SetupMusic();
 	sf::Text titleText;
 	SampleTrack sample;
 	Track track;

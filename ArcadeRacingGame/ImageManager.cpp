@@ -6,7 +6,8 @@ ImageManager::ImageManager()
 {
 
 	if (!backgroundsTexture.loadFromFile("assets/scenes.png") || !trophyTexture.loadFromFile("assets/trophy.png")||
-		!deathTextures[0].loadFromFile("assets/death1.png") || !deathTextures[1].loadFromFile("assets/death2.png")|| !deathTextures[2].loadFromFile("assets/death3.png"))
+		!deathTextures[0].loadFromFile("assets/death1.png") || !deathTextures[1].loadFromFile("assets/death2.png")||
+		!deathTextures[2].loadFromFile("assets/death3.png") || !carTexture.loadFromFile("assets/car.png"))
 	{
 		std::cout << "could not load images" << '\n';
 
@@ -34,6 +35,7 @@ ImageManager::ImageManager()
 		j = ++j % 3;
 		i++;
 	}
+	
 
 }
 

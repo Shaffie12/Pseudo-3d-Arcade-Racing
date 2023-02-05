@@ -23,7 +23,6 @@ Game::~Game()
 
 void Game::initWindow()
 {
-
 	//can read screen size etc from a file and set those vars here/create the window here with file input/settings
 	mainWindow->setFramerateLimit(60);
 	renderer->init();
