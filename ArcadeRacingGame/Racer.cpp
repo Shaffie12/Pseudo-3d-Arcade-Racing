@@ -32,25 +32,22 @@ void Racer::drawElement(sf::RenderTarget& w)
 
 void Racer::update(const float& dt)
 {
-	if(!dead)
+	activeSprite->setPosition(
+		sf::Vector2f((GameGlobals::GAME_W / 2) - activeSprite->getGlobalBounds().width / 2,
+			(GameGlobals::GAME_H)-activeSprite->getGlobalBounds().height - 10));
+	if(dead)
 	{
-
-		activeSprite->setPosition(
-			sf::Vector2f((GameGlobals::GAME_W / 2) - activeSprite->getGlobalBounds().width / 2,
-				(GameGlobals::GAME_H)-activeSprite->getGlobalBounds().height - 10));
-	}
-	else
-	{
-
 		OnDestroy();
 		explosions[drawExplosionIdx].setPosition(
 			sf::Vector2f((GameGlobals::GAME_W / 2) - explosions[drawExplosionIdx].getGlobalBounds().width / 2,
 				(GameGlobals::GAME_H)-explosions[drawExplosionIdx].getGlobalBounds().height - 10));
 	}
+
 }
 
 void Racer::Destroy()
 {
+	SoundManager::GetInstance()->explosion.play();
 	dead = true;
 	activeSprite = &racerSprites.at(0);
 	clock.restart();
@@ -58,21 +55,27 @@ void Racer::Destroy()
 
 void Racer::OnDestroy()
 {
-	if (clock.getElapsedTime().asSeconds() >= 0.1f && clock.getElapsedTime().asSeconds() <= 0.5f)
+	if (clock.getElapsedTime().asSeconds() >= 0.1f && clock.getElapsedTime().asSeconds() <= 1.0f)
 	{
+		activeSprite->setColor(sf::Color::White);
+		if (clock.getElapsedTime().asSeconds() < 0.4f)
+			drawExplosionIdx = 1;
+		else
+			drawExplosionIdx = 2;
 		explosions[drawExplosionIdx].setColor(sf::Color::White);
-		activeSprite->setColor(sf::Color::Transparent);
-
 	}
-	else if (clock.getElapsedTime().asSeconds() > 0.5f)
+	else if (clock.getElapsedTime().asSeconds() > 1.0f)
 	{
-		for (sf::Sprite s : explosions)
+		for (sf::Sprite& s : explosions)
 			s.setColor(sf::Color::Transparent);
-		
+		for (sf::Sprite& s : racerSprites)
+			s.setColor(sf::Color::White);
 		activeSprite = &racerSprites.at(2);
 
 		dead = false;
 	}
+	else
+		activeSprite->setColor(sf::Color::White);
 		
 }
 

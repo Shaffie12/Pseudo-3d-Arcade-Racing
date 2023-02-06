@@ -68,14 +68,15 @@ void GameState::update(const float& dt)
 	{
 		doIntroBeeps(dt);
 	}
+
 	track.update(dt);
-	player.update(dt);
 	bg.update(dt);
 	for (RoadObject* r : roadObjectsContainer.objects)
 	{
 		r->update(dt);
 		doColiisionDetection(r);
 	}
+	player.update(dt);
 		
 	sendVarsToUI();
 	ui.update(dt);
@@ -86,7 +87,6 @@ void GameState::update(const float& dt)
 		if(laps!=REQUIRED_LAPS)
 			incrementRaceTimer(8);
 	}
-		
 	if (isGameFinished())
 		quit();
 
@@ -95,16 +95,14 @@ void GameState::update(const float& dt)
 
 void GameState::doColiisionDetection(RoadObject*& r)
 {
-	
 	if (r->screen_y >= GameGlobals::GAME_H - 50 && player.distanceToTrackEdge() >= 390)
 		if (track.getAcceleration() <= 0.4f)
 			track.addAcceleration(-track.getAcceleration());
 		else
-			player.Destroy();
-	
-			
+			if(!player.isDead())
+				player.Destroy();
+				
 }
-
 
 void GameState::sendVarsToUI()
 {
@@ -185,9 +183,7 @@ void GameState::drawToTexture(Renderer& renderer)
 	renderer.rtx->display();
 	renderer.sprite->setTexture(renderer.rtx->getTexture());
 	renderer.sprite->setScale(sf::Vector2f(2, 2)); //scale using dimensions instead
-	
-
-}
+	}
 
 int GameState::nextState()
 {
@@ -198,7 +194,7 @@ void GameState::quit()
 {
 	SoundManager::GetInstance()->beep_1.setPitch(1);
 	exited = true;
-	//we might need to push a new track
+	
 }
 
 
