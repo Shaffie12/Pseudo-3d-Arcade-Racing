@@ -19,7 +19,7 @@ protected:
 	float blink = 0;
 
 public:
-	Menu(float width, float height, int numberOfElements, std::vector<std::string> menuItems);
+	Menu(float width, float height, int numberOfElements, std::vector<std::string> menuItems, sf::Color color);
 	void drawElement(sf::RenderTarget& w) override;
 	void update(const float& dt) override;
 	void MoveUp();

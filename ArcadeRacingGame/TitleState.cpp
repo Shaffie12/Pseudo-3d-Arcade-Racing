@@ -2,7 +2,8 @@
 
 
 
-TitleState::TitleState() : menu(GameGlobals::GAME_W, 177, 3, {"START", "LEADERBOARD", "OPTIONS"}),track(sample.colors, sample.segments,sample.totalTrackLength), bg(track, std::rand() % 16)
+TitleState::TitleState() : menu(GameGlobals::GAME_W, 177, 3, {"START", "LEADERBOARD", "OPTIONS"}, 
+	sf::Color::Black),track(sample.colors, sample.segments,sample.totalTrackLength), bg(track, std::rand() % 16)
 {
 	userName = TextInput();
 	titleText.setString("ARCADE RACER LITE");
@@ -90,8 +91,6 @@ void TitleState::drawToTexture(Renderer& renderer)
 	track.drawElement(*renderer.rtx);
 	menu.drawElement(*renderer.rtx);
 	userName.drawElement(*renderer.rtx);
-	
-
 	
 	renderer.sprite->setTexture(renderer.rtx->getTexture());
 	renderer.sprite->setScale(sf::Vector2f(2, 2));

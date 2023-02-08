@@ -3,7 +3,7 @@
 
 
 
-Menu::Menu(float width, float height, int numberOfElements, std::vector<std::string> menuItems)
+Menu::Menu(float width, float height, int numberOfElements, std::vector<std::string> menuItems, sf::Color color)
 {
 	elements = numberOfElements > MAX_ELEMENTS ? MAX_ELEMENTS : numberOfElements;
 
@@ -11,7 +11,7 @@ Menu::Menu(float width, float height, int numberOfElements, std::vector<std::str
 	{
 		menuTexts[i].setString(menuItems.at(i));
 		menuTexts[i].setFont(FontsManager::GetInstance()->font_basic);
-		menuTexts[i].setFillColor(sf::Color::Black);
+		menuTexts[i].setFillColor(color);
 		menuTexts[i].setPosition(sf::Vector2f(width / 2- menuTexts[i].getGlobalBounds().width/2, (height / (MAX_ELEMENTS + 1) * i + 1)+180));
 		
 	}
