@@ -15,13 +15,7 @@ int Track::lapsDone = 0;
 
 Track::Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segments, int totalTrackLen)
 {	
-	//acceleration = 0;
-	//dist = 0;
-	//trackOffset = 0;
-	//activeSeg = nullptr;
-	//lapsDone = 0;
-	//lines = std::vector<Track::Line>();
-
+	
 	for (int i = 1; i <=GameGlobals::GAME_H/2 ; i++)
 		lines.push_back(Line(i,*this));
 	this->segments = segments;
@@ -30,9 +24,7 @@ Track::Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segmen
 	baseSeg = &this->segments.at(this->segments.size() - 1);
 	distanceToSegmentEnd = activeSeg->length;
 	totalTrackLength = totalTrackLen;
-	lapsDone = 0;
-	
-	
+	lapsDone = 0;	
 }
 
 Track::~Track()
@@ -63,9 +55,7 @@ void Track::updateTrackLines()
 	rit = lines.rbegin();
 	while (rit != lines.rend())
 	{
-
 		Line& line = *rit;
-
 
 		line.colours[0] = sinf(30 * pow(1 - line.perspective, 10) + dist * 0.1) > 0.0f ? roadColors.find("grassLight")->second : roadColors.find("grassDark")->second;
 		line.colours[1] = sinf(50 * pow(1 - line.perspective, 5) + dist * 0.8) > 0.0f ? roadColors.find("rumble1")->second : roadColors.find("rumble2")->second;

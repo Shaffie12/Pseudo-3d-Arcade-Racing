@@ -39,8 +39,6 @@ public:
 			tile_w = perspective * t.tile_w;
 
 		}
-
-
 	};
 private:
 

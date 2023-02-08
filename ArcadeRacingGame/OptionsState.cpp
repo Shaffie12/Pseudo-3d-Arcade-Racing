@@ -1,22 +1,36 @@
 #include "OptionsState.h"
 
+OptionsState::OptionsState() : bars { SlidingBar(sf::Vector2f(GameGlobals::GAME_W/2 +30,GameGlobals::GAME_H/2)), SlidingBar(sf::Vector2f(GameGlobals::GAME_W/2 + 30,GameGlobals::GAME_H/2 + 20)) }
+{
+}
+
 void OptionsState::handleInput(sf::Event& e)
 {
 	if (e.type == sf::Event::KeyPressed)
 	{
 		if (e.key.code == sf::Keyboard::Enter || e.key.code == sf::Keyboard::Space)
 			quit();
+		else if (e.key.code == sf::Keyboard::D)
+			bars[0].Increase();
+		else if (e.key.code == sf::Keyboard::A)
+			bars[0].Decrease();
 	}
+	
+
+
 }
 
 void OptionsState::update(const float& dt)
 {
+	for (SlidingBar b : bars)
+		b.update(dt);
 }
 
 void OptionsState::drawToTexture(Renderer& renderer)
 {
 	renderer.rtx->clear(sf::Color::Black);
-
+	for(SlidingBar b: bars)
+		b.drawElement(*renderer.rtx);
 	renderer.rtx->display();
 	renderer.sprite->setTexture(renderer.rtx->getTexture());
 	renderer.sprite->setScale(sf::Vector2f(2, 2));
