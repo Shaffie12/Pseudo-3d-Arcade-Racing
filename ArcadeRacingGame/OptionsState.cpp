@@ -1,7 +1,7 @@
 #include "OptionsState.h"
 
 OptionsState::OptionsState() : bars { 
-	SlidingBar(sf::Vector2f(GameGlobals::GAME_W/2 +30 ,GameGlobals::GAME_H/2), sf::Color::White, sf::Color::Blue), SlidingBar(sf::Vector2f(GameGlobals::GAME_W/2 + 30,GameGlobals::GAME_H/2 + 30)) },
+	SlidingBar(sf::Vector2f(GameGlobals::GAME_W/2 +30 ,GameGlobals::GAME_H/2), sf::Color(255,0,0), sf::Color(255,128,0)), SlidingBar(sf::Vector2f(GameGlobals::GAME_W/2 + 30,GameGlobals::GAME_H/2 + 30)) },
 	menu(GameGlobals::GAME_W/2-130,GameGlobals::GAME_H/2-7, 2, { "MUSIC VOLUME","SFX VOLUME" }, sf::Color::White)
 {
 	menu.SetTextScale(0.7f, 0.7f);
