@@ -1,9 +1,10 @@
 #include "OptionsState.h"
 
 OptionsState::OptionsState() : bars { 
-	SlidingBar(sf::Vector2f(GameGlobals::GAME_W/2 +30,GameGlobals::GAME_H/2)), SlidingBar(sf::Vector2f(GameGlobals::GAME_W/2 + 30,GameGlobals::GAME_H/2 + 20)) },
-	menu(GameGlobals::GAME_W,-250, 2, {"MUSIC VOLUME", "SFX VOLUME"}, sf::Color::White)
+	SlidingBar(sf::Vector2f(GameGlobals::GAME_W/2 +30 ,GameGlobals::GAME_H/2), sf::Color::White, sf::Color::Blue), SlidingBar(sf::Vector2f(GameGlobals::GAME_W/2 + 30,GameGlobals::GAME_H/2 + 30)) },
+	menu(GameGlobals::GAME_W/2-130,GameGlobals::GAME_H/2-7, 2, { "MUSIC VOLUME","SFX VOLUME" }, sf::Color::White)
 {
+	menu.SetTextScale(0.7f, 0.7f);
 }
 
 void OptionsState::handleInput(sf::Event& e)
@@ -13,14 +14,13 @@ void OptionsState::handleInput(sf::Event& e)
 		if (e.key.code == sf::Keyboard::Enter || e.key.code == sf::Keyboard::Space)
 			quit();
 		else if (e.key.code == sf::Keyboard::D)
-			bars[selectedBar].Increase();
+			bars[menu.getSelected()].Increase();
 		else if (e.key.code == sf::Keyboard::A)
-			bars[selectedBar].Decrease();
+			bars[menu.getSelected()].Decrease();
 		else if (e.key.code == sf::Keyboard::W)
 			menu.MoveUp();
 		else if (e.key.code == sf::Keyboard::S)
-			menu.MoveDown();		
-
+			menu.MoveDown();
 	}
 	
 }
@@ -28,20 +28,22 @@ void OptionsState::handleInput(sf::Event& e)
 void OptionsState::update(const float& dt)
 {
 	menu.update(dt);
-	for (SlidingBar b : bars)
+	for (SlidingBar& b : bars)
 		b.update(dt);
 }
 
 void OptionsState::drawToTexture(Renderer& renderer)
 {
 	renderer.rtx->clear(sf::Color::Black);
+
 	menu.drawElement(*renderer.rtx);
-	//for(SlidingBar b: bars)
-		//b.drawElement(*renderer.rtx);
-	
-	renderer.rtx->display();
+	for(SlidingBar b: bars)
+		b.drawElement(*renderer.rtx);
+
 	renderer.sprite->setTexture(renderer.rtx->getTexture());
 	renderer.sprite->setScale(sf::Vector2f(2, 2));
+	renderer.rtx->display();
+
 }
 
 void OptionsState::quit()

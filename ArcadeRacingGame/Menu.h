@@ -25,8 +25,11 @@ public:
 	void MoveUp();
 	void MoveDown();
 	int getSelected();
+	void SetTextScale(float x, float y);
 	int getNumberOfElements();
+	sf::Color color;
 	sf::Text menuTexts[MAX_ELEMENTS];
+	float yPadding = 30.0f;
 	bool enabled = false;
 
 
