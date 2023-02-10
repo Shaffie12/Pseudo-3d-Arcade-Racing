@@ -2,7 +2,7 @@
 
 OptionsState::OptionsState() : bars { 
 	SlidingBar(sf::Vector2f(GameGlobals::GAME_W/2 +30 ,GameGlobals::GAME_H/2), sf::Color(255,0,0), sf::Color(255,128,0)), SlidingBar(sf::Vector2f(GameGlobals::GAME_W/2 + 30,GameGlobals::GAME_H/2 + 30)) },
-	menu(GameGlobals::GAME_W/2-130,GameGlobals::GAME_H/2-7, 2, { "MUSIC VOLUME","SFX VOLUME" }, sf::Color::White)
+	menu(GameGlobals::GAME_W/2-130,GameGlobals::GAME_H/2-8, 2, { "MUSIC VOLUME","SFX VOLUME" }, sf::Color::White)
 {
 	menu.SetTextScale(0.7f, 0.7f);
 }
@@ -14,9 +14,9 @@ void OptionsState::handleInput(sf::Event& e)
 		if (e.key.code == sf::Keyboard::Enter || e.key.code == sf::Keyboard::Space)
 			quit();
 		else if (e.key.code == sf::Keyboard::D)
-			bars[menu.getSelected()].Increase();
+			bars[menu.getSelected()].Increase(menu.getSelected());
 		else if (e.key.code == sf::Keyboard::A)
-			bars[menu.getSelected()].Decrease();
+			bars[menu.getSelected()].Decrease(menu.getSelected());
 		else if (e.key.code == sf::Keyboard::W)
 			menu.MoveUp();
 		else if (e.key.code == sf::Keyboard::S)

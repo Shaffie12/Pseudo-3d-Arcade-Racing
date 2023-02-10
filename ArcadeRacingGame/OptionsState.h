@@ -4,7 +4,8 @@
 #include "Util.h"
 #include "Menu.h"
 #include "FontsManager.h"
-#include <iostream>
+#include "SoundManager.h"
+#include<iostream>
 
 class OptionsState: public State
 {
@@ -61,16 +62,46 @@ private:
 				w.draw(barLines[i], 2, sf::Lines);
 		}
 
-		void Increase() { value = Racing::Util::clamp(value + 0.1f, 0.0f, 1.0f); }
-		void Decrease() { value = Racing::Util::clamp(value - 0.1f, 0.0f, 1.0f); }
-		void SetValue(float val) { value = Racing::Util::clamp(val, 0.0f, 1.0f); }
 
-
+		void Increase(int menuChoice) 
+		{ 
+			value = Racing::Util::clamp(value + 0.1f, 0.0f, 1.0f);
+			if (menuChoice == 0)
+				AdjustMusicVol();
+			else
+				AdjustSFXVol();
+			
+		}
+		void Decrease(int menuChoice) 
+		{
+			value = Racing::Util::clamp(value - 0.1f, 0.0f, 1.0f); 
+			if (menuChoice == 0)
+				AdjustMusicVol();
+			else
+				AdjustSFXVol();
+		}
+		void SetValue(float val) 
+		{
+			value = Racing::Util::clamp(val, 0.0f, 1.0f); 
+		}
 	private:
 		sf::Vertex barLines[10][2];
 		const float MAX_LINE_SIZE = 100.0f;
 		const float MIN_LINE_SIZE = 0.0f;
 		float value;
+
+		void AdjustMusicVol()
+		{
+			SoundManager::GetInstance()->trackMusic1.setVolume(value * 100.0f);
+		}
+		void AdjustSFXVol()
+		{
+			SoundManager::GetInstance()->menuNavigate.setVolume(value*100.0f);
+			SoundManager::GetInstance()->menuSelect.setVolume(value * 100.0f);
+			SoundManager::GetInstance()->beep_1.setVolume(value * 100.0f);
+			SoundManager::GetInstance()->checkpoint.setVolume(value * 100.0f);
+			SoundManager::GetInstance()->explosion.setVolume(value * 100.0f);
+		}
 	};
 	Menu menu;
 	SlidingBar bars [2];
