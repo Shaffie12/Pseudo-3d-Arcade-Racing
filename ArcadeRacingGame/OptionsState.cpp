@@ -1,7 +1,8 @@
 #include "OptionsState.h"
 
-OptionsState::OptionsState() : bars { 
-	SlidingBar(sf::Vector2f(GameGlobals::GAME_W/2 +30 ,GameGlobals::GAME_H/2), sf::Color(255,0,0), sf::Color(255,128,0)), SlidingBar(sf::Vector2f(GameGlobals::GAME_W/2 + 30,GameGlobals::GAME_H/2 + 30)) },
+OptionsState::OptionsState(float sfxV, float musicV) : bars { 
+	SlidingBar(sf::Vector2f(GameGlobals::GAME_W/2 +30 ,GameGlobals::GAME_H/2), sf::Color(255,0,0), sf::Color(255,128,0),musicV), 
+	SlidingBar(sf::Vector2f(GameGlobals::GAME_W/2 + 30,GameGlobals::GAME_H/2 + 30),sf::Color(255,0,0), sf::Color(255,128,0),sfxV) },
 	menu(GameGlobals::GAME_W/2-130,GameGlobals::GAME_H/2-8, 2, { "MUSIC VOLUME","SFX VOLUME" }, sf::Color::White)
 {
 	menu.SetTextScale(0.7f, 0.7f);
@@ -48,6 +49,10 @@ void OptionsState::drawToTexture(Renderer& renderer)
 
 void OptionsState::quit()
 {
+	SettingsSaveData data;
+	data.setMusicVolume(bars[0].GetValue());
+	data.setSfxVolume(bars[1].GetValue());
+	data.WriteToFile();
 	exited = true;
 }
 

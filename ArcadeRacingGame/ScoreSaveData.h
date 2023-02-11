@@ -7,8 +7,8 @@
 
 class ScoreSaveData  : public Saveable
 {
-	std::map<std::string, float> scores;
 	const std::string SCORE_SAVE_PATH = "Savedata/leaderboard.txt";
+	std::map<std::string, float> scores;
 	std::pair<std::string, float> nextEntry;
 
 public:

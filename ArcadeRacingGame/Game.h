@@ -38,6 +38,7 @@ private:
 	void pollSFEvents();
 	void renderCurrentState();
 	void initStates();
+	void setVolumesFromFile();
 	State* getNextState(State* currentState);
 	
 

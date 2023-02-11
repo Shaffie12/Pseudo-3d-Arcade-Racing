@@ -5,12 +5,13 @@
 #include "Menu.h"
 #include "FontsManager.h"
 #include "SoundManager.h"
+#include "SettingsSaveData.h"
 #include<iostream>
 
 class OptionsState: public State
 {
 public:
-	OptionsState();
+	OptionsState(float sfxV, float musicV);
 	void handleInput(sf::Event& e) override;
 	void update(const float& dt) override;
 	void drawToTexture(Renderer& renderer) override;
@@ -20,7 +21,7 @@ public:
 private:
 	struct SlidingBar : Drawable
 	{
-		SlidingBar(sf::Vector2f screenPos,sf::Color color1 = sf::Color::White, sf::Color color2 = sf::Color::White) : value(1.0f)
+		SlidingBar(sf::Vector2f screenPos,sf::Color color1 = sf::Color::White, sf::Color color2 = sf::Color::White, float val = 1.0f) : value(val)
 		{
 			for (int i = 0; i < sizeof(barLines)/sizeof(barLines[0]); i++) //factor in screen pos
 			{
@@ -69,8 +70,7 @@ private:
 			if (menuChoice == 0)
 				AdjustMusicVol();
 			else
-				AdjustSFXVol();
-			
+				AdjustSFXVol();	
 		}
 		void Decrease(int menuChoice) 
 		{
@@ -84,6 +84,7 @@ private:
 		{
 			value = Racing::Util::clamp(val, 0.0f, 1.0f); 
 		}
+		float& GetValue() { return value; }
 	private:
 		sf::Vertex barLines[10][2];
 		const float MAX_LINE_SIZE = 100.0f;
