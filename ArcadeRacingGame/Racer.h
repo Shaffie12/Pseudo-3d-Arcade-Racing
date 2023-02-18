@@ -11,7 +11,7 @@ class Racer :public Drawable
 	public:
 		Racer(Track& t, sf::Vector2f startPosition, sf::Color color = sf::Color::White);
 		void drawElement(sf::RenderTarget& w) override;
-		float distanceToTrackEdge();
+		virtual float distanceToTrackEdge();
 		virtual void update(const float& dt) override;
 		void Destroy();
 		bool isDead() { return dead; }

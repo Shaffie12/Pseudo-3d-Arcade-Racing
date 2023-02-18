@@ -12,6 +12,8 @@ ui(track)
 	
 	raceTimer = TIMER_START;
 	intro = true;
+	
+	npcs.push_back(new NpcRacer(track, sf::Vector2f((GameGlobals::GAME_W / 2) + 80, (GameGlobals::GAME_H) - 5),sf::Color::Red));
 
 }
 
@@ -62,7 +64,11 @@ void GameState::update(const float& dt)
 		if (player.distanceToTrackEdge() > 400.0f)
 		{
 			track.addAcceleration(-0.03f);
-		}	
+		}
+		for (Racer* r : npcs)
+		{
+			r->update(dt);
+		}
 	}
 	else
 	{
@@ -77,7 +83,7 @@ void GameState::update(const float& dt)
 		doColiisionDetection(r);
 	}
 	player.update(dt);
-		
+
 	sendVarsToUI();
 	ui.update(dt);
 	if (laps != track.lapsDone)
@@ -176,6 +182,8 @@ void GameState::drawToTexture(Renderer& renderer)
 	player.drawElement(*renderer.rtx);
 	bg.drawElement(*renderer.rtx);
 	for (RoadObject* r : roadObjectsContainer.objects)
+		r->drawElement(*renderer.rtx);
+	for (Racer* r : npcs)
 		r->drawElement(*renderer.rtx);
 	ui.drawElement(*renderer.rtx);
 

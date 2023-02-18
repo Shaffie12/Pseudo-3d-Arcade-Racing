@@ -118,10 +118,10 @@ void RoadObject::drawElement(sf::RenderTarget& w) //should be moved to update
 void RoadObject::move()
 {
 
-	float acceleration_scale = Racing::Util::convertRange(screen_y, 150, 200, 0.001f, 3); //scale the acceleration the object moves depending on proximity to bottom of screen
+	float acceleration_scale = Racing::Util::convertRange(screen_y, 150, 200, 0.001f, 3); //scale the acceleration of the object depending on proximity to bottom of screen
 	int idx = track.lines.size() - 1;
 	screen_y += acceleration_scale * track.acceleration;
-	idx = (screen_y - 150) < track.lines.size() - 1 ? (screen_y -150) : idx; //the list of lines is 149 element long
+	idx = (screen_y - 150) < track.lines.size() - 1 ? (screen_y -150) : idx; //the list of lines is 150 element long (0-149)
 
 	
 	if (left)

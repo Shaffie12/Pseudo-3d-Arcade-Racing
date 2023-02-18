@@ -14,6 +14,7 @@ class Track :public Drawable
 {
 
 	friend class RoadObject;
+	friend class NpcRacer;
 	friend class Background;
 	friend class UI;
 	friend class Racer;

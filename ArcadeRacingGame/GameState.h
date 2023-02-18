@@ -3,6 +3,7 @@
 #include "State.h"
 #include "Drawable.h"
 #include "Player.h"
+#include "NpcRacer.h"
 #include "Track.h"
 #include "TrackData.h"
 #include "Background.h"
@@ -22,10 +23,11 @@ public:
 	void quit() override;
 	static const int REQUIRED_LAPS;
 	float raceTimer;
-
+	
 private:
 	Track track;
 	Player player;
+	std::vector<Racer*> npcs;
 	Background bg;
 	UI ui;
 	RoadObjectLinker roadObjectsContainer;

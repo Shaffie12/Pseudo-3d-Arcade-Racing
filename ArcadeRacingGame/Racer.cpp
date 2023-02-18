@@ -1,7 +1,7 @@
 #include "Racer.h"
 #include <iostream>
 
-Racer::Racer(Track& t, sf::Vector2f startPosition, sf::Color color) : track(t)
+Racer::Racer(Track& t, sf::Vector2f startPosition, sf::Color color ) : track(t)
 {
 	int pixStart = 0;
 	for (int i = 0; i < 5; i++)
@@ -29,6 +29,7 @@ void Racer::drawElement(sf::RenderTarget& w)
 	w.draw(*activeSprite);
 	w.draw(explosions[drawExplosionIdx]);
 }
+
 
 void Racer::update(const float& dt)
 {
