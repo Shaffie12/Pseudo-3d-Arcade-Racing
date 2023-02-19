@@ -24,6 +24,7 @@ public:
 	sf::Texture trophyTexture;
 	sf::Texture deathTextures[3];
 	sf::Texture carTexture;
+	sf::Texture enemyCar;
 
 };
 

@@ -3,25 +3,7 @@
 
 Racer::Racer(Track& t, sf::Vector2f startPosition, sf::Color color ) : track(t)
 {
-	int pixStart = 0;
-	for (int i = 0; i < 5; i++)
-	{
-		racerSprites.push_back(sf::Sprite(ImageManager::GetInstance()->carTexture, sf::IntRect(pixStart, 0, 32, 16)));
-		pixStart += 32;
-		racerSprites.at(i).scale(sf::Vector2f(2,2));
-		racerSprites.at(i).setPosition(
-			sf::Vector2f((startPosition.x) - racerSprites.at(i).getGlobalBounds().width / 2, (startPosition.y) - racerSprites.at(i).getGlobalBounds().height - 10));
-		racerSprites.at(i).setColor(color);
-	}
-	activeSprite = &racerSprites.at(2);
-
-	for (int i = 0; i < sizeof(explosions) / sizeof(sf::Sprite); i++)
-	{
-		explosions[i].setTexture(ImageManager::GetInstance()->deathTextures[i]);
-		explosions[i].setPosition(sf::Vector2f((startPosition.x) - explosions[i].getGlobalBounds().width / 2, (startPosition.y) - explosions[i].getGlobalBounds().height - 10));
-		explosions[i].setScale(sf::Vector2f(2, 2));
-		explosions[i].setColor(sf::Color::Transparent);
-	}
+	loadSprites(startPosition,color);
 }
 
 void Racer::drawElement(sf::RenderTarget& w)
@@ -78,6 +60,29 @@ void Racer::OnDestroy()
 	else
 		activeSprite->setColor(sf::Color::White);
 		
+}
+
+void Racer::loadSprites(sf::Vector2f startPosition, sf::Color color)
+{
+	int pixStart = 0;
+	for (int i = 0; i < 5; i++)
+	{
+		racerSprites.push_back(sf::Sprite(ImageManager::GetInstance()->carTexture, sf::IntRect(pixStart, 0, 32, 16)));
+		pixStart += 32;
+		racerSprites.at(i).scale(sf::Vector2f(2, 2));
+		racerSprites.at(i).setPosition(
+			sf::Vector2f((startPosition.x) - racerSprites.at(i).getGlobalBounds().width / 2, (startPosition.y) - racerSprites.at(i).getGlobalBounds().height - 10));
+		racerSprites.at(i).setColor(color);
+	}
+	activeSprite = &racerSprites.at(2);
+
+	for (int i = 0; i < sizeof(explosions) / sizeof(sf::Sprite); i++)
+	{
+		explosions[i].setTexture(ImageManager::GetInstance()->deathTextures[i]);
+		explosions[i].setPosition(sf::Vector2f((startPosition.x) - explosions[i].getGlobalBounds().width / 2, (startPosition.y) - explosions[i].getGlobalBounds().height - 10));
+		explosions[i].setScale(sf::Vector2f(2, 2));
+		explosions[i].setColor(sf::Color::Transparent);
+	}
 }
 
 float Racer::distanceToTrackEdge()
