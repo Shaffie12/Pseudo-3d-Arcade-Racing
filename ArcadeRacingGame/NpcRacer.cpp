@@ -1,7 +1,7 @@
 #include "NpcRacer.h"
 
 
-NpcRacer::NpcRacer(Track& t, sf::Vector2f startPos, sf::Color color) :Racer(t, startPos, color), speed(std::rand() % 50 + 30)
+NpcRacer::NpcRacer(Track& t, sf::Vector2f startPos, sf::Color color) :Racer(t, startPos, color), speed(std::rand() % 10 + 8)
 {
 	loadSprites(startPos,color);
 	screenY = (activeSprite->getPosition().y + activeSprite->getGlobalBounds().height / 2) - 150;
@@ -9,29 +9,38 @@ NpcRacer::NpcRacer(Track& t, sf::Vector2f startPos, sf::Color color) :Racer(t, s
 
 void NpcRacer::update(const float& dt)
 {
-
+	
 	screenY = (activeSprite->getPosition().y + activeSprite->getGlobalBounds().height / 2) - 150;
-	sf::Vector2f position = activeSprite->getPosition();
+	sf::Vector2f pos = activeSprite->getPosition();
 
 	if(screenY + 150 > GameGlobals::GAME_H/2)
-		activeSprite->setPosition(sf::Vector2f(position.x, position.y - speed * dt));
+		activeSprite->setPosition(sf::Vector2f(pos.x, pos.y - speed * dt));
 
 	swapSprite();
+	position();
 }
 
-const float NpcRacer::distanceFromCenter(int& screenYPos) const
+const float NpcRacer::distanceFromCenter() const
 {
 	float screen_x = activeSprite->getPosition().x + activeSprite->getGlobalBounds().width / 2;
-	return screen_x - track.lines.at(screenYPos).middlePt * GameGlobals::GAME_W;
+	return screen_x - track.lines.at(screenY).middlePt * GameGlobals::GAME_W;
 }
 
 void NpcRacer::swapSprite()
 {
-	
-	if (screenY >= 90)
-		activeSprite = &racerSprites.at(0);
-	else if (screenY <90 && screenY >= 60)
+	sf::Vector2f position = activeSprite->getPosition();
+	if (screenY < 70)
 		activeSprite = &racerSprites.at(2);
+	if (screenY < 30)
+		activeSprite = &racerSprites.at(4);
+	if (screenY < 8)
+		activeSprite = &racerSprites.at(5);
+	if (screenY < 1)
+		activeSprite = &racerSprites.at(6);
+
+	activeSprite->setPosition(position);
+		
+	
 }
 
 void NpcRacer::loadSprites(sf::Vector2f startPosition, sf::Color color)
@@ -72,4 +81,6 @@ void NpcRacer::scale() {}
 
 void NpcRacer::position()
 {
+	int y = screenY - 5 > 0 ? screenY - 5 : screenY;
+	activeSprite->setPosition(sf::Vector2f(activeSprite->getPosition().x - distanceFromCenter() * 0.1f, activeSprite->getPosition().y));	
 }

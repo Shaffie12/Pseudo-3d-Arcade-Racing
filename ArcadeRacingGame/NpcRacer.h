@@ -7,7 +7,7 @@ class NpcRacer: public Racer
 public:
 	NpcRacer(Track& t, sf::Vector2f startPos, sf::Color color =sf::Color::White);
 	void update(const float& dt) override;
-	const float distanceFromCenter(int& screenYPos) const;
+	const float distanceFromCenter() const;
 	
 private:
 	const int spritesX[7] = { 29,29,23,23,13,9,7 };

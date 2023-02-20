@@ -201,7 +201,7 @@ int GameState::nextState()
 void GameState::quit()
 {
 	SoundManager::GetInstance()->beep_1.setPitch(1);
-	exited = true;
+	//exited = true;
 	
 }
 
