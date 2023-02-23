@@ -47,7 +47,7 @@ void Racer::OnDestroy()
 			drawExplosionIdx = 2;
 		explosions[drawExplosionIdx].setColor(sf::Color::White);
 	}
-	else if (clock.getElapsedTime().asSeconds() > 1.0f)
+	else if (clock.getElapsedTime().asSeconds() > 2.0f)
 	{
 		for (sf::Sprite& s : explosions)
 			s.setColor(sf::Color::Transparent);

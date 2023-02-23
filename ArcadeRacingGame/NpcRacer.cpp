@@ -1,20 +1,23 @@
 #include "NpcRacer.h"
 
 
-NpcRacer::NpcRacer(Track& t, sf::Vector2f startPos, sf::Color color) :Racer(t, startPos, color), speed(std::rand() % 10 + 8)
+NpcRacer::NpcRacer(Track& t, sf::Vector2f startPos, sf::Color color) :Racer(t, startPos, color), baseSpeed(std::rand() % 10 + 8)
 {
 	loadSprites(startPos,color);
 	screenY = (activeSprite->getPosition().y + activeSprite->getGlobalBounds().height / 2) - 150;
 }
 
+//scale the npc speed by how far up the screen it is, also add some speed if the player stops moving
 void NpcRacer::update(const float& dt)
 {
 	
 	screenY = (activeSprite->getPosition().y + activeSprite->getGlobalBounds().height / 2) - 150;
 	sf::Vector2f pos = activeSprite->getPosition();
 
+	float currentSpeed = baseSpeed * Racing::Util::convertRange(screenY, 0, 149, 0, 1) + (baseSpeed *3) * (1-track.acceleration);
+
 	if(screenY + 150 > GameGlobals::GAME_H/2)
-		activeSprite->setPosition(sf::Vector2f(pos.x, pos.y - speed * dt));
+		activeSprite->setPosition(sf::Vector2f(pos.x, pos.y - currentSpeed * dt));
 
 	swapSprite();
 	position();
@@ -37,6 +40,8 @@ void NpcRacer::swapSprite()
 		activeSprite = &racerSprites.at(5);
 	if (screenY < 1)
 		activeSprite = &racerSprites.at(6);
+	if(screenY ==0)
+		activeSprite->setColor(sf::Color::Transparent);
 
 	activeSprite->setPosition(position);
 		
@@ -81,6 +86,12 @@ void NpcRacer::scale() {}
 
 void NpcRacer::position()
 {
-	int y = screenY - 5 > 0 ? screenY - 5 : screenY;
-	activeSprite->setPosition(sf::Vector2f(activeSprite->getPosition().x - distanceFromCenter() * 0.1f, activeSprite->getPosition().y));	
+	if (screenY < 90)
+	{
+		int y = screenY - 5 > 0 ? screenY - 5 : screenY;
+		float positionScale = Racing::Util::clamp(Racing::Util::convertRange(screenY, 0, 80, 0, 1),0,1);
+		activeSprite->setPosition(sf::Vector2f(activeSprite->getPosition().x - distanceFromCenter() * (1-positionScale), activeSprite->getPosition().y));
+
+	}
+		
 }

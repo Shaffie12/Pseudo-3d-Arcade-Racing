@@ -9,7 +9,6 @@ player(track, sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30))
 bg(track,0),
 ui(track)
 {
-	
 	raceTimer = TIMER_START;
 	intro = true;
 	
@@ -69,6 +68,7 @@ void GameState::update(const float& dt)
 		{
 			r->update(dt);
 		}
+		
 	}
 	else
 	{
@@ -135,7 +135,7 @@ void GameState::checkPlayerMovement()
 	if (!player.isDead() && moving)
 		track.addAcceleration(0.02);
 	else
-		track.addAcceleration(-0.02);
+		track.addAcceleration(-0.02); //instead of just taking away we need to take into consideration if the player is trying to move and allow them to eventually get enough force
 	if (!player.isDead() && left)
 		track.addPlayerOffset(0.02, true);
 	if (!player.isDead() && right)
@@ -179,14 +179,15 @@ void GameState::drawToTexture(Renderer& renderer)
 	renderer.rtx->clear();
 
 	track.drawElement(*renderer.rtx);
-	player.drawElement(*renderer.rtx);
+	
 	bg.drawElement(*renderer.rtx);
 	for (RoadObject* r : roadObjectsContainer.objects)
 		r->drawElement(*renderer.rtx);
 	for (Racer* r : npcs)
 		r->drawElement(*renderer.rtx);
+		
 	ui.drawElement(*renderer.rtx);
-
+	player.drawElement(*renderer.rtx);
 	
 	renderer.rtx->display();
 	renderer.sprite->setTexture(renderer.rtx->getTexture());
@@ -201,7 +202,7 @@ int GameState::nextState()
 void GameState::quit()
 {
 	SoundManager::GetInstance()->beep_1.setPitch(1);
-	//exited = true;
+	exited = true;
 	
 }
 
