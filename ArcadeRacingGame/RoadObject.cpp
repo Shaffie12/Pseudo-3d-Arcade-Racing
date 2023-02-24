@@ -143,8 +143,6 @@ void::RoadObject::swapSprite()
 		activeSpr = &sprites[1];
 	if (screen_y > sprite_limits[2])
 		activeSpr = &sprites[0];
-	
-	
 	upscale();
 	
 }

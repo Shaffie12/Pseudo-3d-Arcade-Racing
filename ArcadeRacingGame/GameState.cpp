@@ -60,10 +60,7 @@ void GameState::update(const float& dt)
 	{
 		checkPlayerMovement();
 		decrementRaceTimer(dt);
-		if (player.distanceToTrackEdge() > 400.0f)
-		{
-			track.addAcceleration(-0.03f);
-		}
+		
 		for (Racer* r : npcs)
 		{
 			r->update(dt);
@@ -74,15 +71,19 @@ void GameState::update(const float& dt)
 	{
 		doIntroBeeps(dt);
 	}
-
-	track.update(dt);
-	bg.update(dt);
+	
+	player.update(dt);
+	if (player.distanceToTrackEdge() > 400.0f)
+	{
+		track.addAcceleration(-0.03f);
+	}
 	for (RoadObject* r : roadObjectsContainer.objects)
 	{
 		r->update(dt);
 		doColiisionDetection(r);
 	}
-	player.update(dt);
+	track.update(dt);
+	bg.update(dt);
 
 	sendVarsToUI();
 	ui.update(dt);
