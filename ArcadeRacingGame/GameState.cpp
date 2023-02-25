@@ -12,7 +12,9 @@ ui(track)
 	raceTimer = TIMER_START;
 	intro = true;
 	
-	npcs.push_back(new NpcRacer(track, sf::Vector2f((GameGlobals::GAME_W / 2) + 80, (GameGlobals::GAME_H) - 5),sf::Color::Red));
+	
+	npcs.push_back(new NpcRacer(track, sf::Vector2f((GameGlobals::GAME_W / 2) - 80, (GameGlobals::GAME_H)-10), sf::Color::Green));
+	npcs.push_back(new NpcRacer(track, sf::Vector2f((GameGlobals::GAME_W / 2) + 80, (GameGlobals::GAME_H)-5), sf::Color::Red));
 
 }
 
@@ -60,7 +62,7 @@ void GameState::update(const float& dt)
 	{
 		checkPlayerMovement();
 		decrementRaceTimer(dt);
-		
+		std::sort(npcs.begin(), npcs.end());
 		for (Racer* r : npcs)
 		{
 			r->update(dt);
@@ -98,7 +100,6 @@ void GameState::update(const float& dt)
 		quit();
 
 }
-
 
 void GameState::doColiisionDetection(RoadObject*& r)
 {
