@@ -9,7 +9,7 @@ public:
 	NpcRacer(Track& t, sf::Vector2f startPos, sf::Color color =sf::Color::White);
 	void update(const float& dt) override;
 	const float distanceFromCenter() const;
-	friend bool operator<(const NpcRacer& a, const NpcRacer& b) { return a.trackPos > b.trackPos; }
+	friend bool operator<(const NpcRacer& a, const NpcRacer& b) { return a.trackPos < b.trackPos; }
 	
 private:
 	sf::Clock clock;
@@ -23,6 +23,7 @@ private:
 	void position(const float& dt);
 	int trackPos;
 	void generateNextOffset();
+
 
 
 	

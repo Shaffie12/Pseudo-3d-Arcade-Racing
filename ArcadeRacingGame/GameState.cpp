@@ -62,12 +62,11 @@ void GameState::update(const float& dt)
 	{
 		checkPlayerMovement();
 		decrementRaceTimer(dt);
-		std::sort(npcs.begin(), npcs.end());
-		for (Racer* r : npcs)
+		for (NpcRacer* r : npcs)
 		{
 			r->update(dt);
 		}
-		
+		std::sort(npcs.begin(), npcs.end(), [](NpcRacer*& a, NpcRacer*& b) {return *a < *b; });
 	}
 	else
 	{
@@ -185,7 +184,7 @@ void GameState::drawToTexture(Renderer& renderer)
 	bg.drawElement(*renderer.rtx);
 	for (RoadObject* r : roadObjectsContainer.objects)
 		r->drawElement(*renderer.rtx);
-	for (Racer* r : npcs)
+	for (NpcRacer* r : npcs)
 		r->drawElement(*renderer.rtx);
 		
 	ui.drawElement(*renderer.rtx);

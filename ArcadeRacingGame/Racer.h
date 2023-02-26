@@ -25,7 +25,7 @@ class Racer :public Drawable
 		Track& track;
 		sf::Clock clock;
 		virtual void OnDestroy();
-		void loadSprites(sf::Vector2f startPosition, sf::Color color);		
+		void loadSprites(sf::Vector2f startPosition, sf::Color color);	
 
 };
 

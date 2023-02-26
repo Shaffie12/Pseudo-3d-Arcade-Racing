@@ -27,7 +27,7 @@ public:
 private:
 	Track track;
 	Player player;
-	std::vector<Racer*> npcs;
+	std::vector<NpcRacer*> npcs; 
 	Background bg;
 	UI ui;
 	RoadObjectLinker roadObjectsContainer;

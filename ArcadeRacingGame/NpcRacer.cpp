@@ -1,7 +1,7 @@
 #include "NpcRacer.h"
 
 
-NpcRacer::NpcRacer(Track& t, sf::Vector2f startPos, sf::Color color) :Racer(t, startPos, color), baseSpeed(std::rand() % 10 + 8), currentSpeed(0), m_color(color),
+NpcRacer::NpcRacer(Track& t, sf::Vector2f startPos, sf::Color color) :Racer(t, startPos, color), baseSpeed(std::rand() % 18 + 2), currentSpeed(0), m_color(color),
 moveInterval(float(std::rand()) / float((10000)))
 {
 	trackPos = (activeSprite->getPosition().y + activeSprite->getGlobalBounds().height / 2) - 150;
