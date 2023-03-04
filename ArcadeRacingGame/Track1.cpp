@@ -25,8 +25,40 @@ Track1::Track1() :TrackData()
 	};
 	objects =
 	{
+
+		//segment 7 objects
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Start,180,7,30,false),
+
+
+		//segment 2 objects
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Sign,2,200,true,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Sign,2,200,false,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Sign,2,180,true,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Sign,2,180,false,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,2,120,true,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,2,120,false,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,2,100,true,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,2,100,false,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,2,80,true,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,2,80,false,false),
+		
+
+		//segment 1 objects
+
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,1,160,true,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,1,160,false,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,1,140,true,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,1,140,false,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,1,120,true,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,1,120,false,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,1,100,true,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,1,100,false,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,1,80,true,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,1,80,false,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Sign2,1,0,true,false),
+
 		//segment 0 objects
-		/*
+		
 		RoadSideTemplate(RoadSideTemplate::ObjectType::Rock,0,100,true,false),
 		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,0,80,true,false),
 		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,0,80,false,false),
@@ -35,16 +67,10 @@ Track1::Track1() :TrackData()
 		RoadSideTemplate(RoadSideTemplate::ObjectType::Sign,0,30,false,true),
 		RoadSideTemplate(RoadSideTemplate::ObjectType::Sign,0,30,true,true),
 		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,0,0,false,false),
-		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,0,0,true,false),
-		*/
-
-		//segment 1 objects
-		RoadSideTemplate(RoadSideTemplate::ObjectType::Sign2,0,0,0,true,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,0,0,true,false)
+		
 		
 
-		RoadSideTemplate(RoadSideTemplate::ObjectType::Start,180,7,30,false)
-	
-		
 	};
 
 	calculateTotalLength();
