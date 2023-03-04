@@ -74,7 +74,7 @@ void GameState::update(const float& dt)
 	}
 	
 	player.update(dt);
-	if (player.distanceToTrackEdge() > 400.0f)
+	if (player.distanceFromCenter() > 400.0f)
 	{
 		track.addAcceleration(-0.03f);
 	}
@@ -102,13 +102,16 @@ void GameState::update(const float& dt)
 
 void GameState::doColiisionDetection(RoadObject*& r)
 {
-	if (r->screen_y >= GameGlobals::GAME_H - 50 && player.distanceToTrackEdge() >= 390)
+	if (r->screen_y >= GameGlobals::GAME_H - 50 && player.distanceFromCenter() >= 390 && left || 
+		r->screen_y >= GameGlobals::GAME_H - 50 && player.distanceFromCenter() <= -390 && right)
+	{
 		if (track.getAcceleration() <= 0.4f)
 			track.addAcceleration(-track.getAcceleration());
 		else
-			if(!player.isDead())
+			if (!player.isDead())
 				player.Destroy();
-				
+	}
+					
 }
 
 void GameState::sendVarsToUI()

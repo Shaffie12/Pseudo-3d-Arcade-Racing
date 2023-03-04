@@ -6,9 +6,9 @@
 
 class Sign : public RoadObject
 {
-	public:
-		Sign(int screeny, int segmentId, float depth, bool left, Track& t);
-		Sign(int segmentId, float depth, bool left, Track& t);
+public:
+	Sign(int screeny, int segmentId, float depth, bool left, Track& t, bool invert);
+	Sign(int segmentId, float depth, bool left, Track& t, bool invert);
 	
 };
 #endif

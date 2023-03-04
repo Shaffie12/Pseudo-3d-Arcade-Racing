@@ -33,6 +33,9 @@ void Racer::Destroy()
 	SoundManager::GetInstance()->explosion.play();
 	dead = true;
 	activeSprite = &racerSprites.at(0);
+	activeSprite->setPosition(
+		sf::Vector2f((GameGlobals::GAME_W / 2) - activeSprite->getGlobalBounds().width / 2,
+			(GameGlobals::GAME_H)-activeSprite->getGlobalBounds().height - 10));
 	clock.restart();
 }
 
@@ -85,8 +88,8 @@ void Racer::loadSprites(sf::Vector2f startPosition, sf::Color color)
 	}
 }
 
-float Racer::distanceToTrackEdge()
+float Racer::distanceFromCenter()
 {
-	return std::abs(track.lines.at(track.lines.size() - 1).middlePt * GameGlobals::GAME_W - GameGlobals::GAME_W / 2);
+	return track.lines.at(track.lines.size() - 1).middlePt * GameGlobals::GAME_W - GameGlobals::GAME_W / 2;
 }
 

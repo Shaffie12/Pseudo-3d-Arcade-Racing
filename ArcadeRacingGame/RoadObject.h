@@ -8,8 +8,8 @@
 class RoadObject : public Drawable
 {
 public:
-	RoadObject(int screeny, int segmentID, float depth, bool left, Track& t);
-	RoadObject(int segmentID, float depth, bool left, Track& t);
+	RoadObject(int screeny, int segmentID, float depth, bool left, Track& t, bool invert=false);
+	RoadObject(int segmentID, float depth, bool left, Track& t, bool invert=false);
 	RoadObject(const RoadObject& other);
 	RoadObject(RoadObject&& other) noexcept;
 	RoadObject& operator=(const RoadObject& other);
@@ -19,9 +19,10 @@ public:
 	int segId;
 	bool draw = false; 
 	float screen_y;
+	bool left;
 protected:
 	Track& track;
-	bool left;
+	
 	float perspective;
 	sf::Transform base_transform;
 	static int slow_limiter;
@@ -30,6 +31,7 @@ protected:
 	sf::Sprite sprites[4];
 	sf::Sprite* activeSpr;
 	bool drawAtStart = false;
+	bool invert = false;
 	
 	virtual void loadSprites();
 	void swapSprite();

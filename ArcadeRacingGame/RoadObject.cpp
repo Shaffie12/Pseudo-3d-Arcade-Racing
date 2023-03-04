@@ -4,11 +4,12 @@
 int RoadObject::slow_limiter = 10;
 int RoadObject::sprite_limits[3] = { 152,155,160 };
 
-RoadObject::RoadObject(int screeny, int segmentId, float depth, bool left, Track& t) : activeSpr(&sprites[3]), segId(segmentId), track(t)
+RoadObject::RoadObject(int screeny, int segmentId, float depth, bool left, Track& t, bool invert) : activeSpr(&sprites[3]), segId(segmentId), track(t)
 { 
 	
 	//std::cout << "standard constructor was called" << '\n';
 	this->left = left;
+	this->invert = invert;
 	if (screeny < GameGlobals::GAME_H / 2)
 		screen_y = GameGlobals::GAME_H / 2;
 	else
@@ -22,11 +23,12 @@ RoadObject::RoadObject(int screeny, int segmentId, float depth, bool left, Track
 	
 };
 
-RoadObject::RoadObject(int segmentId, float depth, bool left, Track& t) : activeSpr(&sprites[3]), segId(segmentId), track(t)
+RoadObject::RoadObject(int segmentId, float depth, bool left, Track& t, bool invert) : activeSpr(&sprites[3]), segId(segmentId), track(t)
 {
 	
 	//std::cout << "standard constructor was called" << '\n';
 	this->left = left;
+	this->invert = invert;
 	screen_y = GameGlobals::GAME_H / 2;
 	this->depth = depth;
 	float scaledY = Racing::Util::convertRange(screen_y, 1, GameGlobals::GAME_H / 2, 1, 0);
@@ -41,7 +43,7 @@ RoadObject::RoadObject(const RoadObject& other): track(other.track) //copy
 	segId = other.segId;
 	draw = other.draw;
 	left = other.left;
-	
+	invert = other.invert;
 	
 	screen_y = other.screen_y;
 	perspective = other.perspective;
@@ -66,6 +68,7 @@ RoadObject::RoadObject(RoadObject&& other)noexcept : track(other.track)  //move
 	segId = other.segId;
 	draw = other.draw;
 	left = other.left;
+	invert = other.invert;
 	screen_y = other.screen_y;
 	perspective = other.perspective;
 	depth=other.depth;
@@ -90,6 +93,7 @@ RoadObject& RoadObject::operator=(const RoadObject& other)
 	ro.perspective = other.perspective;
 	ro.left = other.left;
 	ro.texture = other.texture;
+	ro.invert = other.invert;
 
 
 	memcpy(ro.sprites, other.sprites, sizeof(ro.sprites));
@@ -150,7 +154,8 @@ void::RoadObject::swapSprite()
 void::RoadObject::upscale()
 {
 	float scale = Racing::Util::roundToDP(Racing::Util::convertRange(screen_y, 150, 160, 0.5f, 1),1);
-	activeSpr->setScale(scale, scale);
+	float scaleX = invert ? scale * -1 : scale;
+	activeSpr->setScale(scaleX, scale);
 }
 
 void RoadObject::checkDraw()
@@ -182,6 +187,7 @@ void RoadObject::loadSprites()
 		size -= 8;
 		sprites[i].setOrigin(sf::Vector2f(sprites[i].getGlobalBounds().width / 2, 0));
 	}
+	
 
 	//reassign default
 	activeSpr = &sprites[3];
