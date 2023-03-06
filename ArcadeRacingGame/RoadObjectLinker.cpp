@@ -30,6 +30,12 @@ RoadObjectLinker::RoadObjectLinker(std::vector<TrackData::RoadSideTemplate> objs
 			else
 				objects.push_back(new Sign2(temp.segmentId, temp.depth, temp.left, track));
 			break;
+		case TrackData::RoadSideTemplate::Sign3:
+			if (temp.screeny != -1)
+				objects.push_back(new Sign3(temp.screeny, temp.segmentId, temp.depth, temp.left, track));
+			else
+				objects.push_back(new Sign3(temp.segmentId, temp.depth, temp.left, track));
+			break;
 		case TrackData::RoadSideTemplate::Start:
 			if (temp.screeny != -1)
 				objects.push_back(new StartSign(temp.screeny, temp.segmentId, temp.depth, temp.left, track));

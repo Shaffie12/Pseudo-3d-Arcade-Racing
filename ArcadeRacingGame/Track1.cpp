@@ -27,7 +27,10 @@ Track1::Track1() :TrackData()
 	{
 
 		//segment 7 objects
-		RoadSideTemplate(RoadSideTemplate::ObjectType::Start,180,7,30,false),
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Start,180,7,30,false,false),
+
+		//segment 3
+		RoadSideTemplate(RoadSideTemplate::ObjectType::Sign3,3,70,false,false),
 
 
 		//segment 2 objects
@@ -59,6 +62,7 @@ Track1::Track1() :TrackData()
 
 		//segment 0 objects
 		
+		
 		RoadSideTemplate(RoadSideTemplate::ObjectType::Rock,0,100,true,false),
 		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,0,80,true,false),
 		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,0,80,false,false),
@@ -68,6 +72,7 @@ Track1::Track1() :TrackData()
 		RoadSideTemplate(RoadSideTemplate::ObjectType::Sign,0,30,true,true),
 		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,0,0,false,false),
 		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,0,0,true,false)
+		
 		
 		
 
