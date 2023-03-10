@@ -25,7 +25,7 @@ Track1::Track1() :TrackData()
 	};
 	objects =
 	{
-
+		
 		//segment 7 objects
 		RoadSideTemplate(RoadSideTemplate::ObjectType::Start,180,7,30,false,false),
 
@@ -72,6 +72,7 @@ Track1::Track1() :TrackData()
 		RoadSideTemplate(RoadSideTemplate::ObjectType::Sign,0,30,true,true),
 		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,0,0,false,false),
 		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,0,0,true,false)
+		
 		
 		
 		

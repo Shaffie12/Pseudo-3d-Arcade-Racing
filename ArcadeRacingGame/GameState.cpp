@@ -102,8 +102,9 @@ void GameState::update(const float& dt)
 
 void GameState::doColiisionDetection(RoadObject*& r)
 {
-	if (r->screen_y >= GameGlobals::GAME_H - 50 && player.distanceFromCenter() >= 390 && left || 
-		r->screen_y >= GameGlobals::GAME_H - 50 && player.distanceFromCenter() <= -390 && right)
+	
+	if ((r->screen_y >= GameGlobals::GAME_H - 50 && r->screen_y <= GameGlobals::GAME_H) && player.distanceFromCenter() >= 390 && r->left || 
+		(r->screen_y >= GameGlobals::GAME_H - 50 && r->screen_y <= GameGlobals::GAME_H) && player.distanceFromCenter() <= -390 && !r->left)
 	{
 		if (track.getAcceleration() <= 0.4f)
 			track.addAcceleration(-track.getAcceleration());
