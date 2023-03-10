@@ -140,7 +140,7 @@ void GameState::checkPlayerMovement()
 	if (!player.isDead() && moving)
 		track.addAcceleration(0.02);
 	else
-		track.addAcceleration(-0.02); //instead of just taking away we need to take into consideration if the player is trying to move and allow them to eventually get enough force
+		track.addAcceleration(-0.02);
 	if (!player.isDead() && left)
 		track.addPlayerOffset(0.02, true);
 	if (!player.isDead() && right)

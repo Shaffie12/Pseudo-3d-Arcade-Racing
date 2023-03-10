@@ -42,7 +42,6 @@ Track1::Track1() :TrackData()
 		RoadSideTemplate(RoadSideTemplate::ObjectType::Sign,5,30,true,true),
 		RoadSideTemplate(RoadSideTemplate::ObjectType::Sign,5,30,false,true),
 		
-
 		//segment 5
 		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,4,170,true,false),
 		RoadSideTemplate(RoadSideTemplate::ObjectType::Tree,4,170,false,false),

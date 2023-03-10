@@ -60,19 +60,29 @@ void Game::updateDT()
 
 void Game::pollSFEvents()
 {
-	
 	while (mainWindow->pollEvent(sfEvent))
 	{
-		if (sfEvent.type == sf::Event::Closed)
+		switch (sfEvent.type)
+		{
+		case sf::Event::Closed:
 			mainWindow->close();
-		if (sfEvent.type == sf::Event::LostFocus)
+			break;
+		case sf::Event::LostFocus:
 			GameGlobals::isActiveWindow = false;
-		if (sfEvent.type == sf::Event::GainedFocus)
+			break;
+		case sf::Event::GainedFocus:
 			GameGlobals::isActiveWindow = true;
-		if(!states->empty())
-			states->top()->handleInput(sfEvent);
+			break;
+		case sf::Event::KeyPressed:
+			if (!states->empty())
+				states->top()->handleInput(sfEvent);
+				break;
+		case sf::Event::KeyReleased:
+			if (!states->empty())
+				states->top()->handleInput(sfEvent);
+			break;
+		}
 	}
-	
 }
 
 void Game::renderCurrentState()
