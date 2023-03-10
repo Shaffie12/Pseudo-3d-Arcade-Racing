@@ -6,8 +6,8 @@ class Player : public Racer
 {
 	public:
 		Player(Track& t, sf::Vector2f startPosition);
-		void handleInput();
-		void update(const float& dt) override;
+		void handleInput(sf::Event& e);
+		//void update(const float& dt) override;
 
 private:
 	sf::Clock clock;

@@ -32,8 +32,8 @@ ui(track)
 
 
 void GameState::handleInput(sf::Event& e)
-{
-
+{ 
+	player.handleInput(e);
 	if (e.type == sf::Event::KeyPressed)
 	{
 		if (e.key.code == sf::Keyboard::W)
