@@ -184,12 +184,12 @@ void GameState::drawToTexture(Renderer& renderer)
 	renderer.rtx->clear();
 
 	track.drawElement(*renderer.rtx);
-	
+	for (NpcRacer* r : npcs)
+		r->drawElement(*renderer.rtx);
 	bg.drawElement(*renderer.rtx);
 	for (RoadObject* r : roadObjectsContainer.objects)
 		r->drawElement(*renderer.rtx);
-	for (NpcRacer* r : npcs)
-		r->drawElement(*renderer.rtx);
+	
 		
 	ui.drawElement(*renderer.rtx);
 	player.drawElement(*renderer.rtx);
