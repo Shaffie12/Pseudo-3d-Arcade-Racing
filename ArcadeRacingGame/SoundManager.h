@@ -17,6 +17,7 @@ private:
 	sf::SoundBuffer ch_buf;	
 
 	sf::SoundBuffer explosion_buf;
+	sf::SoundBuffer engine_buf;
 
 public:
 	SoundManager(const SoundManager& other) = delete;
@@ -26,11 +27,11 @@ public:
 
 	sf::Sound menuNavigate;
 	sf::Sound menuSelect;
-
-	sf::Music trackMusic1;
+	sf::Music music1;
 	sf::Sound beep_1;
 	sf::Sound checkpoint;
 	sf::Sound explosion;
+	sf::Sound engine;
 	
 
 };

@@ -10,24 +10,17 @@ void Player::handleInput(sf::Event& e)
 		if (e.key.code == sf::Keyboard::A)
 		{
 			if (activeIdx != 0)
-			{
 				activeIdx--;
-				activeSprite = &racerSprites.at(activeIdx);
-			}
 		}
 		else if (e.key.code == sf::Keyboard::D)
 		{
 			if (activeIdx != 4)
-			{
 				activeIdx++;
-				activeSprite = &racerSprites.at(activeIdx);
-			}
 		}
 		break;
 	case sf::Event::KeyReleased:
 		activeIdx = 2;
-		break;
-			
+		break;		
 	}
 
 	activeSprite = &racerSprites.at(activeIdx);

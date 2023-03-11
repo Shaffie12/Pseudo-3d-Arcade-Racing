@@ -36,8 +36,6 @@ void Game::initStates()
 	TitleState* ts = new TitleState();
 	username = &ts->userName.text.getString();
 	states->push(ts);
-	
-	
 }
 
 void Game::setVolumesFromFile()
@@ -50,7 +48,7 @@ void Game::setVolumesFromFile()
 	SoundManager::GetInstance()->checkpoint.setVolume(soundSave.getSfxVolume()*100.0f);
 	SoundManager::GetInstance()->explosion.setVolume(soundSave.getSfxVolume()*100.0f);
 
-	SoundManager::GetInstance()->trackMusic1.setVolume(soundSave.getMusicVolume()*100.0f);
+	SoundManager::GetInstance()->music1.setVolume(soundSave.getMusicVolume()*100.0f);
 }
 
 void Game::updateDT()
@@ -73,14 +71,10 @@ void Game::pollSFEvents()
 		case sf::Event::GainedFocus:
 			GameGlobals::isActiveWindow = true;
 			break;
-		case sf::Event::KeyPressed:
+		default:
 			if (!states->empty())
 				states->top()->handleInput(sfEvent);
-				break;
-		case sf::Event::KeyReleased:
-			if (!states->empty())
-				states->top()->handleInput(sfEvent);
-			break;
+		
 		}
 	}
 }
@@ -150,7 +144,7 @@ State* Game::getNextState(State* currentState)
 		else if (gs->nextState() == 2)
 			return new LeaderboardState();
 		else if (gs->nextState() == 3)
-			return new OptionsState(SoundManager::GetInstance()->beep_1.getVolume()*0.01f,SoundManager::GetInstance()->trackMusic1.getVolume()*0.01f);
+			return new OptionsState(SoundManager::GetInstance()->beep_1.getVolume()*0.01f,SoundManager::GetInstance()->music1.getVolume()*0.01f);
 
 	}
 }

@@ -93,7 +93,7 @@ private:
 
 		void AdjustMusicVol()
 		{
-			SoundManager::GetInstance()->trackMusic1.setVolume(value * 100.0f);
+			SoundManager::GetInstance()->music1.setVolume(value * 100.0f);
 		}
 		void AdjustSFXVol()
 		{

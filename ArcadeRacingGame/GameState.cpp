@@ -52,6 +52,7 @@ void GameState::handleInput(sf::Event& e)
 		else if (e.key.code == sf::Keyboard::A)
 			left = false;
 	}
+
 	
 }
 
@@ -61,6 +62,12 @@ void GameState::update(const float& dt)
 	if (!intro)
 	{
 		checkPlayerMovement();
+		if (SoundManager::GetInstance()->engine.getStatus() != sf::Sound::Status::Playing)
+		{
+			SoundManager::GetInstance()->engine.setPlayingOffset(sf::seconds(2));
+			SoundManager::GetInstance()->engine.setLoop(true);
+			SoundManager::GetInstance()->engine.play();
+		}
 		decrementRaceTimer(dt);
 		for (NpcRacer* r : npcs)
 		{
@@ -84,6 +91,7 @@ void GameState::update(const float& dt)
 		doColiisionDetection(r);
 	}
 	track.update(dt);
+	SoundManager::GetInstance()->engine.setPitch(1 * track.getAcceleration());
 	bg.update(dt);
 
 	sendVarsToUI();
@@ -149,9 +157,7 @@ void GameState::checkPlayerMovement()
 
 void GameState::doIntroBeeps(const float& dt)
 {
-	
 		beep_timer += dt;
-
 		if (!beeps[0] && beep_timer >= 1.2f)
 		{
 			SoundManager::GetInstance()->beep_1.play();
@@ -207,6 +213,8 @@ int GameState::nextState()
 void GameState::quit()
 {
 	SoundManager::GetInstance()->beep_1.setPitch(1);
+	SoundManager::GetInstance()->engine.stop();
+	SoundManager::GetInstance()->engine.setPitch(1);
 	exited = true;
 	
 }

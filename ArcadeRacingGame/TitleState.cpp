@@ -1,7 +1,5 @@
 #include "TitleState.h"
 
-
-
 TitleState::TitleState() : menu(GameGlobals::GAME_W/2, 177, 3, {"START", "LEADERBOARD", "OPTIONS"}, 
 	sf::Color::Black),track(sample.colors, sample.segments,sample.totalTrackLength), bg(track, std::rand() % 16)
 {
@@ -11,6 +9,8 @@ TitleState::TitleState() : menu(GameGlobals::GAME_W/2, 177, 3, {"START", "LEADER
 	titleText.setFillColor(sf::Color::Black);
 	titleText.setPosition(GameGlobals::GAME_W/2-titleText.getGlobalBounds().width/2, (GameGlobals::GAME_H/2-titleText.getGlobalBounds().height/2)-100);
 	titleText.setScale(sf::Vector2f(1, 1));	
+
+	SetupMusic();
 }
 
 void TitleState::handleInput(sf::Event& e)
@@ -115,11 +115,12 @@ int TitleState::nextState()
 
 void TitleState::quit()
 {
+	SoundManager::GetInstance()->music1.stop();
 	exited = true;
 }
 
 void TitleState::SetupMusic()
 {
-	SoundManager::GetInstance()->trackMusic1.setLoop(true);
-	SoundManager::GetInstance()->trackMusic1.play();
+	SoundManager::GetInstance()->music1.setLoop(true);
+	SoundManager::GetInstance()->music1.play();
 }
