@@ -1,0 +1,6 @@
+#ignore pdb
+*.pdb
+.vs
+x64
+.vcproj
+.vcproj.filters

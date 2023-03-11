@@ -9,8 +9,6 @@ TitleState::TitleState() : menu(GameGlobals::GAME_W/2, 177, 3, {"START", "LEADER
 	titleText.setFillColor(sf::Color::Black);
 	titleText.setPosition(GameGlobals::GAME_W/2-titleText.getGlobalBounds().width/2, (GameGlobals::GAME_H/2-titleText.getGlobalBounds().height/2)-100);
 	titleText.setScale(sf::Vector2f(1, 1));	
-
-	SetupMusic();
 }
 
 void TitleState::handleInput(sf::Event& e)
@@ -71,14 +69,13 @@ void TitleState::handleInput(sf::Event& e)
 
 void TitleState::update(const float& dt)
 {
+	if (SoundManager::GetInstance()->music1.getStatus() != sf::Sound::Status::Playing)
+		SetupMusic();
 	if (menu.enabled)
-	{
-		menu.update(dt);
-	}	
+		menu.update(dt);	
 	else
-	{
 		userName.update(dt);
-	}
+
 	track.addAcceleration(1 * dt);
 	track.update(dt);
 }

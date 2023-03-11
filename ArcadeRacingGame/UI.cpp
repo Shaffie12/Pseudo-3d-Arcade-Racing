@@ -43,7 +43,7 @@ void UI::update(const float& dt)
 	ss >> time;
 
 
-	speedText.setString("speed: " + spd + "km/h");
+	speedText.setString("Speed: " + spd + "km/h");
 	lapText.setString("LAP: " + lap_string);
 	timerText.setString("TIME: "+time);
 }
