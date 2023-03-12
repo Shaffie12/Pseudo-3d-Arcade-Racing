@@ -9,6 +9,7 @@ player(track, sf::Vector2f(GameGlobals::SCREEN_W / 2, (GameGlobals::GAME_H)-30))
 bg(track,0),
 ui(track)
 {
+	srand(time(NULL));
 	raceTimer = TIMER_START;
 	intro = true;
 	

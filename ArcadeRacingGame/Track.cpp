@@ -5,13 +5,7 @@
 const float Track::road_w = 0.9f;
 const float Track::tile_w = 0.15;
 const float Track::minRoad = 0.01;
-//maybe could use friend functions for these
-//float Track::trackOffset = 0;
-//float Track::acceleration = 0; 
 int Track::lapsDone = 0;
-//std::vector<Track::Line> Track::lines = std::vector<Track::Line>(); 
-//Segment* Track::activeSeg = nullptr;
-//Segment* Track::baseSeg = nullptr;
 
 Track::Track(std::map<std::string,sf::Color> colors, std::vector<Segment> segments, int totalTrackLen)
 {	

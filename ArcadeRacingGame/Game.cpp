@@ -47,6 +47,7 @@ void Game::setVolumesFromFile()
 	SoundManager::GetInstance()->beep_1.setVolume(soundSave.getSfxVolume()*100.0f);
 	SoundManager::GetInstance()->checkpoint.setVolume(soundSave.getSfxVolume()*100.0f);
 	SoundManager::GetInstance()->explosion.setVolume(soundSave.getSfxVolume()*100.0f);
+	SoundManager::GetInstance()->engine.setVolume(soundSave.getSfxVolume() * 100.0f);
 
 	SoundManager::GetInstance()->music1.setVolume(soundSave.getMusicVolume()*100.0f);
 }
