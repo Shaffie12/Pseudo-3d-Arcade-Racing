@@ -52,7 +52,7 @@ void NpcRacer::position(const float& dt)
 	float newY = pos.y - currentSpeed * dt;
 	pos.y = (newY + activeSprite->getGlobalBounds().height) - 150 < 0 ? GameGlobals::GAME_H/2 : newY;
 
-	float positionScale = Racing::Util::clamp(Racing::Util::convertRange(pos.y-150, 0, 60, 0.5f, 1), 0, 1);
+	float positionScale = Racing::Util::clamp(Racing::Util::convertRange(pos.y-150, 0, 60, 0.65f, 1), 0, 1);
 	trackPos = (pos.y + activeSprite->getGlobalBounds().height / 2) - 150;
 	if (trackPos < 90)
 		activeSprite->setPosition(sf::Vector2f((pos.x - (distanceFromCenter() + nextOffset) * (1 - positionScale)), pos.y));
