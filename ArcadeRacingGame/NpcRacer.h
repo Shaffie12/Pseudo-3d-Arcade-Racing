@@ -28,7 +28,7 @@ private:
 	int trackPos;
 	void generateNextOffset();
 	void setSpeed();
-	void randomSlow();
+	void changeSpeed();
 
 	
 };

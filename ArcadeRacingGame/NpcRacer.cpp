@@ -20,19 +20,16 @@ void NpcRacer::update(const float& dt)
 	if (!dead)
 	{
 		
-		randomSlow();
+		changeSpeed();
 		position(dt);
 	}
 	else
 	{
-		
 		OnDestroy();
 		sf::Vector2f center(activeSprite->getPosition().x + activeSprite->getGlobalBounds().width / 2, activeSprite->getPosition().y + activeSprite->getGlobalBounds().height / 2);
 		explosions[drawExplosionIdx].setPosition(
 			sf::Vector2f(center.x - explosions[drawExplosionIdx].getGlobalBounds().width / 2, center.y - explosions[drawExplosionIdx].getGlobalBounds().height + 17));
-		
-
-		
+	
 	}
 
 	
@@ -108,19 +105,19 @@ void NpcRacer::setSpeed()
 		currentSpeed = -baseSpeed * Racing::Util::convertRange(trackPos, 0, 149, 0, 1) + (speed * 3) *  track.getAcceleration();
 }
 
-void NpcRacer::randomSlow()
+void NpcRacer::changeSpeed()
 {
 	if (canSlowDown)
 	{
-		float v = ((float)rand()) / (float)(RAND_MAX);
-		if ((v > 0.45f) && (y_clock.getElapsedTime().asSeconds() > 6.0f))
+		if (y_clock.getElapsedTime().asSeconds() > 10.0f)
 		{
 			y_clock.restart();
-			speed = std::rand() % -8 - 15;
+			speed = std::rand() % 30 - 15;
 		}
 	}
 	else
 		speed = baseSpeed;
+	
 }
 
 

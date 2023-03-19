@@ -14,7 +14,7 @@ ui(track)
 	intro = true;
 	
 	
-	//npcs.push_back(new NpcRacer(track, sf::Vector2f((GameGlobals::GAME_W / 2) - 80, (GameGlobals::GAME_H)-10), sf::Color::Green));
+	npcs.push_back(new NpcRacer(track, sf::Vector2f((GameGlobals::GAME_W / 2) - 80, (GameGlobals::GAME_H)-10), sf::Color::Green));
 	npcs.push_back(new NpcRacer(track, sf::Vector2f((GameGlobals::GAME_W / 2) + 80, (GameGlobals::GAME_H)-5), sf::Color::Red));
 
 }
