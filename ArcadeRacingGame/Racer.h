@@ -15,6 +15,8 @@ class Racer :public Drawable
 		virtual void update(const float& dt) override;
 		void Destroy();
 		bool isDead() { return dead; }
+		sf::FloatRect getSpriteSize() { return activeSprite->getGlobalBounds(); }
+		sf::Vector2f getSpritePosition() { return activeSprite->getPosition(); }
 	protected:
 		bool dead = false;
 		sf::Sprite* activeSprite = nullptr;

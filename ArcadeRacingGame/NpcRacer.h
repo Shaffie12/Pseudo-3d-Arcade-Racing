@@ -12,19 +12,23 @@ public:
 	friend bool operator<(const NpcRacer& a, const NpcRacer& b) { return a.trackPos < b.trackPos; }
 	
 private:
-	sf::Clock clock;
+	sf::Clock x_clock;
+	sf::Clock y_clock;
+	float currentSpeed;
+	bool canSlowDown = false;
+	bool waiting = false;
 	float moveInterval;
 	float nextOffset = 0;
 	float baseSpeed;
-	float currentSpeed;
+	float speed;
 	sf::Color m_color;
 	void recolorSprite();
 	void scale();
 	void position(const float& dt);
 	int trackPos;
 	void generateNextOffset();
-
-
+	void setSpeed();
+	void randomSlow();
 
 	
 };

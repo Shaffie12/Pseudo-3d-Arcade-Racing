@@ -4,15 +4,32 @@
 NpcRacer::NpcRacer(Track& t, sf::Vector2f startPos, sf::Color color) :Racer(t, startPos, color), baseSpeed(std::rand() % 8 + 15), currentSpeed(0), m_color(color),
 moveInterval(2.0f)
 {
-	trackPos = (activeSprite->getPosition().y + activeSprite->getGlobalBounds().height / 2) - 150;
-	clock.restart();
+	speed = baseSpeed;
+	trackPos = (activeSprite->getPosition().y + activeSprite->getGlobalBounds().height / 2) - GameGlobals::GAME_H/2;
+	x_clock.restart();
+	y_clock.restart();
 }
 
 //scale the npc speed by how far up the screen it is, also add some speed if the player stops moving
 void NpcRacer::update(const float& dt)
 {
+	canSlowDown = track.getAcceleration() >= 1.0f;
 	generateNextOffset();
-	position(dt);
+	setSpeed();
+	if (!dead)
+	{
+		randomSlow();
+		position(dt);
+	}
+	else
+	{
+		OnDestroy();
+		explosions[drawExplosionIdx].setPosition(
+			sf::Vector2f((GameGlobals::GAME_W / 2) - explosions[drawExplosionIdx].getGlobalBounds().width / 2,
+				(GameGlobals::GAME_H)-explosions[drawExplosionIdx].getGlobalBounds().height - 10));
+	}
+
+	
 	scale();
 	recolorSprite();
 }
@@ -20,7 +37,9 @@ void NpcRacer::update(const float& dt)
 const float NpcRacer::distanceFromCenter() const
 {
 	float x = activeSprite->getPosition().x + activeSprite->getGlobalBounds().width / 2;
-	return x - track.lines.at(trackPos).middlePt * GameGlobals::GAME_W;
+	if(trackPos < 149)
+		return x - track.lines.at(trackPos).middlePt * GameGlobals::GAME_W;
+	return 100;
 }
 
 void NpcRacer::recolorSprite()
@@ -46,14 +65,18 @@ void NpcRacer::scale()
 //add a random offset sometimes
 void NpcRacer::position(const float& dt)
 {
-	float currentSpeed = baseSpeed * Racing::Util::convertRange(trackPos, 0, 149, 0, 1) + (baseSpeed * 3) * (1 - track.acceleration);
-
-	sf::Vector2f pos = activeSprite->getPosition();
+	//y positioning
+	sf::Vector2f pos = activeSprite->getPosition(); //300 to 150 upward
+	
+	//y positioning
 	float newY = pos.y - currentSpeed * dt;
-	pos.y = (newY + activeSprite->getGlobalBounds().height) - 150 < 0 ? GameGlobals::GAME_H/2 : newY;
+	pos.y = (newY + activeSprite->getGlobalBounds().height) - 150 < 0 ? GameGlobals::GAME_H +10 : newY;
+	
+	//x positioning
+	float positionScale = Racing::Util::clamp(Racing::Util::convertRange(pos.y - GameGlobals::GAME_H/2, 0, 90, 0.65f, 1), 0, 1);
+	trackPos = (pos.y + activeSprite->getGlobalBounds().height / 2) - GameGlobals::GAME_H/2;
 
-	float positionScale = Racing::Util::clamp(Racing::Util::convertRange(pos.y-150, 0, 60, 0.65f, 1), 0, 1);
-	trackPos = (pos.y + activeSprite->getGlobalBounds().height / 2) - 150;
+	//position sprite
 	if (trackPos < 90)
 		activeSprite->setPosition(sf::Vector2f((pos.x - (distanceFromCenter() + nextOffset) * (1 - positionScale)), pos.y));
 	else
@@ -63,10 +86,36 @@ void NpcRacer::position(const float& dt)
 
 void NpcRacer::generateNextOffset()
 {
-	if (clock.getElapsedTime().asSeconds() >= moveInterval)
+	if (x_clock.getElapsedTime().asSeconds() >= moveInterval)
 	{
 		nextOffset = -20.0f + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (20.0f - -20.0f)));
-		clock.restart();
+		x_clock.restart();
 	}
 		
 }
+
+void NpcRacer::setSpeed()
+{
+	if(!dead)
+		currentSpeed = speed * Racing::Util::convertRange(trackPos, 0, 149, 0, 1) + (speed * 3) * (1 - track.getAcceleration());
+	else
+		currentSpeed = -baseSpeed * Racing::Util::convertRange(trackPos, 0, 149, 0, 1) + (speed * 3) *  track.getAcceleration();
+}
+
+void NpcRacer::randomSlow()
+{
+	if (canSlowDown)
+	{
+		float v = ((float)rand()) / (float)(RAND_MAX);
+		if ((v > 0.45f) && (y_clock.getElapsedTime().asSeconds() > 6.0f))
+		{
+			y_clock.restart();
+			speed = std::rand() % -8 - 15;
+		}
+	}
+	else
+		speed = baseSpeed;
+}
+
+
+

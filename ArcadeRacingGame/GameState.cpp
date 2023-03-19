@@ -14,7 +14,7 @@ ui(track)
 	intro = true;
 	
 	
-	npcs.push_back(new NpcRacer(track, sf::Vector2f((GameGlobals::GAME_W / 2) - 80, (GameGlobals::GAME_H)-10), sf::Color::Green));
+	//npcs.push_back(new NpcRacer(track, sf::Vector2f((GameGlobals::GAME_W / 2) - 80, (GameGlobals::GAME_H)-10), sf::Color::Green));
 	npcs.push_back(new NpcRacer(track, sf::Vector2f((GameGlobals::GAME_W / 2) + 80, (GameGlobals::GAME_H)-5), sf::Color::Red));
 
 }
@@ -54,7 +54,6 @@ void GameState::handleInput(sf::Event& e)
 			left = false;
 	}
 
-	
 }
 
 //update all the elements in the state
@@ -73,6 +72,7 @@ void GameState::update(const float& dt)
 		for (NpcRacer* r : npcs)
 		{
 			r->update(dt);
+			//doCollisionDetection(r);
 		}
 		std::sort(npcs.begin(), npcs.end(), [](NpcRacer*& a, NpcRacer*& b) {return *a < *b; });
 	}
@@ -122,6 +122,24 @@ void GameState::doColiisionDetection(RoadObject*& r)
 				player.Destroy();
 	}
 					
+}
+
+void GameState::doCollisionDetection(NpcRacer*& r)
+{
+	
+	if ( std::abs((r->distanceFromCenter() - player.distanceFromCenter())) <= player.getSpriteSize().width && (r-> getSpritePosition().y >=230 && r->getSpritePosition().y < 250))
+	{
+		if (track.getAcceleration() <= 0.4f)
+			track.addAcceleration(-track.getAcceleration());
+		else
+		{
+			if (!player.isDead())
+				player.Destroy();
+			if (!r->isDead())
+				r->Destroy();
+		}
+			
+	}
 }
 
 void GameState::sendVarsToUI()
@@ -180,8 +198,7 @@ void GameState::doIntroBeeps(const float& dt)
 			intro = false;
 			SoundManager::GetInstance()->beep_1.setPitch(2);
 			SoundManager::GetInstance()->beep_1.play();
-			
-			
+				
 		}
 	
 }

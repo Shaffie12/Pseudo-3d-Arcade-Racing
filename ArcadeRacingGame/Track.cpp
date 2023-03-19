@@ -125,7 +125,7 @@ void Track::addPlayerOffset(float amount, bool add) //change
 
 void Track::addAcceleration(float amount){ acceleration += amount;}
 
-float& Track::getAcceleration()
+float Track::getAcceleration()
 {
 	return acceleration;
 }

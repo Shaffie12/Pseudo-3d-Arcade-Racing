@@ -52,6 +52,7 @@ private:
 	void checkPlayerMovement();
 	void doIntroBeeps(const float& dt);
 	void doColiisionDetection(RoadObject*& r);
+	void doCollisionDetection(NpcRacer*& r);
 	
 
 

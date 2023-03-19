@@ -12,7 +12,6 @@
 
 class Track :public Drawable
 {
-
 	friend class RoadObject;
 	friend class NpcRacer;
 	friend class Background;
@@ -72,7 +71,7 @@ public:
 	virtual void drawElement(sf::RenderTarget& w) override;
 	void addPlayerOffset(float amount, bool add);
 	void addAcceleration(float amount);
-	float& getAcceleration();
+	float getAcceleration();
 	static const float road_w;
 	static const float tile_w;
 	static const float minRoad;
