@@ -19,15 +19,20 @@ void NpcRacer::update(const float& dt)
 	setSpeed();
 	if (!dead)
 	{
+		
 		randomSlow();
 		position(dt);
 	}
 	else
 	{
+		
 		OnDestroy();
+		sf::Vector2f center(activeSprite->getPosition().x + activeSprite->getGlobalBounds().width / 2, activeSprite->getPosition().y + activeSprite->getGlobalBounds().height / 2);
 		explosions[drawExplosionIdx].setPosition(
-			sf::Vector2f((GameGlobals::GAME_W / 2) - explosions[drawExplosionIdx].getGlobalBounds().width / 2,
-				(GameGlobals::GAME_H)-explosions[drawExplosionIdx].getGlobalBounds().height - 10));
+			sf::Vector2f(center.x - explosions[drawExplosionIdx].getGlobalBounds().width / 2, center.y - explosions[drawExplosionIdx].getGlobalBounds().height + 17));
+		
+
+		
 	}
 
 	
@@ -71,7 +76,7 @@ void NpcRacer::position(const float& dt)
 	
 	//y positioning
 	float newY = pos.y - currentSpeed * dt;
-	pos.y = (newY + activeSprite->getGlobalBounds().height) - 150 < 0 ? GameGlobals::GAME_H +10 : newY;
+	pos.y = (newY + activeSprite->getGlobalBounds().height) - 150 < 0 ? GameGlobals::GAME_H +10000 : newY;
 	
 	//x positioning
 	float positionScale = Racing::Util::clamp(Racing::Util::convertRange(pos.y - GameGlobals::GAME_H/2, 0, 90, 0.65f, 1), 0, 1);

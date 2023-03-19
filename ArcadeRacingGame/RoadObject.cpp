@@ -124,7 +124,7 @@ void RoadObject::move()
 
 	float acceleration_scale = Racing::Util::convertRange(screen_y, 150, 200, 0.001f, 3); //scale the acceleration of the object depending on proximity to bottom of screen
 	int idx = track.lines.size() - 1;
-	screen_y += acceleration_scale * track.acceleration;
+	screen_y += acceleration_scale * track.getAcceleration();
 	idx = (screen_y - 150) < track.lines.size() - 1 ? (screen_y -150) : idx; //the list of lines is 150 element long (0-149)
 
 	
@@ -188,7 +188,6 @@ void RoadObject::loadSprites()
 		sprites[i].setOrigin(sf::Vector2f(sprites[i].getGlobalBounds().width / 2, 0));
 	}
 	
-
 	//reassign default
 	activeSpr = &sprites[3];
 	base_transform = sprites[3].getTransform();

@@ -21,9 +21,13 @@ void Racer::update(const float& dt)
 	if(dead)
 	{
 		OnDestroy();
-		explosions[drawExplosionIdx].setPosition(
-			sf::Vector2f((GameGlobals::GAME_W / 2) - explosions[drawExplosionIdx].getGlobalBounds().width / 2,
-				(GameGlobals::GAME_H)-explosions[drawExplosionIdx].getGlobalBounds().height - 10));
+		if (dead)
+		{
+			OnDestroy();
+			sf::Vector2f center(activeSprite->getPosition().x + activeSprite->getGlobalBounds().width / 2, activeSprite->getPosition().y + activeSprite->getGlobalBounds().height / 2);
+			explosions[drawExplosionIdx].setPosition(
+				sf::Vector2f(center.x - explosions[drawExplosionIdx].getGlobalBounds().width/2,center.y - explosions[drawExplosionIdx].getGlobalBounds().height + 17));
+		}
 	}
 
 }
@@ -32,12 +36,13 @@ void Racer::Destroy()
 {
 	SoundManager::GetInstance()->explosion.play();
 	dead = true;
+	sf::Vector2f center = activeSprite->getPosition();
 	activeSprite = &racerSprites.at(0);
 	activeSprite->setPosition(
-		sf::Vector2f((GameGlobals::GAME_W / 2) - activeSprite->getGlobalBounds().width / 2,
-			(GameGlobals::GAME_H)-activeSprite->getGlobalBounds().height - 10));
+		sf::Vector2f(center.x ,center.y));
 	clock.restart();
 }
+	
 
 void Racer::OnDestroy()
 {

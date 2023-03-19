@@ -111,7 +111,6 @@ void GameState::update(const float& dt)
 
 void GameState::doColiisionDetection(RoadObject*& r)
 {
-	
 	if ((r->screen_y >= GameGlobals::GAME_H - 50 && r->screen_y <= GameGlobals::GAME_H) && player.distanceFromCenter() >= 390 && r->left || 
 		(r->screen_y >= GameGlobals::GAME_H - 50 && r->screen_y <= GameGlobals::GAME_H) && player.distanceFromCenter() <= -390 && !r->left)
 	{
