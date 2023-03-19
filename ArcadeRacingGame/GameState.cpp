@@ -72,7 +72,7 @@ void GameState::update(const float& dt)
 		for (NpcRacer* r : npcs)
 		{
 			r->update(dt);
-			//doCollisionDetection(r);
+			doCollisionDetection(r);
 		}
 		std::sort(npcs.begin(), npcs.end(), [](NpcRacer*& a, NpcRacer*& b) {return *a < *b; });
 	}
@@ -127,7 +127,9 @@ void GameState::doColiisionDetection(RoadObject*& r)
 void GameState::doCollisionDetection(NpcRacer*& r)
 {
 	
-	if ( std::abs((r->distanceFromCenter() - player.distanceFromCenter())) <= player.getSpriteSize().width && (r-> getSpritePosition().y >=230 && r->getSpritePosition().y < 250))
+	bool closeX = std::abs(r->distanceFromCenter() - player.distanceFromCenter()) <= player.getSpriteSize().width;
+	bool closeY = r->getSpritePosition().y >= 260 && r->getSpritePosition().y < 280;
+	if (closeX && closeY)
 	{
 		if (track.getAcceleration() <= 0.4f)
 			track.addAcceleration(-track.getAcceleration());

@@ -88,8 +88,14 @@ void Racer::loadSprites(sf::Vector2f startPosition, sf::Color color)
 	}
 }
 
+//use the centre of the car for posisioning and cd
 float Racer::distanceFromCenter()
 {
-	return track.lines.at(track.lines.size() - 1).middlePt * GameGlobals::GAME_W - GameGlobals::GAME_W / 2;
+	float x = getSpritePosition().x + getSpriteSize().width / 2;
+	int y = getSpritePosition().y - 150 + getSpriteSize().height / 2;
+	float plXDist = x - track.lines.at(y).middlePt * GameGlobals::GAME_W;
+	return plXDist;
 }
+
+
 

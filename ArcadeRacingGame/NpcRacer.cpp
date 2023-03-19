@@ -13,6 +13,7 @@ moveInterval(2.0f)
 //scale the npc speed by how far up the screen it is, also add some speed if the player stops moving
 void NpcRacer::update(const float& dt)
 {
+	
 	canSlowDown = track.getAcceleration() >= 1.0f;
 	generateNextOffset();
 	setSpeed();
@@ -39,7 +40,7 @@ const float NpcRacer::distanceFromCenter() const
 	float x = activeSprite->getPosition().x + activeSprite->getGlobalBounds().width / 2;
 	if(trackPos < 149)
 		return x - track.lines.at(trackPos).middlePt * GameGlobals::GAME_W;
-	return 100;
+	return track.lines.at(track.lines.size()-1).middlePt * GameGlobals::GAME_W;
 }
 
 void NpcRacer::recolorSprite()
