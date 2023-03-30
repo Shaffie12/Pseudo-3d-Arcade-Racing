@@ -54,7 +54,8 @@ void Game::setVolumesFromFile()
 
 void Game::updateDT()
 {
-	dt = Racing::Util::roundToDP(clock.restart().asSeconds(), 2);
+	dt = clock.restart().asSeconds();
+
 }
 
 void Game::pollSFEvents()
@@ -97,7 +98,6 @@ void Game::renderCurrentState()
 			{
 				int nextState = states->top()->nextState();
 				
-
 				if (nextState > 0) //means we will push a new state
 				{
 					State* s = getNextState(states->top());

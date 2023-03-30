@@ -72,7 +72,7 @@ void NpcRacer::position(const float& dt)
 	sf::Vector2f pos = activeSprite->getPosition(); //300 to 150 upward
 	
 	//y positioning
-	float newY = pos.y - currentSpeed * dt;
+	float newY = pos.y - (currentSpeed * dt);
 	pos.y = (newY + activeSprite->getGlobalBounds().height) - 150 < 0 ? GameGlobals::GAME_H +10000 : newY;
 	
 	//x positioning
@@ -113,6 +113,7 @@ void NpcRacer::changeSpeed()
 		{
 			y_clock.restart();
 			speed = std::rand() % 30 - 15;
+			
 		}
 	}
 	else

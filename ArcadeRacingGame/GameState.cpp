@@ -61,7 +61,7 @@ void GameState::update(const float& dt)
 {
 	if (!intro)
 	{
-		checkPlayerMovement();
+		checkPlayerMovement(dt);
 		if (SoundManager::GetInstance()->engine.getStatus() != sf::Sound::Status::Playing)
 		{
 			SoundManager::GetInstance()->engine.setPlayingOffset(sf::seconds(2));
@@ -163,38 +163,38 @@ bool GameState::isGameFinished()
 	return raceTimer <= 0 || track.lapsDone == REQUIRED_LAPS;
 }
 
-void GameState::checkPlayerMovement()
+void GameState::checkPlayerMovement(const float& dt)
 {
 	if (!player.isDead() && moving)
-		track.addAcceleration(0.02);
+		track.addAcceleration(3.0f * dt);
 	else
-		track.addAcceleration(-0.02);
+		track.addAcceleration(-3.0 * dt);
 	if (!player.isDead() && left)
-		track.addPlayerOffset(0.02, true);
+		track.addPlayerOffset(1.3f * dt);
 	if (!player.isDead() && right)
-		track.addPlayerOffset(0.02, false);
+		track.addPlayerOffset(-1.3f* dt);
 }
 
 void GameState::doIntroBeeps(const float& dt)
 {
 		beep_timer += dt;
-		if (!beeps[0] && beep_timer >= 1.2f)
+		if (!beeps[0] && beep_timer >= 1.0f)
 		{
 			SoundManager::GetInstance()->beep_1.play();
 			beeps[0] = true;
 		}
-		else if (!beeps[1] && beep_timer >= 2.4f)
+		else if (!beeps[1] && beep_timer >= 2.0f)
 		{
 			SoundManager::GetInstance()->beep_1.play();
 			beeps[1] = true;
 		}	
-		else if (!beeps[2] && beep_timer >= 3.6f)
+		else if (!beeps[2] && beep_timer >= 3.0f)
 		{
 			SoundManager::GetInstance()->beep_1.play();
 			beeps[2] = true;
 		}
 
-		if (beeps[0] && beeps[1] && beeps[2] && beep_timer >= 4.8f)
+		if (beeps[0] && beeps[1] && beeps[2] && beep_timer >= 4.0f)
 		{
 			intro = false;
 			SoundManager::GetInstance()->beep_1.setPitch(2);

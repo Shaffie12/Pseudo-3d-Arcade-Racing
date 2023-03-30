@@ -49,7 +49,7 @@ private:
 	void decrementRaceTimer(float dt);
 	void incrementRaceTimer(float amount);
 	bool isGameFinished();
-	void checkPlayerMovement();
+	void checkPlayerMovement(const float& dt);
 	void doIntroBeeps(const float& dt);
 	void doColiisionDetection(RoadObject*& r);
 	void doCollisionDetection(NpcRacer*& r);

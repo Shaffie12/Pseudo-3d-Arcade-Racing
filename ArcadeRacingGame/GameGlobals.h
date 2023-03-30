@@ -11,6 +11,7 @@ public:
 	static const float SCREEN_W, SCREEN_H, GAME_W, GAME_H, GAME_ASPECT;
 	static bool isActiveWindow; 
 	static float elapsedTime;
+	static const float FPS_MULTIPLIER;
 };
 #endif
 

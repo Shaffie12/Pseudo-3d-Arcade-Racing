@@ -30,7 +30,7 @@ Track::~Track()
 void Track::update(const float& deltaTime)
 {
 	acceleration = Racing::Util::clamp(acceleration, 0, 1); 
-	dist += acceleration * 100* deltaTime;
+	dist += acceleration * 100 * deltaTime;
 
 	moveSegment(deltaTime);
 	updateTrackLines();
@@ -115,12 +115,9 @@ void Track::drawElement(sf::RenderTarget& w)
 }
 
 
-void Track::addPlayerOffset(float amount, bool add) //change
+void Track::addPlayerOffset(float amount) 
 {
-	if (add)
-		trackOffset += amount;
-	else
-		trackOffset -= amount;
+	trackOffset += amount;
 }
 
 void Track::addAcceleration(float amount){ acceleration += amount;}
