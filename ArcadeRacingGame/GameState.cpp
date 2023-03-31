@@ -84,7 +84,7 @@ void GameState::update(const float& dt)
 	player.update(dt);
 	if (player.distanceFromCenter() > 400.0f)
 	{
-		track.addAcceleration(-1.5f * dt);
+		track.addAcceleration(-3.2f * dt);
 	}
 	for (RoadObject* r : roadObjectsContainer.objects)
 	{
