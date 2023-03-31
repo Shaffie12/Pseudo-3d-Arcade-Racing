@@ -84,7 +84,7 @@ void GameState::update(const float& dt)
 	player.update(dt);
 	if (player.distanceFromCenter() > 400.0f)
 	{
-		track.addAcceleration(-0.03f);
+		track.addAcceleration(-1.5f * dt);
 	}
 	for (RoadObject* r : roadObjectsContainer.objects)
 	{
@@ -111,14 +111,15 @@ void GameState::update(const float& dt)
 
 void GameState::doColiisionDetection(RoadObject*& r)
 {
-	if ((r->screen_y >= GameGlobals::GAME_H - 50 && r->screen_y <= GameGlobals::GAME_H) && player.distanceFromCenter() >= 390 && r->left || 
-		(r->screen_y >= GameGlobals::GAME_H - 50 && r->screen_y <= GameGlobals::GAME_H) && player.distanceFromCenter() <= -390 && !r->left)
+	if ((r->screen_y >= GameGlobals::GAME_H - 50 && r->screen_y <= GameGlobals::GAME_H) && player.distanceFromCenter() <= -390 && r->left || 
+		(r->screen_y  >= GameGlobals::GAME_H - 50 && r->screen_y <= GameGlobals::GAME_H) && player.distanceFromCenter() >= 390 && !r->left)
 	{
 		if (track.getAcceleration() <= 0.4f)
 			track.addAcceleration(-track.getAcceleration());
 		else
 			if (!player.isDead())
 				player.Destroy();
+				
 	}
 					
 }

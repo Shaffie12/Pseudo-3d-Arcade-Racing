@@ -73,7 +73,7 @@ void NpcRacer::position(const float& dt)
 	
 	//y positioning
 	float newY = pos.y - (currentSpeed * dt);
-	pos.y = (newY + activeSprite->getGlobalBounds().height) - 150 < 0 ? GameGlobals::GAME_H +10000 : newY;
+	pos.y = (newY + activeSprite->getGlobalBounds().height) - 150 < 0 ? GameGlobals::GAME_H + 10000 : newY;
 	
 	//x positioning
 	float positionScale = Racing::Util::clamp(Racing::Util::convertRange(pos.y - GameGlobals::GAME_H/2, 0, 90, 0.65f, 1), 0, 1);

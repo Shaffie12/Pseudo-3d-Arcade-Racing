@@ -13,6 +13,8 @@ public:
 	RoadObject(const RoadObject& other);
 	RoadObject(RoadObject&& other) noexcept;
 	RoadObject& operator=(const RoadObject& other);
+	sf::Vector2f getSpritePosition() { return activeSpr->getPosition(); }
+	sf::FloatRect getSpriteSize() { return activeSpr->getGlobalBounds(); }
 	virtual void drawElement(sf::RenderTarget& w) override;
 	virtual void update(const float& dt) override;
 	float depth; //at what point relative to the segment progress down the screen, should we start drawing this object
