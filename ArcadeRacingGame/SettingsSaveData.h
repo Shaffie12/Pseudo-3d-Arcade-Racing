@@ -10,6 +10,7 @@ class SettingsSaveData : public Saveable
 	const std::string SETTINGS_SAVE_PATH = "GameSettings/settings.txt";
 	float sfxVolume;
 	float musicVolume;
+	bool controller;
 
 public:
 	SettingsSaveData();
@@ -17,8 +18,10 @@ public:
 	void ReadFromFile() override;
 	void setSfxVolume(float& value);
 	void setMusicVolume(float& value);
+	void setController(bool& value);
 	const float getSfxVolume() const;
 	const float getMusicVolume() const;
+	const bool getControllerSettings() const;
 	
 };
 

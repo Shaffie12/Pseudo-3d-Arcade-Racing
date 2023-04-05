@@ -26,6 +26,7 @@ void Game::initWindow()
 	//can read screen size etc from a file and set those vars here/create the window here with file input/settings
 	mainWindow->setFramerateLimit(60);
 	renderer->init();
+	
 }
 
 void Game::initStates()
@@ -33,6 +34,7 @@ void Game::initStates()
 	FontsManager::GetInstance();
 	SoundManager::GetInstance();
 	setVolumesFromFile();
+	setControlsFromFile();
 	TitleState* ts = new TitleState();
 	username = &ts->userName.text.getString();
 	states->push(ts);
@@ -50,6 +52,12 @@ void Game::setVolumesFromFile()
 	SoundManager::GetInstance()->engine.setVolume(soundSave.getSfxVolume() * 100.0f);
 
 	SoundManager::GetInstance()->music1.setVolume(soundSave.getMusicVolume()*100.0f);
+}
+
+void Game::setControlsFromFile()
+{
+	SettingsSaveData  controls;
+	GameGlobals::useController = controls.getControllerSettings();
 }
 
 void Game::updateDT()
@@ -145,7 +153,7 @@ State* Game::getNextState(State* currentState)
 		else if (gs->nextState() == 2)
 			return new LeaderboardState();
 		else if (gs->nextState() == 3)
-			return new OptionsState(SoundManager::GetInstance()->beep_1.getVolume()*0.01f,SoundManager::GetInstance()->music1.getVolume()*0.01f);
+			return new OptionsState(SoundManager::GetInstance()->beep_1.getVolume()*0.01f,SoundManager::GetInstance()->music1.getVolume()*0.01f,GameGlobals::useController);
 
 	}
 }

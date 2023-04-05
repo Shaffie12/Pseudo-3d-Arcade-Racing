@@ -2,6 +2,7 @@
 #define _OPTIONS_STATE_H_
 #include "State.h"
 #include "Util.h"
+#include "UIElement.h"
 #include "Menu.h"
 #include "FontsManager.h"
 #include "SoundManager.h"
@@ -11,7 +12,12 @@
 class OptionsState: public State
 {
 public:
-	OptionsState(float sfxV, float musicV);
+	OptionsState(float sfxV, float musicV, bool useController);
+	~OptionsState()
+	{
+		for (UIElement* e : toggleElements)
+			delete e;
+	}
 	void handleInput(sf::Event& e) override;
 	void update(const float& dt) override;
 	void drawToTexture(Renderer& renderer) override;
@@ -19,7 +25,7 @@ public:
 	int nextState() override;
 
 private:
-	struct SlidingBar : Drawable
+	struct SlidingBar : UIElement
 	{
 		SlidingBar(sf::Vector2f screenPos,sf::Color color1 = sf::Color::White, sf::Color color2 = sf::Color::White, float val = 1.0f) : value(val)
 		{
@@ -62,9 +68,7 @@ private:
 			for (int i = 0; i < sizeof(barLines) / sizeof(barLines[0]); i++)
 				w.draw(barLines[i], 2, sf::Lines);
 		}
-
-
-		void Increase(int menuChoice) 
+		void Increase(int menuChoice) override 
 		{ 
 			value = Racing::Util::clamp(value + 0.1f, 0.0f, 1.0f);
 			if (menuChoice == 0)
@@ -72,7 +76,7 @@ private:
 			else
 				AdjustSFXVol();	
 		}
-		void Decrease(int menuChoice) 
+		void Decrease(int menuChoice)override  
 		{
 			value = Racing::Util::clamp(value - 0.1f, 0.0f, 1.0f); 
 			if (menuChoice == 0)
@@ -80,7 +84,7 @@ private:
 			else
 				AdjustSFXVol();
 		}
-		void SetValue(float val) 
+		void SetValue(float val)  
 		{
 			value = Racing::Util::clamp(val, 0.0f, 1.0f); 
 		}
@@ -104,8 +108,57 @@ private:
 			SoundManager::GetInstance()->explosion.setVolume(value * 100.0f);
 		}
 	};
+	struct YesNoOption : UIElement
+	{
+		YesNoOption(sf::Vector2f position, bool val = false)
+		{
+			
+			yes.setString("YES");
+			yes.setFont(FontsManager::GetInstance()->font_basic);
+			yes.setScale(0.7f, 0.7f);
+			yes.setFillColor(sf::Color::White);
+			yes.setPosition(position);
+			yes.setPosition(sf::Vector2f(GameGlobals::GAME_W / 2 + 30, position.y)); no.setPosition(sf::Vector2f(GameGlobals::GAME_W / 2 + 30, position.y));
+
+			no.setString("NO");
+			no.setFont(FontsManager::GetInstance()->font_basic);
+			no.setScale(0.7f, 0.7f);
+			no.setFillColor(sf::Color::White);
+			no.setPosition(sf::Vector2f(GameGlobals::GAME_W/2 + 100, position.y));
+			value = val;
+		}
+
+		void update(const float& dt) override 
+		{
+			if (value == true)
+			{
+				yes.setFillColor(sf::Color::Green);
+				no.setFillColor(sf::Color::White);
+			}
+			else
+			{
+				yes.setFillColor(sf::Color::White);
+				no.setFillColor(sf::Color::Green);
+			}	
+		}
+		void drawElement(sf::RenderTarget& w) override 
+		{ 
+			w.draw(yes);
+			w.draw(no);
+		}
+		void Increase(int menuChoice) override { value = false; AdjustGlobalControls(); }
+		void Decrease(int menuChoice) override { value = true; AdjustGlobalControls(); }
+		void SetValue(bool val) { value = val; }
+		void AdjustGlobalControls() { GameGlobals::useController = value; }
+		bool& GetValue() { return value; }
+
+	private:
+		bool value;
+		sf::Text yes;
+		sf::Text no;
+	};
 	Menu menu;
-	SlidingBar bars [2];
+	UIElement* toggleElements [3];
 	int selectedBar = 0;
 
 };

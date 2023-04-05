@@ -25,6 +25,7 @@ public:
 	void MoveUp();
 	void MoveDown();
 	int getSelected();
+	const sf::Vector2f GetElementPosition(int element) { return menuTexts[element].getPosition(); }
 	void SetTextScale(float x, float y);
 	int getNumberOfElements();
 	sf::Color color;

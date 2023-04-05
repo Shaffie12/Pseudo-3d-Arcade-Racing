@@ -12,6 +12,7 @@ public:
 	static bool isActiveWindow; 
 	static float elapsedTime;
 	static const float FPS_MULTIPLIER;
+	static bool useController;
 };
 #endif
 

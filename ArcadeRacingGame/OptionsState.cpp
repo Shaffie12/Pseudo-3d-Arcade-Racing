@@ -1,9 +1,12 @@
 #include "OptionsState.h"
 
-OptionsState::OptionsState(float sfxV, float musicV) : bars { 
-	SlidingBar(sf::Vector2f(GameGlobals::GAME_W/2 +30 ,GameGlobals::GAME_H/2), sf::Color(255,0,0), sf::Color(255,128,0),musicV), 
-	SlidingBar(sf::Vector2f(GameGlobals::GAME_W/2 + 30,GameGlobals::GAME_H/2 + 30),sf::Color(255,0,0), sf::Color(255,128,0),sfxV) },
-	menu(GameGlobals::GAME_W/2-130,GameGlobals::GAME_H/2-8, 2, { "MUSIC VOLUME","SFX VOLUME" }, sf::Color::White)
+OptionsState::OptionsState(float sfxV, float musicV, bool useController) :
+menu(GameGlobals::GAME_W/2-130,GameGlobals::GAME_H/2-8, 3, { "MUSIC VOLUME","SFX VOLUME", "USE CONTROLLER"}, sf::Color::White),
+toggleElements { 
+	new SlidingBar(sf::Vector2f(GameGlobals::GAME_W/2 +30 ,GameGlobals::GAME_H/2), sf::Color(255,0,0), sf::Color(255,128,0),musicV), 
+	new SlidingBar(sf::Vector2f(GameGlobals::GAME_W/2 + 30,GameGlobals::GAME_H/2 + 30),sf::Color(255,0,0), sf::Color(255,128,0),sfxV),
+	new YesNoOption(menu.GetElementPosition(2),useController)
+}	
 {
 	menu.SetTextScale(0.7f, 0.7f);
 }
@@ -15,9 +18,9 @@ void OptionsState::handleInput(sf::Event& e)
 		if (e.key.code == sf::Keyboard::Enter || e.key.code == sf::Keyboard::Space)
 			quit();
 		else if (e.key.code == sf::Keyboard::D)
-			bars[menu.getSelected()].Increase(menu.getSelected());
+			toggleElements[menu.getSelected()]->Increase(menu.getSelected());
 		else if (e.key.code == sf::Keyboard::A)
-			bars[menu.getSelected()].Decrease(menu.getSelected());
+			toggleElements[menu.getSelected()]->Decrease(menu.getSelected());
 		else if (e.key.code == sf::Keyboard::W)
 			menu.MoveUp();
 		else if (e.key.code == sf::Keyboard::S)
@@ -29,8 +32,8 @@ void OptionsState::handleInput(sf::Event& e)
 void OptionsState::update(const float& dt)
 {
 	menu.update(dt);
-	for (SlidingBar& b : bars)
-		b.update(dt);
+	for (UIElement* b : toggleElements)
+		b->update(dt);
 }
 
 void OptionsState::drawToTexture(Renderer& renderer)
@@ -38,8 +41,8 @@ void OptionsState::drawToTexture(Renderer& renderer)
 	renderer.rtx->clear(sf::Color::Black);
 
 	menu.drawElement(*renderer.rtx);
-	for(SlidingBar b: bars)
-		b.drawElement(*renderer.rtx);
+	for(UIElement* b: toggleElements)
+		b->drawElement(*renderer.rtx);
 
 	renderer.sprite->setTexture(renderer.rtx->getTexture());
 	renderer.sprite->setScale(sf::Vector2f(2, 2));
@@ -50,8 +53,9 @@ void OptionsState::drawToTexture(Renderer& renderer)
 void OptionsState::quit()
 {
 	SettingsSaveData data;
-	data.setMusicVolume(bars[0].GetValue());
-	data.setSfxVolume(bars[1].GetValue());
+	data.setMusicVolume(static_cast<SlidingBar*>(toggleElements[0])->GetValue());
+	data.setSfxVolume(static_cast<SlidingBar*>(toggleElements[1])->GetValue());
+	data.setController(static_cast<YesNoOption*>(toggleElements[2])->GetValue());
 	data.WriteToFile();
 	exited = true;
 }

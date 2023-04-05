@@ -32,6 +32,7 @@ private:
 	float dt;
 	std::stack<State*>* states;
 	const sf::String* username;
+	sf::Joystick stick;
 
 	void initWindow();
 	void updateDT();
@@ -39,6 +40,7 @@ private:
 	void renderCurrentState();
 	void initStates();
 	void setVolumesFromFile();
+	void setControlsFromFile();
 	State* getNextState(State* currentState);
 	
 
