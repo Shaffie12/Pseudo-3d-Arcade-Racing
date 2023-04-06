@@ -39,6 +39,9 @@ private:
 	bool right = false;
 	bool intro = true;
 
+	float xMove;
+	float yMove;
+
 	float beep_timer = 0.0f;
 	const float INITIAL_WAIT = 4.1f*1000.0f;
 	bool beeps[3] = { false,false,false};

@@ -35,24 +35,56 @@ ui(track)
 void GameState::handleInput(sf::Event& e)
 { 
 	player.handleInput(e);
-	if (e.type == sf::Event::KeyPressed)
+	if (GameGlobals::useController && GameGlobals::controller_connected)
 	{
-		if (e.key.code == sf::Keyboard::W)
-			moving = true;
-		else if (e.key.code == sf::Keyboard::D)
+		float stick_x = sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::X);
+		float stick_y = sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::Y);
+		if (stick_x > 0)
+		{
 			right = true;
-		else if (e.key.code == sf::Keyboard::A)
-			left = true;
-	}
-	if (e.type == sf::Event::KeyReleased)
-	{
-		if (e.key.code == sf::Keyboard::W)
-			moving = false;
-		else if (e.key.code == sf::Keyboard::D)
-			right = false;
-		else if (e.key.code == sf::Keyboard::A)
 			left = false;
+		}
+		else if (stick_x < 0)
+		{
+			left = true;
+			right = false;
+		}
+		if (stick_y > 0)
+			moving = true;
+		else if (stick_y < 0)
+			moving = false;
+		if (std::abs(stick_x/100.0f) < 0.1f)
+			stick_x = 0.0f;
+		yMove = Racing::Util::convertRange(Racing::Util::clamp(stick_y, 0.0f, 90.0f), 0.0f, 90.0f, 0.0f, 1.0f);
+		xMove = std::abs(Racing::Util::convertRange(Racing::Util::clamp(stick_x, -80.0f, 80.0f), -80.0f, 80.0f, -1.0f, 1.0f));
+		
+			
 	}
+	else
+	{
+		if (e.type == sf::Event::KeyPressed)
+		{
+			if (e.key.code == sf::Keyboard::W)
+				moving = true;
+			else if (e.key.code == sf::Keyboard::D)
+				right = true;
+			else if (e.key.code == sf::Keyboard::A)
+				left = true;
+		}
+		if (e.type == sf::Event::KeyReleased)
+		{
+			if (e.key.code == sf::Keyboard::W)
+				moving = false;
+			else if (e.key.code == sf::Keyboard::D)
+				right = false;
+			else if (e.key.code == sf::Keyboard::A)
+				left = false;
+		}
+
+		xMove = 1.0f;
+		yMove = 1.0f;
+	}
+	
 
 }
 
@@ -167,13 +199,13 @@ bool GameState::isGameFinished()
 void GameState::checkPlayerMovement(const float& dt)
 {
 	if (!player.isDead() && moving)
-		track.addAcceleration(3.0f * dt);
+		track.addAcceleration(3.0f * yMove* dt);
 	else
-		track.addAcceleration(-3.0 * dt);
+		track.addAcceleration(-3.0f * dt);
 	if (!player.isDead() && left)
-		track.addPlayerOffset(1.3f * dt);
+		track.addPlayerOffset(1.3f * xMove* dt);
 	if (!player.isDead() && right)
-		track.addPlayerOffset(-1.3f* dt);
+		track.addPlayerOffset(-1.3f* xMove* dt);
 }
 
 void GameState::doIntroBeeps(const float& dt)

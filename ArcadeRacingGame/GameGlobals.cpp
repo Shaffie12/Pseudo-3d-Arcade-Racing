@@ -9,3 +9,4 @@ bool GameGlobals::isActiveWindow = true;
 float GameGlobals::elapsedTime = 0;
 const float GameGlobals::FPS_MULTIPLIER = 50.0f;
 bool GameGlobals::useController = false;
+bool GameGlobals::controller_connected = false;

@@ -13,6 +13,7 @@ public:
 	static float elapsedTime;
 	static const float FPS_MULTIPLIER;
 	static bool useController;
+	static bool controller_connected;
 };
 #endif
 

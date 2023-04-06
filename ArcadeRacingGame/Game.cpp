@@ -57,6 +57,7 @@ void Game::setVolumesFromFile()
 void Game::setControlsFromFile()
 {
 	SettingsSaveData  controls;
+	GameGlobals::controller_connected = sf::Joystick::isConnected;
 	GameGlobals::useController = controls.getControllerSettings();
 }
 
