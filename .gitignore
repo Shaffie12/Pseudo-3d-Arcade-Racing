@@ -9,3 +9,5 @@ Debug/*
 Release/*
 include/*
 lib/*
+Resource.rc
+resource.h
