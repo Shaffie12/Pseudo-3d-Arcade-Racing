@@ -8,4 +8,4 @@ Credited in the assets folder
 
 # Notes  
 -Needs a frame rate independence patch, might add this at some point  
--I did not include the lib folder or SFML files here
+-I did not include the lib folder or SFML files here but youd need them to run this in project
