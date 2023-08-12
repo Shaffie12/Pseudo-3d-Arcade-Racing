@@ -2,5 +2,10 @@
 *.pdb
 .vs
 x64
-.vcproj
-.vcproj.filters
+*.vcxproj*
+*.sln
+*.aps
+Debug/*
+Release/*
+include/*
+lib/*
