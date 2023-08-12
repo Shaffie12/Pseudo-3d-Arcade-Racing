@@ -5,3 +5,6 @@ Play it here: https://shaffie12.itch.io/arcade-racer-lite
 
 # Assets:
 Credited in the assets folder
+
+# Notes  
+-Needs a frame rate independence patch, might add this at some point
